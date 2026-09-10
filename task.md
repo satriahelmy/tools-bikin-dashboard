@@ -14,7 +14,7 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 
 - `index.html` — beranda unified tools.
 - `colorpalette/` — generator, ekstraksi warna dari gambar, eksplorasi palet, dan panduan ekspor.
-- `chart/` — daftar chart, halaman detail chart, dan bundle lokal `chart.umd.min.js`.
+- `chart/` — daftar chart, halaman detail chart, bundle lokal `chart.umd.min.js`, dan renderer SVG `native-renderers.js` untuk tipe non-core.
 - `resourcehub/` — katalog resource data visualization.
 - `tools/` — halaman katalog legacy dan data tool.
 - `assets/nav.js` + `assets/nav.css` — navigasi global dan sidebar.
@@ -27,9 +27,9 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 - [x] Mengarahkan navigasi antar-tool ke rute internal.
 - [x] Memperbaiki layout agar area kerja mengisi ruang setelah sidebar.
 - [x] Mengganti ikon sidebar dengan SVG.
-- [x] Menambahkan CTA `Jelajahi tool` pada kartu beranda.
+- [x] Menambahkan CTA `Buka tool` pada kartu beranda.
 - [x] Menambahkan intro kontekstual pada Color Palette dan Resource Hub.
-- [x] Menyeragamkan sebagian besar copy UI ke Bahasa Indonesia.
+- [x] Menyegarkan copy UI ke Bahasa Indonesia yang lebih ringkas dan terasa ditulis manusia.
 - [x] Merapikan alignment kontrol Generator Palet Warna.
 - [x] Memendekkan tinggi area swatch agar tidak mendominasi layar.
 - [x] Menjalankan smoke test seluruh halaman tanpa error JavaScript.
@@ -39,6 +39,9 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 - [x] Menambahkan focus ring global, nama aksesibel untuk kontrol/icon, toggle state ARIA, dan dukungan `prefers-reduced-motion`.
 - [x] Menambahkan README XAMPP dan checklist smoke test deployment.
 - [x] Mengurangi badge kategori yang berulang pada kartu Chart Guide.
+- [x] Membuat token CSS bersama di `assets/tokens.css` agar perubahan visual tidak perlu disalin ke tiap tool.
+- [x] Memisahkan dokumen sumber dan arsip ZIP ke `docs/` agar folder runtime hanya berisi aset aplikasi.
+- [x] Menstabilkan layout mobile: topbar tidak tertutup tombol menu, kontrol dapat wrap/scroll, dan kartu/detail tidak meluber horizontal.
 
 ## Prioritas P0 — Fondasi dan konsistensi
 
@@ -83,7 +86,7 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 ### Resource Hub
 
 - [x] Tambahkan domain sumber pada setiap resource.
-- [x] Tambahkan CTA yang jelas, misalnya `Buka resource`.
+- [x] Tambahkan CTA yang jelas, yaitu `Buka link`.
 - [x] Bedakan metadata utama dari tag tambahan agar tidak terjadi badge soup.
 - [x] Pertahankan pencarian, filter kategori, filter tag, dan reset filter.
 
@@ -121,10 +124,18 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 
 ### Maintenance
 
-- [ ] Pisahkan asset produksi dari dokumen PRD, task, checklist, dan file ZIP.
+- [x] Pisahkan asset produksi dari dokumen PRD, checklist, dan file ZIP ke `docs/source/` dan `docs/archive/`; dokumen operasional root (`README.md`, `SMOKE-TEST.md`, `task.md`) tetap mudah ditemukan.
 - [x] Hindari duplikasi token CSS yang tidak perlu jika sistem shared sudah stabil (`assets/tokens.css`).
 - [x] Tambahkan dokumentasi cara menjalankan website di XAMPP.
 - [x] Tambahkan checklist smoke test sebelum deployment.
+
+## Prioritas P3 — Production readiness dan fidelity data
+
+- [x] Perbaiki Waterfall Chart menjadi floating bar yang menunjukkan alur kumulatif.
+- [x] Validasi konfigurasi chart sebelum inisialisasi Chart.js dan tampilkan fallback informatif jika data tidak valid.
+- [x] Tambahkan `robots.txt`, `sitemap.xml`, dan web manifest untuk kesiapan publikasi.
+- [x] Tambahkan theme color konsisten pada seluruh route aplikasi.
+- [x] Sediakan renderer native untuk tipe yang membutuhkan plugin khusus (Treemap, Box Plot, dan Heatmap) melalui `chart/native-renderers.js`.
 
 ## Acceptance criteria
 

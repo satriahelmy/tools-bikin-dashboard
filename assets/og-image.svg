@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">bikindashboard.com — Tools untuk data analyst</title>
-  <desc id="desc">Kumpulan tool gratis untuk warna, chart, dan resource dashboard.</desc>
+  <title id="title">bikindashboard.com — Tools untuk kerja data</title>
+  <desc id="desc">Alat praktis untuk memilih warna, memahami chart, dan mencari referensi dashboard.</desc>
   <rect width="1200" height="630" fill="#f8fafc"/>
   <rect x="72" y="72" width="74" height="74" rx="18" fill="#2563eb"/>
   <path d="M94 88h16v19c3-3.4 7-5.2 12.7-5.2 10.8 0 18.8 8.4 18.8 20.2s-8 20.2-18.8 20.2c-5.7 0-9.7-1.8-12.7-5.2v5.2H94V88Zm24.3 27.1c-5.4 0-9.3 3.2-9.3 7.7s3.9 7.7 9.3 7.7 9.3-3.2 9.3-7.7-3.9-7.7-9.3-7.7Z" fill="#fff"/>
   <text x="170" y="122" fill="#0f172a" font-family="Arial, sans-serif" font-size="34" font-weight="700">bikindashboard.com</text>
-  <text x="80" y="285" fill="#0f172a" font-family="Arial, sans-serif" font-size="62" font-weight="700">Tools untuk data analyst</text>
-  <text x="84" y="345" fill="#475569" font-family="Arial, sans-serif" font-size="28">Pilih warna, chart, dan resource untuk dashboard yang lebih baik.</text>
+  <text x="80" y="285" fill="#0f172a" font-family="Arial, sans-serif" font-size="62" font-weight="700">Tools untuk kerja data</text>
+  <text x="84" y="345" fill="#475569" font-family="Arial, sans-serif" font-size="28">Pilih warna, cari chart, dan temukan referensi.</text>
   <g transform="translate(84 430)">
     <rect width="300" height="112" rx="16" fill="#fff" stroke="#dbe3ef"/>
     <circle cx="40" cy="40" r="14" fill="#60a5fa"/><circle cx="70" cy="62" r="9" fill="#2563eb"/><circle cx="105" cy="34" r="11" fill="#93c5fd"/>

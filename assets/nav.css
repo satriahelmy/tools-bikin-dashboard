@@ -42,6 +42,53 @@ body.bd-with-nav :where(input, select, textarea):focus-visible {
   body.bd-with-nav .bd-main > .bd-container { padding-top: 8px; }
 }
 @media (max-width: 900px) {
+  body.bd-with-nav {
+    overflow-x: hidden;
+  }
+  body.bd-with-nav .bd-topbar-inner {
+    width: 100%;
+    max-width: none;
+    min-height: 52px;
+    height: auto;
+    padding: 10px 16px 10px 58px;
+    gap: 8px;
+  }
+  body.bd-with-nav .bd-topbar-left {
+    min-width: 0;
+    flex: 1 1 auto;
+    gap: 8px;
+  }
+  body.bd-with-nav .bd-topbar-left .bd-back {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  body.bd-with-nav .bd-topbar-left .bd-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  body.bd-with-nav .bd-topbar-right {
+    flex: 0 0 auto;
+  }
+  body.bd-with-nav .bd-main > .bd-container {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    min-width: 0;
+  }
+  body.bd-with-nav .bd-main {
+    min-width: 0;
+  }
+  body.bd-with-nav :where(img, svg, canvas) {
+    max-width: 100%;
+  }
+  body.bd-with-nav :where(.bd-card, .bd-grid > *, .bd-topbar-left, .bd-topbar-right) {
+    min-width: 0;
+  }
+  body.bd-with-nav .bd-footer {
+    margin-left: 0;
+  }
   .bd-global-sidebar { transform: translateX(-100%); transition: transform .2s ease; box-shadow: 8px 0 24px rgba(15,23,42,.12); }
   body.bd-nav-open .bd-global-sidebar { transform: translateX(0); }
   .bd-sidebar-toggle { position: fixed; top: 10px; left: 12px; z-index: 40; display: grid; place-content: center; gap: 4px; width: 34px; height: 34px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; cursor: pointer; box-shadow: 0 1px 3px rgba(15,23,42,.08); }

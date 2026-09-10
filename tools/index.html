@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tools — bikindashboard.com</title>
-  <meta name="description" content="Kumpulan tools gratis untuk data analyst — color palette generator, chart guide, resource hub, dan lainnya dari bikindashboard.com.">
+  <meta name="description" content="Alat praktis untuk memilih warna, memahami chart, dan mencari referensi dashboard.">
   <link rel="canonical" href="https://bikindashboard.com/">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <meta http-equiv="refresh" content="0; url=../index.html">
@@ -19,9 +19,9 @@
   <header class="bd-topbar">
     <div class="bd-topbar-inner">
       <div class="bd-topbar-left">
-        <a href="../index.html" class="bd-back">← bikindashboard.com</a>
+        <a href="../index.html" class="bd-back">← Semua tool</a>
         <span class="bd-topbar-divider"></span>
-        <h1 class="bd-title">Tools</h1>
+        <h1 class="bd-title">Semua tool</h1>
       </div>
       <div class="bd-topbar-right"></div>
     </div>
@@ -30,19 +30,19 @@
   <main class="bd-main">
     <div class="bd-container">
       <header class="bd-hero">
-        <h2 class="bd-hero-title">Tools untuk data analyst</h2>
-        <p class="bd-hero-subtitle">Kumpulan tool gratis bikindashboard.com — dari desain warna, belajar chart, hingga kurasi resource.</p>
+        <h2 class="bd-hero-title">Kerjakan dashboard tanpa mulai dari nol</h2>
+        <p class="bd-hero-subtitle">Pilih warna, cari chart yang pas, atau temukan link untuk langkah berikutnya.</p>
       </header>
 
       <section class="bd-search-wrapper">
-        <input type="text" id="search-input" class="bd-input" placeholder="Cari tool (misal: palette, chart, resource)...">
+        <input type="text" id="search-input" class="bd-input" placeholder="Cari tool, misalnya palette atau chart…">
       </section>
 
       <section class="bd-filters" id="category-filters">
         <button type="button" class="bd-filter-pill active" aria-pressed="true" data-category="all">Semua</button>
         <button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Desain & warna">Desain & warna</button>
         <button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Belajar">Belajar</button>
-        <button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Resources">Resource</button>
+        <button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Resources">Referensi</button>
       </section>
 
       <section class="bd-results-meta" aria-live="polite">
@@ -63,7 +63,7 @@
   </main>
 
   <footer class="bd-footer">
-    <p class="bd-hint">Tool gratis dari <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p>
+    <p class="bd-hint">Gratis untuk kamu yang kerja dengan data · <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p>
   </footer>
 
   <script src="../assets/nav.js" defer></script>
@@ -85,6 +85,7 @@
       'Chart.js': 'bd-badge-blue',
       'Gratis': 'bd-badge-green',
       'Kurasi': 'bd-badge-blue',
+      'Pilihan': 'bd-badge-blue',
       'CSV': 'bd-badge-gray',
       'WCAG': 'bd-badge-blue',
       'Preview': 'bd-badge-blue',
@@ -108,7 +109,7 @@
 
     function renderTools(tools) {
       toolsGrid.innerHTML = '';
-      resultsCount.textContent = `Menampilkan ${tools.length} dari ${toolsData.length} tool`;
+      resultsCount.textContent = `${tools.length} dari ${toolsData.length} tool`;
 
       if (tools.length === 0) {
         emptyState.style.display = 'flex';
@@ -201,15 +202,15 @@
     async function loadToolsData() {
       try {
         const response = await fetch('tools.json');
-        if (!response.ok) throw new Error('Gagal memuat data tools.');
+        if (!response.ok) throw new Error('Data tool tidak terbaca.');
         toolsData = await response.json();
         filterTools();
       } catch (error) {
         console.error(error);
         toolsGrid.innerHTML = `
           <div style="grid-column: 1/-1; text-align: center; padding: 48px; background: var(--bd-bg); border: 1px dashed var(--bd-danger); border-radius: var(--bd-radius-lg);">
-            <p style="color: var(--bd-danger); font-weight: 600; margin-bottom: 8px;">Gagal memuat data</p>
-            <p class="bd-hint">Silakan segarkan halaman atau coba lagi nanti.</p>
+            <p style="color: var(--bd-danger); font-weight: 600; margin-bottom: 8px;">Data tool belum tersedia</p>
+            <p class="bd-hint">Segarkan halaman atau coba lagi.</p>
           </div>`;
         resultsCount.textContent = '';
       }

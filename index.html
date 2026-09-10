@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tools — bikindashboard.com</title>
-  <meta name="description" content="Kumpulan tools gratis untuk data analyst dari bikindashboard.com.">
+  <title>BikinDashboard — tools untuk kerja data</title>
+  <meta name="description" content="Alat praktis untuk memilih warna, memahami chart, dan mencari referensi dashboard.">
   <link rel="canonical" href="https://bikindashboard.com/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Tools gratis untuk data analyst — bikindashboard.com">
-  <meta property="og:description" content="Pilih warna, chart, dan resource untuk membuat dashboard yang lebih baik.">
+  <meta property="og:title" content="Tools praktis untuk dashboard — bikindashboard.com">
+  <meta property="og:description" content="Pilih palet, temukan chart yang pas, dan cari referensi data viz.">
   <meta property="og:url" content="https://bikindashboard.com/">
   <meta property="og:image" content="https://bikindashboard.com/assets/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
@@ -21,20 +21,20 @@
   <script src="assets/nav.js" defer></script>
 </head>
 <body class="bd-home">
-  <header class="bd-topbar"><div class="bd-topbar-inner"><div class="bd-topbar-left"><span class="bd-topbar-divider"></span><h1 class="bd-title">Tools</h1></div></div></header>
+  <header class="bd-topbar"><div class="bd-topbar-inner"><div class="bd-topbar-left"><span class="bd-topbar-divider"></span><h1 class="bd-title">Semua tool</h1></div></div></header>
   <main class="bd-main"><div class="bd-container">
-    <header class="bd-hero"><p class="bd-label" style="margin-bottom:10px;">BIKINDASHBOARD.COM</p><h2 class="bd-hero-title">Tools untuk data analyst</h2><p class="bd-hero-subtitle">Kumpulan tool gratis untuk membantu kamu memilih warna, chart, dan resource terbaik untuk dashboard.</p></header>
-    <section class="bd-search-wrapper"><input type="text" id="search-input" class="bd-input" aria-label="Cari tool" placeholder="Cari tool (misal: palette, chart, resource)..."></section>
-    <section class="bd-filters" id="category-filters" aria-label="Filter kategori"><button type="button" class="bd-filter-pill active" aria-pressed="true" data-category="all">Semua</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Desain & warna">Desain & warna</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Belajar">Belajar</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Resources">Resource</button></section>
+    <header class="bd-hero"><p class="bd-label" style="margin-bottom:10px;">BIKINDASHBOARD.COM</p><h2 class="bd-hero-title">Kerjakan dashboard tanpa mulai dari nol</h2><p class="bd-hero-subtitle">Pilih warna, cari bentuk chart yang pas, atau temukan referensi untuk langkah berikutnya.</p></header>
+    <section class="bd-search-wrapper"><input type="text" id="search-input" class="bd-input" aria-label="Cari tool" placeholder="Cari tool, misalnya palette atau chart…"></section>
+    <section class="bd-filters" id="category-filters" aria-label="Filter kategori"><button type="button" class="bd-filter-pill active" aria-pressed="true" data-category="all">Semua</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Desain & warna">Desain & warna</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Belajar">Belajar</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Resources">Referensi</button></section>
     <section class="bd-results-meta" aria-live="polite"><p class="bd-hint" id="results-count"></p></section>
     <section id="tools-grid" class="bd-grid" aria-label="Daftar tools"></section>
-    <div id="empty-state" class="bd-empty-state" style="display:none"><h3 class="bd-empty-title">Tidak ada tool yang sesuai</h3><p class="bd-hint">Coba kata kunci lain atau pilih kategori berbeda.</p></div>
+    <div id="empty-state" class="bd-empty-state" style="display:none"><h3 class="bd-empty-title">Tool-nya belum ketemu</h3><p class="bd-hint">Coba kata kunci lain atau buka kategori berbeda.</p></div>
   </div></main>
-  <footer class="bd-footer"><p class="bd-hint">Tool gratis dari <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p></footer>
+  <footer class="bd-footer"><p class="bd-hint">Gratis untuk kamu yang kerja dengan data · <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p></footer>
   <script>
     let toolsData = [], activeCategory = 'all', searchQuery = '';
     const toolsGrid = document.getElementById('tools-grid'), emptyState = document.getElementById('empty-state'), searchInput = document.getElementById('search-input'), resultsCount = document.getElementById('results-count'), filterPills = document.querySelectorAll('.bd-filter-pill');
-    const badgeClassMap = { 'Tableau':'bd-badge-blue','Power BI':'bd-badge-orange','Chart.js':'bd-badge-blue','Gratis':'bd-badge-green','Kurasi':'bd-badge-blue' };
+    const badgeClassMap = { 'Tableau':'bd-badge-blue','Power BI':'bd-badge-orange','Chart.js':'bd-badge-blue','Gratis':'bd-badge-green','Pilihan':'bd-badge-blue' };
     const root = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.replace(/[^/]*$/, '');
     const localPaths = { colorpalette: root + 'colorpalette/index.html', chart: root + 'chart/index.html', resourcehub: root + 'resourcehub/index.html' };
     const cardIcon = (id) => {
@@ -46,17 +46,17 @@
       return icons[id] || icons.resourcehub;
     };
     function renderTools(tools) {
-      resultsCount.textContent = `Menampilkan ${tools.length} dari ${toolsData.length} tool`;
+      resultsCount.textContent = `${tools.length} dari ${toolsData.length} tool`;
       emptyState.style.display = tools.length ? 'none' : 'flex';
       toolsGrid.innerHTML = tools.map(tool => {
         const url = localPaths[tool.id] || tool.url, badges = (tool.badges || []).map(label => `<span class="bd-badge ${badgeClassMap[label] || 'bd-badge-gray'}">${label}</span>`).join('');
-        return `<a class="bd-tool-card" href="${url}"><div class="bd-tool-card-header"><div class="bd-tool-icon">${cardIcon(tool.id)}</div><div class="bd-tool-card-title">${tool.name}</div></div><div class="bd-tool-card-body"><p class="bd-tool-card-desc">${tool.description}</p><div class="bd-tool-card-badges">${badges}</div><div class="bd-tool-card-foot"><span>Jelajahi tool</span><span aria-hidden="true">→</span></div></div></a>`;
+        return `<a class="bd-tool-card" href="${url}"><div class="bd-tool-card-header"><div class="bd-tool-icon">${cardIcon(tool.id)}</div><div class="bd-tool-card-title">${tool.name}</div></div><div class="bd-tool-card-body"><p class="bd-tool-card-desc">${tool.description}</p><div class="bd-tool-card-badges">${badges}</div><div class="bd-tool-card-foot"><span>Buka tool</span><span aria-hidden="true">→</span></div></div></a>`;
       }).join('');
     }
     function filterTools() { const q = searchQuery.trim().toLowerCase(); renderTools(toolsData.filter(tool => (activeCategory === 'all' || tool.category === activeCategory) && (!q || `${tool.name} ${tool.description} ${tool.category}`.toLowerCase().includes(q)))); }
     filterPills.forEach(pill => pill.addEventListener('click', () => { filterPills.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-pressed', 'false'); }); pill.classList.add('active'); pill.setAttribute('aria-pressed', 'true'); activeCategory = pill.dataset.category; filterTools(); }));
     searchInput.addEventListener('input', e => { searchQuery = e.target.value; filterTools(); });
-    fetch('tools/tools.json').then(r => { if (!r.ok) throw new Error('Gagal memuat data tools'); return r.json(); }).then(data => { toolsData = data; filterTools(); }).catch(() => { resultsCount.textContent = 'Data tools belum dapat dimuat.'; });
+    fetch('tools/tools.json').then(r => { if (!r.ok) throw new Error('Data tools tidak terbaca'); return r.json(); }).then(data => { toolsData = data; filterTools(); }).catch(() => { resultsCount.textContent = 'Data tool belum tersedia.'; });
   </script>
 </body>
 </html>

@@ -28,7 +28,7 @@ Tanggal: __________  Tester: __________  Browser: __________
 
 ## Resource Hub
 
-- [ ] Resource tampil dengan domain sumber dan CTA Buka resource.
+- [ ] Resource tampil dengan domain sumber dan CTA Buka link.
 - [ ] Pencarian, kategori, tag multi-pilih, dan Reset filter bekerja.
 - [ ] Empty state muncul ketika tidak ada hasil.
 
@@ -38,3 +38,9 @@ Tanggal: __________  Tester: __________  Browser: __________
 - [ ] Tombol icon (lock/copy/menu) memiliki nama aksesibel.
 - [ ] Teks utama terbaca pada background normal; swatch memiliki label/kode hex.
 - [ ] Dengan `prefers-reduced-motion`, transisi tidak mengganggu penggunaan.
+
+## Production readiness P3
+
+- [ ] `/robots.txt`, `/sitemap.xml`, dan `/site.webmanifest` dapat diakses tanpa 404.
+- [ ] Waterfall Chart menampilkan kolom bertingkat dari nilai awal ke nilai akhir.
+- [ ] Chart dengan konfigurasi rusak menampilkan fallback informatif, bukan halaman kosong.

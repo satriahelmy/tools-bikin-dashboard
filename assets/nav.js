@@ -43,7 +43,7 @@
     <nav class="bd-sidebar-nav">
       ${links.map((link) => `<a class="bd-sidebar-link${current === link.id ? ' is-active' : ''}" href="${link.href}"><span class="bd-sidebar-icon">${iconSvg(link.id)}</span><span>${link.label}</span></a>`).join('')}
     </nav>
-    <div class="bd-sidebar-footer">Tool gratis untuk data analyst</div>`;
+    <div class="bd-sidebar-footer">Gratis untuk kerja data</div>`;
 
   const toggle = document.createElement('button');
   toggle.className = 'bd-sidebar-toggle';

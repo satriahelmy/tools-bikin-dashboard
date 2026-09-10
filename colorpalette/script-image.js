@@ -27,11 +27,11 @@ function setImageActionsEnabled(enabled) {
 function validateFile(file) {
   const validType = ["image/jpeg", "image/png", "image/webp"].includes(file.type);
   if (!validType) {
-    showToast("Format tidak didukung. Gunakan JPG, PNG, atau WEBP.");
+    showToast("Format file ini belum didukung. Pilih JPG, PNG, atau WEBP.");
     return false;
   }
   if (file.size > 5 * 1024 * 1024) {
-    showToast("File terlalu besar. Ukuran maksimum 5 MB.");
+    showToast("File terlalu besar. Ukuran maksimalnya 5 MB.");
     return false;
   }
   return true;
@@ -94,7 +94,7 @@ function renderResult() {
     sw.style.background = hex;
     sw.innerHTML = `<div class="swatch-overlay" style="opacity:1;color:${fg}"><div></div><div class="swatch-bottom"><span class="bd-mono">${hex}</span><button type="button" aria-label="Salin hex" class="swatch-icon-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button></div></div>`;
     sw.querySelector("button").addEventListener("click", () => {
-      copyToClipboard(hex, `Penyalinan gagal. Salin manual: ${hex}`).then((ok) => ok && showToast(`${hex} disalin`));
+      copyToClipboard(hex, `Tidak bisa menyalin otomatis. Salin kode ini: ${hex}`).then((ok) => ok && showToast(`${hex} disalin`));
     });
     stage.appendChild(sw);
 
@@ -104,7 +104,7 @@ function renderResult() {
     chip.textContent = hex;
     chip.style.borderLeftColor = hex;
     chip.addEventListener("click", () => {
-      copyToClipboard(hex, `Penyalinan gagal. Salin manual: ${hex}`).then((ok) => ok && showToast(`${hex} disalin`));
+      copyToClipboard(hex, `Tidak bisa menyalin otomatis. Salin kode ini: ${hex}`).then((ok) => ok && showToast(`${hex} disalin`));
     });
     row.appendChild(chip);
   });
@@ -113,7 +113,7 @@ function renderResult() {
 function exportTps() {
   const body = `<?xml version='1.0'?>\n<workbook>\n  <preferences>\n    <color-palette name="Custom Palette" type="regular">\n${extracted.map((c) => `      <color>${c}</color>`).join("\n")}\n    </color-palette>\n  </preferences>\n</workbook>\n`;
   downloadFile("palette.tps", body, "application/xml");
-  showToast("palette.tps diunduh");
+  showToast("palette.tps siap diunduh");
 }
 
 function exportJson() {
@@ -125,22 +125,22 @@ function exportJson() {
     tableAccent: extracted[0]
   }, null, 2);
   downloadFile("theme.json", body, "application/json");
-  showToast("theme.json diunduh");
+  showToast("theme.json siap diunduh");
 }
 
 function exportCss() {
   const body = `:root {\n  --color-1: ${extracted[0]};\n  --color-2: ${extracted[1]};\n  --color-3: ${extracted[2]};\n  --color-4: ${extracted[3]};\n  --color-5: ${extracted[4]};\n}`;
-  copyToClipboard(body, "Penyalinan gagal. Salin manual: variabel CSS").then((ok) => ok && showToast("Variabel CSS disalin"));
+  copyToClipboard(body, "Tidak bisa menyalin otomatis. Salin variabel CSS secara manual.").then((ok) => ok && showToast("Variabel CSS disalin"));
 }
 
 function exportPng() {
   downloadPaletteImage(extracted, "png");
-  showToast("palette.png diunduh");
+  showToast("palette.png siap diunduh");
 }
 
 function exportJpg() {
   downloadPaletteImage(extracted, "jpg");
-  showToast("palette.jpg diunduh");
+  showToast("palette.jpg siap diunduh");
 }
 
 async function analyze(file) {
@@ -171,7 +171,7 @@ async function analyze(file) {
     setImageActionsEnabled(hasResult);
   } catch (_error) {
     document.getElementById("imageErrorState")?.classList.remove("u-hidden");
-    showToast("Gambar gagal dianalisis. Coba gambar lain.");
+    showToast("Warna dari gambar belum terbaca. Coba gambar lain.");
   } finally {
     analysisInfo.classList.add("u-hidden");
   }

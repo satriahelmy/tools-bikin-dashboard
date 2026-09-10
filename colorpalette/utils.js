@@ -26,7 +26,7 @@ async function copyToClipboard(text, fallbackMessage) {
     await navigator.clipboard.writeText(text);
     return true;
   } catch (_error) {
-    showToast(fallbackMessage || `Penyalinan gagal. Salin manual: ${text}`);
+    showToast(fallbackMessage || `Tidak bisa menyalin otomatis. Salin manual: ${text}`);
     return false;
   }
 }

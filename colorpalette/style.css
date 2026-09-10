@@ -1068,7 +1068,7 @@ h1.bd-title {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .bd-main {
     padding-top: 16px;
     padding-left: max(16px, env(safe-area-inset-left));
@@ -1083,7 +1083,7 @@ h1.bd-title {
     align-content: center;
     gap: 8px 12px;
     row-gap: 0;
-    padding-left: max(16px, env(safe-area-inset-left));
+    padding-left: max(58px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
   }
 

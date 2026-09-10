@@ -60,7 +60,7 @@ function nextPalette(seedHex) {
 }
 
 function copyHex(hex) {
-  copyToClipboard(hex, `Penyalinan gagal. Salin manual: ${hex}`).then((ok) => {
+  copyToClipboard(hex, `Tidak bisa menyalin otomatis. Salin kode ini: ${hex}`).then((ok) => {
     if (ok) showToast(`${hex} disalin`);
   });
 }
@@ -236,7 +236,7 @@ function regenerate() {
 function exportTps() {
   const body = `<?xml version='1.0'?>\n<workbook>\n  <preferences>\n    <color-palette name="Custom Palette" type="regular">\n${palette.map((c) => `      <color>${c}</color>`).join("\n")}\n    </color-palette>\n  </preferences>\n</workbook>\n`;
   downloadFile("palette.tps", body, "application/xml");
-  showToast("palette.tps diunduh");
+  showToast("palette.tps siap diunduh");
 }
 
 function exportJson() {
@@ -248,24 +248,24 @@ function exportJson() {
     tableAccent: palette[0]
   }, null, 2);
   downloadFile("theme.json", body, "application/json");
-  showToast("theme.json diunduh");
+  showToast("theme.json siap diunduh");
 }
 
 function exportCss() {
   const body = `:root {\n  --color-1: ${palette[0]};\n  --color-2: ${palette[1]};\n  --color-3: ${palette[2]};\n  --color-4: ${palette[3]};\n  --color-5: ${palette[4]};\n}`;
-  copyToClipboard(body, "Penyalinan gagal. Salin manual: variabel CSS").then((ok) => {
+  copyToClipboard(body, "Tidak bisa menyalin otomatis. Salin variabel CSS secara manual.").then((ok) => {
     if (ok) showToast("Variabel CSS disalin");
   });
 }
 
 function exportPng() {
   downloadPaletteImage(palette, "png");
-  showToast("palette.png diunduh");
+  showToast("palette.png siap diunduh");
 }
 
 function exportJpg() {
   downloadPaletteImage(palette, "jpg");
-  showToast("palette.jpg diunduh");
+  showToast("palette.jpg siap diunduh");
 }
 
 function seedFromQuery() {

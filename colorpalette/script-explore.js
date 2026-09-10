@@ -57,7 +57,7 @@ function render() {
     `;
     card.querySelector("button").addEventListener("click", () => {
       writeSeedPalette(item.colors);
-      showToast("Palet dipilih, membuka generator...");
+      showToast("Palet dipilih. Membuka generator…");
       setTimeout(() => {
         location.href = `./index.html?palette=${encodeURIComponent(item.colors.join(","))}`;
       }, 250);
@@ -65,7 +65,7 @@ function render() {
     grid.appendChild(card);
   });
   if (!items.length) {
-    grid.innerHTML = `<div class="bd-hint">Tidak ada palet yang cocok dengan filter ini.</div>`;
+    grid.innerHTML = `<div class="bd-hint">Belum ada palet yang cocok dengan filter ini.</div>`;
   }
 }
 
@@ -79,7 +79,7 @@ async function init() {
   } catch (_error) {
     allPalettes = fallbackPalettes;
     render();
-    showToast("Mode offline: menampilkan contoh palet.");
+    showToast("Mode offline: menampilkan palet contoh.");
   }
 }
 
