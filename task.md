@@ -96,13 +96,16 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 - [x] Buat tiap kartu tool memiliki manfaat utama dan CTA yang jelas.
 - [ ] Pertimbangkan section `Mulai dari sini` atau tool unggulan jika jumlah tool bertambah.
 - [x] Hindari whitespace kosong yang tidak membantu pengguna.
+- [x] Samakan alignment konten discovery ke garis kiri grid agar perpindahan antarhalaman terasa rapi.
 
 ## Prioritas P2 — Brand, accessibility, dan kualitas produksi
 
 ### Identitas visual
 
 - [x] Finalisasi sistem ikon SVG yang konsisten.
-- [x] Evaluasi logo mark `b` dan pertahankan bentuk sederhana yang sudah konsisten di shell.
+- [x] Menggunakan logo BikinDashboard sebagai favicon dan ikon aplikasi.
+- [x] Mengintegrasikan logo SVG BikinDashboard sebagai brand sidebar.
+- [x] Memuat shell CSS sejak awal agar logo SVG dan layout tidak bergeser saat navigasi.
 - [x] Kurangi penggunaan pill/badge yang tidak informatif (kategori chart tidak diulang sebagai badge).
 - [x] Gunakan accent color hanya untuk aksi dan status penting.
 - [x] Pastikan komponen shared tidak terlihat seperti template yang sama di setiap halaman.

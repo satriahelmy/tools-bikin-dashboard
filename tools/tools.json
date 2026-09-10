@@ -12,7 +12,7 @@
   {
     "id": "chart",
     "name": "Chart Guide",
-    "description": "Cari chart berdasarkan pertanyaanmu, lihat contohnya, dan cek kapan sebaiknya dipakai.",
+    "description": "Lihat contoh chart, kebutuhan datanya, dan catatan penggunaannya.",
     "category": "Belajar",
     "status": "available",
     "url": "/chart/",
@@ -22,7 +22,7 @@
   {
     "id": "resourcehub",
     "name": "Resource Hub",
-    "description": "Link tools, dataset, tutorial, dan inspirasi yang bisa langsung dipakai.",
+    "description": "Link tools, dataset, tutorial, dan inspirasi untuk pekerjaanmu.",
     "category": "Resources",
     "status": "available",
     "url": "/resourcehub/",

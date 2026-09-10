@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BikinDashboard — tools untuk kerja data</title>
-  <meta name="description" content="Alat praktis untuk memilih warna, memahami chart, dan mencari referensi dashboard.">
+  <meta name="description" content="Alat untuk memilih warna, mempelajari chart, dan mencari referensi dashboard.">
   <link rel="canonical" href="https://bikindashboard.com/">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Tools praktis untuk dashboard — bikindashboard.com">
-  <meta property="og:description" content="Pilih palet, temukan chart yang pas, dan cari referensi data viz.">
+  <meta property="og:title" content="Alat untuk kerja dashboard — bikindashboard.com">
+  <meta property="og:description" content="Pilih palet warna, pelajari chart, dan cari referensi data.">
   <meta property="og:url" content="https://bikindashboard.com/">
   <meta property="og:image" content="https://bikindashboard.com/assets/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
@@ -18,12 +18,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tools/style.css">
-  <script src="assets/nav.js" defer></script>
+  <link rel="stylesheet" href="assets/nav.css?v=1.2" data-bd-nav-css>
+  <script src="assets/nav.js?v=1.2" defer></script>
 </head>
-<body class="bd-home">
+<body class="bd-home bd-with-nav">
   <header class="bd-topbar"><div class="bd-topbar-inner"><div class="bd-topbar-left"><span class="bd-topbar-divider"></span><h1 class="bd-title">Semua tool</h1></div></div></header>
   <main class="bd-main"><div class="bd-container">
-    <header class="bd-hero"><p class="bd-label" style="margin-bottom:10px;">BIKINDASHBOARD.COM</p><h2 class="bd-hero-title">Kerjakan dashboard tanpa mulai dari nol</h2><p class="bd-hero-subtitle">Pilih warna, cari bentuk chart yang pas, atau temukan referensi untuk langkah berikutnya.</p></header>
+    <header class="bd-hero"><p class="bd-label" style="margin-bottom:10px;">BIKINDASHBOARD.COM</p><h2 class="bd-hero-title">Alat untuk kerja dashboard</h2><p class="bd-hero-subtitle">Pilih palet warna, pelajari chart, atau cari referensi data.</p></header>
     <section class="bd-search-wrapper"><input type="text" id="search-input" class="bd-input" aria-label="Cari tool" placeholder="Cari tool, misalnya palette atau chart…"></section>
     <section class="bd-filters" id="category-filters" aria-label="Filter kategori"><button type="button" class="bd-filter-pill active" aria-pressed="true" data-category="all">Semua</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Desain & warna">Desain & warna</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Belajar">Belajar</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Resources">Referensi</button></section>
     <section class="bd-results-meta" aria-live="polite"><p class="bd-hint" id="results-count"></p></section>

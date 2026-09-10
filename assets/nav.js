@@ -9,10 +9,16 @@
         return prefix ? `/${prefix}/` : '/';
       })();
 
-  const stylesheet = document.createElement('link');
-  stylesheet.rel = 'stylesheet';
-  stylesheet.href = new URL('./nav.css', document.currentScript.src).href;
-  document.head.appendChild(stylesheet);
+  // Pages include the shell stylesheet from <head> so the sidebar and its SVG
+  // logo have their final dimensions before the first paint. Keep this
+  // fallback for standalone pages that have not added the static link yet.
+  if (!document.querySelector('link[data-bd-nav-css]')) {
+    const stylesheet = document.createElement('link');
+    stylesheet.rel = 'stylesheet';
+    stylesheet.dataset.bdNavCss = 'true';
+    stylesheet.href = `${new URL('./nav.css', document.currentScript.src).href}?v=1.2`;
+    document.head.appendChild(stylesheet);
+  }
 
   const links = [
     { id: 'home', label: 'Beranda', href: rootPath },
@@ -39,7 +45,7 @@
   aside.id = 'bd-global-sidebar';
   aside.setAttribute('aria-label', 'Navigasi utama');
   aside.innerHTML = `
-    <div class="bd-sidebar-brand"><span class="bd-brand-mark">b</span><span>bikindashboard</span></div>
+    <div class="bd-sidebar-brand"><img class="bd-sidebar-brand-logo" src="${rootPath}assets/bikindashboard-logo.svg" alt="bikindashboard" width="164" height="116" decoding="async"></div>
     <nav class="bd-sidebar-nav">
       ${links.map((link) => `<a class="bd-sidebar-link${current === link.id ? ' is-active' : ''}" href="${link.href}"><span class="bd-sidebar-icon">${iconSvg(link.id)}</span><span>${link.label}</span></a>`).join('')}
     </nav>
