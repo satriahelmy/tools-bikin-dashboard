@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">bikindashboard.com — Tools untuk data analyst</title>
+  <desc id="desc">Kumpulan tool gratis untuk warna, chart, dan resource dashboard.</desc>
+  <rect width="1200" height="630" fill="#f8fafc"/>
+  <rect x="72" y="72" width="74" height="74" rx="18" fill="#2563eb"/>
+  <path d="M94 88h16v19c3-3.4 7-5.2 12.7-5.2 10.8 0 18.8 8.4 18.8 20.2s-8 20.2-18.8 20.2c-5.7 0-9.7-1.8-12.7-5.2v5.2H94V88Zm24.3 27.1c-5.4 0-9.3 3.2-9.3 7.7s3.9 7.7 9.3 7.7 9.3-3.2 9.3-7.7-3.9-7.7-9.3-7.7Z" fill="#fff"/>
+  <text x="170" y="122" fill="#0f172a" font-family="Arial, sans-serif" font-size="34" font-weight="700">bikindashboard.com</text>
+  <text x="80" y="285" fill="#0f172a" font-family="Arial, sans-serif" font-size="62" font-weight="700">Tools untuk data analyst</text>
+  <text x="84" y="345" fill="#475569" font-family="Arial, sans-serif" font-size="28">Pilih warna, chart, dan resource untuk dashboard yang lebih baik.</text>
+  <g transform="translate(84 430)">
+    <rect width="300" height="112" rx="16" fill="#fff" stroke="#dbe3ef"/>
+    <circle cx="40" cy="40" r="14" fill="#60a5fa"/><circle cx="70" cy="62" r="9" fill="#2563eb"/><circle cx="105" cy="34" r="11" fill="#93c5fd"/>
+    <text x="32" y="92" fill="#0f172a" font-family="Arial, sans-serif" font-size="22" font-weight="700">Color Palette</text>
+  </g>
+  <g transform="translate(414 430)">
+    <rect width="300" height="112" rx="16" fill="#fff" stroke="#dbe3ef"/>
+    <path d="M28 76V28M28 76h238M62 64V49h22v15m18 0V37h22v27m18 0V22h22v42m18 0V43h22v21" fill="none" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+    <text x="32" y="98" fill="#0f172a" font-family="Arial, sans-serif" font-size="22" font-weight="700">Chart Guide</text>
+  </g>
+  <g transform="translate(744 430)">
+    <rect width="300" height="112" rx="16" fill="#fff" stroke="#dbe3ef"/>
+    <path d="M32 37h236M32 59h190M32 81h154" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="246" cy="37" r="13" fill="#2563eb"/><circle cx="200" cy="59" r="13" fill="#60a5fa"/><circle cx="164" cy="81" r="13" fill="#93c5fd"/>
+    <text x="32" y="102" fill="#0f172a" font-family="Arial, sans-serif" font-size="22" font-weight="700">Resource Hub</text>
+  </g>
+</svg>

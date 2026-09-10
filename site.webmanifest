@@ -1,0 +1,19 @@
+{
+  "name": "bikindashboard.com — Tools untuk data analyst",
+  "short_name": "bikindashboard",
+  "description": "Kumpulan tool gratis untuk warna, chart, dan resource dashboard.",
+  "lang": "id",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#f8fafc",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

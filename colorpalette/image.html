@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dari Gambar — Generator Palet Warna</title>
+  <meta name="description" content="Ekstrak warna dominan dari gambar dan ekspor paletnya untuk kebutuhan dashboard.">
+  <link rel="canonical" href="https://bikindashboard.com/colorpalette/image.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="../assets/nav.js" defer></script>
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="bd-topbar">
+    <div class="bd-topbar-inner">
+      <div class="bd-topbar-left">
+        <a href="../index.html" class="bd-back">← Semua Tools</a>
+        <span class="bd-topbar-divider"></span>
+        <h1 class="bd-title">Generator Palet Warna</h1>
+      </div>
+      <nav class="bd-tabs">
+        <a href="./index.html" class="bd-tab">Generator</a>
+        <a href="./image.html" class="bd-tab active">Dari Gambar</a>
+        <a href="./explore.html" class="bd-tab">Jelajahi</a>
+        <a href="./guide.html" class="bd-tab">Panduan</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="bd-main">
+    <div class="bd-container">
+      <header class="tool-page-intro">
+        <p class="bd-label">DARI GAMBAR</p>
+        <h2>Ambil warna dari referensi visual</h2>
+        <p class="bd-body">Unggah gambar untuk mendapatkan lima warna dominan yang siap diekspor ke dashboard.</p>
+      </header>
+      <div class="bd-card">
+        <div class="bd-card-header"><h2 class="bd-heading">Unggah gambar</h2></div>
+        <div class="bd-card-body">
+          <label id="dropzone" class="upload-dropzone">
+            <input id="imageInput" type="file" accept=".jpg,.jpeg,.png,.webp" class="u-visually-hidden">
+            <div>Seret gambar ke sini atau klik untuk memilih (JPG, PNG, WEBP, maks. 5 MB)</div>
+          </label>
+          <img id="imagePreview" class="image-preview u-hidden" alt="Pratinjau gambar">
+        </div>
+      </div>
+
+      <div class="bd-divider"></div>
+
+      <div id="analysisInfo" class="analysis-loading u-hidden">Menganalisis warna...</div>
+      <div id="imageEmptyState" class="image-empty-state">
+        <strong>Belum ada gambar</strong>
+        <span>Unggah referensi visual untuk melihat palet warna hasil ekstraksi.</span>
+      </div>
+      <div id="imageErrorState" class="image-error-state u-hidden" role="alert">
+        <strong>Gambar belum bisa dianalisis</strong>
+        <span>Coba unggah file JPG, PNG, atau WEBP lain dengan ukuran maksimal 5 MB.</span>
+      </div>
+      <div id="imageResultHeading" class="palette-section-heading u-hidden">
+        <div><p class="bd-label">HASIL EKSTRAKSI</p><h3>Warna dominan dari gambar</h3></div>
+        <p class="bd-hint">Klik kode hex untuk menyalin.</p>
+      </div>
+      <section id="resultPalette" class="palette-stage u-hidden"></section>
+      <section id="resultHexRow" class="hex-chip-row u-hidden"></section>
+      <section id="imagePaletteActions" class="palette-actions u-hidden">
+        <div></div>
+        <div class="export-actions">
+          <button id="imageExportTpsBtn" type="button" class="bd-btn bd-btn-secondary">Ekspor Tableau TPS</button>
+          <button id="imageExportJsonBtn" type="button" class="bd-btn bd-btn-secondary">Ekspor Power BI JSON</button>
+          <button id="imageExportPngBtn" type="button" class="bd-btn bd-btn-secondary">Ekspor PNG</button>
+          <button id="imageExportJpgBtn" type="button" class="bd-btn bd-btn-secondary">Ekspor JPG</button>
+          <button id="imageCopyCssBtn" type="button" class="bd-btn bd-btn-ghost">Salin variabel CSS</button>
+          <button id="editGeneratorBtn" type="button" class="bd-btn bd-btn-primary">Edit di Generator</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bd-footer">
+    <p class="bd-hint">Tool gratis dari <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p>
+  </footer>
+
+  <div class="bd-toast" id="toast"></div>
+
+  <script src="./utils.js"></script>
+  <script src="./script-image.js"></script>
+</body>
+</html>

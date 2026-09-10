@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools — bikindashboard.com</title>
+  <meta name="description" content="Kumpulan tools gratis untuk data analyst — color palette generator, chart guide, resource hub, dan lainnya dari bikindashboard.com.">
+  <link rel="canonical" href="https://bikindashboard.com/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <meta http-equiv="refresh" content="0; url=../index.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>window.location.replace('../index.html');</script>
+
+  <!-- Top Bar -->
+  <header class="bd-topbar">
+    <div class="bd-topbar-inner">
+      <div class="bd-topbar-left">
+        <a href="../index.html" class="bd-back">← bikindashboard.com</a>
+        <span class="bd-topbar-divider"></span>
+        <h1 class="bd-title">Tools</h1>
+      </div>
+      <div class="bd-topbar-right"></div>
+    </div>
+  </header>
+
+  <main class="bd-main">
+    <div class="bd-container">
+      <header class="bd-hero">
+        <h2 class="bd-hero-title">Tools untuk data analyst</h2>
+        <p class="bd-hero-subtitle">Kumpulan tool gratis bikindashboard.com — dari desain warna, belajar chart, hingga kurasi resource.</p>
+      </header>
+
+      <section class="bd-search-wrapper">
+        <input type="text" id="search-input" class="bd-input" placeholder="Cari tool (misal: palette, chart, resource)...">
+      </section>
+
+      <section class="bd-filters" id="category-filters">
+        <button type="button" class="bd-filter-pill active" aria-pressed="true" data-category="all">Semua</button>
+        <button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Desain & warna">Desain & warna</button>
+        <button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Belajar">Belajar</button>
+        <button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Resources">Resource</button>
+      </section>
+
+      <section class="bd-results-meta" aria-live="polite">
+        <p class="bd-hint" id="results-count"></p>
+      </section>
+
+      <section id="tools-grid" class="bd-grid" aria-label="Daftar tools"></section>
+
+      <div id="empty-state" class="bd-empty-state" style="display: none;">
+        <svg class="bd-empty-icon" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <h3 class="bd-empty-title">Tidak ada tool yang sesuai</h3>
+        <p class="bd-hint">Coba kata kunci lain atau pilih kategori berbeda.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bd-footer">
+    <p class="bd-hint">Tool gratis dari <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p>
+  </footer>
+
+  <script src="../assets/nav.js" defer></script>
+
+  <script>
+    let toolsData = [];
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    const toolsGrid = document.getElementById('tools-grid');
+    const emptyState = document.getElementById('empty-state');
+    const searchInput = document.getElementById('search-input');
+    const resultsCount = document.getElementById('results-count');
+    const filterPills = document.querySelectorAll('.bd-filter-pill');
+
+    const badgeClassMap = {
+      'Tableau': 'bd-badge-blue',
+      'Power BI': 'bd-badge-orange',
+      'Chart.js': 'bd-badge-blue',
+      'Gratis': 'bd-badge-green',
+      'Kurasi': 'bd-badge-blue',
+      'CSV': 'bd-badge-gray',
+      'WCAG': 'bd-badge-blue',
+      'Preview': 'bd-badge-blue',
+      'Coming soon': 'bd-badge-gray'
+    };
+
+    function isLocalHost() {
+      const host = window.location.hostname;
+      return host === 'localhost' || host === '127.0.0.1';
+    }
+
+    function getToolUrl(tool) {
+      if (tool.status !== 'available') return null;
+      if (tool.localUrl && (isLocalHost() || window.location.pathname.includes('/tools/'))) return tool.localUrl;
+      return tool.url;
+    }
+
+    function getToolInitial(name) {
+      return name.trim().charAt(0).toUpperCase();
+    }
+
+    function renderTools(tools) {
+      toolsGrid.innerHTML = '';
+      resultsCount.textContent = `Menampilkan ${tools.length} dari ${toolsData.length} tool`;
+
+      if (tools.length === 0) {
+        emptyState.style.display = 'flex';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      tools.forEach(tool => {
+        const url = getToolUrl(tool);
+        const isAvailable = tool.status === 'available' && url;
+        const card = document.createElement(isAvailable ? 'a' : 'div');
+
+        card.className = 'bd-tool-card' + (isAvailable ? '' : ' is-disabled');
+        if (isAvailable) {
+          card.href = url;
+          card.target = isLocalHost() ? '_self' : '_blank';
+          card.rel = isLocalHost() ? '' : 'noopener noreferrer';
+        }
+
+        const header = document.createElement('div');
+        header.className = 'bd-tool-card-header';
+
+        const icon = document.createElement('div');
+        icon.className = 'bd-tool-icon';
+        icon.textContent = getToolInitial(tool.name);
+        icon.setAttribute('aria-hidden', 'true');
+
+        const title = document.createElement('div');
+        title.className = 'bd-tool-card-title';
+        title.textContent = tool.name;
+
+        header.appendChild(icon);
+        header.appendChild(title);
+
+        const body = document.createElement('div');
+        body.className = 'bd-tool-card-body';
+
+        const desc = document.createElement('p');
+        desc.className = 'bd-tool-card-desc';
+        desc.textContent = tool.description;
+
+        const badges = document.createElement('div');
+        badges.className = 'bd-tool-card-badges';
+
+        (tool.badges || []).forEach(label => {
+          const badge = document.createElement('span');
+          badge.className = 'bd-badge ' + (badgeClassMap[label] || 'bd-badge-gray');
+          badge.textContent = label;
+          badges.appendChild(badge);
+        });
+
+        body.appendChild(desc);
+        body.appendChild(badges);
+
+        card.appendChild(header);
+        card.appendChild(body);
+        toolsGrid.appendChild(card);
+      });
+    }
+
+    function filterTools() {
+      const filtered = toolsData.filter(tool => {
+        const matchesCategory = activeCategory === 'all' || tool.category === activeCategory;
+        const q = searchQuery.toLowerCase();
+        const matchesSearch =
+          tool.name.toLowerCase().includes(q) ||
+          tool.description.toLowerCase().includes(q) ||
+          tool.category.toLowerCase().includes(q);
+        return matchesCategory && matchesSearch;
+      });
+      renderTools(filtered);
+    }
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-pressed', 'false'); });
+        pill.classList.add('active');
+        pill.setAttribute('aria-pressed', 'true');
+        activeCategory = pill.getAttribute('data-category');
+        filterTools();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      filterTools();
+    });
+
+    async function loadToolsData() {
+      try {
+        const response = await fetch('tools.json');
+        if (!response.ok) throw new Error('Gagal memuat data tools.');
+        toolsData = await response.json();
+        filterTools();
+      } catch (error) {
+        console.error(error);
+        toolsGrid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 48px; background: var(--bd-bg); border: 1px dashed var(--bd-danger); border-radius: var(--bd-radius-lg);">
+            <p style="color: var(--bd-danger); font-weight: 600; margin-bottom: 8px;">Gagal memuat data</p>
+            <p class="bd-hint">Silakan segarkan halaman atau coba lagi nanti.</p>
+          </div>`;
+        resultsCount.textContent = '';
+      }
+    }
+
+    loadToolsData();
+  </script>
+</body>
+</html>

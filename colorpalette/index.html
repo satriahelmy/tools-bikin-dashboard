@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Generator Palet Warna — bikindashboard.com</title>
+  <meta name="description" content="Buat dan ekspor palet warna harmonis untuk dashboard, Tableau, Power BI, dan aplikasi web.">
+  <link rel="canonical" href="https://bikindashboard.com/colorpalette/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="../assets/nav.js" defer></script>
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="bd-topbar">
+    <div class="bd-topbar-inner">
+      <div class="bd-topbar-left">
+        <a href="../index.html" class="bd-back">← Semua Tools</a>
+        <span class="bd-topbar-divider"></span>
+        <h1 class="bd-title">Generator Palet Warna</h1>
+      </div>
+      <nav class="bd-tabs">
+        <a href="./index.html" class="bd-tab active">Generator</a>
+        <a href="./image.html" class="bd-tab">Dari Gambar</a>
+        <a href="./explore.html" class="bd-tab">Jelajahi</a>
+        <a href="./guide.html" class="bd-tab">Panduan</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="bd-main">
+    <div class="bd-container">
+      <header class="palette-intro">
+        <div>
+          <p class="bd-label">RUANG KERJA</p>
+          <h2>Bangun palet yang siap dipakai</h2>
+          <p class="bd-body">Masukkan warna awal, pilih hubungan warna, lalu salin hasilnya ke dashboard atau aplikasi web.</p>
+        </div>
+      </header>
+
+      <div class="generator-controls">
+        <label class="control-field"><span class="bd-label">Warna awal</span><input id="seedInput" class="bd-input" type="text" placeholder="Contoh: #3B82F6 atau ocean"></label>
+        <div id="harmonyModes" class="harmony-modes" role="group" aria-label="Mode harmoni warna"></div>
+        <button id="generateBtn" type="button" class="bd-btn bd-btn-primary">Buat palet</button>
+      </div>
+
+      <div class="palette-section-heading">
+        <div><p class="bd-label">PALET SAAT INI</p><h3>Warna yang siap dipakai</h3></div>
+        <p class="bd-hint">Klik kode hex untuk menyalin.</p>
+      </div>
+      <section id="paletteStage" class="palette-stage"></section>
+
+      <div class="palette-section-heading palette-export-heading">
+        <div><p class="bd-label">HASIL EKSPOR</p><h3>Gunakan palet di tool favoritmu</h3></div>
+        <p class="bd-hint">Unduh format yang sesuai dengan alur kerjamu.</p>
+      </div>
+      <section class="palette-actions">
+        <div class="bd-kbd-hint">Tekan <kbd class="bd-kbd">Space</kbd> untuk membuat ulang</div>
+        <div class="export-actions">
+          <button id="exportTpsBtn" type="button" class="bd-btn bd-btn-secondary">Ekspor Tableau TPS</button>
+          <button id="exportJsonBtn" type="button" class="bd-btn bd-btn-secondary">Ekspor Power BI JSON</button>
+          <button id="exportPngBtn" type="button" class="bd-btn bd-btn-secondary">Ekspor PNG</button>
+          <button id="exportJpgBtn" type="button" class="bd-btn bd-btn-secondary">Ekspor JPG</button>
+          <button id="copyCssBtn" type="button" class="bd-btn bd-btn-ghost">Salin variabel CSS</button>
+        </div>
+      </section>
+
+      <div class="palette-section-heading palette-code-heading">
+        <div><p class="bd-label">KODE WARNA</p></div>
+      </div>
+      <section id="hexRow" class="hex-chip-row"></section>
+
+      <section class="preview-shell">
+        <div class="preview-top">
+          <div><p class="bd-label">HASIL</p><div class="bd-heading">Pratinjau dashboard</div></div>
+          <div>
+            <button type="button" class="bd-btn bd-btn-sm bd-btn-secondary" data-preview-theme="light">Terang</button>
+            <button type="button" class="bd-btn bd-btn-sm bd-btn-secondary" data-preview-theme="dark">Gelap</button>
+          </div>
+        </div>
+        <div id="dashboardPreview" class="bd-card-body"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bd-footer">
+    <p class="bd-hint">Tool gratis dari <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p>
+  </footer>
+
+  <div class="bd-toast" id="toast"></div>
+
+  <script src="./utils.js"></script>
+  <script src="./script-generator.js"></script>
+</body>
+</html>

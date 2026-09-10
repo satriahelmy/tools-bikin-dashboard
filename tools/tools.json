@@ -1,0 +1,32 @@
+[
+  {
+    "id": "colorpalette",
+    "name": "Generator Palet Warna",
+    "description": "Buat palet warna harmonis untuk dashboard, lalu ekspor ke Tableau, Power BI, CSS, atau gambar.",
+    "category": "Desain & warna",
+    "status": "available",
+    "url": "/colorpalette/",
+    "localUrl": "../colorpalette/index.html",
+    "badges": ["Tableau", "Power BI", "Gratis"]
+  },
+  {
+    "id": "chart",
+    "name": "Chart Guide",
+    "description": "Panduan interaktif memilih tipe chart yang tepat untuk datamu — dengan visualisasi, kegunaan, dan do's & don'ts.",
+    "category": "Belajar",
+    "status": "available",
+    "url": "/chart/",
+    "localUrl": "../chart/index.html",
+    "badges": ["Chart.js", "Gratis"]
+  },
+  {
+    "id": "resourcehub",
+    "name": "Resource Hub",
+    "description": "Kurasi resource data visualization — tools, dataset, tutorial, dan inspirasi untuk analyst Indonesia.",
+    "category": "Resources",
+    "status": "available",
+    "url": "/resourcehub/",
+    "localUrl": "../resourcehub/index.html",
+    "badges": ["Kurasi", "Gratis"]
+  }
+]

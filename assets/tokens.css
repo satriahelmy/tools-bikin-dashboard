@@ -1,0 +1,31 @@
+/* Shared design tokens. Tool-specific styles consume these variables so the
+   shell, controls, cards, and semantic states stay visually aligned. */
+:root {
+  --bd-primary: #2563eb;
+  --bd-primary-hover: #1d4ed8;
+  --bd-primary-light: #eff6ff;
+  --bd-primary-text: #1e40af;
+  --bd-bg: #ffffff;
+  --bd-bg-secondary: #f8fafc;
+  --bd-bg-tertiary: #f1f5f9;
+  --bd-border: #e2e8f0;
+  --bd-border-strong: #cbd5e1;
+  --bd-text: #0f172a;
+  --bd-text-secondary: #475569;
+  --bd-text-tertiary: #94a3b8;
+  --bd-success: #16a34a;
+  --bd-success-light: #f0fdf4;
+  --bd-warning: #b45309;
+  --bd-warning-light: #fffbeb;
+  --bd-danger: #dc2626;
+  --bd-danger-light: #fef2f2;
+  --bd-radius-sm: 6px;
+  --bd-radius-md: 8px;
+  --bd-radius-lg: 12px;
+  --bd-radius-xl: 16px;
+  --bd-radius-full: 9999px;
+  --bd-shadow-sm: 0 1px 2px rgba(0, 0, 0, .05);
+  --bd-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, .07), 0 2px 4px -1px rgba(0, 0, 0, .04);
+  --bd-font: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bd-font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+}

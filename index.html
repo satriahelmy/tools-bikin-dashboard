@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools — bikindashboard.com</title>
+  <meta name="description" content="Kumpulan tools gratis untuk data analyst dari bikindashboard.com.">
+  <link rel="canonical" href="https://bikindashboard.com/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tools gratis untuk data analyst — bikindashboard.com">
+  <meta property="og:description" content="Pilih warna, chart, dan resource untuk membuat dashboard yang lebih baik.">
+  <meta property="og:url" content="https://bikindashboard.com/">
+  <meta property="og:image" content="https://bikindashboard.com/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tools/style.css">
+  <script src="assets/nav.js" defer></script>
+</head>
+<body class="bd-home">
+  <header class="bd-topbar"><div class="bd-topbar-inner"><div class="bd-topbar-left"><span class="bd-topbar-divider"></span><h1 class="bd-title">Tools</h1></div></div></header>
+  <main class="bd-main"><div class="bd-container">
+    <header class="bd-hero"><p class="bd-label" style="margin-bottom:10px;">BIKINDASHBOARD.COM</p><h2 class="bd-hero-title">Tools untuk data analyst</h2><p class="bd-hero-subtitle">Kumpulan tool gratis untuk membantu kamu memilih warna, chart, dan resource terbaik untuk dashboard.</p></header>
+    <section class="bd-search-wrapper"><input type="text" id="search-input" class="bd-input" aria-label="Cari tool" placeholder="Cari tool (misal: palette, chart, resource)..."></section>
+    <section class="bd-filters" id="category-filters" aria-label="Filter kategori"><button type="button" class="bd-filter-pill active" aria-pressed="true" data-category="all">Semua</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Desain & warna">Desain & warna</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Belajar">Belajar</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Resources">Resource</button></section>
+    <section class="bd-results-meta" aria-live="polite"><p class="bd-hint" id="results-count"></p></section>
+    <section id="tools-grid" class="bd-grid" aria-label="Daftar tools"></section>
+    <div id="empty-state" class="bd-empty-state" style="display:none"><h3 class="bd-empty-title">Tidak ada tool yang sesuai</h3><p class="bd-hint">Coba kata kunci lain atau pilih kategori berbeda.</p></div>
+  </div></main>
+  <footer class="bd-footer"><p class="bd-hint">Tool gratis dari <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p></footer>
+  <script>
+    let toolsData = [], activeCategory = 'all', searchQuery = '';
+    const toolsGrid = document.getElementById('tools-grid'), emptyState = document.getElementById('empty-state'), searchInput = document.getElementById('search-input'), resultsCount = document.getElementById('results-count'), filterPills = document.querySelectorAll('.bd-filter-pill');
+    const badgeClassMap = { 'Tableau':'bd-badge-blue','Power BI':'bd-badge-orange','Chart.js':'bd-badge-blue','Gratis':'bd-badge-green','Kurasi':'bd-badge-blue' };
+    const root = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.replace(/[^/]*$/, '');
+    const localPaths = { colorpalette: root + 'colorpalette/index.html', chart: root + 'chart/index.html', resourcehub: root + 'resourcehub/index.html' };
+    const cardIcon = (id) => {
+      const icons = {
+        colorpalette: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="8.5" cy="10" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="15.5" cy="10" r="1"/><path d="M15.5 16.5c0-1.1.9-2 2-2h.5"/></svg>',
+        chart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16"/><rect x="7" y="12" width="2.5" height="4" rx=".5"/><rect x="11" y="9" width="2.5" height="7" rx=".5"/><rect x="15" y="6" width="2.5" height="10" rx=".5"/></svg>',
+        resourcehub: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8 12h8M12 8v8"/></svg>'
+      };
+      return icons[id] || icons.resourcehub;
+    };
+    function renderTools(tools) {
+      resultsCount.textContent = `Menampilkan ${tools.length} dari ${toolsData.length} tool`;
+      emptyState.style.display = tools.length ? 'none' : 'flex';
+      toolsGrid.innerHTML = tools.map(tool => {
+        const url = localPaths[tool.id] || tool.url, badges = (tool.badges || []).map(label => `<span class="bd-badge ${badgeClassMap[label] || 'bd-badge-gray'}">${label}</span>`).join('');
+        return `<a class="bd-tool-card" href="${url}"><div class="bd-tool-card-header"><div class="bd-tool-icon">${cardIcon(tool.id)}</div><div class="bd-tool-card-title">${tool.name}</div></div><div class="bd-tool-card-body"><p class="bd-tool-card-desc">${tool.description}</p><div class="bd-tool-card-badges">${badges}</div><div class="bd-tool-card-foot"><span>Jelajahi tool</span><span aria-hidden="true">→</span></div></div></a>`;
+      }).join('');
+    }
+    function filterTools() { const q = searchQuery.trim().toLowerCase(); renderTools(toolsData.filter(tool => (activeCategory === 'all' || tool.category === activeCategory) && (!q || `${tool.name} ${tool.description} ${tool.category}`.toLowerCase().includes(q)))); }
+    filterPills.forEach(pill => pill.addEventListener('click', () => { filterPills.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-pressed', 'false'); }); pill.classList.add('active'); pill.setAttribute('aria-pressed', 'true'); activeCategory = pill.dataset.category; filterTools(); }));
+    searchInput.addEventListener('input', e => { searchQuery = e.target.value; filterTools(); });
+    fetch('tools/tools.json').then(r => { if (!r.ok) throw new Error('Gagal memuat data tools'); return r.json(); }).then(data => { toolsData = data; filterTools(); }).catch(() => { resultsCount.textContent = 'Data tools belum dapat dimuat.'; });
+  </script>
+</body>
+</html>
