@@ -45,7 +45,7 @@
   aside.id = 'bd-global-sidebar';
   aside.setAttribute('aria-label', 'Navigasi utama');
   aside.innerHTML = `
-    <div class="bd-sidebar-brand"><img class="bd-sidebar-brand-logo" src="${rootPath}assets/bikindashboard-logo.svg" alt="bikindashboard" width="164" height="116" decoding="async"></div>
+    <div class="bd-sidebar-brand"><img class="bd-sidebar-brand-logo" src="${rootPath}assets/bikindashboard-logo.svg" alt="bikindashboard" width="164" height="116" loading="lazy" fetchpriority="low" decoding="async"></div>
     <nav class="bd-sidebar-nav">
       ${links.map((link) => `<a class="bd-sidebar-link${current === link.id ? ' is-active' : ''}" href="${link.href}"><span class="bd-sidebar-icon">${iconSvg(link.id)}</span><span>${link.label}</span></a>`).join('')}
     </nav>
@@ -97,5 +97,14 @@
   });
   document.body.classList.add('bd-with-nav');
   document.body.prepend(backdrop, toggle, aside);
+  const brandLogo = aside.querySelector('.bd-sidebar-brand-logo');
+  if (brandLogo) {
+    const revealLogo = () => brandLogo.classList.add('is-ready');
+    if (brandLogo.complete) revealLogo();
+    else {
+      brandLogo.addEventListener('load', revealLogo, { once: true });
+      brandLogo.addEventListener('error', revealLogo, { once: true });
+    }
+  }
   syncSidebarState();
 })();

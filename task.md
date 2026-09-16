@@ -74,6 +74,7 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 - [x] Pertahankan area swatch sebagai fokus utama, tetapi jangan membuatnya terlalu tinggi.
 - [x] Pastikan tombol mode, generate, export, lock, dan copy memiliki hierarchy yang jelas.
 - [x] Pastikan preview dashboard menjadi contoh penggunaan, bukan sekadar blok dekoratif.
+- [x] Bedakan area preview dashboard dari alur generator dengan panel/canvas khusus.
 - [x] Tambahkan state kosong/error yang mudah dipahami pada fitur From Image.
 
 ### Chart Guide
@@ -106,6 +107,7 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 - [x] Menggunakan logo BikinDashboard sebagai favicon dan ikon aplikasi.
 - [x] Mengintegrasikan logo SVG BikinDashboard sebagai brand sidebar.
 - [x] Memuat shell CSS sejak awal agar logo SVG dan layout tidak bergeser saat navigasi.
+- [x] Menurunkan prioritas loading logo dan menampilkan transisi singkat agar perpindahan halaman terasa halus.
 - [x] Kurangi penggunaan pill/badge yang tidak informatif (kategori chart tidak diulang sebagai badge).
 - [x] Gunakan accent color hanya untuk aksi dan status penting.
 - [x] Pastikan komponen shared tidak terlihat seperti template yang sama di setiap halaman.
