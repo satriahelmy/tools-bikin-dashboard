@@ -1,0 +1,6 @@
+order_id,order_date,region,sales,status,empty_column,mixed_value
+1001,2024-01-01,Jakarta,100,active,,100
+1002,2024-01-02,jakarta,250,active,,250
+1002,2024-01-02,jakarta,250,active,,250
+1003,,Surabaya,,active,,unknown
+1004,2024-01-04," Jakarta ",50,active,,500

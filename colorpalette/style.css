@@ -462,7 +462,7 @@ h1.bd-title {
 
 .harmony-mode {
   border: 1px solid var(--bd-border);
-  border-radius: var(--bd-radius-full);
+  border-radius: var(--bd-radius-md);
   background: var(--bd-bg);
   color: var(--bd-text-secondary);
   height: 30px;
@@ -1006,7 +1006,7 @@ h1.bd-title {
 .filter-pill {
   height: 30px;
   padding: 0 12px;
-  border-radius: var(--bd-radius-full);
+  border-radius: var(--bd-radius-md);
   border: 1px solid var(--bd-border);
   background: var(--bd-bg);
   color: var(--bd-text-secondary);
@@ -1144,6 +1144,7 @@ h1.bd-title {
   .generator-controls,
   .explore-toolbar {
     grid-template-columns: 1fr;
+    min-width: 0;
   }
 
   .generator-controls {
@@ -1176,6 +1177,7 @@ h1.bd-title {
   .harmony-modes {
     justify-content: flex-start;
     width: 100%;
+    min-width: 0;
   }
 
   .palette-stage {
@@ -1298,5 +1300,57 @@ h1.bd-title {
     min-height: 140px;
     padding: 16px;
     font-size: 13px;
+  }
+}
+
+.generator-controls,
+.explore-toolbar,
+.palette-section-heading,
+.palette-actions,
+.preview-shell,
+.preview-top,
+.preview-dashboard {
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .palette-intro,
+  .tool-page-intro {
+    margin-bottom: 20px;
+  }
+
+  .palette-intro h2,
+  .tool-page-intro h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .palette-stage {
+    gap: 8px;
+  }
+
+  .swatch {
+    min-height: 88px;
+    border-radius: var(--bd-radius-lg);
+  }
+
+  .swatch-overlay {
+    padding: 8px 10px;
+  }
+
+  .swatch-icon-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .preview-shell {
+    margin-top: 28px;
+  }
+
+  #dashboardPreview {
+    padding: 12px;
+  }
+
+  .preview-body {
+    padding: 10px;
   }
 }

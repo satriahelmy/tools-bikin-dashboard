@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <style>
+    body{margin:0;background:#ffffff;-webkit-font-smoothing:antialiased;}
+    *{box-sizing:border-box;}
+    a{color:#2f5fb0;text-decoration:none;}
+    a:hover{color:#1f3f82;}
+    input:focus{outline:none;}
+    @media (max-width:860px){
+      .bd-shell{flex-direction:column;}
+      .bd-sidebar{width:100% !important;height:auto !important;position:relative !important;flex-direction:row !important;align-items:center;border-right:none !important;border-bottom:1px solid #e4e7ec;padding:14px 16px !important;gap:14px;}
+      .bd-sidebar .bd-nav{flex-direction:row !important;overflow-x:auto;gap:2px !important;flex:1;}
+      .bd-sidebar .bd-footer{display:none !important;}
+      .bd-brand-sub{display:none !important;}
+      .bd-nav button{white-space:nowrap;}
+    }
+  </style>
+</helmet>
+
+<div class="bd-shell" style="display:flex;min-height:100vh;background:#ffffff;color:#14181f;font-family:'Inter',sans-serif;">
+
+  <aside class="bd-sidebar" style="width:236px;flex-shrink:0;border-right:1px solid #e4e7ec;padding:28px 22px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;gap:28px;">
+    <button onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;background:none;border:none;padding:0;cursor:pointer;text-align:left;">
+      <span style="width:36px;height:36px;border-radius:3px;background:#eef3fb;position:relative;flex-shrink:0;">
+        <span style="position:absolute;left:8px;top:8px;width:13px;height:13px;border-radius:50%;border:2px solid #2f5fb0;"></span>
+        <span style="position:absolute;right:7px;bottom:7px;width:9px;height:9px;border-radius:50%;background:#2f5fb0;opacity:0.6;"></span>
+      </span>
+      <span style="display:flex;flex-direction:column;">
+        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;color:#14181f;line-height:1.2;">BikinDashboard</span>
+        <span class="bd-brand-sub" style="font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#7a8394;">Tools</span>
+      </span>
+    </button>
+
+    <nav class="bd-nav" style="display:flex;flex-direction:column;gap:2px;">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+        <button onClick="{{ item.onClick }}" style="{{ item.style }}">{{ item.label }}</button>
+      </sc-for>
+    </nav>
+
+    <div style="flex:1;"></div>
+    <div class="bd-footer" style="font-size:12px;color:#9aa2b1;line-height:1.5;">Gratis untuk kerja data.</div>
+  </aside>
+
+  <main style="flex:1;min-width:0;padding:32px 44px 80px;">
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:960px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #2f5fb0;flex-shrink:0;"></span>
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.07em;color:#2f5fb0;">BIKINDASHBOARD.COM</span>
+        </div>
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:50px;line-height:1.06;letter-spacing:-.01em;margin:0 0 14px;color:#14181f;max-width:680px;">Alat praktis<br>untuk kerja data.</h1>
+        <p style="font-size:15.5px;color:#4b5563;max-width:460px;line-height:1.6;margin:0 0 20px;">Palet warna, referensi chart, dan resource yang benar-benar kepake — satu tempat, tumbuh perlahan.</p>
+        <input value="{{ toolQuery }}" onChange="{{ onToolQuery }}" type="text" placeholder="Cari tool, misalnya palette atau chart…" style="width:100%;max-width:520px;padding:13px 16px;border:1px solid #d7dde6;border-radius:3px;font-size:14.5px;font-family:'Inter',sans-serif;color:#14181f;margin-bottom:11px;" style-focus="border-color:#2f5fb0;box-shadow:0 0 0 3px #eef3fb;" />
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:30px;font-size:12.5px;">
+          <span style="color:#9aa2b1;">Populer:</span>
+          <sc-for list="{{ heroShortcuts }}" as="hs" hint-placeholder-count="3">
+            <button onClick="{{ hs.open }}" style="background:none;border:none;padding:0;font-size:12.5px;color:#2f5fb0;cursor:pointer;border-bottom:1px solid transparent;" style-hover="color:#1f3f82;border-bottom:1px solid #b9c8e4;">{{ hs.title }}</button>
+          </sc-for>
+        </div>
+        <div style="border-bottom:1px solid #e4e7ec;margin-bottom:26px;"></div>
+
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;">
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;margin:0;color:#14181f;">Tools</h2>
+          <span style="font-size:12.5px;color:#9aa2b1;">{{ homeToolCount }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-bottom:48px;">
+          <sc-for list="{{ homeTools }}" as="tool" hint-placeholder-count="4">
+            <div style="border:1px solid #e4e7ec;border-radius:3px;padding:20px;background:#ffffff;display:flex;flex-direction:column;gap:12px;transition:border-color .12s,box-shadow .12s;" style-hover="border-color:#c3cbd6;box-shadow:0 1px 4px rgba(20,24,31,0.05);">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="width:38px;height:38px;border-radius:3px;background:#eef3fb;flex-shrink:0;position:relative;">
+                  <sc-if value="{{ tool.iconColor }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:absolute;left:8px;top:9px;width:9px;height:9px;border-radius:50%;background:#2f5fb0;"></span>
+                    <span style="position:absolute;left:15px;top:14px;width:9px;height:9px;border-radius:50%;background:#2f5fb0;opacity:0.55;"></span>
+                    <span style="position:absolute;left:11px;top:19px;width:9px;height:9px;border-radius:50%;background:#2f5fb0;opacity:0.3;"></span>
+                  </sc-if>
+                  <sc-if value="{{ tool.iconChart }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:absolute;left:9px;bottom:9px;width:5px;height:10px;background:#2f5fb0;opacity:.45;"></span>
+                    <span style="position:absolute;left:16px;bottom:9px;width:5px;height:16px;background:#2f5fb0;"></span>
+                    <span style="position:absolute;left:23px;bottom:9px;width:5px;height:13px;background:#2f5fb0;opacity:.7;"></span>
+                  </sc-if>
+                  <sc-if value="{{ tool.iconResource }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:absolute;left:12px;top:8px;width:14px;height:18px;background:#2f5fb0;clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);"></span>
+                  </sc-if>
+                  <sc-if value="{{ tool.iconQuality }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:absolute;left:11px;top:17px;width:7px;height:2px;background:#2f5fb0;transform:rotate(45deg);"></span>
+                    <span style="position:absolute;left:15px;top:12px;width:13px;height:2px;background:#2f5fb0;transform:rotate(-45deg);"></span>
+                  </sc-if>
+                </span>
+                <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#14181f;">{{ tool.title }}</span>
+              </div>
+              <p style="font-size:13.5px;color:#4b5563;line-height:1.55;margin:0;">{{ tool.desc }}</p>
+              <div style="font-size:11.5px;color:#9aa2b1;">{{ tool.meta }}</div>
+              <button onClick="{{ tool.open }}" style="align-self:flex-start;background:none;border:none;padding:0;font-size:13.5px;font-weight:500;color:#2f5fb0;cursor:pointer;display:flex;align-items:center;gap:6px;margin-top:2px;border-radius:2px;" style-hover="color:#1f3f82;" style-focus="outline:2px solid #c7d6ee;outline-offset:2px;">Buka tool <span>→</span></button>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;">
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;margin:0;color:#14181f;">Resource Hub</h2>
+          <button onClick="{{ goResources }}" style="background:none;border:none;padding:0;font-size:13px;color:#2f5fb0;cursor:pointer;" style-hover="color:#1f3f82;">Lihat semua →</button>
+        </div>
+        <div style="border:1px solid #e4e7ec;border-radius:3px;overflow:hidden;">
+          <sc-for list="{{ homeResources }}" as="r" hint-placeholder-count="3">
+            <a href="{{ r.url }}" target="_blank" style="display:flex;justify-content:space-between;gap:16px;padding:14px 18px;border-bottom:1px solid #eef0f3;color:#14181f;" style-hover="background:#fafbfc;">
+              <span style="display:flex;flex-direction:column;gap:3px;">
+                <span style="font-weight:500;font-size:14px;">{{ r.title }}</span>
+                <span style="font-size:12.5px;color:#9aa2b1;">{{ r.category }} · {{ r.domain }}</span>
+              </span>
+              <span style="font-size:12px;color:#9aa2b1;align-self:center;">{{ r.priceTag }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isTools }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1040px;">
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;margin:0 0 6px;">Semua tool</h1>
+        <p style="font-size:14px;color:#4b5563;margin:0 0 22px;">Pilih tool yang paling cocok buat kerjaanmu hari ini.</p>
+        <input value="{{ toolQuery }}" onChange="{{ onToolQuery }}" type="text" placeholder="Cari tool, misalnya palette atau chart…" style="width:100%;max-width:480px;padding:10px 14px;border:1px solid #e4e7ec;border-radius:3px;font-size:14px;font-family:'Inter',sans-serif;margin-bottom:18px;" style-focus="border-color:#2f5fb0;box-shadow:0 0 0 3px #eef3fb;" />
+        <div style="display:flex;gap:18px;margin-bottom:20px;border-bottom:1px solid #e4e7ec;flex-wrap:wrap;">
+          <sc-for list="{{ toolFilterChips }}" as="chip" hint-placeholder-count="5">
+            <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+          </sc-for>
+        </div>
+        <div style="font-size:12.5px;color:#9aa2b1;margin-bottom:16px;">{{ toolCountLabel }}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+          <sc-for list="{{ filteredTools }}" as="tool" hint-placeholder-count="4">
+            <div style="border:1px solid #e4e7ec;border-radius:3px;padding:20px;background:#ffffff;display:flex;flex-direction:column;gap:12px;transition:border-color .12s,box-shadow .12s;" style-hover="border-color:#c3cbd6;box-shadow:0 1px 4px rgba(20,24,31,0.05);">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="width:38px;height:38px;border-radius:3px;background:#eef3fb;flex-shrink:0;position:relative;">
+                  <sc-if value="{{ tool.iconColor }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:absolute;left:8px;top:9px;width:9px;height:9px;border-radius:50%;background:#2f5fb0;"></span>
+                    <span style="position:absolute;left:15px;top:14px;width:9px;height:9px;border-radius:50%;background:#2f5fb0;opacity:0.55;"></span>
+                    <span style="position:absolute;left:11px;top:19px;width:9px;height:9px;border-radius:50%;background:#2f5fb0;opacity:0.3;"></span>
+                  </sc-if>
+                  <sc-if value="{{ tool.iconChart }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:absolute;left:9px;bottom:9px;width:5px;height:10px;background:#2f5fb0;opacity:.45;"></span>
+                    <span style="position:absolute;left:16px;bottom:9px;width:5px;height:16px;background:#2f5fb0;"></span>
+                    <span style="position:absolute;left:23px;bottom:9px;width:5px;height:13px;background:#2f5fb0;opacity:.7;"></span>
+                  </sc-if>
+                  <sc-if value="{{ tool.iconResource }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:absolute;left:12px;top:8px;width:14px;height:18px;background:#2f5fb0;clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);"></span>
+                  </sc-if>
+                  <sc-if value="{{ tool.iconQuality }}" hint-placeholder-val="{{ false }}">
+                    <span style="position:absolute;left:11px;top:17px;width:7px;height:2px;background:#2f5fb0;transform:rotate(45deg);"></span>
+                    <span style="position:absolute;left:15px;top:12px;width:13px;height:2px;background:#2f5fb0;transform:rotate(-45deg);"></span>
+                  </sc-if>
+                </span>
+                <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#14181f;">{{ tool.title }}</span>
+              </div>
+              <p style="font-size:13.5px;color:#4b5563;line-height:1.55;margin:0;">{{ tool.desc }}</p>
+              <div style="font-size:11.5px;color:#9aa2b1;">{{ tool.meta }}</div>
+              <button onClick="{{ tool.open }}" style="align-self:flex-start;background:none;border:none;padding:0;font-size:13.5px;font-weight:500;color:#2f5fb0;cursor:pointer;display:flex;align-items:center;gap:6px;margin-top:2px;border-radius:2px;" style-hover="color:#1f3f82;" style-focus="outline:2px solid #c7d6ee;outline-offset:2px;">Buka tool <span>→</span></button>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+<sc-if value="{{ isChartGuide }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1080px;">
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;margin:0 0 6px;">Chart Guide</h1>
+        <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;color:#2f5fb0;margin-bottom:8px;">BELAJAR VISUALISASI</div>
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:20px;margin:0 0 6px;">Cari chart berdasarkan kebutuhanmu</h2>
+        <p style="font-size:14px;color:#4b5563;margin:0 0 20px;">Mulai dari tujuan analisis, lalu lihat contoh dan catatan penggunaannya.</p>
+        <input value="{{ chartQuery }}" onChange="{{ onChartQuery }}" type="text" placeholder="Cari chart, misalnya bar atau line…" style="width:100%;padding:10px 14px;border:1px solid #e4e7ec;border-radius:3px;font-size:14px;font-family:'Inter',sans-serif;margin-bottom:18px;" style-focus="border-color:#2f5fb0;box-shadow:0 0 0 3px #eef3fb;" />
+        <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
+          <sc-for list="{{ chartFamilyChips }}" as="chip" hint-placeholder-count="5">
+            <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+          <sc-for list="{{ filteredCharts }}" as="c" hint-placeholder-count="9">
+            <div style="border:1px solid #e4e7ec;border-radius:3px;background:#fff;overflow:hidden;display:flex;flex-direction:column;">
+              <div style="height:96px;background:#fbfcfd;border-bottom:1px solid #eef0f3;position:relative;padding:14px;">
+                <sc-if value="{{ c.previewBar }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:flex-end;gap:6px;height:100%;"><span style="width:9px;height:36%;background:#2f5fb0;opacity:.35;"></span><span style="width:9px;height:64%;background:#2f5fb0;opacity:.6;"></span><span style="width:9px;height:96%;background:#2f5fb0;"></span><span style="width:9px;height:78%;background:#2f5fb0;opacity:.75;"></span><span style="width:9px;height:55%;background:#2f5fb0;opacity:.5;"></span></div></sc-if>
+                <sc-if value="{{ c.previewLine }}" hint-placeholder-val="{{ false }}"><svg width="100%" height="100%" viewBox="0 0 100 40" preserveAspectRatio="none"><polyline points="0,32 20,24 40,28 60,14 80,18 100,6" fill="none" stroke="#2f5fb0" stroke-width="2.5"></polyline></svg></sc-if>
+                <sc-if value="{{ c.previewSlope }}" hint-placeholder-val="{{ false }}"><svg width="100%" height="100%" viewBox="0 0 100 40"><line x1="10" y1="10" x2="90" y2="30" stroke="#2f5fb0" stroke-width="2"></line><line x1="10" y1="30" x2="90" y2="12" stroke="#2f5fb0" stroke-width="2" opacity="0.5"></line><circle cx="10" cy="10" r="3" fill="#2f5fb0"></circle><circle cx="90" cy="30" r="3" fill="#2f5fb0"></circle><circle cx="10" cy="30" r="3" fill="#2f5fb0" opacity="0.5"></circle><circle cx="90" cy="12" r="3" fill="#2f5fb0" opacity="0.5"></circle></svg></sc-if>
+                <sc-if value="{{ c.previewBullet }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;height:100%;"><div style="position:relative;height:14px;width:100%;background:#dbe4f3;border-radius:3px;"><div style="position:absolute;left:0;top:0;height:100%;width:65%;background:#2f5fb0;border-radius:3px;"></div><div style="position:absolute;left:78%;top:-4px;bottom:-4px;width:2px;background:#14181f;"></div></div></div></sc-if>
+                <sc-if value="{{ c.previewWaterfall }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:flex-end;gap:6px;height:100%;"><span style="width:12px;height:70%;background:#2f5fb0;opacity:.85;"></span><span style="width:12px;height:22%;align-self:flex-start;margin-top:8%;background:#f59e0b;"></span><span style="width:12px;height:30%;margin-top:22%;background:#2f5fb0;opacity:.7;align-self:flex-start;"></span><span style="width:12px;height:88%;background:#2f5fb0;"></span></div></sc-if>
+                <sc-if value="{{ c.previewPie }}" hint-placeholder-val="{{ false }}"><div style="width:56px;height:56px;margin:0 auto;border-radius:50%;background:conic-gradient(#2f5fb0 0 65%, rgba(47,95,176,.3) 65% 100%);"></div></sc-if>
+                <sc-if value="{{ c.previewDonut }}" hint-placeholder-val="{{ false }}"><div style="width:56px;height:56px;margin:0 auto;border-radius:50%;background:conic-gradient(#2f5fb0 0 65%, rgba(47,95,176,.3) 65% 100%);position:relative;"><div style="position:absolute;inset:14px;border-radius:50%;background:#fbfcfd;"></div></div></sc-if>
+                <sc-if value="{{ c.previewStackedBar }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:flex-end;gap:6px;height:100%;"><div style="width:9px;height:90%;display:flex;flex-direction:column-reverse;"><span style="height:55%;background:#2f5fb0;"></span><span style="height:45%;background:#2f5fb0;opacity:.4;"></span></div><div style="width:9px;height:65%;display:flex;flex-direction:column-reverse;"><span style="height:70%;background:#2f5fb0;opacity:.7;"></span><span style="height:30%;background:#2f5fb0;opacity:.35;"></span></div><div style="width:9px;height:100%;display:flex;flex-direction:column-reverse;"><span style="height:40%;background:#2f5fb0;"></span><span style="height:60%;background:#2f5fb0;opacity:.5;"></span></div><div style="width:9px;height:48%;display:flex;flex-direction:column-reverse;"><span style="height:60%;background:#2f5fb0;opacity:.6;"></span><span style="height:40%;background:#2f5fb0;opacity:.3;"></span></div></div></sc-if>
+                <sc-if value="{{ c.previewTreemap }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:3px;height:100%;"><div style="display:flex;gap:3px;flex:1.4;"><div style="flex:1.6;background:#2f5fb0;"></div><div style="flex:0.8;background:#2f5fb0;opacity:.5;"></div><div style="flex:0.6;background:#2f5fb0;opacity:.3;"></div></div><div style="display:flex;gap:3px;flex:1;"><div style="flex:1;background:#2f5fb0;opacity:.65;"></div><div style="flex:1.2;background:#2f5fb0;opacity:.25;"></div></div></div></sc-if>
+                <sc-if value="{{ c.previewArea }}" hint-placeholder-val="{{ false }}"><svg width="100%" height="100%" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon points="0,40 0,30 20,26 40,20 60,24 80,10 100,14 100,40" fill="#2f5fb0" opacity="0.18"></polygon><polyline points="0,30 20,26 40,20 60,24 80,10 100,14" fill="none" stroke="#2f5fb0" stroke-width="2"></polyline></svg></sc-if>
+                <sc-if value="{{ c.previewHistogram }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:flex-end;gap:4px;height:100%;"><span style="width:8px;height:20%;background:#2f5fb0;opacity:.35;"></span><span style="width:8px;height:40%;background:#2f5fb0;opacity:.55;"></span><span style="width:8px;height:95%;background:#2f5fb0;"></span><span style="width:8px;height:75%;background:#2f5fb0;opacity:.8;"></span><span style="width:8px;height:45%;background:#2f5fb0;opacity:.55;"></span><span style="width:8px;height:18%;background:#2f5fb0;opacity:.3;"></span></div></sc-if>
+                <sc-if value="{{ c.previewBoxPlot }}" hint-placeholder-val="{{ false }}"><div style="position:relative;height:100%;"><div style="position:absolute;left:6%;right:6%;top:50%;height:2px;background:#c9d3e0;"></div><div style="position:absolute;left:32%;width:34%;top:calc(50% - 10px);height:20px;background:#eef3fb;border:1.5px solid #2f5fb0;border-radius:2px;"></div><div style="position:absolute;left:48%;top:calc(50% - 10px);width:2px;height:20px;background:#2f5fb0;"></div></div></sc-if>
+                <sc-if value="{{ c.previewDotPlot }}" hint-placeholder-val="{{ false }}"><svg width="100%" height="100%" viewBox="0 0 100 20" preserveAspectRatio="none"><line x1="4" y1="10" x2="96" y2="10" stroke="#e4e7ec" stroke-width="1"></line><circle cx="10" cy="10" r="4" fill="#2f5fb0"></circle><circle cx="26" cy="10" r="4" fill="#2f5fb0" opacity="0.6"></circle><circle cx="40" cy="10" r="4" fill="#2f5fb0"></circle><circle cx="58" cy="10" r="4" fill="#2f5fb0" opacity="0.7"></circle><circle cx="72" cy="10" r="4" fill="#2f5fb0" opacity="0.5"></circle><circle cx="88" cy="10" r="4" fill="#2f5fb0"></circle></svg></sc-if>
+                <sc-if value="{{ c.previewScatter }}" hint-placeholder-val="{{ false }}"><svg width="100%" height="100%" viewBox="0 0 100 40"><circle cx="14" cy="30" r="3.5" fill="#2f5fb0"></circle><circle cx="30" cy="16" r="3.5" fill="#2f5fb0" opacity="0.7"></circle><circle cx="44" cy="24" r="3.5" fill="#2f5fb0" opacity="0.5"></circle><circle cx="60" cy="10" r="3.5" fill="#2f5fb0"></circle><circle cx="72" cy="18" r="3.5" fill="#2f5fb0" opacity="0.6"></circle><circle cx="88" cy="8" r="3.5" fill="#2f5fb0" opacity="0.8"></circle></svg></sc-if>
+                <sc-if value="{{ c.previewBubble }}" hint-placeholder-val="{{ false }}"><svg width="100%" height="100%" viewBox="0 0 100 40"><circle cx="18" cy="26" r="5" fill="#2f5fb0" opacity="0.5"></circle><circle cx="40" cy="14" r="9" fill="#2f5fb0" opacity="0.6"></circle><circle cx="64" cy="24" r="4" fill="#2f5fb0"></circle><circle cx="82" cy="12" r="11" fill="#2f5fb0" opacity="0.35"></circle></svg></sc-if>
+                <sc-if value="{{ c.previewHeatmap }}" hint-placeholder-val="{{ false }}"><div style="display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(2,1fr);gap:3px;height:100%;"><div style="background:#2f5fb0;opacity:.25;"></div><div style="background:#2f5fb0;opacity:.55;"></div><div style="background:#2f5fb0;opacity:.7;"></div><div style="background:#2f5fb0;"></div><div style="background:#2f5fb0;opacity:.9;"></div><div style="background:#2f5fb0;opacity:.35;"></div><div style="background:#2f5fb0;opacity:.4;"></div><div style="background:#2f5fb0;"></div><div style="background:#2f5fb0;opacity:.3;"></div><div style="background:#2f5fb0;opacity:.6;"></div><div style="background:#2f5fb0;opacity:.45;"></div><div style="background:#2f5fb0;opacity:.8;"></div></div></sc-if>
+              </div>
+              <div style="padding:16px;display:flex;flex-direction:column;gap:8px;flex:1;">
+                <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;">{{ c.name }}</div>
+                <div style="font-size:13px;color:#4b5563;line-height:1.55;">{{ c.desc }}</div>
+                <div style="font-size:11.5px;color:#9aa2b1;">{{ c.purpose }} · {{ c.typeTag }} · {{ c.colsLabel }}</div>
+                <button onClick="{{ c.onToggle }}" style="background:none;border:none;padding:0;font-size:13px;font-weight:500;color:#2f5fb0;cursor:pointer;text-align:left;margin-top:2px;" style-hover="color:#1f3f82;">{{ c.toggleLabel }}</button>
+                <sc-if value="{{ c.expanded }}" hint-placeholder-val="{{ false }}">
+                  <div style="border-top:1px solid #eef0f3;padding-top:10px;margin-top:2px;display:flex;flex-direction:column;gap:8px;">
+                    <div><div style="font-size:11px;font-weight:600;color:#2f5fb0;text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px;">Gunakan saat</div><div style="font-size:12.5px;color:#4b5563;line-height:1.5;">{{ c.useWhen }}</div></div>
+                    <div><div style="font-size:11px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px;">Hindari saat</div><div style="font-size:12.5px;color:#4b5563;line-height:1.5;">{{ c.avoidWhen }}</div></div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+<sc-if value="{{ isResources }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1080px;">
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;margin:0 0 6px;">Resource Hub</h1>
+        <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;color:#2f5fb0;margin-bottom:8px;">PILIHAN LINK</div>
+        <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:20px;margin:0 0 6px;">Referensi untuk kerja data</h2>
+        <p style="font-size:14px;color:#4b5563;margin:0 0 20px;">Cari tools, dataset, tutorial, dan komunitas untuk referensi kerja.</p>
+
+        <div style="border:1px solid #e4e7ec;border-radius:3px;padding:20px;margin-bottom:20px;">
+          <label style="font-size:11.5px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:8px;">Cari link</label>
+          <input value="{{ resourceQuery }}" onChange="{{ onResourceQuery }}" type="text" placeholder="Cari nama, deskripsi, atau catatan…" style="width:100%;padding:10px 14px;border:1px solid #e4e7ec;border-radius:3px;font-size:14px;font-family:'Inter',sans-serif;margin-bottom:18px;" style-focus="border-color:#2f5fb0;box-shadow:0 0 0 3px #eef3fb;" />
+          <label style="font-size:11.5px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:8px;">Kategori</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">
+            <sc-for list="{{ categoryChips }}" as="chip" hint-placeholder-count="7">
+              <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+            </sc-for>
+          </div>
+          <label style="font-size:11.5px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:8px;">Tag</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+            <sc-for list="{{ tagChips }}" as="chip" hint-placeholder-count="20">
+              <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+            </sc-for>
+          </div>
+          <button onClick="{{ onResetFilters }}" style="padding:8px 14px;border:1px solid #e4e7ec;border-radius:3px;background:#fff;font-size:12.5px;font-weight:500;color:#14181f;cursor:pointer;" style-hover="background:#fafbfc;border-color:#c9d3e0;">Reset filter</button>
+        </div>
+
+        <div style="font-size:12.5px;color:#9aa2b1;margin-bottom:16px;">{{ resourceCountLabel }}</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+          <sc-for list="{{ filteredResources }}" as="r" hint-placeholder-count="6">
+            <div style="border:1px solid #e4e7ec;border-radius:3px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#fff;">
+              <div style="font-weight:600;font-size:14.5px;color:#14181f;">{{ r.title }}</div>
+              <div style="font-size:13px;color:#4b5563;line-height:1.5;flex:1;">{{ r.desc }}</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <sc-for list="{{ r.tagPills }}" as="tp" hint-placeholder-count="3">
+                  <span style="{{ tp.style }}">{{ tp.label }}</span>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
+                <span style="font-size:11.5px;color:#9aa2b1;font-family:monospace;">{{ r.domain }}</span>
+                <a href="{{ r.url }}" target="_blank" style="font-size:12.5px;font-weight:500;color:#2f5fb0;" style-hover="color:#1f3f82;">Buka link ↗</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isColorPalette }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:980px;">
+        <button onClick="{{ goTools }}" style="background:none;border:none;padding:0;font-size:12.5px;color:#9aa2b1;cursor:pointer;margin-bottom:14px;" style-hover="color:#2f5fb0;">← Tools</button>
+
+        <div style="display:flex;gap:20px;border-bottom:1px solid #e4e7ec;margin-bottom:24px;flex-wrap:wrap;">
+          <sc-for list="{{ paletteSubTabs }}" as="t" hint-placeholder-count="4">
+            <div style="{{ t.style }}">{{ t.label }}</div>
+          </sc-for>
+        </div>
+
+        <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;color:#2f5fb0;margin-bottom:8px;">RUANG KERJA</div>
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;margin:0 0 6px;">Susun palet warna untuk dashboard</h1>
+        <p style="font-size:14px;color:#4b5563;margin:0 0 22px;">Masukkan satu warna, pilih arah kombinasinya, lalu salin hasilnya ke tempat kerja kamu.</p>
+
+        <label style="font-size:11.5px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:8px;">Warna awal</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;">
+          <input type="text" value="{{ paletteInput }}" onChange="{{ onPaletteInput }}" onKeyDown="{{ onInputKeyDown }}" placeholder="Contoh: #3B82F6 atau ocean" style="flex:1;min-width:220px;padding:10px 14px;border:1px solid #e4e7ec;border-radius:3px;font-size:13.5px;font-family:'Inter',sans-serif;" style-focus="border-color:#2f5fb0;box-shadow:0 0 0 3px #eef3fb;" />
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <sc-for list="{{ paletteModeChips }}" as="m" hint-placeholder-count="5">
+              <button onClick="{{ m.onClick }}" style="{{ m.style }}">{{ m.label }}</button>
+            </sc-for>
+          </div>
+          <button onClick="{{ onGenerate }}" style="padding:10px 20px;border:none;border-radius:3px;background:#2f5fb0;color:#fff;font-size:13.5px;font-weight:600;cursor:pointer;" style-hover="background:#1f3f82;">Buat palet</button>
+        </div>
+
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px;">
+          <div>
+            <div style="font-size:11.5px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.04em;">Palet hasil</div>
+            <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;margin-top:4px;">Lima warna untuk dicoba</div>
+          </div>
+          <div style="font-size:12px;color:#9aa2b1;">Klik kode hex untuk menyalin</div>
+        </div>
+        <div style="display:flex;gap:0;margin-top:14px;margin-bottom:28px;border-radius:3px;overflow:hidden;border:1px solid #e4e7ec;">
+          <sc-for list="{{ scheme }}" as="sw" hint-placeholder-count="5">
+            <button onClick="{{ sw.onCopy }}" style="{{ sw.blockStyle }}">
+              <span style="{{ sw.copiedStyle }}">Disalin</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px;">
+          <div>
+            <div style="font-size:11.5px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.04em;">Simpan hasil</div>
+            <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;margin-top:4px;">Bawa palet ini ke alur kerjamu</div>
+          </div>
+          <div style="font-size:12px;color:#9aa2b1;">Unduh atau salin sesuai kebutuhanmu.</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:14px 0 20px;">
+          <div style="font-size:12.5px;color:#9aa2b1;">Tekan <span style="border:1px solid #e4e7ec;border-radius:2px;padding:1px 7px;font-family:monospace;font-size:11.5px;">Space</span> untuk acak lagi</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button onClick="{{ onExportTps }}" style="padding:9px 14px;border:1px solid #e4e7ec;border-radius:3px;background:#fff;font-size:13px;font-weight:500;color:#14181f;cursor:pointer;" style-hover="background:#fafbfc;border-color:#c9d3e0;">Ekspor Tableau TPS</button>
+            <button onClick="{{ onExportPowerBi }}" style="padding:9px 14px;border:1px solid #e4e7ec;border-radius:3px;background:#fff;font-size:13px;font-weight:500;color:#14181f;cursor:pointer;" style-hover="background:#fafbfc;border-color:#c9d3e0;">Ekspor Power BI JSON</button>
+            <button onClick="{{ onExportPng }}" style="padding:9px 14px;border:1px solid #e4e7ec;border-radius:3px;background:#fff;font-size:13px;font-weight:500;color:#14181f;cursor:pointer;" style-hover="background:#fafbfc;border-color:#c9d3e0;">Ekspor PNG</button>
+            <button onClick="{{ onExportJpg }}" style="padding:9px 14px;border:1px solid #e4e7ec;border-radius:3px;background:#fff;font-size:13px;font-weight:500;color:#14181f;cursor:pointer;" style-hover="background:#fafbfc;border-color:#c9d3e0;">Ekspor JPG</button>
+            <button onClick="{{ onExportCss }}" style="padding:9px 14px;border:1px solid #e4e7ec;border-radius:3px;background:#fff;font-size:13px;font-weight:500;color:#14181f;cursor:pointer;" style-hover="background:#fafbfc;border-color:#c9d3e0;">{{ cssBtnLabel }}</button>
+          </div>
+        </div>
+
+        <div style="font-size:11.5px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;">Kode warna</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;">
+          <sc-for list="{{ scheme }}" as="hc" hint-placeholder-count="5">
+            <button onClick="{{ hc.onCopy }}" style="{{ hc.chipStyle }}">{{ hc.hexLabel }}</button>
+          </sc-for>
+        </div>
+
+        <div style="border:1px solid #e4e7ec;border-radius:3px;overflow:hidden;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;padding:20px 22px 0;">
+            <div>
+              <div style="font-size:11.5px;font-weight:600;color:#9aa2b1;text-transform:uppercase;letter-spacing:.04em;">Pratinjau dashboard</div>
+              <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;margin-top:4px;">Coba palet ini di dashboard</div>
+              <div style="font-size:12.5px;color:#4b5563;margin-top:4px;margin-bottom:16px;">Lihat peran tiap warna pada KPI, grafik, dan status.</div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button onClick="{{ setThemeLight }}" style="{{ themeLightStyle }}">Terang</button>
+              <button onClick="{{ setThemeDark }}" style="{{ themeDarkStyle }}">Gelap</button>
+            </div>
+          </div>
+          <div style="{{ previewShellStyle }}">
+            <div style="{{ previewHeaderStyle }}">Dashboard pendapatan</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;padding:16px;">
+              <div style="{{ previewKpiStyle }}"><div style="{{ previewLabelStyle }}">Penjualan bulanan</div><div style="{{ previewValueStyle }}">Rp2,4M</div></div>
+              <div style="{{ previewKpiStyle }}"><div style="{{ previewLabelStyle }}">Margin kotor</div><div style="{{ previewValueStyle }}">42,7%</div></div>
+              <div style="{{ previewKpiStyle }}"><div style="{{ previewLabelStyle }}">Retensi</div><div style="{{ previewValueStyle }}">89,3%</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px;padding:0 16px 16px;">
+              <div style="{{ previewPanelStyle }}">
+                <div style="{{ previewLabelStyle }}margin-bottom:10px;">Komposisi kanal penjualan</div>
+                <sc-for list="{{ previewBars }}" as="pb" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                    <div style="{{ previewMutedTextStyle }}width:56px;flex-shrink:0;">{{ pb.label }}</div>
+                    <div style="flex:1;height:8px;background:{{ previewTrackColor }};border-radius:2px;overflow:hidden;"><div style="{{ pb.fillStyle }}"></div></div>
+                    <div style="{{ previewMutedTextStyle }}width:34px;text-align:right;flex-shrink:0;">{{ pb.pct }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="{{ previewPanelStyle }}display:flex;flex-direction:column;align-items:center;">
+                <div style="{{ previewLabelStyle }}align-self:flex-start;margin-bottom:10px;">Kontribusi wilayah</div>
+                <div style="{{ previewDonutStyle }}"></div>
+                <div style="display:flex;flex-direction:column;gap:4px;margin-top:10px;width:100%;">
+                  <sc-for list="{{ previewLegend }}" as="lg" hint-placeholder-count="3">
+                    <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;">
+                      <span style="{{ lg.dotStyle }}"></span>
+                      <span style="{{ previewMutedTextStyle }}flex:1;">{{ lg.label }}</span>
+                      <span style="{{ previewLabelStyle }}">{{ lg.pct }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 16px 20px;">
+              <button style="{{ previewCtaStyle }}">Lihat insight</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:36px;">
+          <div style="font-size:12px;color:#9aa2b1;margin-bottom:8px;">Tool terkait</div>
+          <div style="display:flex;gap:18px;">
+            <button onClick="{{ goChartGuide }}" style="background:none;border:none;padding:0;font-size:13.5px;color:#2f5fb0;cursor:pointer;" style-hover="color:#1f3f82;">Chart Guide</button>
+            <button onClick="{{ goResources }}" style="background:none;border:none;padding:0;font-size:13.5px;color:#2f5fb0;cursor:pointer;" style-hover="color:#1f3f82;">Resource Hub</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+<sc-if value="{{ isDataQuality }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1080px;">
+        <button onClick="{{ goTools }}" style="background:none;border:none;padding:0;font-size:12.5px;color:#9aa2b1;cursor:pointer;margin-bottom:14px;" style-hover="color:#2f5fb0;">← Tools</button>
+
+        <div style="border:1px solid #e4e7ec;border-radius:3px;padding:26px;margin-bottom:24px;">
+          <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;color:#2f5fb0;margin-bottom:10px;">TOOLS · DATA QUALITY</div>
+          <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:24px;margin:0 0 10px;line-height:1.25;">Periksa datamu sebelum bikin dashboard</h1>
+          <p style="font-size:14px;color:#4b5563;line-height:1.6;margin:0 0 16px;max-width:560px;">Upload CSV atau Excel untuk menemukan missing values, duplicate rows, tipe data, dan potensi masalah dataset.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#15803d;border:1px solid #e4e7ec;border-radius:3px;padding:5px 10px;"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></span>Diproses lokal</span>
+            <span style="font-size:12px;color:#4b5563;border:1px solid #e4e7ec;border-radius:3px;padding:5px 10px;">CSV · XLSX</span>
+            <span style="font-size:12px;color:#4b5563;border:1px solid #e4e7ec;border-radius:3px;padding:5px 10px;">Maks. 25 MB</span>
+          </div>
+        </div>
+
+        <div style="border:1px solid #e4e7ec;border-radius:3px;padding:26px;margin-bottom:24px;">
+          <div style="font-size:11px;font-weight:700;color:#2f5fb0;letter-spacing:.04em;margin-bottom:4px;">01 · UPLOAD</div>
+          <h2 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:17px;margin:0 0 6px;">Upload dataset</h2>
+          <p style="font-size:13px;color:#4b5563;margin:0 0 16px;">File diproses lokal di browser dan tidak dikirim ke server. Nama file, nama kolom, dan isi dataset tidak dikirim melalui analytics.</p>
+
+          <div onDrop="{{ onDrop }}" onDragOver="{{ onDragOver }}" style="border:1.5px dashed #c9d3e0;border-radius:3px;background:#fafbfc;padding:44px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
+            <span style="width:40px;height:40px;border-radius:50%;background:#eef3fb;display:flex;align-items:center;justify-content:center;color:#2f5fb0;font-size:16px;">↑</span>
+            <div style="font-weight:600;font-size:15px;color:#14181f;">Drop file CSV atau Excel di sini</div>
+            <div style="font-size:12.5px;color:#9aa2b1;">atau pilih dari perangkatmu</div>
+            <label style="margin-top:6px;padding:9px 18px;border-radius:3px;background:#2f5fb0;color:#fff;font-size:13px;font-weight:600;cursor:pointer;" style-hover="background:#1f3f82;">
+              Browse file
+              <input type="file" accept=".csv,.xlsx,.xls" onChange="{{ onFileInput }}" style="display:none;" />
+            </label>
+            <div style="font-size:11.5px;color:#9aa2b1;margin-top:2px;">CSV atau XLSX · maksimal 25 MB</div>
+          </div>
+
+          <sc-if value="{{ dqError }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:16px;padding:12px 16px;border-radius:3px;background:#fef2f2;color:#b91c1c;font-size:13px;">{{ dqError }}</div>
+          </sc-if>
+
+          <sc-if value="{{ hasFile }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:16px;padding:10px 14px;border-radius:3px;background:#f0fdf4;color:#15803d;font-size:13px;display:flex;align-items:center;gap:8px;">
+              <span>✓</span>File berhasil dibaca dan diprofilkan secara lokal.
+            </div>
+            <div style="margin-top:12px;border:1px solid #bbf0cf;border-left:3px solid #22c55e;border-radius:3px;padding:16px 18px;display:flex;align-items:center;gap:14px;background:#f6fefa;">
+              <span style="width:26px;height:26px;border-radius:50%;background:#22c55e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">✓</span>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:11px;font-weight:700;color:#15803d;letter-spacing:.04em;margin-bottom:2px;">FILE SIAP DIPROFILKAN</div>
+                <div style="font-weight:600;font-size:14.5px;color:#14181f;">{{ dqFile.name }}</div>
+                <div style="font-size:12.5px;color:#4b5563;margin-top:2px;">{{ dqFile.sizeLabel }} · {{ dqRowCount }} baris · {{ dqColCount }} kolom</div>
+              </div>
+              <button onClick="{{ resetFile }}" style="padding:8px 14px;border:1px solid #e4e7ec;border-radius:3px;background:#fff;font-size:12.5px;font-weight:500;color:#14181f;cursor:pointer;flex-shrink:0;" style-hover="background:#fafbfc;">Upload file lain</button>
+            </div>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{ hasFile }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px;">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#2f5fb0;letter-spacing:.04em;">02 · ANALISIS</div>
+                <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:22px;margin:6px 0 2px;">Dataset overview</h2>
+                <div style="font-size:12.5px;color:#9aa2b1;">{{ dqFile.name }} · {{ dqFile.sizeLabel }}</div>
+              </div>
+              <button onClick="{{ resetFile }}" style="padding:8px 14px;border:1px solid #e4e7ec;border-radius:3px;background:#fff;font-size:12.5px;font-weight:500;color:#14181f;cursor:pointer;" style-hover="background:#fafbfc;">Upload dataset lain</button>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:20px 0;">
+              <div style="border:1px solid #e4e7ec;border-radius:3px;padding:16px;"><div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;"># Rows</div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:24px;">{{ dqRowCount }}</div><div style="font-size:11.5px;color:#9aa2b1;margin-top:2px;">records detected</div></div>
+              <div style="border:1px solid #e4e7ec;border-radius:3px;padding:16px;"><div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;">Columns</div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:24px;">{{ dqColCount }}</div><div style="font-size:11.5px;color:#9aa2b1;margin-top:2px;">fields detected</div></div>
+              <div style="border:1px solid #e4e7ec;border-radius:3px;padding:16px;"><div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;">Duplicate rows</div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:24px;">{{ dqDupCount }}</div><div style="font-size:11.5px;color:#9aa2b1;margin-top:2px;">exact matches</div></div>
+              <div style="border:1px solid #e4e7ec;border-radius:3px;padding:16px;"><div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;">Missing columns</div><div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:24px;">{{ dqMissingColCount }}</div><div style="font-size:11.5px;color:#9aa2b1;margin-top:2px;">need attention</div></div>
+            </div>
+
+            <div style="margin-bottom:20px;">
+              <div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;">Inspeksi · Detected issues</div>
+              <sc-if value="{{ dqIssues.length }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <sc-for list="{{ dqIssues }}" as="iss" hint-placeholder-count="2">
+                    <div style="padding:12px 16px;border-radius:3px;background:#fffbeb;color:#92400e;font-size:13px;">{{ iss }}</div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ dqNoIssues }}" hint-placeholder-val="{{ true }}">
+                <div style="padding:12px 16px;border-radius:3px;background:#f0fdf4;color:#15803d;font-size:13px;">✓ Kami tidak menemukan masalah data umum berdasarkan pemeriksaan saat ini.</div>
+              </sc-if>
+            </div>
+
+            <div style="border:1px solid #e4e7ec;border-radius:3px;padding:20px;margin-bottom:20px;">
+              <div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;">Kolom · Column overview</div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+                <input value="{{ dqColumnSearch }}" onChange="{{ onDqColumnSearch }}" type="text" placeholder="Cari nama kolom…" style="flex:1;min-width:180px;padding:9px 12px;border:1px solid #e4e7ec;border-radius:3px;font-size:13px;font-family:'Inter',sans-serif;" style-focus="border-color:#2f5fb0;" />
+                <div style="display:flex;gap:6px;">
+                  <sc-for list="{{ dqStatusChips }}" as="chip" hint-placeholder-count="4">
+                    <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px;padding:8px 10px;font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;border-bottom:1px solid #e4e7ec;">
+                <div>Column</div><div>Type</div><div>Missing</div><div>Unique</div><div>Status</div>
+              </div>
+              <sc-for list="{{ dqColumnRows }}" as="col" hint-placeholder-count="4">
+                <button onClick="{{ col.onSelect }}" style="{{ col.rowStyle }}">
+                  <span style="{{ col.nameStyle }}">{{ col.name }}</span>
+                  <span style="font-size:13px;color:#4b5563;">{{ col.type }}</span>
+                  <span style="font-size:13px;color:#4b5563;">{{ col.missingPct }}%</span>
+                  <span style="font-size:13px;color:#4b5563;">{{ col.unique }}</span>
+                  <span style="{{ col.statusPillStyle }}">{{ col.status }}</span>
+                </button>
+              </sc-for>
+            </div>
+
+            <sc-if value="{{ selectedColumn }}" hint-placeholder-val="{{ false }}">
+              <div style="border:1px solid #e4e7ec;border-radius:3px;padding:20px;margin-bottom:20px;">
+                <div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;">Detail · Column profile</div>
+                <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px;">
+                  <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;">{{ selectedColumn.name }}</span>
+                  <span style="font-size:12.5px;color:#9aa2b1;">{{ selectedColumn.noteLabel }}</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px;">
+                  <div style="border:1px solid #e4e7ec;border-radius:3px;padding:12px;"><div style="font-size:11px;color:#9aa2b1;">Count</div><div style="font-weight:600;font-size:15px;margin-top:4px;">{{ selectedColumn.count }}</div></div>
+                  <div style="border:1px solid #e4e7ec;border-radius:3px;padding:12px;"><div style="font-size:11px;color:#9aa2b1;">Missing</div><div style="font-weight:600;font-size:15px;margin-top:4px;">{{ selectedColumn.missingLabel }}</div></div>
+                  <div style="border:1px solid #e4e7ec;border-radius:3px;padding:12px;"><div style="font-size:11px;color:#9aa2b1;">Unique</div><div style="font-weight:600;font-size:15px;margin-top:4px;">{{ selectedColumn.unique }}</div></div>
+                  <sc-if value="{{ selectedColumn.isNumber }}" hint-placeholder-val="{{ false }}">
+                    <div style="border:1px solid #e4e7ec;border-radius:3px;padding:12px;"><div style="font-size:11px;color:#9aa2b1;">Min</div><div style="font-weight:600;font-size:15px;margin-top:4px;">{{ selectedColumn.minLabel }}</div></div>
+                    <div style="border:1px solid #e4e7ec;border-radius:3px;padding:12px;"><div style="font-size:11px;color:#9aa2b1;">Max</div><div style="font-weight:600;font-size:15px;margin-top:4px;">{{ selectedColumn.maxLabel }}</div></div>
+                    <div style="border:1px solid #e4e7ec;border-radius:3px;padding:12px;"><div style="font-size:11px;color:#9aa2b1;">Mean</div><div style="font-weight:600;font-size:15px;margin-top:4px;">{{ selectedColumn.meanLabel }}</div></div>
+                    <div style="border:1px solid #e4e7ec;border-radius:3px;padding:12px;"><div style="font-size:11px;color:#9aa2b1;">Median</div><div style="font-weight:600;font-size:15px;margin-top:4px;">{{ selectedColumn.medianLabel }}</div></div>
+                  </sc-if>
+                </div>
+                <sc-if value="{{ selectedColumn.isNumber }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:12px;color:#9aa2b1;margin-bottom:8px;">Numeric distribution</div>
+                  <div style="display:flex;gap:4px;align-items:flex-end;height:70px;">
+                    <sc-for list="{{ selectedColumn.histogram }}" as="hb" hint-placeholder-count="6">
+                      <div style="{{ hb.barStyle }}"><span style="{{ hb.countLabelStyle }}">{{ hb.count }}</span></div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+
+            <div style="border:1px solid #e4e7ec;border-radius:3px;padding:20px;margin-bottom:20px;">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;">
+                <div>
+                  <div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;">Pratinjau · Data preview</div>
+                </div>
+                <div style="font-size:12px;color:#9aa2b1;">Maksimal 50 baris</div>
+              </div>
+              <div style="overflow:auto;max-height:320px;border:1px solid #eef0f3;border-radius:3px;">
+                <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                  <thead><tr style="{{ dqTheadRowStyle }}"><th style="{{ dqThStyle }}">#</th>
+                    <sc-for list="{{ dqHeaders }}" as="h" hint-placeholder-count="3"><th style="{{ dqThStyle }}">{{ h }}</th></sc-for>
+                  </tr></thead>
+                  <tbody>
+                  <sc-for list="{{ dqPreviewRows }}" as="pr" hint-placeholder-count="6">
+                    <tr style="border-bottom:1px solid #eef0f3;">
+                      <td style="padding:8px 12px;color:#9aa2b1;">{{ pr.n }}</td>
+                      <sc-for list="{{ pr.cells }}" as="cell" hint-placeholder-count="3"><td style="padding:8px 12px;color:#14181f;">{{ cell }}</td></sc-for>
+                    </tr>
+                  </sc-for>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="border:1px solid #e4e7ec;border-radius:3px;padding:20px;">
+              <div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:10px;">Duplicate · Duplicate row preview</div>
+              <sc-if value="{{ dqDupCount }}" hint-placeholder-val="{{ false }}">
+                <div style="overflow:auto;max-height:220px;border:1px solid #eef0f3;border-radius:3px;">
+                  <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                    <thead><tr style="{{ dqTheadRowStyle }}"><th style="{{ dqThStyle }}">#</th>
+                      <sc-for list="{{ dqHeaders }}" as="h2" hint-placeholder-count="3"><th style="{{ dqThStyle }}">{{ h2 }}</th></sc-for>
+                    </tr></thead>
+                    <tbody>
+                    <sc-for list="{{ dqDupRows }}" as="dr" hint-placeholder-count="2">
+                      <tr style="border-bottom:1px solid #eef0f3;">
+                        <td style="padding:8px 12px;color:#9aa2b1;">{{ dr.n }}</td>
+                        <sc-for list="{{ dr.cells }}" as="cell2" hint-placeholder-count="3"><td style="padding:8px 12px;color:#14181f;">{{ cell2 }}</td></sc-for>
+                      </tr>
+                    </sc-for>
+                    </tbody>
+                  </table>
+                </div>
+              </sc-if>
+              <sc-if value="{{ dqNoDup }}" hint-placeholder-val="{{ true }}">
+                <div style="font-size:13px;color:#9aa2b1;">No duplicate rows</div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="border:1px solid #e4e7ec;border-radius:3px;padding:20px;margin-top:24px;">
+          <div style="font-size:11px;color:#9aa2b1;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;">Yang akan diperiksa</div>
+          <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;margin:2px 0 14px;">First inspection layer untuk datasetmu</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+            <div style="display:flex;gap:10px;"><span style="font-size:11px;font-weight:700;color:#2f5fb0;">01</span><div><div style="font-weight:600;font-size:13.5px;">Missing values</div><div style="font-size:12.5px;color:#9aa2b1;margin-top:2px;">Temukan kolom yang belum lengkap.</div></div></div>
+            <div style="display:flex;gap:10px;"><span style="font-size:11px;font-weight:700;color:#2f5fb0;">02</span><div><div style="font-weight:600;font-size:13.5px;">Duplicate rows</div><div style="font-size:12.5px;color:#9aa2b1;margin-top:2px;">Deteksi baris yang sama persis.</div></div></div>
+            <div style="display:flex;gap:10px;"><span style="font-size:11px;font-weight:700;color:#2f5fb0;">03</span><div><div style="font-weight:600;font-size:13.5px;">Data types</div><div style="font-size:12.5px;color:#9aa2b1;margin-top:2px;">Pahami cara tiap kolom dibaca.</div></div></div>
+            <div style="display:flex;gap:10px;"><span style="font-size:11px;font-weight:700;color:#2f5fb0;">04</span><div><div style="font-weight:600;font-size:13.5px;">Column statistics</div><div style="font-size:12.5px;color:#9aa2b1;margin-top:2px;">Lihat karakteristik dasar data.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TOOLS_DATA = [
+  {id:'color-palette', title:'Color Palette', desc:'Mulai dari satu warna, susun paletnya, lalu unduh untuk Tableau, Power BI, CSS, atau gambar.', tags:['Desain & warna'], meta:'Tableau · Power BI · Gratis', view:'color-palette', iconColor:true, iconChart:false, iconResource:false, iconQuality:false},
+  {id:'chart-guide', title:'Chart Guide', desc:'Lihat contoh chart, kebutuhan datanya, dan catatan penggunaannya.', tags:['Belajar','Referensi'], meta:'Chart.js · Gratis', view:'chart-guide', iconColor:false, iconChart:true, iconResource:false, iconQuality:false},
+  {id:'resource-hub', title:'Resource Hub', desc:'Link tools, dataset, tutorial, dan inspirasi untuk pekerjaanmu.', tags:['Referensi'], meta:'Pilihan · Gratis', view:'resources', iconColor:false, iconChart:false, iconResource:true, iconQuality:false},
+  {id:'data-quality', title:'Data Quality Checker', desc:'Cek missing values, duplicate rows, tipe data, dan potensi masalah sebelum membuat dashboard.', tags:['Data & kualitas'], meta:'CSV · XLSX · Gratis', view:'data-quality', iconColor:false, iconChart:false, iconResource:false, iconQuality:true}
+];
+const FILTERS = ['Semua','Desain & warna','Belajar','Referensi','Data & kualitas'];
+const CHART_DATA = [
+  {id:'bar', name:'Bar Chart', family:'Perbandingan', purpose:'Membandingkan', typeTag:'Batang', colsLabel:'2 kolom data', desc:'Bandingkan nilai antar kategori dengan panjang batang. Cocok untuk melihat produk, cabang, atau metrik mana yang paling tinggi.', useWhen:'Kategori diskrit dengan jumlah sedikit sampai sedang.', avoidWhen:'Terlalu banyak kategori (>15) — pertimbangkan tabel atau Pareto.', previewBar:true},
+  {id:'line', name:'Line Chart', family:'Perbandingan', purpose:'Membandingkan', typeTag:'Garis', colsLabel:'2 kolom data', desc:'Hubungkan nilai berdasarkan waktu untuk melihat arah tren dan perubahan dari satu periode ke periode berikutnya.', useWhen:'Data time-series kontinu, ingin lihat tren naik/turun.', avoidWhen:'Kategori tidak berurutan atau tidak berbasis waktu.', previewLine:true},
+  {id:'slope', name:'Slope Chart', family:'Perbandingan', purpose:'Membandingkan', typeTag:'Garis miring', colsLabel:'3 kolom data', desc:'Tampilkan perubahan antara dua titik waktu. Kemiringan garis langsung memperlihatkan siapa yang naik, turun, atau berpindah peringkat.', useWhen:'Ingin bandingkan ranking atau nilai antara dua titik waktu untuk beberapa entitas.', avoidWhen:'Terlalu banyak garis — perpotongan bikin sulit diikuti, batasi ke ~8 entitas.', previewSlope:true},
+  {id:'bullet', name:'Bullet Chart', family:'Perbandingan', purpose:'Membandingkan', typeTag:'Bullet', colsLabel:'3 kolom data', desc:'Ringkas satu metrik dan bandingkan dengan target. Rentang latar menunjukkan batas rendah, sedang, dan baik tanpa memakan ruang seperti gauge.', useWhen:'Ingin lihat progres satu metrik terhadap target di ruang sempit, misal di tabel atau dashboard padat.', avoidWhen:'Butuh detail tren dari waktu ke waktu — bullet chart hanya snapshot satu titik.', previewBullet:true},
+  {id:'waterfall', name:'Waterfall Chart', family:'Perbandingan', purpose:'Membandingkan', typeTag:'Waterfall', colsLabel:'2 kolom data', desc:'Ikuti jejak dari nilai awal ke nilai akhir. Setiap batang menunjukkan penambahan atau pengurangan yang membentuk total.', useWhen:'Ingin tunjukkan bagaimana nilai awal berubah lewat serangkaian penambahan/pengurangan ke nilai akhir.', avoidWhen:'Urutan perubahan tidak penting atau kategori tidak berurutan secara logis.', previewWaterfall:true},
+  {id:'pie', name:'Pie Chart', family:'Komposisi', purpose:'Menjelaskan komposisi', typeTag:'Pie', colsLabel:'2 kolom data', desc:'Tunjukkan bagian dari satu total dalam bentuk irisan. Gunakan saat kategori sedikit dan jumlahnya memang mewakili 100%.', useWhen:'Maksimal 5–6 kategori dengan proporsi cukup jelas.', avoidWhen:'Banyak kategori dengan nilai mirip — sudut sulit dibedakan.', previewPie:true},
+  {id:'donut', name:'Donut Chart', family:'Komposisi', purpose:'Menjelaskan komposisi', typeTag:'Donat', colsLabel:'2 kolom data', desc:'Versi berlubang dari pie chart. Area tengah bisa dipakai untuk menonjolkan total atau KPI.', useWhen:'Ingin menampilkan total angka di tengah bersama proporsinya.', avoidWhen:'Sama seperti pie chart — jangan untuk banyak kategori.', previewDonut:true},
+  {id:'stacked-bar', name:'Stacked Bar Chart', family:'Komposisi', purpose:'Menjelaskan komposisi', typeTag:'Batang bertumpuk', colsLabel:'3 kolom data', desc:'Bandingkan total sambil melihat isi tiap kategori. Setiap segmen batang mewakili satu subkategori.', useWhen:'Ingin lihat kontribusi tiap sub-kategori ke total.', avoidWhen:'Sub-kategori terlalu banyak — bagian tengah jadi sulit dibandingkan.', previewStackedBar:true},
+  {id:'treemap', name:'Treemap', family:'Komposisi', purpose:'Menjelaskan komposisi', typeTag:'Treemap', colsLabel:'3 kolom data', desc:'Bandingkan banyak kategori dalam ruang terbatas. Kotak yang lebih besar berarti nilai yang lebih besar, sementara susunannya menunjukkan hierarki.', useWhen:'Banyak kategori/subkategori dengan hierarki, dan ingin bandingkan ukuran relatifnya sekaligus.', avoidWhen:'Nilai antar kategori mirip — perbedaan ukuran kotak jadi sulit dibedakan.', previewTreemap:true},
+  {id:'area', name:'Area Chart', family:'Komposisi', purpose:'Menjelaskan komposisi', typeTag:'Area', colsLabel:'3 kolom data', desc:'Lihat tren sekaligus volumenya lewat area berisi di bawah garis. Berguna saat besarnya total sama pentingnya dengan arahnya.', useWhen:'Ingin menonjolkan volume kumulatif dari waktu ke waktu.', avoidWhen:'Banyak garis bertumpuk — area bisa saling menutupi.', previewArea:true},
+  {id:'histogram', name:'Histogram', family:'Sebaran', purpose:'Melihat sebaran', typeTag:'Histogram', colsLabel:'1 kolom data', desc:'Kelompokkan angka ke dalam interval untuk melihat bentuk sebarannya—misalnya menumpuk di tengah, miring, atau punya pencilan.', useWhen:'Ingin lihat bentuk distribusi satu variabel numerik.', avoidWhen:'Data kategorikal, bukan numerik kontinu.', previewHistogram:true},
+  {id:'box-plot', name:'Box Plot', family:'Sebaran', purpose:'Melihat sebaran', typeTag:'Box plot', colsLabel:'2 kolom data', desc:'Ringkas sebaran angka dengan minimum, kuartil, median, dan maksimum. Bisa dipakai untuk membandingkan variasi antar kelompok.', useWhen:'Ingin bandingkan sebaran (median, kuartil, outlier) antar beberapa kelompok sekaligus.', avoidWhen:'Audiens tidak familiar dengan statistik — butuh penjelasan tambahan.', previewBoxPlot:true},
+  {id:'dot-plot', name:'Dot Plot', family:'Sebaran', purpose:'Melihat sebaran', typeTag:'Dot plot', colsLabel:'2 kolom data', desc:'Tampilkan setiap pengamatan sebagai titik. Sebaran dan tumpukan nilai terlihat tanpa menyembunyikan data mentah.', useWhen:'Dataset kecil-menengah dan ingin tunjukkan setiap titik data mentah tanpa agregasi.', avoidWhen:'Dataset sangat besar — titik-titik akan bertumpuk dan sulit dibaca.', previewDotPlot:true},
+  {id:'scatter', name:'Scatter Plot', family:'Sebaran', purpose:'Melihat sebaran', typeTag:'Scatter', colsLabel:'2 kolom data', desc:'Cari pola hubungan dua angka lewat titik pada sumbu X dan Y. Bentuk sebarannya membantu membaca arah dan kekuatan korelasi.', useWhen:'Ingin cek pola, korelasi, atau outlier antar dua metrik.', avoidWhen:'Salah satu variabel bersifat kategorikal, bukan numerik.', previewScatter:true},
+  {id:'bubble', name:'Bubble Chart', family:'Hubungan', purpose:'Membaca hubungan', typeTag:'Bubble', colsLabel:'3 kolom data', desc:'Bandingkan dua variabel sekaligus dengan ukuran bubble sebagai variabel ketiga. Pastikan skala bubble punya arti yang jelas.', useWhen:'Ingin tunjukkan tiga variabel sekaligus: posisi X, Y, dan ukuran sebagai variabel ketiga.', avoidWhen:'Perbedaan ukuran bubble terlalu halus untuk dibedakan mata.', previewBubble:true},
+  {id:'heatmap', name:'Heatmap', family:'Hubungan', purpose:'Membaca hubungan', typeTag:'Heatmap', colsLabel:'3 kolom data', desc:'Gunakan warna untuk membaca nilai dalam matriks. Sel yang lebih pekat menandakan angka lebih tinggi atau aktivitas lebih padat.', useWhen:'Data dua dimensi dengan banyak sel, ingin lihat pola cepat.', avoidWhen:'Perbedaan nilai antar sel kecil — gradasi jadi tidak informatif.', previewHeatmap:true}
+];
+const CHART_FAMILIES = ['Semua','Perbandingan','Komposisi','Sebaran','Hubungan'];
+const RESOURCE_DATA = [
+  {title:'Tableau Public', category:'Tools & Software', domain:'public.tableau.com', desc:'Jelajahi dan publikasikan dashboard Tableau langsung dari browser.', tags:['Gratis','Tableau','Inspirasi'], url:'#'},
+  {title:'Power BI Desktop', category:'Tools & Software', domain:'powerbi.microsoft.com', desc:'Aplikasi Windows untuk membuat laporan dan dashboard Power BI.', tags:['Gratis','Power BI','Windows'], url:'#'},
+  {title:'Google Looker Studio', category:'Tools & Software', domain:'lookerstudio.google.com', desc:'Buat dashboard berbasis web dan bagikan laporan ke tim.', tags:['Gratis','Dashboard','Web'], url:'#'},
+  {title:'Metabase', category:'Tools & Software', domain:'metabase.com', desc:'Jalankan query, buat dashboard, dan bagikan hasilnya ke tim.', tags:['Freemium','BI','SQL','Open Source'], url:'#'},
+  {title:'SQLBolt', category:'Belajar', domain:'sqlbolt.com', desc:'Latihan SQL singkat yang langsung bisa dicoba di browser.', tags:['Gratis','SQL','Pemula'], url:'#'},
+  {title:'Microsoft Learn – Power BI', category:'Belajar', domain:'learn.microsoft.com', desc:'Materi resmi Microsoft untuk belajar Power BI dari dasar.', tags:['Gratis','Power BI'], url:'#'},
+  {title:'DataCamp – Data Analyst with Python', category:'Belajar', domain:'datacamp.com', desc:'Jalur belajar berbayar dengan latihan Python untuk calon data analyst.', tags:['Berbayar','Python'], url:'#'},
+  {title:'freeCodeCamp – Data Analysis with Python', category:'Belajar', domain:'freecodecamp.org', desc:'Kursus gratis untuk belajar dasar analisis data dengan Python.', tags:['Gratis','Python'], url:'#'},
+  {title:'Coursera – Google Data Analytics', category:'Belajar', domain:'coursera.org', desc:'Program sertifikat Google untuk belajar dasar-dasar analisis data.', tags:['Berbayar','Sertifikasi'], url:'#'},
+  {title:'BPS – Badan Pusat Statistik', category:'Dataset', domain:'bps.go.id', desc:'Data statistik resmi Indonesia untuk topik sosial, ekonomi, dan demografi.', tags:['Gratis','Indonesia'], url:'#'},
+  {title:'data.go.id', category:'Dataset', domain:'data.go.id', desc:'Portal data terbuka pemerintah dari berbagai kementerian dan lembaga.', tags:['Gratis','Indonesia'], url:'#'},
+  {title:'Jakarta Open Data', category:'Dataset', domain:'data.jakarta.go.id', desc:'Dataset terbuka dari Pemerintah Provinsi DKI Jakarta.', tags:['Gratis','Indonesia'], url:'#'},
+  {title:'BMKG Data Online', category:'Dataset', domain:'dataonline.bmkg.go.id', desc:'Data cuaca, iklim, dan geofisika dari BMKG.', tags:['Gratis','Indonesia'], url:'#'},
+  {title:'Kaggle Datasets', category:'Dataset', domain:'kaggle.com', desc:'Cari dataset untuk latihan, eksperimen, atau notebook komunitas.', tags:['Gratis','Python','SQL'], url:'#'},
+  {title:'UCI Machine Learning Repository', category:'Dataset', domain:'archive.ics.uci.edu', desc:'Dataset publik yang sering dipakai untuk belajar machine learning.', tags:['Gratis','Global'], url:'#'},
+  {title:'Our World in Data', category:'Dataset', domain:'ourworldindata.org', desc:'Data dan grafik tentang ekonomi, kesehatan, dan lingkungan di berbagai negara.', tags:['Gratis','Global'], url:'#'},
+  {title:'Coolors', category:'Desain & Warna', domain:'coolors.co', desc:'Buat dan coba kombinasi warna untuk dashboard atau desain lain.', tags:['Freemium','Desain','Warna','Gratis'], url:'#'},
+  {title:'ColorBrewer', category:'Desain & Warna', domain:'colorbrewer2.org', desc:'Pilih palet untuk peta dan chart dengan fokus pada keterbacaan.', tags:['Gratis','Warna','Chart'], url:'#'},
+  {title:'Adobe Color', category:'Desain & Warna', domain:'color.adobe.com', desc:'Eksplorasi roda warna dan susun palet sesuai kebutuhan desain.', tags:['Freemium','Warna','Desain','Gratis'], url:'#'},
+  {title:'Google Fonts', category:'Desain & Warna', domain:'fonts.google.com', desc:'Cari font gratis untuk dashboard, presentasi, dan produk web.', tags:['Gratis','Typography','Desain'], url:'#'},
+  {title:'Makeover Monday', category:'Inspirasi', domain:'makeovermonday.co.uk', desc:'Latihan mingguan untuk membongkar ulang visualisasi data.', tags:['Gratis','Tableau','Power BI'], url:'#'},
+  {title:'Workout Wednesday', category:'Inspirasi', domain:'workout-wednesday.com', desc:'Tantangan mingguan untuk mengasah teknik Tableau dan Power BI.', tags:['Gratis','Tableau','Power BI'], url:'#'},
+  {title:'Viz of the Day', category:'Inspirasi', domain:'tableau.com', desc:'Contoh visualisasi Tableau pilihan untuk mencari ide layout dan cerita.', tags:['Gratis','Tableau'], url:'#'},
+  {title:'Dribbble – Dashboard Design', category:'Inspirasi', domain:'dribbble.com', desc:'Contoh UI dashboard untuk mencari referensi layout dan gaya visual.', tags:['Freemium','UI','Desain'], url:'#'},
+  {title:'Komunitas Power BI Indonesia', category:'Khusus Indonesia', domain:'linkedin.com', desc:'Tempat praktisi dan pembelajar Power BI Indonesia bertukar tips.', tags:['Gratis','Indonesia','Power BI','Komunitas'], url:'#'},
+  {title:'Tableau User Group Indonesia', category:'Khusus Indonesia', domain:'usergroups.tableau.com', desc:'Forum pengguna Tableau di Indonesia untuk berbagi tips dan agenda.', tags:['Gratis','Indonesia','Tableau','Komunitas'], url:'#'},
+  {title:'Data Science Indonesia', category:'Khusus Indonesia', domain:'datascience.or.id', desc:'Komunitas data Indonesia dengan artikel, acara, dan materi belajar.', tags:['Gratis','Indonesia','Komunitas','Belajar'], url:'#'},
+  {title:'PANDI Academy', category:'Khusus Indonesia', domain:'pandi.id', desc:'Materi belajar digital berbahasa Indonesia tentang data dan teknologi.', tags:['Gratis','Indonesia','Belajar'], url:'#'}
+];
+const CATEGORIES = ['Semua','Tools & Software','Belajar','Dataset','Desain & Warna','Inspirasi','Khusus Indonesia'];
+const ALL_TAGS = ['Gratis','Freemium','Berbayar','Indonesia','Tableau','Power BI','Python','SQL','Belajar','BI','Chart','Dashboard','Dataset','Desain','Global','Inspirasi','Komunitas','Open Source','Pemula','Sertifikasi','Typography','UI','Warna','Web','Windows'];
+const TAG_COLOR = {Gratis:'#15803d', Freemium:'#b45309', Berbayar:'#b91c1c'};
+
+const tabStyle = (active) => ({
+  background:'none', border:'none', padding:'0 0 10px', marginBottom:'-1px',
+  fontSize:'13.5px', fontFamily:"'Inter',sans-serif", cursor:'pointer',
+  color: active ? '#14181f' : '#9aa2b1',
+  fontWeight: active ? 600 : 400,
+  borderBottom: active ? '2px solid #2f5fb0' : '2px solid transparent'
+});
+
+const navItemStyle = (active) => ({
+  background: active ? '#eef3fb' : 'none', border:'none', textAlign:'left',
+  padding:'8px 10px', borderRadius:'3px', fontSize:'13.5px', cursor:'pointer',
+  fontFamily:"'Inter',sans-serif", color: active ? '#2f5fb0' : '#4b5563',
+  fontWeight: active ? 600 : 400
+});
+
+class Component extends DCLogic {
+  state = {
+    view: 'home',
+    toolQuery: '',
+    toolFilter: 'Semua',
+    chartFamily: 'Semua',
+    expandedChart: null,
+    resourceCategory: 'Semua',
+    resourceTags: [],
+    resourceQuery: '',
+    chartQuery: '',
+    baseHex: '#2F5FB0',
+    paletteInput: '',
+    paletteMode: 'Acak',
+    scheme: [],
+    previewTheme: 'light',
+    copiedKey: '',
+    dqFile: null,
+    dqHeaders: [],
+    dqRows: [],
+    dqSelectedColumnIndex: 0,
+    dqColumnSearch: '',
+    dqStatusFilter: 'All',
+    dqError: null
+  };
+
+  componentDidMount() {
+    this.setState({scheme: this.generateScheme(this.state.baseHex, this.state.paletteMode)});
+    this._onKeyDown = (e) => {
+      if (e.code === 'Space' && this.state.view === 'color-palette' && document.activeElement.tagName !== 'INPUT') {
+        e.preventDefault();
+        this.regenerate();
+      }
+    };
+    document.addEventListener('keydown', this._onKeyDown);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._onKeyDown);
+  }
+
+  fmtSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/(1024*1024)).toFixed(1) + ' MB';
+  }
+  fmtNum(n) {
+    if (n === null || n === undefined || isNaN(n)) return '–';
+    return n.toLocaleString('id-ID', {maximumFractionDigits: 2});
+  }
+
+  async parseFile(file) {
+    if (file.size > 25*1024*1024) { this.setState({dqError: 'File terlalu besar. Maksimal 25 MB.'}); return; }
+    this.setState({dqError: null});
+    try {
+      const buf = await file.arrayBuffer();
+      const wb = window.XLSX.read(buf, {type: 'array'});
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const rows = window.XLSX.utils.sheet_to_json(sheet, {header: 1, raw: false, defval: ''});
+      if (!rows.length) throw new Error('empty');
+      const headers = rows[0].map((h,i) => String(h||'').trim() || ('Kolom ' + (i+1)));
+      const dataRows = rows.slice(1).filter(r => r.some(c => String(c).trim() !== ''));
+      const format = file.name.split('.').pop().toUpperCase();
+      this.setState({
+        dqFile: {name: file.name, sizeLabel: this.fmtSize(file.size), format},
+        dqHeaders: headers, dqRows: dataRows, dqSelectedColumnIndex: 0, dqColumnSearch: '', dqStatusFilter: 'All'
+      });
+    } catch (e) {
+      this.setState({dqError: 'Gagal membaca file. Pastikan formatnya CSV atau Excel yang valid.'});
+    }
+  }
+
+  onFileInput = (e) => { const f = e.target.files[0]; if (f) this.parseFile(f); };
+  onDrop = (e) => { e.preventDefault(); const f = e.dataTransfer.files && e.dataTransfer.files[0]; if (f) this.parseFile(f); };
+  onDragOver = (e) => e.preventDefault();
+  resetFile = () => this.setState({dqFile: null, dqHeaders: [], dqRows: [], dqError: null});
+  onDqColumnSearch = (e) => this.setState({dqColumnSearch: e.target.value});
+  selectDqColumn = (i) => this.setState({dqSelectedColumnIndex: i});
+  setDqStatusFilter = (f) => this.setState({dqStatusFilter: f});
+
+  computeDqColumns(headers, rows) {
+    return headers.map((name, i) => {
+      const raw = rows.map(r => (r[i] !== undefined ? String(r[i]) : ''));
+      const nonEmpty = raw.filter(v => v.trim() !== '');
+      const missing = raw.length - nonEmpty.length;
+      const missingPct = raw.length ? Math.round((missing/raw.length)*100) : 0;
+      const unique = new Set(nonEmpty).size;
+      const numericVals = nonEmpty.map(v => Number(v.replace(',','.'))).filter(v => !isNaN(v) && v !== '');
+      const isNumber = nonEmpty.length > 0 && numericVals.length === nonEmpty.length;
+      let stats = null;
+      if (isNumber && numericVals.length) {
+        const sorted = [...numericVals].sort((a,b) => a-b);
+        const sum = numericVals.reduce((a,b) => a+b, 0);
+        const mean = sum/numericVals.length;
+        const mid = Math.floor(sorted.length/2);
+        const median = sorted.length % 2 ? sorted[mid] : (sorted[mid-1]+sorted[mid])/2;
+        stats = {min: sorted[0], max: sorted[sorted.length-1], mean, median, sorted};
+      }
+      return {name, index: i, type: isNumber ? 'Number' : 'Text', count: raw.length, missing, missingPct, unique, stats, status: missing > 0 ? 'Missing' : 'Clean'};
+    });
+  }
+
+  buildHistogram(sorted) {
+    if (!sorted || !sorted.length) return [];
+    const min = sorted[0], max = sorted[sorted.length-1];
+    const binCount = 6;
+    const width = (max-min)/binCount || 1;
+    const bins = Array.from({length: binCount}, () => 0);
+    sorted.forEach(v => { let idx = Math.floor((v-min)/width); if (idx >= binCount) idx = binCount-1; if (idx < 0) idx = 0; bins[idx]++; });
+    const maxCount = Math.max(...bins, 1);
+    return bins.map(c => ({count: c, frac: c/maxCount}));
+  }
+
+  computeDqDuplicates(rows) {
+    const seen = new Set();
+    const dups = [];
+    rows.forEach((r, i) => {
+      const key = r.join('\u0001');
+      if (seen.has(key)) dups.push({n: i+1, cells: r});
+      else seen.add(key);
+    });
+    return dups;
+  }
+
+  navTo = (v) => this.setState({view: v});
+  goHome = () => this.setState({view:'home'});
+  goTools = () => this.setState({view:'tools'});
+  goResources = () => this.setState({view:'resources'});
+  goChartGuide = () => this.setState({view:'chart-guide'});
+
+  onToolQuery = (e) => this.setState({toolQuery: e.target.value});
+  onResourceQuery = (e) => this.setState({resourceQuery: e.target.value});
+  onChartQuery = (e) => this.setState({chartQuery: e.target.value});
+  setToolFilter = (f) => this.setState({toolFilter: f});
+  setChartFamily = (f) => this.setState({chartFamily: f, expandedChart: null});
+  toggleChart = (id) => this.setState(s => ({expandedChart: s.expandedChart === id ? null : id}));
+  setResourceCategory = (c) => this.setState({resourceCategory: c});
+  toggleResourceTag = (tag) => this.setState(s => ({resourceTags: s.resourceTags.includes(tag) ? s.resourceTags.filter(t => t !== tag) : [...s.resourceTags, tag]}));
+  onResetFilters = () => this.setState({resourceCategory: 'Semua', resourceTags: [], resourceQuery: ''});
+
+  onPaletteInput = (e) => this.setState({paletteInput: e.target.value});
+  onInputKeyDown = (e) => { if (e.key === 'Enter') this.onGenerate(); };
+
+  parseColorInput(text) {
+    const NAMED = {ocean:'#3B82F6', sunset:'#F97316', forest:'#22C55E', coral:'#FB7185', lavender:'#A78BFA', mint:'#34D399', slate:'#64748B', amber:'#F59E0B', rose:'#F43F5E', teal:'#14B8A6'};
+    const v = (text || '').trim();
+    if (!v) return null;
+    const hex = v[0] === '#' ? v : '#' + v;
+    if (/^#([0-9a-f]{6})$/i.test(hex)) return hex.toUpperCase();
+    return NAMED[v.toLowerCase()] || null;
+  }
+
+  setMode = (m) => this.setState(s => ({paletteMode: m, scheme: this.generateScheme(s.baseHex, m)}));
+
+  onGenerate = () => {
+    const parsed = this.parseColorInput(this.state.paletteInput);
+    const baseHex = parsed || this.state.baseHex;
+    this.setState({baseHex, scheme: this.generateScheme(baseHex, this.state.paletteMode)});
+  };
+
+  regenerate = () => this.setState(s => ({scheme: this.generateScheme(s.baseHex, s.paletteMode)}));
+
+  generateScheme(baseHex, mode) {
+    const base = this.hexToHsl(baseHex);
+    const jitter = (n) => n + (Math.random() * 12 - 6);
+    let stops;
+    if (mode === 'Acak') {
+      stops = Array.from({length:5}, () => ({h: Math.random()*360, s: 55 + Math.random()*20, l: 42 + Math.random()*24}));
+    } else if (mode === 'Analog') {
+      stops = [-40,-20,0,20,40].map(off => ({h: base.h + off, s: jitter(base.s || 60), l: jitter(base.l || 55)}));
+    } else if (mode === 'Komplementer') {
+      const hues = [base.h, base.h, base.h+180, base.h+180, base.h];
+      const ls = [62,46,58,40,52];
+      stops = hues.map((h,i) => ({h, s: jitter(base.s || 60), l: jitter(ls[i])}));
+    } else if (mode === 'Triadik') {
+      const hues = [base.h, base.h+120, base.h+240, base.h, base.h+120];
+      const ls = [56,48,60,40,52];
+      stops = hues.map((h,i) => ({h, s: jitter(base.s || 60), l: jitter(ls[i])}));
+    } else {
+      const ls = [78,62,48,35,22];
+      stops = ls.map(l => ({h: base.h, s: Math.max((base.s || 50) * 0.85, 20), l: jitter(l)}));
+    }
+    return stops.map((st, i) => {
+      const h = ((st.h % 360) + 360) % 360;
+      const s = Math.min(Math.max(st.s, 15), 85);
+      const l = Math.min(Math.max(st.l, 12), 88);
+      const hex = this.hslToHex(h, s, l).toUpperCase();
+      const light = this.isLightBg(hex);
+      const key = 'sw' + i;
+      const copied = this.state && this.state.copiedKey === key;
+      return {
+        hex,
+        blockStyle: {flex:'1 1 0', minHeight:'170px', background:hex, border:'none', borderRight: i < 4 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor:'pointer', position:'relative', display:'flex', alignItems:'flex-end', justifyContent:'center', paddingBottom:'12px'},
+        copiedStyle: {fontSize:'11px', fontFamily:"'Inter',sans-serif", fontWeight:500, color: light ? '#14181f' : '#ffffff', opacity: copied ? 0.9 : 0, transition:'opacity .15s'},
+        chipStyle: {padding:'8px 14px', borderLeft: '3px solid ' + hex, border:'1px solid #e4e7ec', borderLeftWidth:'3px', borderRadius:'3px', background:'#fff', fontSize:'12.5px', fontFamily:'monospace', color:'#14181f', cursor:'pointer'},
+        hexLabel: hex,
+        onCopy: () => this.copy(hex, key)
+      };
+    });
+  }
+
+  copy = (text, key) => {
+    if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+    this.setState({copiedKey: key});
+    clearTimeout(this._copyTimer);
+    this._copyTimer = setTimeout(() => this.setState({copiedKey: ''}), 1300);
+  };
+
+  hexToHsl(hex) {
+    const r = parseInt(hex.slice(1,3),16)/255, g = parseInt(hex.slice(3,5),16)/255, b = parseInt(hex.slice(5,7),16)/255;
+    const max = Math.max(r,g,b), min = Math.min(r,g,b);
+    let h, s, l = (max+min)/2;
+    if (max === min) { h = 0; s = 0; }
+    else {
+      const d = max - min;
+      s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+      if (max === r) h = ((g-b)/d + (g < b ? 6 : 0));
+      else if (max === g) h = (b-r)/d + 2;
+      else h = (r-g)/d + 4;
+      h *= 60;
+    }
+    return {h, s: s*100, l: l*100};
+  }
+
+  hslToHex(h, s, l) {
+    s /= 100; l /= 100;
+    const c = (1 - Math.abs(2*l-1)) * s;
+    const x = c * (1 - Math.abs((h/60) % 2 - 1));
+    const m = l - c/2;
+    let r,g,b;
+    if (h < 60) [r,g,b] = [c,x,0];
+    else if (h < 120) [r,g,b] = [x,c,0];
+    else if (h < 180) [r,g,b] = [0,c,x];
+    else if (h < 240) [r,g,b] = [0,x,c];
+    else if (h < 300) [r,g,b] = [x,0,c];
+    else [r,g,b] = [c,0,x];
+    const toHex = (v) => Math.round((v+m)*255).toString(16).padStart(2,'0');
+    return '#' + toHex(r) + toHex(g) + toHex(b);
+  }
+
+  isLightBg(hex) {
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    return (r*299+g*587+b*114)/1000 >= 150;
+  }
+
+  downloadBlob(content, filename, mime) {
+    const blob = new Blob([content], {type: mime});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  onExportTps = () => {
+    const xml = '<?xml version="1.0"?>\n<color-palette name="BikinDashboard Palette" type="regular">\n' +
+      this.state.scheme.map(c => '  <color>' + c.hex + '</color>').join('\n') + '\n</color-palette>';
+    this.downloadBlob(xml, 'bikindashboard-palette.tps', 'application/xml');
+  };
+  onExportPowerBi = () => {
+    const json = JSON.stringify({name:'BikinDashboard Palette', dataColors: this.state.scheme.map(c => c.hex)}, null, 2);
+    this.downloadBlob(json, 'bikindashboard-palette.json', 'application/json');
+  };
+  onExportCss = () => {
+    const css = ':root {\n' + this.state.scheme.map((c,i) => '  --palette-' + (i+1) + ': ' + c.hex + ';').join('\n') + '\n}';
+    this.copy(css, 'css-export');
+  };
+  exportImage(format) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 500; canvas.height = 140;
+    const ctx = canvas.getContext('2d');
+    this.state.scheme.forEach((c,i) => { ctx.fillStyle = c.hex; ctx.fillRect(i*100, 0, 100, 140); });
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'bikindashboard-palette.' + format;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, format === 'png' ? 'image/png' : 'image/jpeg', 0.92);
+  }
+  onExportPng = () => this.exportImage('png');
+  onExportJpg = () => this.exportImage('jpg');
+
+  setThemeLight = () => this.setState({previewTheme: 'light'});
+  setThemeDark = () => this.setState({previewTheme: 'dark'});
+
+  renderVals() {
+    const s = this.state;
+    const q = s.toolQuery.trim().toLowerCase();
+
+    const matchesQuery = (t) => !q || t.title.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q);
+    const toolsOpen = TOOLS_DATA.map(t => ({...t, open: () => this.navTo(t.view)}));
+
+    const homeTools = toolsOpen.filter(matchesQuery);
+    const HERO_ORDER = ['color-palette','chart-guide','resource-hub'];
+    const heroShortcuts = HERO_ORDER.map(id => toolsOpen.find(t => t.id === id)).filter(Boolean);
+    const filteredTools = toolsOpen.filter(t => (s.toolFilter === 'Semua' || t.tags.includes(s.toolFilter)) && matchesQuery(t));
+
+    const toolFilterChips = FILTERS.map(f => ({label: f, active: f === s.toolFilter, style: tabStyle(f === s.toolFilter), onClick: () => this.setToolFilter(f)}));
+
+    const chartFamilyChips = CHART_FAMILIES.map(f => ({label: f, style: tabStyle(f === s.chartFamily), onClick: () => this.setChartFamily(f)}));
+    const cq = s.chartQuery.trim().toLowerCase();
+    const filteredCharts = CHART_DATA.filter(c => (s.chartFamily === 'Semua' || c.family === s.chartFamily) && (!cq || c.name.toLowerCase().includes(cq) || c.typeTag.toLowerCase().includes(cq))).map(c => {
+      const expanded = s.expandedChart === c.id;
+      return {...c, expanded, onToggle: () => this.toggleChart(c.id), toggleLabel: expanded ? '← Tutup panduan' : 'Lihat panduan →'};
+    });
+
+    const categoryChips = CATEGORIES.map(c => ({label: c, style: {padding:'7px 13px', borderRadius:'3px', fontSize:'12.5px', fontWeight:500, cursor:'pointer', fontFamily:"'Inter',sans-serif", background: c === s.resourceCategory ? '#eef3fb' : '#fff', border: c === s.resourceCategory ? '1px solid #2f5fb0' : '1px solid #e4e7ec', color: c === s.resourceCategory ? '#2f5fb0' : '#14181f'}, onClick: () => this.setResourceCategory(c)}));
+    const tagChips = ALL_TAGS.map(t => {
+      const active = s.resourceTags.includes(t);
+      return {label: t, style: {padding:'6px 12px', borderRadius:'2px', fontSize:'12px', fontWeight:500, cursor:'pointer', fontFamily:"'Inter',sans-serif", background: active ? '#eef3fb' : '#fff', border: active ? '1px solid #2f5fb0' : '1px solid #e4e7ec', color: active ? '#2f5fb0' : '#4b5563'}, onClick: () => this.toggleResourceTag(t)};
+    });
+    const rq = s.resourceQuery.trim().toLowerCase();
+    const filteredResources = RESOURCE_DATA.filter(r =>
+      (s.resourceCategory === 'Semua' || r.category === s.resourceCategory) &&
+      (s.resourceTags.length === 0 || s.resourceTags.some(t => r.tags.includes(t))) &&
+      (!rq || r.title.toLowerCase().includes(rq) || r.desc.toLowerCase().includes(rq))
+    ).map(r => ({
+      ...r,
+      tagPills: [r.category, ...r.tags].map(label => ({label, style:{padding:'3px 8px', borderRadius:'2px', border:'1px solid #e4e7ec', fontSize:'11px', background:'#fff', color: label === r.category ? '#2f5fb0' : (TAG_COLOR[label] || '#6b7280')}}))
+    }));
+    const resourceCountLabel = filteredResources.length + ' dari ' + RESOURCE_DATA.length + ' link';
+    const homeResources = RESOURCE_DATA.slice(0,3).map(r => ({...r, priceTag: r.tags.find(t => TAG_COLOR[t]) || r.tags[0]}));
+
+    const navItems = [
+      {key:'home', label:'Beranda', onClick: this.goHome, style: navItemStyle(s.view === 'home')},
+      {key:'tools', label:'Tools', onClick: this.goTools, style: navItemStyle(s.view === 'tools' || s.view === 'color-palette' || s.view === 'data-quality')},
+      {key:'chart-guide', label:'Chart Guide', onClick: this.goChartGuide, style: navItemStyle(s.view === 'chart-guide')},
+      {key:'resources', label:'Resource Hub', onClick: this.goResources, style: navItemStyle(s.view === 'resources')}
+    ];
+
+    const scheme = s.scheme.length ? s.scheme : this.generateScheme(s.baseHex, s.paletteMode);
+    const MODES = ['Acak','Analog','Komplementer','Triadik','Monokromatik'];
+    const paletteModeChips = MODES.map(m => ({label: m, onClick: () => this.setMode(m), style: {padding:'8px 14px', borderRadius:'3px', fontSize:'13px', fontWeight:500, cursor:'pointer', fontFamily:"'Inter',sans-serif", background: m === s.paletteMode ? '#eef3fb' : '#fff', border: m === s.paletteMode ? '1px solid #2f5fb0' : '1px solid #e4e7ec', color: m === s.paletteMode ? '#2f5fb0' : '#14181f'}}));
+    const paletteSubTabs = ['Generator','Dari Gambar','Jelajahi','Panduan'].map((label,i) => ({label, style: tabStyle(i === 0), style2: i !== 0 ? {opacity:0.45, cursor:'default'} : {}}));
+    paletteSubTabs.forEach((t,i) => { if (i !== 0) t.style = {...t.style, color:'#c3c9d3', cursor:'default'}; });
+
+    const isDark = s.previewTheme === 'dark';
+    const previewShellStyle = {background: isDark ? '#181c24' : '#fafbfc', padding:'16px 0 0'};
+    const previewHeaderStyle = {background: scheme[0] ? scheme[0].hex : '#2f5fb0', color: scheme[0] && this.isLightBg(scheme[0].hex) ? '#14181f' : '#fff', fontSize:'13px', fontWeight:600, padding:'12px 16px', margin:'0 16px', borderRadius:'8px 8px 0 0'};
+    const previewKpiStyle = {background: isDark ? '#232834' : '#fff', border: '1px solid ' + (isDark ? '#2c323f' : '#e4e7ec'), borderRadius:'3px', padding:'12px 14px'};
+    const previewPanelStyle = {background: isDark ? '#232834' : '#fff', border: '1px solid ' + (isDark ? '#2c323f' : '#e4e7ec'), borderRadius:'3px', padding:'14px'};
+    const previewLabelStyle = {fontSize:'12px', fontWeight:600, color: isDark ? '#e6e8ec' : '#14181f'};
+    const previewValueStyle = {fontSize:'16px', fontWeight:700, fontFamily:"'Poppins',sans-serif", color: isDark ? '#f2f3f5' : '#14181f', marginTop:'4px'};
+    const previewMutedTextStyle = {fontSize:'11.5px', color: isDark ? '#8b93a3' : '#9aa2b1'};
+    const previewTrackColor = isDark ? '#2c323f' : '#eef0f3';
+    const barColors = [scheme[1], scheme[2], scheme[3]].map(c => c ? c.hex : '#2f5fb0');
+    const previewBars = [
+      {label:'Organik', pct:'72%', fillStyle:{height:'100%', width:'72%', background: barColors[0], borderRadius:'2px'}},
+      {label:'Iklan', pct:'48%', fillStyle:{height:'100%', width:'48%', background: barColors[1], borderRadius:'2px'}},
+      {label:'Mitra', pct:'29%', fillStyle:{height:'100%', width:'29%', background: barColors[2], borderRadius:'2px'}}
+    ];
+    const legendColors = [scheme[0], scheme[1], scheme[3], scheme[4]].map(c => c ? c.hex : '#2f5fb0');
+    const previewLegend = [
+      {label:'Barat', pct:'38%', dotStyle:{width:'8px',height:'8px',borderRadius:'50%',background:legendColors[0],display:'inline-block'}},
+      {label:'Pusat', pct:'28%', dotStyle:{width:'8px',height:'8px',borderRadius:'50%',background:legendColors[1],display:'inline-block'}},
+      {label:'Timur', pct:'18%', dotStyle:{width:'8px',height:'8px',borderRadius:'50%',background:legendColors[2],display:'inline-block'}}
+    ];
+    const donutStops = [
+      legendColors[0] + ' 0 38%', legendColors[1] + ' 38% 66%', legendColors[2] + ' 66% 84%', (isDark ? '#2c323f' : '#eef0f3') + ' 84% 100%'
+    ].join(', ');
+    const previewDonutStyle = {width:'88px', height:'88px', borderRadius:'50%', background: 'conic-gradient(' + donutStops + ')', position:'relative'};
+    const previewCtaStyle = {width:'100%', padding:'11px', border:'none', borderRadius:'3px', background: scheme[0] ? scheme[0].hex : '#2f5fb0', color: scheme[0] && this.isLightBg(scheme[0].hex) ? '#14181f' : '#fff', fontSize:'13px', fontWeight:600, cursor:'pointer'};
+    const themeBtnStyle = (active) => ({padding:'6px 12px', borderRadius:'2px', fontSize:'12px', fontWeight:500, cursor:'pointer', border: active ? '1px solid #2f5fb0' : '1px solid #e4e7ec', background: active ? '#eef3fb' : '#fff', color: active ? '#2f5fb0' : '#4b5563'});
+
+    return {
+      isHome: s.view === 'home', isTools: s.view === 'tools', isChartGuide: s.view === 'chart-guide',
+      isResources: s.view === 'resources', isColorPalette: s.view === 'color-palette', isDataQuality: s.view === 'data-quality',
+      navItems, goHome: this.goHome, goTools: this.goTools, goResources: this.goResources, goChartGuide: this.goChartGuide,
+      toolQuery: s.toolQuery, onToolQuery: this.onToolQuery,
+      homeTools, homeToolCount: homeTools.length + ' tool', heroShortcuts,
+      filteredTools, toolFilterChips, toolCountLabel: filteredTools.length + ' dari ' + TOOLS_DATA.length + ' tool',
+      chartFamilyChips, filteredCharts,
+      chartQuery: s.chartQuery, onChartQuery: this.onChartQuery,
+      resourceQuery: s.resourceQuery, onResourceQuery: this.onResourceQuery,
+      categoryChips, tagChips, onResetFilters: this.onResetFilters, filteredResources, resourceCountLabel, homeResources,
+      paletteInput: s.paletteInput, onPaletteInput: this.onPaletteInput, onInputKeyDown: this.onInputKeyDown,
+      paletteModeChips, paletteSubTabs, onGenerate: this.onGenerate, scheme,
+      onExportTps: this.onExportTps, onExportPowerBi: this.onExportPowerBi, onExportPng: this.onExportPng, onExportJpg: this.onExportJpg, onExportCss: this.onExportCss,
+      cssBtnLabel: s.copiedKey === 'css-export' ? 'Disalin!' : 'Salin variabel CSS',
+      setThemeLight: this.setThemeLight, setThemeDark: this.setThemeDark,
+      themeLightStyle: themeBtnStyle(!isDark), themeDarkStyle: themeBtnStyle(isDark),
+      previewShellStyle, previewHeaderStyle, previewKpiStyle, previewPanelStyle, previewLabelStyle, previewValueStyle, previewMutedTextStyle, previewTrackColor,
+      previewBars, previewLegend, previewDonutStyle, previewCtaStyle,
+      ...this.renderDqVals(s)
+    };
+  }
+
+  renderDqVals(s) {
+    const hasFile = !!s.dqFile;
+    const dqRowCount = s.dqRows.length;
+    const dqColCount = s.dqHeaders.length;
+    const allColumns = hasFile ? this.computeDqColumns(s.dqHeaders, s.dqRows) : [];
+    const dqMissingColCount = allColumns.filter(c => c.missing > 0).length;
+    const dupRows = hasFile ? this.computeDqDuplicates(s.dqRows) : [];
+    const dqDupCount = dupRows.length;
+
+    const dqIssues = [];
+    if (dqMissingColCount > 0) dqIssues.push(dqMissingColCount + ' dari ' + dqColCount + ' kolom punya missing values.');
+    if (dqDupCount > 0) dqIssues.push(dqDupCount + ' baris terdeteksi duplikat persis.');
+
+    const STATUS_FILTERS = ['All','Issues','Missing','Clean'];
+    const dqStatusChips = STATUS_FILTERS.map(f => ({label: f, style: {padding:'6px 12px', borderRadius:'2px', fontSize:'12px', fontWeight:500, cursor:'pointer', border: f === s.dqStatusFilter ? '1px solid #2f5fb0' : '1px solid #e4e7ec', background: f === s.dqStatusFilter ? '#eef3fb' : '#fff', color: f === s.dqStatusFilter ? '#2f5fb0' : '#4b5563'}, onClick: () => this.setDqStatusFilter(f)}));
+
+    const csq = s.dqColumnSearch.trim().toLowerCase();
+    const visibleColumns = allColumns.filter(c =>
+      (!csq || c.name.toLowerCase().includes(csq)) &&
+      (s.dqStatusFilter === 'All' || (s.dqStatusFilter === 'Issues' ? c.missing > 0 : c.status === s.dqStatusFilter))
+    );
+    const dqColumnRows = visibleColumns.map(c => {
+      const active = c.index === s.dqSelectedColumnIndex;
+      return {
+        ...c,
+        onSelect: () => this.selectDqColumn(c.index),
+        rowStyle: {display:'grid', gridTemplateColumns:'2fr 1fr 1fr 1fr 1fr', gap:'8px', width:'100%', padding:'10px', border:'none', borderLeft: active ? '2px solid #2f5fb0' : '2px solid transparent', background: active ? '#fafbfc' : 'none', textAlign:'left', cursor:'pointer', alignItems:'center'},
+        nameStyle: {fontSize:'13.5px', fontWeight:500, color:'#14181f'},
+        statusPillStyle: {fontSize:'11px', fontWeight:600, padding:'2px 8px', borderRadius:'2px', width:'fit-content', background: c.status === 'Clean' ? '#f0fdf4' : '#fffbeb', color: c.status === 'Clean' ? '#15803d' : '#92400e'}
+      };
+    });
+
+    const selCol = allColumns.find(c => c.index === s.dqSelectedColumnIndex);
+    let selectedColumn = null;
+    if (selCol) {
+      selectedColumn = {
+        name: selCol.name, count: selCol.count, unique: selCol.unique, isNumber: !!selCol.stats,
+        missingLabel: selCol.missing + ' · ' + selCol.missingPct + '%',
+        noteLabel: selCol.missing === 0 ? 'Tidak ada issue terdeteksi pada kolom ini' : selCol.missing + ' nilai kosong terdeteksi',
+      };
+      if (selCol.stats) {
+        selectedColumn.minLabel = this.fmtNum(selCol.stats.min);
+        selectedColumn.maxLabel = this.fmtNum(selCol.stats.max);
+        selectedColumn.meanLabel = this.fmtNum(selCol.stats.mean);
+        selectedColumn.medianLabel = this.fmtNum(selCol.stats.median);
+        selectedColumn.histogram = this.buildHistogram(selCol.stats.sorted).map(b => ({
+          count: b.count,
+          barStyle: {flex:1, minHeight:'4px', height: Math.max(b.frac*100, 6) + '%', background:'#8fb3e0', borderRadius:'3px 3px 0 0', display:'flex', alignItems:'flex-start', justifyContent:'center', paddingTop:'4px'},
+          countLabelStyle: {fontSize:'10.5px', color:'#14181f', fontWeight:600}
+        }));
+      }
+    }
+
+    const dqPreviewRows = s.dqRows.slice(0, 50).map((r, i) => ({n: i+1, cells: s.dqHeaders.map((_, ci) => r[ci] !== undefined ? String(r[ci]) : '')}));
+    const dqDupRows = dupRows.slice(0, 20);
+
+    return {
+      hasFile, dqFile: s.dqFile, dqError: s.dqError, onFileInput: this.onFileInput, onDrop: this.onDrop, onDragOver: this.onDragOver, resetFile: this.resetFile,
+      dqRowCount, dqColCount, dqMissingColCount, dqDupCount,
+      dqIssues, dqNoIssues: dqIssues.length === 0,
+      dqColumnSearch: s.dqColumnSearch, onDqColumnSearch: this.onDqColumnSearch, dqStatusChips, dqColumnRows,
+      selectedColumn, dqHeaders: s.dqHeaders, dqPreviewRows, dqDupRows, dqNoDup: dqDupCount === 0,
+      dqTheadRowStyle: {background:'#fafbfc'},
+      dqThStyle: {textAlign:'left', padding:'8px 12px', fontSize:'11px', color:'#9aa2b1', textTransform:'uppercase', letterSpacing:'.03em', fontWeight:600}
+    };
+  }
+}
+</script>
+</body>
+</html>

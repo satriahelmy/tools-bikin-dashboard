@@ -16,6 +16,7 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 - `colorpalette/` — generator, ekstraksi warna dari gambar, eksplorasi palet, dan panduan ekspor.
 - `chart/` — daftar chart, halaman detail chart, bundle lokal `chart.umd.min.js`, dan renderer SVG `native-renderers.js` untuk tipe non-core.
 - `resourcehub/` — katalog resource data visualization.
+- `data-quality-checker/` — fondasi pemeriksaan CSV/XLSX secara client-side.
 - `tools/` — halaman katalog legacy dan data tool.
 - `assets/nav.js` + `assets/nav.css` — navigasi global dan sidebar.
 - `assets/tokens.css` — token desain bersama untuk seluruh tool.
@@ -141,6 +142,7 @@ Dokumen ini menjadi roadmap untuk menyatukan dan memoles seluruh tools BikinDash
 - [x] Tambahkan `robots.txt`, `sitemap.xml`, dan web manifest untuk kesiapan publikasi.
 - [x] Tambahkan theme color konsisten pada seluruh route aplikasi.
 - [x] Sediakan renderer native untuk tipe yang membutuhkan plugin khusus (Treemap, Box Plot, dan Heatmap) melalui `chart/native-renderers.js`.
+- [x] Mendaftarkan Data Quality Checker sebagai tools keempat dengan parser CSV/XLSX client-side dan route unified.
 
 ## Acceptance criteria
 
@@ -156,6 +158,7 @@ Pekerjaan dianggap siap untuk deployment apabila:
 8. Tidak ada error JavaScript pada halaman utama dalam kondisi normal.
 9. Layout dapat digunakan pada desktop, tablet, dan mobile.
 10. UI utama memakai Bahasa Indonesia yang konsisten.
+11. Data Quality Checker tersedia di `/data-quality-checker/` dan active state sidebar sesuai.
 
 ## Cara menjalankan lokal
 

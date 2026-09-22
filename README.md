@@ -1,6 +1,6 @@
 # bikindashboard.com — Unified Tools
 
-Website statis yang menyatukan Color Palette, Chart Guide, dan Resource Hub dalam satu navigasi. Tidak membutuhkan Laravel atau database; seluruh fitur berjalan di browser dengan HTML, CSS, dan JavaScript.
+Website statis yang menyatukan Color Palette, Chart Guide, Resource Hub, dan Data Quality Checker dalam satu navigasi. Tidak membutuhkan Laravel atau database; seluruh fitur berjalan di browser dengan HTML, CSS, dan JavaScript.
 
 ## Menjalankan di XAMPP
 
@@ -24,6 +24,8 @@ Kemudian buka [http://127.0.0.1:8765/](http://127.0.0.1:8765/).
 - `/chart/chart.html?id=bar-chart` — detail chart; Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`.
 - Treemap, Box Plot, dan Heatmap memakai renderer SVG lokal di `chart/native-renderers.js` karena bukan tipe inti Chart.js.
 - `/resourcehub/` — katalog resource data visualization.
+- `/data-quality-checker/` — pemeriksaan awal kualitas CSV/XLSX secara client-side.
+- Batasan dan perilaku V1 Data Quality Checker: [`data-quality-checker/README.md`](data-quality-checker/README.md).
 
 ## Catatan deployment
 

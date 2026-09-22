@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Quality Worker Smoke Test</title>
+</head>
+<body>
+  <pre id="output">Running worker smoke test…</pre>
+  <script src="../vendor/papaparse.min.js"></script>
+  <script src="../vendor/xlsx.full.min.js"></script>
+  <script src="../config.js?v=5"></script>
+  <script src="../model.js?v=5"></script>
+  <script src="../profiling.js?v=5"></script>
+  <script src="../parser.js?v=5"></script>
+  <script>
+    (async () => {
+      const output = document.getElementById('output');
+      try {
+        const csvFile = new File(['id,value\n1,10\n2,20'], 'worker-fixture.csv', { type: 'text/csv' });
+        const csv = await window.BDDataQuality.parser.parseFile(csvFile);
+        const actualCsv = new File([[
+          'bensin_liter,jarak_km',
+          '2.0,25', '2.5,31', '3.0,38', '3.5,42', '4.0,49', '4.5,55',
+          '5.0,61', '5.5,66', '6.0,74', '6.5,78', '7.0,86', '7.5,91',
+          '8.0,97', '8.5,102', '9.0,111', '9.5,115', '10.0,123', '10.5,127',
+          '11.0,135', '11.5,139', ''
+        ].join('\n')], 'dataset_bensin_jarak_v2.csv', { type: 'text/csv' });
+        const actual = await window.BDDataQuality.parser.parseFile(actualCsv);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([['id', 'value'], [1, 10]]), 'Data');
+        XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([['id', 'value'], [2, 20]]), 'Other');
+        const xlsxFile = new File([XLSX.write(workbook, { type: 'array', bookType: 'xlsx' })], 'worker-fixture.xlsx');
+        const info = await window.BDDataQuality.parser.inspectFile(xlsxFile);
+        const xlsx = await window.BDDataQuality.parser.parseFile(xlsxFile, { sheetName: 'Data' });
+        output.textContent = JSON.stringify({
+          csvStatus: csv.status,
+          csvRows: csv.overview.rows,
+          csvUsesWorker: window.BDDataQuality.parser.usesWorker(csvFile),
+          actualCsvRows: actual.overview.rows,
+          actualCsvIssues: actual.issues.length,
+          xlsxSheets: info.sheetNames,
+          xlsxStatus: xlsx.status,
+          xlsxRows: xlsx.overview.rows,
+          xlsxUsesWorker: window.BDDataQuality.parser.usesWorker(xlsxFile),
+          worker: window.BDDataQuality.parser.getStatus().worker
+        }, null, 2);
+      } catch (error) {
+        output.textContent = `ERROR: ${error.code || 'unknown'} — ${error.message}`;
+      }
+    })();
+  </script>
+</body>
+</html>

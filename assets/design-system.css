@@ -1,0 +1,104 @@
+/*
+ * BikinDashboard universal design system.
+ *
+ * Keep shared type, controls, and small UI primitives here so every tool
+ * inherits the same visual language. Page styles should only handle layout
+ * and behavior that is unique to that tool.
+ */
+
+body.bd-with-nav {
+  font-family: var(--bd-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.bd-with-nav h1,
+body.bd-with-nav h2,
+body.bd-with-nav h3,
+body.bd-with-nav h4,
+body.bd-with-nav .bd-title,
+body.bd-with-nav .bd-heading,
+body.bd-with-nav .bd-hero-title {
+  font-family: var(--bd-font-heading);
+}
+
+body.bd-with-nav button,
+body.bd-with-nav input,
+body.bd-with-nav select,
+body.bd-with-nav textarea {
+  font-family: var(--bd-font);
+}
+
+body.bd-with-nav input::placeholder,
+body.bd-with-nav textarea::placeholder {
+  font-family: var(--bd-font);
+}
+
+/* Shared page anatomy. Every tool starts from the same content line and intro
+   rhythm; only the modules below the intro are page-specific. */
+body.bd-with-nav .bd-main > .bd-container {
+  display: flow-root;
+}
+
+body.bd-with-nav .bd-tool-intro {
+  margin: 8px 0 20px;
+}
+
+body.bd-with-nav .bd-tool-intro .bd-label,
+body.bd-with-nav .bd-tool-intro .bd-body,
+body.bd-with-nav .bd-tool-intro .bd-hero-subtitle {
+  margin: 0;
+}
+
+body.bd-with-nav .bd-tool-intro .bd-label {
+  color: var(--bd-primary);
+  text-transform: uppercase;
+}
+
+body.bd-with-nav .bd-label {
+  font-family: var(--bd-font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  line-height: 1.2;
+}
+
+body.bd-with-nav .bd-tool-intro h2,
+body.bd-with-nav .bd-tool-intro .bd-hero-title,
+body.bd-with-nav .dq-results-header h2 {
+  margin: 5px 0 6px;
+  font-family: var(--bd-font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+}
+
+body.bd-with-nav .bd-tool-intro .bd-body,
+body.bd-with-nav .bd-tool-intro .bd-hero-subtitle {
+  font-family: var(--bd-font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+body.bd-chart-index .bd-tool-intro {
+  max-width: none;
+  padding: 0;
+  text-align: left;
+}
+
+body.bd-chart-index .bd-tool-intro .bd-hero-subtitle {
+  max-width: 680px;
+}
+
+body.bd-with-nav.bd-chart-detail .bd-main > .bd-container {
+  padding-top: 8px;
+}
+
+body.bd-with-nav .bd-mono,
+body.bd-with-nav .bd-type-badge,
+body.bd-with-nav .dq-type-badge,
+body.bd-with-nav .dq-status-badge {
+  font-family: var(--bd-font-mono);
+}

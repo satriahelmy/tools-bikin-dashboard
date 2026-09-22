@@ -1,5 +1,5 @@
 (function () {
-  const toolFolders = ['colorpalette', 'chart', 'resourcehub', 'tools'];
+  const toolFolders = ['colorpalette', 'chart', 'resourcehub', 'data-quality-checker', 'tools'];
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const toolIndex = pathSegments.findIndex((segment) => toolFolders.includes(segment.toLowerCase()));
   const rootPath = toolIndex === -1
@@ -16,7 +16,7 @@
     const stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
     stylesheet.dataset.bdNavCss = 'true';
-    stylesheet.href = `${new URL('./nav.css', document.currentScript.src).href}?v=1.2`;
+    stylesheet.href = `${new URL('./nav.css', document.currentScript.src).href}?v=1.3`;
     document.head.appendChild(stylesheet);
   }
 
@@ -24,7 +24,8 @@
     { id: 'home', label: 'Beranda', href: rootPath },
     { id: 'colorpalette', label: 'Color Palette', href: `${rootPath}colorpalette/` },
     { id: 'chart', label: 'Chart Guide', href: `${rootPath}chart/` },
-    { id: 'resourcehub', label: 'Resource Hub', href: `${rootPath}resourcehub/` }
+    { id: 'resourcehub', label: 'Resource Hub', href: `${rootPath}resourcehub/` },
+    { id: 'data-quality-checker', label: 'Data Quality', href: `${rootPath}data-quality-checker/` }
   ];
   const current = toolIndex === -1 || pathSegments[toolIndex].toLowerCase() === 'tools'
     ? 'home'
@@ -35,7 +36,8 @@
       home: '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
       colorpalette: '<circle cx="12" cy="12" r="8.5"/><circle cx="8.5" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="15.5" cy="10" r="1" fill="currentColor" stroke="none"/><path d="M15.5 16.5c0-1.1.9-2 2-2h.5"/>',
       chart: '<path d="M4 19V5M4 19h16"/><rect x="7" y="12" width="2.5" height="4" rx=".5"/><rect x="11" y="9" width="2.5" height="7" rx=".5"/><rect x="15" y="6" width="2.5" height="10" rx=".5"/>',
-      resourcehub: '<circle cx="12" cy="12" r="8.5"/><path d="M8 12h8M12 8v8"/>'
+      resourcehub: '<circle cx="12" cy="12" r="8.5"/><path d="M8 12h8M12 8v8"/>',
+      'data-quality-checker': '<path d="M4 5.5h10M4 10h6M4 14.5h5"/><path d="M15 14.5l2 2 3-4"/><circle cx="17" cy="9" r="3.5"/>'
     };
     return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${paths[id] || paths.home}</svg>`;
   };
@@ -61,15 +63,10 @@
 
   const backdrop = document.createElement('div');
   backdrop.className = 'bd-sidebar-backdrop';
-  const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+  const isCompact = () => window.matchMedia('(max-width: 860px)').matches;
   const syncSidebarState = () => {
-    if (isMobile() && !document.body.classList.contains('bd-nav-open')) {
-      aside.setAttribute('aria-hidden', 'true');
-      aside.inert = true;
-    } else {
-      aside.removeAttribute('aria-hidden');
-      aside.inert = false;
-    }
+    aside.removeAttribute('aria-hidden');
+    aside.inert = false;
   };
   const close = (restoreFocus = false) => {
     document.body.classList.remove('bd-nav-open');
@@ -85,11 +82,12 @@
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Tutup navigasi');
       syncSidebarState();
-      if (isMobile()) aside.querySelector('a')?.focus();
+      if (!isCompact()) aside.querySelector('a')?.focus();
     } else {
       close(true);
     }
   });
+  window.addEventListener('resize', syncSidebarState, { passive: true });
   backdrop.addEventListener('click', () => close(true));
   aside.addEventListener('click', (event) => { if (event.target.closest('a')) close(); });
   document.addEventListener('keydown', (event) => {

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Free Data Quality Checker for CSV &amp; Excel | BikinDashboard</title>
+  <meta name="description" content="Check missing values, duplicate rows, data types, unique values, and basic statistics from CSV or Excel files directly in your browser.">
+  <link rel="canonical" href="https://bikindashboard.com/data-quality-checker/">
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Data Quality Checker for CSV &amp; Excel | BikinDashboard">
+  <meta property="og:description" content="Check missing values, duplicate rows, data types, unique values, and basic statistics from CSV or Excel files directly in your browser.">
+  <meta property="og:url" content="https://bikindashboard.com/data-quality-checker/">
+  <meta property="og:image" content="https://bikindashboard.com/assets/og-image.svg">
+  <meta name="theme-color" content="#2f5fb0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="./style.css?v=2">
+  <link rel="stylesheet" href="../assets/design-system.css?v=1.4" data-bd-design-system>
+  <link rel="stylesheet" href="../assets/nav.css?v=1.3" data-bd-nav-css>
+  <script src="../assets/nav.js?v=1.3" defer></script>
+  <script src="./vendor/papaparse.min.js" defer></script>
+  <script src="./vendor/xlsx.full.min.js" defer></script>
+  <script src="./config.js?v=5" defer></script>
+  <script src="./model.js?v=5" defer></script>
+  <script src="./profiling.js?v=5" defer></script>
+  <script src="./parser.js?v=5" defer></script>
+  <script src="./analytics.js?v=1" defer></script>
+  <script src="./app.js?v=10" defer></script>
+</head>
+<body class="bd-with-nav data-quality-page">
+  <header class="bd-topbar">
+    <div class="bd-topbar-inner">
+      <div class="bd-topbar-left">
+        <a href="../index.html" class="bd-back">← Semua tool</a>
+        <span class="bd-topbar-divider"></span>
+        <h1 class="bd-title">Data Quality Checker</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="bd-main">
+    <div class="bd-container">
+      <header class="tool-page-intro bd-tool-intro">
+        <p class="bd-label">TOOLS · DATA QUALITY</p>
+        <h2>Periksa datamu sebelum bikin dashboard</h2>
+        <p class="bd-body">Upload CSV atau Excel untuk menemukan missing values, duplicate rows, tipe data, dan potensi masalah dataset.</p>
+        <div class="dq-intro-meta" aria-label="Ringkasan tool">
+          <span><i aria-hidden="true"></i> Diproses lokal</span>
+          <span>CSV · XLSX</span>
+          <span>Maks. 25 MB</span>
+        </div>
+      </header>
+
+      <section class="dq-upload-card" aria-labelledby="upload-heading">
+        <div class="dq-upload-heading">
+          <div>
+            <p class="bd-label">UPLOAD</p>
+            <h3 id="upload-heading">Upload dataset</h3>
+            <p id="upload-help" class="bd-body">File diproses lokal di browser dan tidak dikirim ke server. Nama file, nama kolom, dan isi dataset tidak dikirim melalui analytics.</p>
+          </div>
+        </div>
+
+        <label id="dropzone" class="dq-dropzone" for="fileInput" tabindex="0">
+          <span class="dq-dropzone-icon" aria-hidden="true">↑</span>
+          <span class="dq-dropzone-title">Drop file CSV atau Excel di sini</span>
+          <span class="dq-dropzone-copy">atau pilih dari perangkatmu</span>
+          <span class="bd-btn bd-btn-primary dq-browse-button">Browse file</span>
+          <span class="dq-file-hint">CSV atau XLSX · maksimal 25 MB</span>
+          <input id="fileInput" class="dq-file-input" type="file" aria-label="Pilih file CSV atau XLSX" aria-describedby="upload-help" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </label>
+
+        <div id="sheetPicker" class="dq-sheet-picker" hidden>
+          <div>
+            <p class="bd-label">WORKBOOK</p>
+            <h3>Pilih sheet yang ingin diperiksa</h3>
+            <p class="bd-body">Workbook ini memiliki beberapa sheet. Pilih satu sheet untuk melanjutkan.</p>
+          </div>
+          <div class="dq-sheet-controls">
+            <label class="dq-field-label" for="sheetSelect">Sheet</label>
+            <select id="sheetSelect" class="bd-input"></select>
+            <button id="analyzeSheetBtn" class="bd-btn bd-btn-primary" type="button">Periksa sheet</button>
+          </div>
+        </div>
+
+        <div id="uploadState" class="dq-upload-state" data-state="idle" role="status" aria-live="polite">
+          <span class="dq-state-dot" aria-hidden="true"></span>
+          <span id="uploadStateText">Belum ada file yang dipilih.</span>
+        </div>
+
+        <div id="uploadError" class="dq-message dq-message-error" role="alert" hidden>
+          <div>
+            <strong>Ada masalah saat membaca file</strong>
+            <p id="uploadErrorText"></p>
+          </div>
+          <button id="tryAgainBtn" class="bd-btn bd-btn-secondary" type="button">Coba lagi</button>
+        </div>
+
+        <div id="successPanel" class="dq-success-panel" hidden>
+          <div class="dq-success-icon" aria-hidden="true">✓</div>
+          <div class="dq-success-copy">
+            <p class="bd-label">FILE SIAP DIPROFILKAN</p>
+            <h3 id="resultFileName"></h3>
+            <p id="resultMeta" class="bd-body"></p>
+            <p id="resultSheet" class="dq-result-sheet"></p>
+          </div>
+          <button id="uploadAnotherBtn" class="bd-btn bd-btn-secondary" type="button">Upload file lain</button>
+        </div>
+      </section>
+
+      <section id="resultsPanel" class="dq-results" aria-labelledby="results-heading" hidden>
+        <header class="dq-results-header">
+          <div>
+            <p class="bd-label">ANALISIS</p>
+            <h2 id="results-heading">Dataset overview</h2>
+            <p id="resultsDatasetMeta" class="bd-body"></p>
+          </div>
+          <button id="resultsUploadAnotherBtn" class="bd-btn bd-btn-secondary" type="button">Upload dataset lain</button>
+        </header>
+
+        <section class="dq-result-section" aria-labelledby="overview-heading">
+          <div class="dq-section-heading">
+            <div>
+              <p class="bd-label">RINGKASAN</p>
+              <h3 id="overview-heading">Apa yang ada di dataset ini?</h3>
+            </div>
+          </div>
+          <div class="dq-overview-grid">
+            <article class="dq-overview-card" data-icon="rows"><span>Rows</span><strong id="overviewRows">—</strong><small>records detected</small></article>
+            <article class="dq-overview-card" data-icon="columns"><span>Columns</span><strong id="overviewColumns">—</strong><small>fields detected</small></article>
+            <article class="dq-overview-card" data-icon="duplicates"><span>Duplicate rows</span><strong id="overviewDuplicates">—</strong><small>exact matches</small></article>
+            <article class="dq-overview-card" data-icon="missing"><span>Columns with missing</span><strong id="overviewMissingColumns">—</strong><small>need attention</small></article>
+          </div>
+        </section>
+
+        <section class="dq-result-section" aria-labelledby="issues-heading">
+          <div class="dq-section-heading dq-section-heading-inline">
+            <div>
+              <p class="bd-label">INSPEKSI</p>
+              <h3 id="issues-heading">Detected issues</h3>
+            </div>
+            <span id="issuesCount" class="dq-section-count"></span>
+          </div>
+          <div id="issuesList" class="dq-issues-list"></div>
+        </section>
+
+        <section class="dq-result-section" aria-labelledby="columns-heading">
+          <div class="dq-section-heading">
+            <p class="bd-label">KOLOM</p>
+            <h3 id="columns-heading">Column overview</h3>
+          </div>
+          <div class="dq-columns-toolbar">
+            <label class="dq-search-field" for="columnSearch">
+              <span class="sr-only">Cari nama kolom</span>
+              <input id="columnSearch" class="bd-input" type="search" placeholder="Cari nama kolom…" autocomplete="off">
+            </label>
+            <div id="columnFilters" class="dq-filter-group" role="group" aria-label="Filter kolom">
+              <button class="dq-filter-button is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="dq-filter-button" type="button" data-filter="issue" aria-pressed="false">Issues</button>
+              <button class="dq-filter-button" type="button" data-filter="missing" aria-pressed="false">Missing</button>
+              <button class="dq-filter-button" type="button" data-filter="clean" aria-pressed="false">Clean</button>
+            </div>
+          </div>
+          <div class="dq-table-wrap">
+            <table class="dq-columns-table">
+              <thead>
+                <tr>
+                  <th scope="col"><button type="button" class="dq-sort-button" data-sort="name">Column <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col"><button type="button" class="dq-sort-button" data-sort="type">Type <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col"><button type="button" class="dq-sort-button" data-sort="missingPercentage">Missing <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col"><button type="button" class="dq-sort-button" data-sort="uniqueCount">Unique <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="columnsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="dq-result-section" aria-labelledby="profile-heading">
+          <div class="dq-section-heading dq-section-heading-inline">
+            <div>
+              <p class="bd-label">DETAIL</p>
+              <h3 id="profile-heading">Column profile</h3>
+            </div>
+            <span id="profileType" class="dq-type-badge"></span>
+          </div>
+          <div id="profileContent" class="dq-profile-content" role="region" aria-live="polite" aria-label="Detail profil kolom"></div>
+        </section>
+
+        <section class="dq-result-section" aria-labelledby="preview-heading">
+          <div class="dq-section-heading dq-section-heading-inline">
+            <div>
+              <p class="bd-label">PRATINJAU</p>
+              <h3 id="preview-heading">Data preview</h3>
+            </div>
+            <span class="dq-section-count">Maksimal 50 baris</span>
+          </div>
+          <div class="dq-table-wrap dq-preview-wrap">
+            <table class="dq-preview-table">
+              <thead id="previewTableHead"></thead>
+              <tbody id="previewTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="dq-result-section" aria-labelledby="duplicate-heading">
+          <div class="dq-section-heading dq-section-heading-inline">
+            <div>
+              <p class="bd-label">DUPLICATE</p>
+              <h3 id="duplicate-heading">Duplicate row preview</h3>
+            </div>
+            <button id="duplicatePreviewBtn" class="bd-btn bd-btn-secondary" type="button" aria-controls="duplicatePreviewPanel" aria-expanded="false">View duplicate rows</button>
+          </div>
+          <div id="duplicatePreviewPanel" class="dq-duplicate-panel" hidden>
+            <div class="dq-table-wrap">
+              <table class="dq-preview-table">
+                <thead id="duplicateTableHead"></thead>
+                <tbody id="duplicateTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="dq-what-we-check" aria-labelledby="check-heading">
+        <div>
+          <p class="bd-label">YANG AKAN DIPERIKSA</p>
+          <h3 id="check-heading">First inspection layer untuk datasetmu</h3>
+        </div>
+        <div class="dq-check-grid">
+          <article><strong>Missing values</strong><p>Temukan kolom yang belum lengkap.</p></article>
+          <article><strong>Duplicate rows</strong><p>Deteksi baris yang sama persis.</p></article>
+          <article><strong>Data types</strong><p>Pahami cara tiap kolom dibaca.</p></article>
+          <article><strong>Column statistics</strong><p>Lihat karakteristik dasar data.</p></article>
+        </div>
+      </section>
+
+      <p id="runtimeStatus" class="dq-runtime-status" role="status" aria-live="polite">Memeriksa parser…</p>
+    </div>
+  </main>
+
+  <footer class="bd-footer">
+    <p class="bd-hint">Gratis untuk kamu yang kerja dengan data · <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p>
+  </footer>
+</body>
+</html>

@@ -28,5 +28,15 @@
     "url": "/resourcehub/",
     "localUrl": "../resourcehub/index.html",
     "badges": ["Pilihan", "Gratis"]
+  },
+  {
+    "id": "data-quality-checker",
+    "name": "Data Quality Checker",
+    "description": "Cek missing values, duplicate rows, tipe data, dan potensi masalah sebelum membuat dashboard.",
+    "category": "Data & kualitas",
+    "status": "available",
+    "url": "/data-quality-checker/",
+    "localUrl": "../data-quality-checker/index.html",
+    "badges": ["CSV", "XLSX", "Gratis"]
   }
 ]
