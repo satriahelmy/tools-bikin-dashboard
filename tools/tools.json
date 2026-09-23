@@ -38,5 +38,15 @@
     "url": "/data-quality-checker/",
     "localUrl": "../data-quality-checker/index.html",
     "badges": ["CSV", "XLSX", "Gratis"]
+  },
+  {
+    "id": "papers",
+    "name": "Paper Library",
+    "description": "Temukan paper penting tentang data, visualization, machine learning, dan AI.",
+    "category": "Belajar",
+    "status": "available",
+    "url": "/papers/",
+    "localUrl": "../papers/index.html",
+    "badges": ["Pilihan", "Gratis"]
   }
 ]

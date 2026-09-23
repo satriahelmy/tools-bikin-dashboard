@@ -8,6 +8,7 @@ Toolkit statis untuk membantu pekerjaan dashboard dan data visualization. Projec
 - **Chart Guide** — mencari chart berdasarkan kebutuhan analisis, melihat struktur data dan contoh penggunaan, serta membuka halaman detail setiap chart.
 - **Resource Hub** — mencari dan memfilter kumpulan tools, dataset, tutorial, komunitas, dan inspirasi data berdasarkan kategori dan tag.
 - **Data Quality Checker** — memeriksa file CSV/XLSX secara lokal di browser, termasuk missing values, duplicate rows, tipe data, profile kolom, histogram sederhana, preview, dan deteksi issue berdasarkan severity.
+- **Paper Library** — katalog 143 paper terkurasi untuk data, visualization, machine learning, dan AI dengan pencarian, filter, sorting, 138 link paper gratis terverifikasi, dan 69 repository code terverifikasi.
 
 Semua halaman memakai navigasi bersama, responsive layout, active route state, empty/error state, dan baseline aksesibilitas.
 
@@ -36,6 +37,7 @@ Kemudian buka [http://127.0.0.1:8765/](http://127.0.0.1:8765/).
 - `/chart/chart.html?id=bar-chart` — detail chart dengan contoh data dan visualisasi.
 - `/resourcehub/` — katalog resource data visualization.
 - `/data-quality-checker/` — pemeriksaan awal kualitas CSV/XLSX secara client-side.
+- `/papers/` — katalog Paper Library dengan 143 paper terkurasi dan filter client-side.
 
 Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot, dan Heatmap memakai renderer SVG lokal di `chart/native-renderers.js`. Batasan dan perilaku V1 Data Quality Checker dijelaskan di [`data-quality-checker/README.md`](data-quality-checker/README.md).
 
@@ -46,15 +48,19 @@ Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot,
 - `chart/` — katalog, halaman detail, data chart, dan renderer lokal.
 - `resourcehub/` — katalog resource beserta data JSON dan filter.
 - `data-quality-checker/` — parser, worker, profiling, model, dan UI pemeriksaan dataset.
+- `papers/` — route, shell, dan page-specific assets Paper Library.
+- `data/` — source dataset Paper Library dan data statis hasil transformasi.
+- `scripts/` — script development-only untuk mengubah workbook Paper Library menjadi JSON runtime.
 - `tools/` — data katalog tool dan halaman kompatibilitas/redirect lama.
 - `docs/` dan `design/` — dokumentasi sumber, PRD, desain, dan arsip; bukan route aplikasi utama.
 
 ## Catatan deployment
 
-- Publish isi project dari root repository beserta folder tool dan `assets/`.
+- Publish isi project dari root repository beserta folder tool, `papers/`, `data/`, dan `assets/`.
 - `assets/nav.js`, `assets/nav.css`, favicon, logo, dan share image adalah aset produksi bersama.
 - `assets/tokens.css` adalah sumber tunggal token desain bersama.
 - Folder tool menyimpan data JSON, bundle lokal, dan script yang dipakai halaman masing-masing.
+- Setelah workbook berubah, regenerasi katalog dengan `python scripts/build_papers_data.py` dari root repository dan review ringkasan validasinya sebelum publish.
 - Data Quality Checker memproses file di browser. Nama file, nama kolom, dan nilai dataset tidak dikirim ke backend aplikasi.
 - `robots.txt`, `sitemap.xml`, dan `site.webmanifest` berada di root untuk kebutuhan crawler dan instalasi web app.
 - Dokumen PRD, checklist, desain, dan arsip ZIP dipisahkan ke [`docs/`](docs/) dan [`design/`](design/) sebagai referensi sumber; jangan jadikan keduanya route aplikasi.

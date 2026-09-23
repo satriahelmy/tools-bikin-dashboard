@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Paper Library — BikinDashboard</title>
+  <meta name="description" content="Explore curated papers in data visualization, machine learning, and AI with free reading links and verified code repositories.">
+  <link rel="canonical" href="https://bikindashboard.com/papers/">
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <meta name="theme-color" content="#2f5fb0">
+  <script src="../assets/analytics.js?v=1"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1.1">
+  <link rel="stylesheet" href="../assets/design-system.css?v=1.8" data-bd-design-system>
+  <link rel="stylesheet" href="../assets/nav.css?v=1.5" data-bd-nav-css>
+  <script src="../assets/nav.js?v=1.3" defer></script>
+</head>
+<body class="bd-with-nav papers-page">
+  <header class="bd-topbar">
+    <div class="bd-topbar-inner">
+      <div class="bd-topbar-left">
+        <a href="../index.html" class="bd-back">← Semua tool</a>
+        <span class="bd-topbar-divider"></span>
+        <h1 class="bd-title">Paper Library</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="bd-main">
+    <div class="bd-container">
+      <header class="papers-intro bd-tool-intro">
+        <p class="bd-label">PAPER LIBRARY</p>
+        <h2>Paper Library</h2>
+        <p class="bd-body">Temukan paper penting tentang data, visualization, machine learning, dan AI.</p>
+      </header>
+
+      <section class="papers-controls" aria-label="Pencarian dan filter paper">
+        <div class="papers-search-row">
+          <label class="papers-field papers-search-field" for="paper-search">
+            <span class="bd-label">Cari paper</span>
+            <span class="papers-input-wrap">
+              <input id="paper-search" class="bd-input" type="search" placeholder="Cari judul, author, topik, atau kontribusi…" autocomplete="off" aria-controls="paper-list">
+              <button id="clear-search" class="papers-clear-button" type="button" aria-label="Hapus pencarian" aria-controls="paper-search" hidden>×</button>
+            </span>
+          </label>
+        </div>
+
+        <div class="papers-filter-row" role="group" aria-label="Filter paper">
+          <label class="papers-field" for="category-filter">
+            <span class="bd-label">Kategori</span>
+            <select id="category-filter" class="bd-input">
+              <option value="">Semua kategori</option>
+            </select>
+          </label>
+
+          <label id="topic-field" class="papers-field" for="topic-filter" hidden>
+            <span class="bd-label">Topik</span>
+            <select id="topic-filter" class="bd-input">
+              <option value="">Semua topik</option>
+            </select>
+          </label>
+
+          <label class="papers-field" for="difficulty-filter">
+            <span class="bd-label">Kesulitan</span>
+            <select id="difficulty-filter" class="bd-input">
+              <option value="">Semua tingkat</option>
+            </select>
+          </label>
+
+          <label class="papers-field" for="year-filter">
+            <span class="bd-label">Tahun</span>
+            <select id="year-filter" class="bd-input">
+              <option value="">Semua tahun</option>
+              <option value="before-2000">Sebelum 2000</option>
+              <option value="2000-2009">2000–2009</option>
+              <option value="2010-2019">2010–2019</option>
+              <option value="2020-plus">2020+</option>
+            </select>
+          </label>
+
+          <label class="papers-check-field" for="code-filter">
+            <input id="code-filter" type="checkbox">
+            <span>Has Code</span>
+          </label>
+        </div>
+
+        <div id="active-filters" class="papers-active-filters" aria-live="polite"></div>
+      </section>
+
+      <section class="papers-results-toolbar" aria-label="Paper results">
+        <p id="results-count" class="bd-body" aria-live="polite" aria-atomic="true">Memuat paper…</p>
+        <label class="papers-sort-field" for="sort-select">
+          <span>Sort</span>
+          <select id="sort-select" class="bd-input bd-input-sm">
+            <option value="curated">Curated</option>
+            <option value="oldest">Oldest</option>
+            <option value="newest">Newest</option>
+            <option value="az">A–Z</option>
+          </select>
+        </label>
+      </section>
+
+      <section id="paper-list" class="papers-list" aria-label="Daftar paper" aria-busy="true"></section>
+
+      <section id="papers-empty" class="papers-state" hidden aria-live="polite">
+        <h2 class="bd-heading">Paper tidak ditemukan</h2>
+        <p class="bd-body">Coba kata kunci lain atau hapus filter yang dipilih.</p>
+        <button id="clear-filters-empty" class="bd-btn bd-btn-secondary" type="button">Hapus filter</button>
+      </section>
+
+      <section id="papers-error" class="papers-state papers-error-state" hidden role="alert">
+        <h2 class="bd-heading">Paper Library belum dapat dimuat</h2>
+        <p class="bd-body">Segarkan halaman dan coba lagi.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bd-footer">
+    <p class="bd-hint">Gratis untuk kamu yang kerja dengan data · <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p>
+  </footer>
+
+  <script src="script.js?v=3.0"></script>
+</body>
+</html>

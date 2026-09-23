@@ -5,7 +5,7 @@ Tanggal: __________  Tester: __________  Browser: __________
 ## Route dan shell
 
 - [ ] `/` terbuka tanpa error; judul dan kartu tools tampil.
-- [ ] Sidebar mengarah ke Beranda, Color Palette, Chart Guide, Resource Hub, dan Data Quality Checker.
+- [ ] Sidebar mengarah ke Beranda, Color Palette, Chart Guide, Resource Hub, Data Quality Checker, dan Paper Library.
 - [ ] Active state sidebar berubah sesuai route.
 - [ ] Pada viewport mobile, tombol menu dapat membuka/menutup sidebar dan tombol Escape menutupnya.
 - [ ] Favicon tampil dan tidak ada request asset 404.
@@ -45,6 +45,25 @@ Tanggal: __________  Tester: __________  Browser: __________
 - [ ] Tabel columns mendukung pencarian, sorting, filter All/Issues/Missing/Clean, dan membuka profile kolom.
 - [ ] Numeric profile menampilkan statistik dan histogram sederhana; categorical/date profile menampilkan detail yang sesuai.
 - [ ] Data preview dibatasi maksimal 50 baris dan duplicate preview tidak menyediakan fungsi delete.
+
+## Paper Library — Phase 4
+
+- [x] `/papers/` terbuka tanpa error dan menampilkan 143 paper.
+- [x] Paper Library muncul di sidebar dengan active state yang benar.
+- [x] Paper Library muncul di homepage dan link populer membuka route yang benar.
+- [x] Search instan dapat menemukan paper berdasarkan judul, author, kategori, kontribusi, tahun, atau provenance.
+- [x] Filter kategori, kesulitan, tahun, dan Has Code memperbarui result count serta daftar.
+- [x] Topic tidak tampil ketika dataset tidak memiliki nilai topic.
+- [x] Sorting Curated, Oldest, Newest, dan A–Z bekerja.
+- [x] Read Paper hanya tampil untuk 138 link yang lolos verifikasi; Code hanya tampil untuk 69 link terverifikasi.
+- [x] Paper tanpa link terverifikasi, termasuk Rainbow Color Map, tidak menampilkan CTA yang tidak dapat dipakai.
+- [x] Empty state, tombol reset, loading/error state, dan provenance source tampil dengan benar.
+- [x] URL `q`, `category`, `topic` bila tersedia, `difficulty`, `year`, `code=true`, dan `sort` dapat dibagikan dan mengisi kontrol saat dibuka.
+- [x] Perubahan filter memperbarui query URL tanpa reload penuh; nilai query yang tidak valid dibersihkan.
+- [x] Event analytics `paper_search`, `paper_filter`, `paper_read_click`, dan `paper_code_click` tidak mengirim judul paper atau isi query pencarian.
+- [x] Layout Paper Library tidak menimbulkan horizontal overflow pada viewport 1280/1100/1024/900/860/768/600/390px.
+- [x] Keyboard Tab, focus-visible, live result count, `aria-busy`, dan pengumuman link tab baru diverifikasi.
+- [x] Generator Excel → JSON lulus: 143 source/generated records, tanpa duplicate ID/title/URL, 138 Read Paper, dan 69 Code terverifikasi.
 
 ## Aksesibilitas dan visual
 

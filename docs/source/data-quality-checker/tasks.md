@@ -1,6 +1,6 @@
 # Tasks — Data Quality Checker (Atomic + Phased Dependency)
 
-Dokumen ini menurunkan `prd-data-quality-checker.md` menjadi task implementasi yang dapat diverifikasi. Scope V1 tetap client-side, tanpa login, backend processing, AI, cleaning, atau quality score arbitrer.
+Dokumen ini menurunkan `prd.md` menjadi task implementasi yang dapat diverifikasi. Scope V1 tetap client-side, tanpa login, backend processing, AI, cleaning, atau quality score arbitrer.
 
 ## Konvensi
 
