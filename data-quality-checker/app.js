@@ -66,6 +66,16 @@
     return String(value);
   }
 
+  function formatColumnType(type) {
+    const labels = { Number: 'Angka', Date: 'Tanggal', Boolean: 'Boolean', Text: 'Teks', Empty: 'Kosong' };
+    return labels[type] || type;
+  }
+
+  function formatSeverity(severity) {
+    const labels = { high: 'Tinggi', medium: 'Sedang', low: 'Rendah' };
+    return labels[severity] || severity;
+  }
+
   function setHidden(element, hidden) {
     if (element) element.hidden = hidden;
   }
@@ -192,7 +202,7 @@
 
   function renderIssues(issues) {
     elements.issuesList.replaceChildren();
-    elements.issuesCount.textContent = issues.length ? `${issues.length} potential issue${issues.length === 1 ? '' : 's'}` : 'Tidak ada issue';
+    elements.issuesCount.textContent = issues.length ? `${issues.length} masalah ditemukan` : 'Tidak ada masalah';
     if (!issues.length) {
       elements.issuesList.appendChild(makeElement('div', "Kami tidak menemukan masalah data umum berdasarkan pemeriksaan saat ini.", 'dq-no-issues'));
       return;
@@ -200,7 +210,7 @@
     issues.forEach((issue) => {
       const card = makeElement('article', undefined, 'dq-issue-card');
       card.dataset.severity = issue.severity;
-      card.appendChild(makeElement('span', issue.severity, 'dq-issue-severity'));
+      card.appendChild(makeElement('span', formatSeverity(issue.severity), 'dq-issue-severity'));
       const copy = makeElement('div');
       copy.append(makeElement('h4', issue.title, 'dq-issue-title'), makeElement('p', issue.detail, 'dq-issue-detail'));
       card.appendChild(copy);
@@ -263,17 +273,17 @@
       const nameCell = document.createElement('td');
       const nameButton = makeElement('button', column.name, 'dq-column-link');
       nameButton.type = 'button';
-      nameButton.title = `Buka profile ${column.name}`;
+      nameButton.title = `Buka profil ${column.name}`;
       nameButton.addEventListener('click', () => selectColumn(column.name));
       nameCell.appendChild(nameButton);
       row.append(
         nameCell,
-        makeElement('td', column.type),
+        makeElement('td', formatColumnType(column.type)),
         makeElement('td', formatPercentage(column.missingPercentage)),
         makeElement('td', formatNumber(column.uniqueCount))
       );
       const statusCell = document.createElement('td');
-      const statusBadge = makeElement('span', column.status === 'issue' ? 'Issue' : 'Clean', 'dq-status-badge');
+      const statusBadge = makeElement('span', column.status === 'issue' ? 'Bermasalah' : 'Bersih', 'dq-status-badge');
       statusBadge.dataset.status = column.status;
       statusCell.appendChild(statusBadge);
       row.appendChild(statusCell);
@@ -299,13 +309,13 @@
     histogramData.forEach((item) => {
       const bar = makeElement('div', undefined, 'dq-histogram-bar');
       bar.style.height = `${Math.max(8, (item.count / maxCount) * 100)}%`;
-      bar.title = `${item.count} value${item.count === 1 ? '' : 's'} mulai ${formatNumber(item.label)}`;
+      bar.title = `${item.count} nilai mulai ${formatNumber(item.label)}`;
       bar.appendChild(makeElement('span', String(item.count)));
       bar.dataset.label = formatNumber(item.label);
       histogram.appendChild(bar);
     });
     const wrapper = makeElement('div', undefined, 'dq-profile-block');
-    wrapper.append(makeElement('h4', 'Numeric distribution', 'dq-profile-subheading'), histogram);
+    wrapper.append(makeElement('h4', 'Sebaran angka', 'dq-profile-subheading'), histogram);
     return wrapper;
   }
 
@@ -313,7 +323,7 @@
     const topValues = profile.categorical?.topValues || [];
     if (!topValues.length) return null;
     const wrapper = makeElement('div', undefined, 'dq-profile-block');
-    wrapper.appendChild(makeElement('h4', 'Top values', 'dq-profile-subheading'));
+    wrapper.appendChild(makeElement('h4', 'Nilai terbanyak', 'dq-profile-subheading'));
     const table = makeElement('table', undefined, 'dq-top-values');
     topValues.forEach((item) => {
       const row = document.createElement('tr');
@@ -327,25 +337,25 @@
   function renderColumnProfile(columnName) {
     const profile = state.analysis?.columns.find((column) => column.name === columnName);
     if (!profile) return;
-    elements.profileType.textContent = profile.type;
+    elements.profileType.textContent = formatColumnType(profile.type);
     elements.profileContent.replaceChildren();
     const intro = makeElement('div', undefined, 'dq-profile-intro');
-    intro.append(makeElement('h4', profile.name), makeElement('p', `${profile.status === 'issue' ? 'Perlu diperiksa' : 'Tidak ada issue terdeteksi pada kolom ini'}`));
+    intro.append(makeElement('h4', profile.name), makeElement('p', `${profile.status === 'issue' ? 'Perlu diperiksa' : 'Tidak ada masalah pada kolom ini'}`));
     elements.profileContent.appendChild(intro);
 
     const stats = makeElement('div', undefined, 'dq-stat-grid');
-    appendStat(stats, 'Count', formatNumber(profile.nonMissingCount));
-    appendStat(stats, 'Missing', `${formatNumber(profile.missingCount)} · ${formatPercentage(profile.missingPercentage)}`);
-    appendStat(stats, 'Unique', formatNumber(profile.uniqueCount));
+    appendStat(stats, 'Jumlah terisi', formatNumber(profile.nonMissingCount));
+    appendStat(stats, 'Kosong', `${formatNumber(profile.missingCount)} · ${formatPercentage(profile.missingPercentage)}`);
+    appendStat(stats, 'Unik', formatNumber(profile.uniqueCount));
     if (profile.type === 'Number' && profile.stats) {
-      appendStat(stats, 'Min', formatNumber(profile.stats.min));
-      appendStat(stats, 'Max', formatNumber(profile.stats.max));
-      appendStat(stats, 'Mean', formatNumber(profile.stats.mean));
+      appendStat(stats, 'Minimum', formatNumber(profile.stats.min));
+      appendStat(stats, 'Maksimum', formatNumber(profile.stats.max));
+      appendStat(stats, 'Rata-rata', formatNumber(profile.stats.mean));
       appendStat(stats, 'Median', formatNumber(profile.stats.median));
     } else if (profile.type === 'Date' && profile.date) {
-      appendStat(stats, 'Earliest', formatCell(profile.date.earliest));
-      appendStat(stats, 'Latest', formatCell(profile.date.latest));
-      appendStat(stats, 'Unique dates', formatNumber(profile.date.uniqueDates));
+      appendStat(stats, 'Tanggal paling awal', formatCell(profile.date.earliest));
+      appendStat(stats, 'Tanggal paling akhir', formatCell(profile.date.latest));
+      appendStat(stats, 'Tanggal unik', formatNumber(profile.date.uniqueDates));
     }
     elements.profileContent.appendChild(stats);
 
@@ -383,7 +393,7 @@
     const rows = duplicate.previewRows || [];
     renderTableContent(elements.duplicateTableHead, elements.duplicateTableBody, rows);
     elements.duplicatePreviewBtn.disabled = duplicate.count === 0;
-    elements.duplicatePreviewBtn.textContent = duplicate.count ? 'View duplicate rows' : 'No duplicate rows';
+    elements.duplicatePreviewBtn.textContent = duplicate.count ? 'Lihat baris duplikat' : 'Tidak ada baris duplikat';
     elements.duplicatePreviewBtn.setAttribute('aria-expanded', 'false');
   }
 

@@ -275,7 +275,7 @@
         id: 'duplicate-rows',
         code: 'duplicate-rows',
         severity,
-        title: `${duplicate.count.toLocaleString('id-ID')} duplicate rows`,
+        title: `${duplicate.count.toLocaleString('id-ID')} baris duplikat`,
         detail: `${round(duplicate.percentage, 1)}% dari dataset memiliki baris yang sama persis.`
       }));
     }
@@ -287,14 +287,14 @@
           profile,
           'missing-values',
           severity,
-          `${profile.name} contains ${profile.missingCount.toLocaleString('id-ID')} missing values`,
+          `${profile.name} memiliki ${profile.missingCount.toLocaleString('id-ID')} nilai kosong`,
           `${round(missingPercentage, 1)}% dari nilai kolom ini belum terisi.`
         ));
       }
       if (type === 'Empty') {
-        issues.push(issueForColumn(profile, 'empty-column', 'high', 'Empty column', 'Kolom ini tidak memiliki nilai terisi.'));
+        issues.push(issueForColumn(profile, 'empty-column', 'high', 'Kolom kosong', 'Kolom ini tidak memiliki nilai terisi.'));
       } else if (uniqueCount === 1) {
-        issues.push(issueForColumn(profile, 'constant-column', 'low', 'Constant column', 'Semua nilai yang terisi pada kolom ini sama.'));
+        issues.push(issueForColumn(profile, 'constant-column', 'low', 'Nilai kolom sama semua', 'Semua nilai yang terisi pada kolom ini sama.'));
       }
       if (type === 'Text' && _raw.categoryVariants.length) {
         const examples = _raw.categoryVariants
@@ -305,8 +305,8 @@
           profile,
           'inconsistent-categories',
           'low',
-          'Potential inconsistent categories',
-          `Beberapa nilai tampak sama setelah trim/lowercase: ${examples}.`
+          'Kategori tidak konsisten',
+          `Beberapa nilai mungkin merujuk pada kategori yang sama setelah dirapikan: ${examples}.`
         ));
       }
       if (type === 'Text' && nonMissingCount > 0 && percentage(uniqueCount, nonMissingCount) >= config.issueThresholds.highCardinalityPercentage) {
@@ -314,7 +314,7 @@
           profile,
           'high-cardinality',
           'low',
-          'High cardinality',
+          'Terlalu banyak nilai unik',
           `${round(percentage(uniqueCount, nonMissingCount), 1)}% dari nilai yang terisi bersifat unik.`
         ));
       }
@@ -323,8 +323,8 @@
           profile,
           'mixed-values',
           'medium',
-          'Mixed values detected',
-          'Sebagian besar nilai tampak numeric, tetapi beberapa nilai tidak dapat diparse sebagai angka.'
+          'Nilai campuran',
+          'Sebagian besar nilai terlihat seperti angka, tetapi beberapa tidak bisa dibaca sebagai angka.'
         ));
       }
     });

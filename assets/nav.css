@@ -92,7 +92,7 @@
 .bd-sidebar-footer {
   margin-top: auto;
   padding: 14px 2px 0;
-  color: #9aa2b1;
+  color: var(--bd-text-tertiary);
   font: 400 12px/1.5 var(--bd-font);
 }
 
@@ -128,7 +128,7 @@ body.bd-with-nav .bd-main {
 
 body.bd-with-nav .bd-main > .bd-container {
   width: calc(100% - 236px);
-  max-width: 1080px;
+  max-width: 1440px;
   margin-left: 236px;
   margin-right: auto;
 }

@@ -266,11 +266,11 @@ body.data-quality-page {
 
 .dq-file-hint {
   margin-top: 3px;
-  color: var(--bd-text-tertiary);
+  color: var(--bd-text-secondary);
 }
 
 .dq-browse-button {
-  margin-top: 9px;
+  margin-top: 14px;
   pointer-events: none;
 }
 
@@ -1140,7 +1140,7 @@ body.data-quality-page {
 }
 
 .dq-file-hint {
-  color: #7c8da7;
+  color: var(--bd-text-secondary);
   font-family: var(--bd-font-mono);
   font-size: 10px;
   letter-spacing: .02em;
@@ -1504,9 +1504,13 @@ body.data-quality-page {
 }
 
 .dq-browse-button {
+  display: inline-flex;
   min-height: 36px;
   padding: 0 14px;
   box-shadow: none;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
 }
 
 .dq-upload-state {

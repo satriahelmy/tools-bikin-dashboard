@@ -102,3 +102,63 @@ body.bd-with-nav .dq-type-badge,
 body.bd-with-nav .dq-status-badge {
   font-family: var(--bd-font-mono);
 }
+
+/* Metadata badges use the same restrained radius across every tool. */
+body.bd-with-nav .bd-badge {
+  border-radius: var(--bd-radius-md);
+}
+
+/* Text links remain distinguishable without relying on color alone. */
+body.bd-with-nav .bd-link,
+body.bd-with-nav .bd-home-popular a,
+body.bd-with-nav .bd-resource-title a,
+body.bd-with-nav .bd-resource-cta {
+  text-decoration-line: underline;
+  text-decoration-thickness: .08em;
+  text-underline-offset: 2px;
+}
+
+/* Filter controls use one compact button geometry across every tool. */
+body.bd-with-nav .bd-filter-pill,
+body.bd-with-nav .bd-chip,
+body.bd-with-nav .dq-filter-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  min-height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--bd-border-strong);
+  border-radius: var(--bd-radius-md);
+  background: var(--bd-bg);
+  color: var(--bd-text-secondary);
+  font-family: var(--bd-font);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
+}
+
+body.bd-with-nav .bd-filter-pill:hover,
+body.bd-with-nav .bd-chip:hover,
+body.bd-with-nav .dq-filter-button:hover {
+  border-color: var(--bd-primary);
+  background: var(--bd-primary-light);
+  color: var(--bd-primary-text);
+}
+
+body.bd-with-nav .bd-filter-pill.active,
+body.bd-with-nav .bd-chip.is-active,
+body.bd-with-nav .dq-filter-button.is-active {
+  border-color: var(--bd-primary);
+  background: var(--bd-primary);
+  color: #fff;
+}
+
+body.bd-with-nav .bd-filter-pill:active,
+body.bd-with-nav .bd-chip:active,
+body.bd-with-nav .dq-filter-button:active {
+  transform: scale(.97);
+}

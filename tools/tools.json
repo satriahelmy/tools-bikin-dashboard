@@ -2,7 +2,7 @@
   {
     "id": "colorpalette",
     "name": "Generator Palet Warna",
-    "description": "Mulai dari satu warna, susun paletnya, lalu unduh untuk Tableau, Power BI, CSS, atau gambar.",
+    "description": "Buat palet dari satu warna lalu ekspor untuk Tableau, Power BI, CSS, atau gambar.",
     "category": "Desain & warna",
     "status": "available",
     "url": "/colorpalette/",
@@ -12,7 +12,7 @@
   {
     "id": "chart",
     "name": "Chart Guide",
-    "description": "Lihat contoh chart, kebutuhan datanya, dan catatan penggunaannya.",
+    "description": "Pilih chart dari contoh, kebutuhan data, dan cara pakainya.",
     "category": "Belajar",
     "status": "available",
     "url": "/chart/",
@@ -22,7 +22,7 @@
   {
     "id": "resourcehub",
     "name": "Resource Hub",
-    "description": "Link tools, dataset, tutorial, dan inspirasi untuk pekerjaanmu.",
+    "description": "Kumpulan link tools, dataset, tutorial, dan inspirasi data.",
     "category": "Resources",
     "status": "available",
     "url": "/resourcehub/",
@@ -32,7 +32,7 @@
   {
     "id": "data-quality-checker",
     "name": "Data Quality Checker",
-    "description": "Cek missing values, duplicate rows, tipe data, dan potensi masalah sebelum membuat dashboard.",
+    "description": "Cek missing values, baris duplikat, tipe data, dan masalah dasar dataset sebelum bikin dashboard.",
     "category": "Data & kualitas",
     "status": "available",
     "url": "/data-quality-checker/",

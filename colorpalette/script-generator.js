@@ -136,10 +136,12 @@ function renderPreview() {
   const track = isDarkTheme ? "#1E293B" : "#F1F5F9";
   const text = isDarkTheme ? "#F8FAFC" : "#0F172A";
   const muted = isDarkTheme ? "#94A3B8" : "#64748B";
+  const ink = palette.map((color) => readableForeground(color));
+  const trend = palette.map((color) => readablePaletteText(color, card));
 
   wrap.innerHTML = `
     <section class="preview-dashboard"
-      style="--pv-bg:${bg};--pv-card:${card};--pv-border:${border};--pv-track:${track};--pv-text:${text};--pv-muted:${muted};--pv-c1:${palette[0]};--pv-c2:${palette[1]};--pv-c3:${palette[2]};--pv-c4:${palette[3]};--pv-c5:${palette[4]};">
+      style="--pv-bg:${bg};--pv-card:${card};--pv-border:${border};--pv-track:${track};--pv-text:${text};--pv-muted:${muted};--pv-c1:${palette[0]};--pv-c2:${palette[1]};--pv-c3:${palette[2]};--pv-c4:${palette[3]};--pv-c5:${palette[4]};--pv-c1-ink:${ink[0]};--pv-c4-ink:${ink[3]};--pv-c5-ink:${ink[4]};">
       <header class="preview-navbar">
         <div class="preview-brand">Dashboard pendapatan</div>
         <div class="preview-navdots"><span></span><span></span><span></span></div>
@@ -203,9 +205,9 @@ function renderPreview() {
                 <tr><th>Produk</th><th>Pendapatan</th><th>Tren</th></tr>
               </thead>
               <tbody>
-                <tr><td>Pro Plan</td><td>Rp740K</td><td style="color:${palette[1]}">+18%</td></tr>
-                <tr><td>Starter</td><td>Rp510K</td><td style="color:${palette[2]}">+11%</td></tr>
-                <tr><td>Consulting</td><td>Rp430K</td><td style="color:${palette[3]}">+8%</td></tr>
+                <tr><td>Pro Plan</td><td>Rp740K</td><td style="color:${trend[1]}">+18%</td></tr>
+                <tr><td>Starter</td><td>Rp510K</td><td style="color:${trend[2]}">+11%</td></tr>
+                <tr><td>Consulting</td><td>Rp430K</td><td style="color:${trend[3]}">+8%</td></tr>
               </tbody>
             </table>
           </article>
@@ -213,8 +215,8 @@ function renderPreview() {
             <div class="preview-panel-title">Ringkasan tindakan</div>
             <div class="preview-action-list">
               <div class="preview-action-item"><span>Produk teratas</span><strong class="preview-chip">Pro Plan</strong></div>
-              <div class="preview-action-item"><span>Peringatan risiko</span><strong style="color:${palette[2]}">Churn rendah</strong></div>
-              <div class="preview-action-item"><span>Peluang</span><strong style="color:${palette[1]}">Upsell +12%</strong></div>
+              <div class="preview-action-item"><span>Peringatan risiko</span><strong style="color:${trend[2]}">Churn rendah</strong></div>
+              <div class="preview-action-item"><span>Peluang</span><strong style="color:${trend[1]}">Upsell +12%</strong></div>
             </div>
             <button type="button" class="preview-cta">Lihat insight</button>
           </article>

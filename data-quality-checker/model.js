@@ -18,7 +18,7 @@
   }
 
   function normalizeHeader(value, index) {
-    const fallback = `Column ${index + 1}`;
+    const fallback = `Kolom ${index + 1}`;
     const label = isMissingValue(value) ? fallback : String(value).trim();
     return label || fallback;
   }
@@ -66,7 +66,7 @@
       id: id || `${code || 'issue'}-${column || 'dataset'}`,
       code: code || 'unknown',
       severity: severity || 'low',
-      title: title || 'Potential issue',
+      title: title || 'Masalah yang perlu diperiksa',
       detail: detail || '',
       column: column || null
     });

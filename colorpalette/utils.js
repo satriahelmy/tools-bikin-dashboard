@@ -47,6 +47,29 @@ function isDark(hex) {
   return 0.299 * r + 0.587 * g + 0.114 * b < 145;
 }
 
+function relativeLuminance(hex) {
+  const c = normalizeHex(hex);
+  if (!c) return 1;
+  const channels = [1, 3, 5].map((start) => parseInt(c.slice(start, start + 2), 16) / 255);
+  const linear = channels.map((value) => value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
+  return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+}
+
+function contrastRatio(foreground, background) {
+  const light = relativeLuminance(foreground);
+  const dark = relativeLuminance(background);
+  return (Math.max(light, dark) + 0.05) / (Math.min(light, dark) + 0.05);
+}
+
+function readableForeground(background) {
+  return contrastRatio("#FFFFFF", background) >= contrastRatio("#0F172A", background) ? "#FFFFFF" : "#0F172A";
+}
+
+function readablePaletteText(color, background) {
+  if (contrastRatio(color, background) >= 4.5) return color;
+  return isDark(background) ? "#F8FAFC" : "#0F172A";
+}
+
 function hslToHex(h, s, l) {
   s /= 100;
   l /= 100;

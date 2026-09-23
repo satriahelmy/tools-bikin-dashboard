@@ -708,7 +708,7 @@ h1.bd-title {
   align-items: center;
   justify-content: space-between;
   background: var(--pv-c1, #2563eb);
-  color: #ffffff;
+  color: var(--pv-c1-ink, #ffffff);
 }
 
 .preview-brand {
@@ -725,7 +725,8 @@ h1.bd-title {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.65);
+  background: var(--pv-c1-ink, #ffffff);
+  opacity: .65;
 }
 
 .preview-body {
@@ -798,14 +799,14 @@ h1.bd-title {
 
 .preview-bar-track {
   height: 8px;
-  border-radius: var(--bd-radius-full);
+  border-radius: var(--bd-radius-sm);
   background: var(--pv-track, #f1f5f9);
   overflow: hidden;
 }
 
 .preview-bar-fill {
   height: 100%;
-  border-radius: inherit;
+  border-radius: var(--bd-radius-sm);
 }
 
 .preview-bar-row span {
@@ -878,11 +879,11 @@ h1.bd-title {
 .preview-chip {
   display: inline-flex;
   align-items: center;
-  border-radius: var(--bd-radius-full);
+  border-radius: var(--bd-radius-md);
   height: 20px;
   padding: 0 8px;
   font-size: 10px;
-  color: #ffffff;
+  color: var(--pv-c4-ink, #ffffff);
   background: var(--pv-c4, #84cc16);
 }
 
@@ -917,7 +918,7 @@ h1.bd-title {
   border: none;
   border-radius: var(--bd-radius-md);
   padding: 0 12px;
-  color: #ffffff;
+  color: var(--pv-c5-ink, #ffffff);
   background: var(--pv-c5, #f59e0b);
   font-size: 12px;
   font-weight: 500;

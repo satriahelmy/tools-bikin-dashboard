@@ -1,6 +1,15 @@
-# bikindashboard.com — Unified Tools
+# bikindashboard.com
 
-Website statis yang menyatukan Color Palette, Chart Guide, Resource Hub, dan Data Quality Checker dalam satu navigasi. Tidak membutuhkan Laravel atau database; seluruh fitur berjalan di browser dengan HTML, CSS, dan JavaScript.
+Toolkit statis untuk membantu pekerjaan dashboard dan data visualization. Project ini menyatukan beberapa tool dalam satu navigasi dan berjalan di browser dengan HTML, CSS, dan JavaScript—tanpa Laravel, database, atau backend aplikasi.
+
+## Fitur terbaru
+
+- **Color Palette** — membuat palet dari satu warna, mengambil warna dari gambar, menjelajahi palet berdasarkan mood/industri, lalu mengekspor ke Tableau TPS, Power BI JSON, CSS, PNG, atau JPG.
+- **Chart Guide** — mencari chart berdasarkan kebutuhan analisis, melihat struktur data dan contoh penggunaan, serta membuka halaman detail setiap chart.
+- **Resource Hub** — mencari dan memfilter kumpulan tools, dataset, tutorial, komunitas, dan inspirasi data berdasarkan kategori dan tag.
+- **Data Quality Checker** — memeriksa file CSV/XLSX secara lokal di browser, termasuk missing values, duplicate rows, tipe data, profile kolom, histogram sederhana, preview, dan deteksi issue berdasarkan severity.
+
+Semua halaman memakai navigasi bersama, responsive layout, active route state, empty/error state, dan baseline aksesibilitas.
 
 ## Menjalankan di XAMPP
 
@@ -19,19 +28,45 @@ Kemudian buka [http://127.0.0.1:8765/](http://127.0.0.1:8765/).
 ## Rute utama
 
 - `/` — beranda dan katalog seluruh tool.
-- `/colorpalette/` — generator palet, ekstraksi gambar, eksplorasi, dan panduan ekspor.
+- `/colorpalette/` — generator palet utama.
+- `/colorpalette/image.html` — ekstraksi warna dari gambar.
+- `/colorpalette/explore.html` — eksplorasi palet berdasarkan mood dan industri.
+- `/colorpalette/guide.html` — panduan penggunaan hasil ekspor.
 - `/chart/` — katalog Chart Guide.
-- `/chart/chart.html?id=bar-chart` — detail chart; Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`.
-- Treemap, Box Plot, dan Heatmap memakai renderer SVG lokal di `chart/native-renderers.js` karena bukan tipe inti Chart.js.
+- `/chart/chart.html?id=bar-chart` — detail chart dengan contoh data dan visualisasi.
 - `/resourcehub/` — katalog resource data visualization.
 - `/data-quality-checker/` — pemeriksaan awal kualitas CSV/XLSX secara client-side.
-- Batasan dan perilaku V1 Data Quality Checker: [`data-quality-checker/README.md`](data-quality-checker/README.md).
+
+Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot, dan Heatmap memakai renderer SVG lokal di `chart/native-renderers.js`. Batasan dan perilaku V1 Data Quality Checker dijelaskan di [`data-quality-checker/README.md`](data-quality-checker/README.md).
+
+## Struktur project
+
+- `assets/` — navigasi, design system, token, favicon, logo, dan aset bersama.
+- `colorpalette/` — seluruh halaman dan script Color Palette.
+- `chart/` — katalog, halaman detail, data chart, dan renderer lokal.
+- `resourcehub/` — katalog resource beserta data JSON dan filter.
+- `data-quality-checker/` — parser, worker, profiling, model, dan UI pemeriksaan dataset.
+- `tools/` — data katalog tool dan halaman kompatibilitas/redirect lama.
+- `docs/` dan `design/` — dokumentasi sumber, PRD, desain, dan arsip; bukan route aplikasi utama.
 
 ## Catatan deployment
 
-- `assets/nav.js`, `assets/nav.css`, favicon, dan share image adalah aset produksi bersama.
+- Publish isi project dari root repository beserta folder tool dan `assets/`.
+- `assets/nav.js`, `assets/nav.css`, favicon, logo, dan share image adalah aset produksi bersama.
 - `assets/tokens.css` adalah sumber tunggal token desain bersama.
-- Folder tool menyimpan data JSON dan script yang dipakai halaman masing-masing.
+- Folder tool menyimpan data JSON, bundle lokal, dan script yang dipakai halaman masing-masing.
+- Data Quality Checker memproses file di browser. Nama file, nama kolom, dan nilai dataset tidak dikirim ke backend aplikasi.
 - `robots.txt`, `sitemap.xml`, dan `site.webmanifest` berada di root untuk kebutuhan crawler dan instalasi web app.
-- Dokumen PRD, checklist, dan arsip ZIP dipisahkan ke [`docs/`](docs/) sebagai referensi sumber; jangan ikut dipublish sebagai route aplikasi.
+- Dokumen PRD, checklist, desain, dan arsip ZIP dipisahkan ke [`docs/`](docs/) dan [`design/`](design/) sebagai referensi sumber; jangan jadikan keduanya route aplikasi.
 - Sebelum deploy, jalankan checklist di [SMOKE-TEST.md](SMOKE-TEST.md).
+
+## Pengujian lokal
+
+Test unit untuk profiling dan metadata event Data Quality Checker dapat dijalankan dengan:
+
+```powershell
+node data-quality-checker/tests/profiling.test.js
+node data-quality-checker/tests/analytics.test.js
+```
+
+Untuk validasi UI lintas route, gunakan checklist di [SMOKE-TEST.md](SMOKE-TEST.md).
