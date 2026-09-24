@@ -48,5 +48,15 @@
     "url": "/papers/",
     "localUrl": "../papers/index.html",
     "badges": ["Pilihan", "Gratis"]
+  },
+  {
+    "id": "book-library",
+    "name": "Book Library",
+    "description": "Buku data yang bisa kamu baca gratis dari penulis, penerbit, universitas, dan proyek open-access.",
+    "category": "Belajar",
+    "status": "available",
+    "url": "/book-library/",
+    "localUrl": "../book-library/index.html",
+    "badges": ["Open Access", "Gratis"]
   }
 ]

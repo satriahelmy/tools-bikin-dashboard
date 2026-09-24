@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>BikinDashboard — tools untuk kerja data</title>
-  <meta name="description" content="Alat untuk memilih warna, mempelajari chart, mencari paper dan referensi data, serta mengecek kualitas dataset.">
+  <meta name="description" content="Alat untuk memilih warna, mempelajari chart, mencari paper dan buku data, serta mengecek kualitas dataset.">
   <link rel="canonical" href="https://bikindashboard.com/">
   <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
   <meta property="og:type" content="website">
@@ -28,7 +28,7 @@
   <main class="bd-main"><div class="bd-container">
     <header class="bd-hero"><p class="bd-label">BIKINDASHBOARD.COM</p><h2 class="bd-hero-title">Alat praktis<br>untuk kerja data.</h2><p class="bd-hero-subtitle">Pilih warna, cari referensi chart, dan cek dataset sebelum mulai bikin dashboard.</p></header>
     <section class="bd-search-wrapper"><input type="text" id="search-input" class="bd-input" aria-label="Cari tool" placeholder="Cari tool, misalnya palette atau chart…"></section>
-    <nav class="bd-home-popular" aria-label="Tool populer"><span class="bd-home-popular-label">Populer:</span><a href="colorpalette/index.html">Color Palette</a><a href="chart/index.html">Chart Guide</a><a href="resourcehub/index.html">Resource Hub</a><a href="papers/index.html">Paper Library</a></nav>
+    <nav class="bd-home-popular" aria-label="Tool populer"><span class="bd-home-popular-label">Populer:</span><a href="colorpalette/index.html">Color Palette</a><a href="chart/index.html">Chart Guide</a><a href="resourcehub/index.html">Resource Hub</a><a href="papers/index.html">Paper Library</a><a href="book-library/index.html">Book Library</a></nav>
     <div class="bd-home-divider"></div>
     <section class="bd-section-heading"><h2 class="bd-heading">Tools</h2><p class="bd-hint" id="results-count" aria-live="polite"></p></section>
     <section class="bd-filters" id="category-filters" aria-label="Filter kategori"><button type="button" class="bd-filter-pill active" aria-pressed="true" data-category="all">Semua</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Desain & warna">Desain & warna</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Belajar">Belajar</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Resources">Referensi</button><button type="button" class="bd-filter-pill" aria-pressed="false" data-category="Data & kualitas">Data & kualitas</button></section>
@@ -41,13 +41,14 @@
     const toolsGrid = document.getElementById('tools-grid'), emptyState = document.getElementById('empty-state'), searchInput = document.getElementById('search-input'), resultsCount = document.getElementById('results-count'), filterPills = document.querySelectorAll('.bd-filter-pill');
     const badgeClassMap = { 'Tableau':'bd-badge-blue','Power BI':'bd-badge-orange','Chart.js':'bd-badge-blue','Gratis':'bd-badge-green','Pilihan':'bd-badge-blue' };
     const root = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.replace(/[^/]*$/, '');
-    const localPaths = { colorpalette: root + 'colorpalette/index.html', chart: root + 'chart/index.html', resourcehub: root + 'resourcehub/index.html', 'data-quality-checker': root + 'data-quality-checker/index.html', papers: root + 'papers/index.html' };
+    const localPaths = { colorpalette: root + 'colorpalette/index.html', chart: root + 'chart/index.html', resourcehub: root + 'resourcehub/index.html', 'data-quality-checker': root + 'data-quality-checker/index.html', papers: root + 'papers/index.html', 'book-library': root + 'book-library/index.html' };
     const cardIcon = (id) => {
       const icons = {
         colorpalette: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="8.5" cy="10" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="15.5" cy="10" r="1"/><path d="M15.5 16.5c0-1.1.9-2 2-2h.5"/></svg>',
         chart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16"/><rect x="7" y="12" width="2.5" height="4" rx=".5"/><rect x="11" y="9" width="2.5" height="7" rx=".5"/><rect x="15" y="6" width="2.5" height="10" rx=".5"/></svg>',
         resourcehub: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8 12h8M12 8v8"/></svg>',
-        'data-quality-checker': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h10M4 10h6M4 14.5h5"/><path d="M15 14.5l2 2 3-4"/><circle cx="17" cy="9" r="3.5"/></svg>'
+        'data-quality-checker': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h10M4 10h6M4 14.5h5"/><path d="M15 14.5l2 2 3-4"/><circle cx="17" cy="9" r="3.5"/></svg>',
+        'book-library': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v12.5H7.5A2.5 2.5 0 0 0 5 22z"/><path d="M5 4.5v15M8 8h6M8 11h6"/></svg>'
       };
       return icons[id] || icons.resourcehub;
     };

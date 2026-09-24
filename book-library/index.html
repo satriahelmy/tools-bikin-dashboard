@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Book Library — BikinDashboard</title>
+  <meta name="description" content="Buku data yang bisa kamu baca gratis dari penulis, penerbit, universitas, dan proyek open-access.">
+  <link rel="canonical" href="https://bikindashboard.com/book-library/">
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <meta name="theme-color" content="#2f5fb0">
+  <script src="../assets/analytics.js?v=1"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1.0">
+  <link rel="stylesheet" href="../assets/design-system.css?v=1.8" data-bd-design-system>
+  <link rel="stylesheet" href="../assets/nav.css?v=1.5" data-bd-nav-css>
+  <script src="../assets/nav.js?v=1.3" defer></script>
+</head>
+<body class="bd-with-nav book-library-page">
+  <header class="bd-topbar">
+    <div class="bd-topbar-inner">
+      <div class="bd-topbar-left">
+        <a href="../index.html" class="bd-back">← Semua tool</a>
+        <span class="bd-topbar-divider"></span>
+        <h1 class="bd-title">Book Library</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="bd-main">
+    <div class="bd-container">
+      <header class="books-intro bd-tool-intro">
+        <p class="bd-label">BOOK LIBRARY</p>
+        <h2>Book Library</h2>
+        <h3 class="books-heading">Buku data yang bisa kamu baca gratis.</h3>
+        <p class="bd-body">Koleksi buku legal dan gratis dari penulis, penerbit, universitas, dan proyek open-access.</p>
+      </header>
+
+      <section class="books-controls" aria-label="Pencarian dan filter buku">
+        <div class="books-search-row">
+          <label class="books-field books-search-field" for="book-search">
+            <span class="bd-label">Cari buku</span>
+            <span class="books-input-wrap">
+              <input id="book-search" class="bd-input" type="search" placeholder="Cari judul, author, atau topik…" autocomplete="off" aria-controls="book-list">
+              <button id="clear-search" class="books-clear-button" type="button" aria-label="Hapus pencarian" aria-controls="book-search" hidden>×</button>
+            </span>
+          </label>
+        </div>
+
+        <div class="books-filter-row" role="group" aria-label="Filter buku">
+          <label class="books-field" for="category-filter">
+            <span class="bd-label">Kategori</span>
+            <select id="category-filter" class="bd-input">
+              <option value="">Semua kategori</option>
+            </select>
+          </label>
+
+          <label class="books-field" for="level-filter">
+            <span class="bd-label">Level</span>
+            <select id="level-filter" class="bd-input">
+              <option value="">Semua level</option>
+            </select>
+          </label>
+
+          <label class="books-field" for="format-filter">
+            <span class="bd-label">Format</span>
+            <select id="format-filter" class="bd-input">
+              <option value="">Semua format</option>
+            </select>
+          </label>
+
+          <label class="books-field" for="tools-filter">
+            <span class="bd-label">Tools / bahasa</span>
+            <select id="tools-filter" class="bd-input">
+              <option value="">Semua tools / bahasa</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="active-filters" class="books-active-filters" aria-live="polite"></div>
+      </section>
+
+      <section class="books-results-toolbar" aria-label="Book results">
+        <p id="results-count" class="bd-body" aria-live="polite" aria-atomic="true">Memuat buku…</p>
+        <button id="clear-filters" class="bd-btn bd-btn-secondary" type="button" hidden>Hapus filter</button>
+      </section>
+
+      <section id="book-list" class="books-grid" aria-label="Daftar buku" aria-busy="true"></section>
+
+      <section id="books-empty" class="books-state" hidden aria-live="polite">
+        <h2 class="bd-heading">Buku tidak ditemukan</h2>
+        <p class="bd-body">Coba kata kunci lain atau hapus filter yang dipilih.</p>
+        <button id="clear-filters-empty" class="bd-btn bd-btn-secondary" type="button">Hapus filter</button>
+      </section>
+
+      <section id="books-error" class="books-state books-error-state" hidden role="alert">
+        <h2 class="bd-heading">Book Library belum dapat dimuat</h2>
+        <p class="bd-body">Segarkan halaman dan coba lagi.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bd-footer">
+    <p class="bd-hint">Gratis untuk kamu yang kerja dengan data · <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a></p>
+  </footer>
+
+  <script src="script.js?v=1.0"></script>
+</body>
+</html>

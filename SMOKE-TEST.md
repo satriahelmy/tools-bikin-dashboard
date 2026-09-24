@@ -5,7 +5,7 @@ Tanggal: __________  Tester: __________  Browser: __________
 ## Route dan shell
 
 - [ ] `/` terbuka tanpa error; judul dan kartu tools tampil.
-- [ ] Sidebar mengarah ke Beranda, Color Palette, Chart Guide, Resource Hub, Data Quality Checker, dan Paper Library.
+- [ ] Sidebar mengarah ke Beranda, Color Palette, Chart Guide, Resource Hub, Data Quality Checker, Paper Library, dan Book Library.
 - [ ] Active state sidebar berubah sesuai route.
 - [ ] Pada viewport mobile, tombol menu dapat membuka/menutup sidebar dan tombol Escape menutupnya.
 - [ ] Favicon tampil dan tidak ada request asset 404.
@@ -64,6 +64,21 @@ Tanggal: __________  Tester: __________  Browser: __________
 - [x] Layout Paper Library tidak menimbulkan horizontal overflow pada viewport 1280/1100/1024/900/860/768/600/390px.
 - [x] Keyboard Tab, focus-visible, live result count, `aria-busy`, dan pengumuman link tab baru diverifikasi.
 - [x] Generator Excel → JSON lulus: 143 source/generated records, tanpa duplicate ID/title/URL, 138 Read Paper, dan 69 Code terverifikasi.
+
+## Book Library — implementation QA
+
+- [x] `/book-library/` terbuka tanpa error dan menampilkan 141 buku dari `data/books.json`.
+- [x] Book Library tampil tepat di bawah Paper Library pada sidebar dengan active state yang benar.
+- [x] Book Library tampil di homepage, pencarian homepage, kategori Belajar, dan link populer.
+- [x] Hero title, heading, deskripsi akses legal/gratis, search, dan footer memakai shell parent Tools BikinDashboard.
+- [x] Search instan bekerja untuk judul, author, dan metadata topik yang tersedia di dataset.
+- [x] Filter Category, Level, Format, dan Tools / bahasa memperbarui daftar, result count, active filter, dan query URL.
+- [x] Clear/reset filter mengembalikan 141 buku dan menghapus query state.
+- [x] Kartu memprioritaskan title, author, category, level, format, akses, status edition bila relevan, dan `Free & verified`.
+- [x] `Baca buku →` hanya memakai URL verified dari dataset, membuka tab baru dengan `noopener noreferrer`, dan tidak menampilkan CTA palsu.
+- [x] Loading, fetch error, empty state, `aria-busy`, live result count, focus-visible, dan pengumuman tab baru tersedia.
+- [x] Responsive layout diuji pada 390/768/1100/1280px tanpa horizontal overflow; grid menjadi satu kolom di mobile.
+- [x] Runtime checks lulus: `/`, `/papers/`, `/book-library/`, `/assets/nav.js`, `/assets/analytics.js`, dan `/data/books.json` merespons HTTP 200; console tidak memiliki warning/error.
 
 ## Aksesibilitas dan visual
 

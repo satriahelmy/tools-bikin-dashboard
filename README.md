@@ -9,6 +9,7 @@ Toolkit statis untuk membantu pekerjaan dashboard dan data visualization. Projec
 - **Resource Hub** — mencari dan memfilter kumpulan tools, dataset, tutorial, komunitas, dan inspirasi data berdasarkan kategori dan tag.
 - **Data Quality Checker** — memeriksa file CSV/XLSX secara lokal di browser, termasuk missing values, duplicate rows, tipe data, profile kolom, histogram sederhana, preview, dan deteksi issue berdasarkan severity.
 - **Paper Library** — katalog 143 paper terkurasi untuk data, visualization, machine learning, dan AI dengan pencarian, filter, sorting, 138 link paper gratis terverifikasi, dan 69 repository code terverifikasi.
+- **Book Library** — katalog 141 buku data legal dan gratis dari penulis, penerbit, universitas, dan proyek open-access.
 
 Semua halaman memakai navigasi bersama, responsive layout, active route state, empty/error state, dan baseline aksesibilitas.
 
@@ -38,6 +39,7 @@ Kemudian buka [http://127.0.0.1:8765/](http://127.0.0.1:8765/).
 - `/resourcehub/` — katalog resource data visualization.
 - `/data-quality-checker/` — pemeriksaan awal kualitas CSV/XLSX secara client-side.
 - `/papers/` — katalog Paper Library dengan 143 paper terkurasi dan filter client-side.
+- `/book-library/` — katalog Book Library dengan buku data legal dan gratis serta filter client-side.
 
 Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot, dan Heatmap memakai renderer SVG lokal di `chart/native-renderers.js`. Batasan dan perilaku V1 Data Quality Checker dijelaskan di [`data-quality-checker/README.md`](data-quality-checker/README.md).
 
@@ -49,7 +51,8 @@ Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot,
 - `resourcehub/` — katalog resource beserta data JSON dan filter.
 - `data-quality-checker/` — parser, worker, profiling, model, dan UI pemeriksaan dataset.
 - `papers/` — route, shell, dan page-specific assets Paper Library.
-- `data/` — source dataset Paper Library dan data statis hasil transformasi.
+- `book-library/` — route, shell, dan page-specific assets Book Library.
+- `data/` — source dataset Paper Library dan dataset statis Book Library yang dipakai runtime.
 - `scripts/` — script development-only untuk mengubah workbook Paper Library menjadi JSON runtime.
 - `tools/` — data katalog tool dan halaman kompatibilitas/redirect lama.
 - `docs/` dan `design/` — dokumentasi sumber, PRD, desain, dan arsip; bukan route aplikasi utama.
