@@ -38,6 +38,7 @@ Kemudian buka [http://127.0.0.1:8765/](http://127.0.0.1:8765/).
 - `/chart/chart.html?id=bar-chart` — detail chart dengan contoh data dan visualisasi.
 - `/resourcehub/` — katalog resource data visualization.
 - `/data-quality-checker/` — pemeriksaan awal kualitas CSV/XLSX secara client-side.
+- `/privacy.html` — kebijakan privasi situs dan penjelasan pemrosesan data.
 - `/papers/` — katalog Paper Library dengan 143 paper terkurasi dan filter client-side.
 - `/book-library/` — katalog Book Library dengan buku data legal dan gratis, filter client-side, query state, dan link baca eksternal.
 
