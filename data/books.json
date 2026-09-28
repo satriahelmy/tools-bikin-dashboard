@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "BikinDashboard Book Library",
-    "count": 141,
+    "count": 145,
     "productionRule": "Verified full books/web books/author manuscripts/drafts/WIP only; WITH CAUTION excluded."
   },
   "books": [
@@ -2119,6 +2119,66 @@
       "url": "https://opentextbc.ca/dbdesign01/",
       "verificationUrl": "https://opentextbc.ca/dbdesign01/",
       "note": "BCcampus open textbook."
+    },
+    {
+      "id": 142,
+      "title": "Principles of Building AI Agents",
+      "authors": "Sam Bhagwat",
+      "category": "AI Agents",
+      "level": "Beginner–Intermediate",
+      "tools": "",
+      "format": "Book / digital copy",
+      "accessType": "Free copy from official site",
+      "editionStatus": "",
+      "verified": true,
+      "url": "https://mastra.ai/books/principles-of-building-ai-agents",
+      "verificationUrl": "https://mastra.ai/books/principles-of-building-ai-agents",
+      "note": "Mastra explicitly offers a free copy; covers agents, memory, workflows, RAG, tools and traces."
+    },
+    {
+      "id": 143,
+      "title": "Patterns of Building AI Agents",
+      "authors": "Sam Bhagwat",
+      "category": "AI Agents",
+      "level": "Intermediate",
+      "tools": "",
+      "format": "Book / digital copy",
+      "accessType": "Free copy from official site",
+      "editionStatus": "",
+      "verified": true,
+      "url": "https://mastra.ai/books/patterns-of-building-ai-agents",
+      "verificationUrl": "https://mastra.ai/books/patterns-of-building-ai-agents",
+      "note": "Mastra explicitly offers a free copy; production patterns, context engineering, evals and security."
+    },
+    {
+      "id": 144,
+      "title": "AI Agents in Depth: Design Principles and Engineering Practice",
+      "authors": "Bojie Li",
+      "category": "AI Agents",
+      "level": "Intermediate–Advanced",
+      "tools": "",
+      "format": "PDF / EPUB / Web",
+      "accessType": "Open-source full text",
+      "editionStatus": "",
+      "verified": true,
+      "url": "https://bojieli.github.io/ai-agent-book/book-en/introduction/",
+      "verificationUrl": "https://bojieli.github.io/ai-agent-book/book-en/introduction/",
+      "note": "Full text is openly available; PDF/EPUB and experiments are also provided."
+    },
+    {
+      "id": 145,
+      "title": "Introduction to Generative AI (1st Edition)",
+      "authors": "Numa Dhamani; Maggie Engler",
+      "category": "Generative AI",
+      "level": "Beginner",
+      "tools": "",
+      "format": "eBook",
+      "accessType": "Free with email registration",
+      "editionStatus": "",
+      "verified": true,
+      "url": "https://www.manning.com/books/introduction-to-generative-ai",
+      "verificationUrl": "https://www.manning.com/books/introduction-to-generative-ai",
+      "note": "Manning currently provides the first edition free after name/email registration."
     }
   ]
 }

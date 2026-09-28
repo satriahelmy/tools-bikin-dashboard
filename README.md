@@ -9,7 +9,7 @@ Toolkit statis untuk membantu pekerjaan dashboard dan data visualization. Projec
 - **Resource Hub** — mencari dan memfilter kumpulan tools, dataset, tutorial, komunitas, dan inspirasi data berdasarkan kategori dan tag.
 - **Data Quality Checker** — memeriksa file CSV/XLSX secara lokal di browser, termasuk missing values, duplicate rows, tipe data, profile kolom, histogram sederhana, preview, dan deteksi issue berdasarkan severity.
 - **Paper Library** — katalog 143 paper terkurasi untuk data, visualization, machine learning, dan AI dengan pencarian, filter, sorting, 138 link paper gratis terverifikasi, dan 69 repository code terverifikasi.
-- **Book Library** — katalog 141 buku data legal dan gratis dari penulis, penerbit, universitas, dan proyek open-access, dengan pencarian judul/author/topik, filter kategori/level/format/tools, serta CTA ke URL resmi yang sudah diverifikasi.
+- **Book Library** — katalog 145 buku data legal dan gratis dari penulis, penerbit, universitas, dan proyek open-access, dengan pencarian judul/author/topik, filter kategori/level/format/tools, halaman detail yang dapat dibagikan per buku, serta CTA ke URL resmi yang sudah diverifikasi.
 
 Semua halaman memakai navigasi bersama, responsive layout, active route state, empty/error state, dan baseline aksesibilitas.
 
@@ -41,6 +41,7 @@ Kemudian buka [http://127.0.0.1:8765/](http://127.0.0.1:8765/).
 - `/privacy.html` — kebijakan privasi situs dan penjelasan pemrosesan data.
 - `/papers/` — katalog Paper Library dengan 143 paper terkurasi dan filter client-side.
 - `/book-library/` — katalog Book Library dengan buku data legal dan gratis, filter client-side, query state, dan link baca eksternal.
+- `/book-library/books/<slug>/` — halaman detail statis per buku untuk canonical URL dan share link; slug dibuat dari judul buku.
 
 Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot, dan Heatmap memakai renderer SVG lokal di `chart/native-renderers.js`. Batasan dan perilaku V1 Data Quality Checker dijelaskan di [`data-quality-checker/README.md`](data-quality-checker/README.md).
 
@@ -52,9 +53,9 @@ Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot,
 - `resourcehub/` — katalog resource beserta data JSON dan filter.
 - `data-quality-checker/` — parser, worker, profiling, model, dan UI pemeriksaan dataset.
 - `papers/` — route, shell, dan page-specific assets Paper Library.
-- `book-library/` — route, shell, dan page-specific assets Book Library.
-- `data/` — source dataset Paper Library, hasil transformasi `papers.json`, dan dataset produksi Book Library `books.json` yang dipakai runtime.
-- `scripts/` — script development-only untuk mengubah workbook Paper Library menjadi JSON runtime.
+- `book-library/` — route, shell, page-specific assets, dan halaman detail statis Book Library.
+- `data/` — source dataset Paper Library, hasil transformasi `papers.json`, workbook validasi tambahan buku, dan dataset produksi Book Library `books.json` yang dipakai runtime.
+- `scripts/` — script development-only untuk mengubah workbook Paper Library, menggabungkan tambahan buku tervalidasi ke JSON runtime, dan membuat halaman detail Book Library.
 - `tools/` — data katalog tool dan halaman kompatibilitas/redirect lama.
 - `docs/` dan `design/` — dokumentasi sumber, PRD, desain, dan arsip; bukan route aplikasi utama.
 
@@ -66,7 +67,9 @@ Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot,
 - `assets/tokens.css` adalah sumber tunggal token desain bersama.
 - Folder tool menyimpan data JSON, bundle lokal, dan script yang dipakai halaman masing-masing.
 - Setelah workbook berubah, regenerasi katalog dengan `python scripts/build_papers_data.py` dari root repository dan review ringkasan validasinya sebelum publish.
-- `data/books.json` adalah dataset produksi editorial; jangan mengubah, menambah, atau memperkaya metadata secara otomatis tanpa review sumber.
+- Setelah `modern_ai_books_validated.xlsx` berubah, jalankan `python scripts/build_books_data.py` dari root repository; hanya baris yang ditandai `Yes` yang digabungkan ke katalog dan baris paid/preview/course tetap dikecualikan.
+- Setelah `data/books.json` berubah, jalankan `python scripts/build_book_detail_pages.py` dari root repository untuk membuat ulang halaman detail statis dan memperbarui `sitemap.xml`.
+- `data/books.json` adalah dataset runtime hasil katalog lama dan tambahan buku tervalidasi; metadata yang tidak tersedia di workbook dibiarkan kosong, bukan ditebak atau diperkaya otomatis.
 - Book Library hanya menampilkan CTA untuk URL buku yang verified dan membuka sumber resmi di tab baru; BikinDashboard tidak me-host PDF atau isi buku.
 - Data Quality Checker memproses file di browser. Nama file, nama kolom, dan nilai dataset tidak dikirim ke backend aplikasi.
 - `robots.txt`, `sitemap.xml`, dan `site.webmanifest` berada di root untuk kebutuhan crawler dan instalasi web app.

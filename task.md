@@ -348,19 +348,23 @@ Status: complete
 - [x] Load production records from `data/books.json`; no book metadata is hard-coded into HTML and no automatic enrichment or external URL invention is performed.
 - [x] Implement compact hero, instant search, Category/Level/Format/Tools-or-language filters, result count, active filter chips, reset action, empty state, and fetch error state.
 - [x] Render responsive cards with title, author, category, level, format, access type, relevant edition status, `Free & verified`, and verified `Baca buku →` external action.
+- [x] Generate one static, shareable detail page per book under `/book-library/books/<slug>/`, with title-derived slugs, canonical/OG metadata, source-backed metadata, and the verified external CTA.
 - [x] Implement practical URL state for `q`, `category`, `level`, `format`, and `tools` with normalization and browser navigation support.
 - [x] Add `book_search`, `book_filter`, and `book_read_click` analytics events without sending the search text or book metadata as event payload.
 
 ### Verification
 
-- [x] `data/books.json` validation: 141 records, `meta.count` matches, unique IDs, all records verified, and all runtime URLs are valid HTTP(S) URLs.
-- [x] Browser smoke: default 141 books; search `Python` → 26; Category `Data Science` → 21; combined Beginner → 6; Format `HTML` → 66; Tools `Python` → 12; search `visualization` → 8.
-- [x] Browser smoke: reset returns 141, edition status appears on 7 records, every verified card has a new-tab CTA, and no console warning/error was reported.
+- [x] `data/books.json` validation: 145 records, `meta.count` matches, unique IDs, all records verified, and all runtime URLs are valid HTTP(S) URLs.
+- [x] Browser smoke: default 145 books; search `Python` → 26; Category `Data Science` → 21; combined Beginner → 6; Format `HTML` → 66; Tools `Python` → 12; search `visualization` → 8.
+- [x] Browser smoke: reset returns 145, edition status appears on 7 records, every verified card has a new-tab CTA, and no console warning/error was reported.
+- [x] Modern AI workbook update: 4 included records were appended in workbook order; 4 paid/preview/course records were excluded by the source flag.
+- [x] Added `scripts/build_books_data.py` to repeat the merge without hard-coding the workbook records; missing Tools / bahasa and Edition status remain empty.
 - [x] Responsive smoke: 390/768/1100/1280px have no horizontal overflow; filters and cards collapse at the existing page breakpoints.
 - [x] Route smoke: root, Paper Library, Book Library, shared navigation/analytics assets, and `data/books.json` return HTTP 200.
 
 ### Decisions and non-goals
 
-- The existing `books.json` is treated as the production editorial dataset. This phase does not transform, rewrite, or enrich its metadata.
-- No book detail pages, accounts, bookmarks, reading progress, AI summaries, collections, backend/database, or framework migration are included.
+- `modern_ai_books_validated.xlsx` is an additions workbook. `scripts/build_books_data.py` preserves existing records and appends only source rows explicitly marked for inclusion.
+- Book metadata is mapped directly from the workbook; fields not present in the workbook are left empty rather than inferred.
+- No accounts, bookmarks, reading progress, AI summaries, collections, backend/database, or framework migration are included. Detail pages are static generated HTML, not a backend-driven detail system.
 - The pre-existing dirty `chart` worktree remains untouched.

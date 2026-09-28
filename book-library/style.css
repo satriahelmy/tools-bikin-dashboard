@@ -267,6 +267,20 @@ body.book-library-page {
   line-height: 1.3;
 }
 
+.book-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.book-title-link:hover {
+  color: var(--bd-primary);
+}
+
+.book-title-link:focus-visible {
+  outline: 2px solid var(--bd-primary);
+  outline-offset: 3px;
+}
+
 .book-authors {
   color: var(--bd-text-secondary);
 }
@@ -311,6 +325,56 @@ body.book-library-page {
 
 .book-actions .bd-btn {
   width: 100%;
+}
+
+.book-detail {
+  max-width: 760px;
+  padding-bottom: 48px;
+}
+
+.book-detail-header {
+  max-width: 700px;
+}
+
+.book-detail-title {
+  margin: 8px 0 6px;
+  color: var(--bd-text);
+  font-family: var(--bd-font-heading);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.25;
+}
+
+.book-detail-meta {
+  max-width: 700px;
+  margin-top: 28px;
+}
+
+.book-detail-note {
+  max-width: 700px;
+  margin: 24px 0 0;
+  padding: 16px;
+  border-left: 3px solid var(--bd-border-strong);
+  background: var(--bd-bg-secondary);
+  color: var(--bd-text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.book-detail-note .bd-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--bd-text-tertiary);
+}
+
+.book-detail-actions {
+  max-width: 360px;
+  margin-top: 28px;
+}
+
+.book-detail-back {
+  margin: 24px 0 0;
 }
 
 .books-state {
@@ -371,5 +435,13 @@ body.book-library-page {
 
   .book-title {
     font-size: 18px;
+  }
+
+  .book-detail-title {
+    font-size: 24px;
+  }
+
+  .book-detail-actions {
+    max-width: none;
   }
 }

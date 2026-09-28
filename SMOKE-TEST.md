@@ -67,17 +67,22 @@ Tanggal: __________  Tester: __________  Browser: __________
 
 ## Book Library — implementation QA
 
-- [x] `/book-library/` terbuka tanpa error dan menampilkan 141 buku dari `data/books.json`.
+- [x] `/book-library/` terbuka tanpa error dan menampilkan 145 buku dari `data/books.json`.
 - [x] Book Library tampil tepat di bawah Paper Library pada sidebar dengan active state yang benar.
 - [x] Book Library tampil di homepage, pencarian homepage, kategori Belajar, dan link populer.
 - [x] Hero title, heading, deskripsi akses legal/gratis, search, dan footer memakai shell parent Tools BikinDashboard.
 - [x] Search instan bekerja untuk judul, author, dan metadata topik yang tersedia di dataset.
 - [x] Filter Category, Level, Format, dan Tools / bahasa memperbarui daftar, result count, active filter, dan query URL.
-- [x] Clear/reset filter mengembalikan 141 buku dan menghapus query state.
+- [x] Clear/reset filter mengembalikan 145 buku dan menghapus query state.
 - [x] Kartu memprioritaskan title, author, category, level, format, akses, status edition bila relevan, dan `Free & verified`.
+- [x] Judul kartu mengarah ke halaman detail statis dengan slug yang dibuat dari nama buku; benturan slug diberi suffix ID buku.
+- [x] Halaman detail menampilkan title/author/category, metadata sumber yang tersedia, canonical URL, Open Graph title/URL, dan link kembali ke katalog.
 - [x] `Baca buku →` hanya memakai URL verified dari dataset, membuka tab baru dengan `noopener noreferrer`, dan tidak menampilkan CTA palsu.
 - [x] Loading, fetch error, empty state, `aria-busy`, live result count, focus-visible, dan pengumuman tab baru tersedia.
 - [x] Responsive layout diuji pada 390/768/1100/1280px tanpa horizontal overflow; grid menjadi satu kolom di mobile.
+- [x] Update workbook modern AI diverifikasi: 4 baris `Yes` ditambahkan; 4 baris paid/preview/course tidak dimasukkan.
+- [x] `scripts/build_books_data.py` mempertahankan metadata sumber, menolak duplicate title/URL, dan memperbarui `meta.count`.
+- [x] `scripts/build_book_detail_pages.py` menghasilkan 145 halaman detail unik dan memperbarui `sitemap.xml`.
 - [x] Runtime checks lulus: `/`, `/papers/`, `/book-library/`, `/assets/nav.js`, `/assets/analytics.js`, dan `/data/books.json` merespons HTTP 200; console tidak memiliki warning/error.
 
 ## Aksesibilitas dan visual

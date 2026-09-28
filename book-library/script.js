@@ -3,6 +3,7 @@
 
   const DATA_URL = '../data/books.json';
   const allBooks = [];
+  const bookSlugs = new Map();
   const state = {
     query: '',
     category: '',
@@ -43,6 +44,28 @@
       return null;
     }
   };
+
+  const slugBase = (value) => String(value ?? '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'book';
+
+  const buildBookSlugs = () => {
+    const counts = new Map();
+    allBooks.forEach((book) => {
+      const base = slugBase(book.title);
+      counts.set(base, (counts.get(base) || 0) + 1);
+    });
+    allBooks.forEach((book) => {
+      const base = slugBase(book.title);
+      const suffix = counts.get(base) > 1 ? `-${book.id}` : '';
+      bookSlugs.set(String(book.id), `${base}${suffix}`);
+    });
+  };
+
+  const bookDetailUrl = (book) => `books/${bookSlugs.get(String(book.id))}/`;
 
   const track = (eventName, parameters = {}) => {
     if (typeof window.gtag === 'function') {
@@ -161,6 +184,12 @@
   function renderBook(book) {
     const bookUrl = book.verified ? safeExternalUrl(book.url) : null;
     const hasEditionNote = book.editionStatus && book.editionStatus.toLowerCase() !== 'final / official';
+    const metadata = [
+      ['Level', book.level],
+      ['Format', book.format],
+      ['Akses', book.accessType],
+      ['Tools / bahasa', book.tools]
+    ].filter(([, value]) => value);
     const action = bookUrl
       ? `<a class="bd-btn bd-btn-primary" data-book-action="book_read_click" data-book-id="${escapeHtml(book.id)}" href="${escapeHtml(bookUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Baca buku: ${escapeHtml(book.title)}, membuka tab baru">Baca buku <span aria-hidden="true">→</span></a>`
       : '';
@@ -171,14 +200,9 @@
           <p class="book-category">${escapeHtml(book.category)}</p>
           ${book.verified ? '<span class="book-verified">Free &amp; verified</span>' : ''}
         </header>
-        <h2 class="book-title">${escapeHtml(book.title)}</h2>
+        <h2 class="book-title"><a class="book-title-link" href="${escapeHtml(bookDetailUrl(book))}">${escapeHtml(book.title)}</a></h2>
         <p class="book-authors">${escapeHtml(book.authors)}</p>
-        <dl class="book-meta">
-          <div><dt>Level</dt><dd>${escapeHtml(book.level)}</dd></div>
-          <div><dt>Format</dt><dd>${escapeHtml(book.format)}</dd></div>
-          <div><dt>Akses</dt><dd>${escapeHtml(book.accessType)}</dd></div>
-          <div><dt>Tools / bahasa</dt><dd>${escapeHtml(book.tools)}</dd></div>
-        </dl>
+        ${metadata.length ? `<dl class="book-meta">${metadata.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>` : ''}
         ${hasEditionNote ? `<p class="book-edition">Edition: ${escapeHtml(book.editionStatus)}</p>` : ''}
         ${action ? `<div class="book-actions">${action}</div>` : ''}
       </article>`;
@@ -264,6 +288,7 @@
       const payload = await response.json();
       if (!payload || !Array.isArray(payload.books)) throw new Error('Book data does not contain a books array');
       allBooks.push(...payload.books);
+      buildBookSlugs();
       populateFilters();
       normalizeState();
       syncControls();
