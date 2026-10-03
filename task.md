@@ -195,7 +195,7 @@ Status: audit selesai; Phase 1 route dan parent integration selesai; Phase 2 dat
 
 - Membaca `docs/source/papers/PRD_Paper_Library.md` dan `docs/source/papers/design.md`.
 - Membaca source-of-truth parent di `design/design.md`, token bersama, design-system, navigasi, homepage, katalog tool, dan implementasi Chart Guide, Resource Hub, Color Palette, serta Data Quality Checker.
-- Membaca workbook `data/bikindashboard_paper_library_master_latest.xlsx` secara struktural dan visual. Sheet utama adalah `Paper Catalog!A1:R144`.
+- Membaca workbook `docs/source/papers/workbooks/bikindashboard_paper_library_master_latest.xlsx` secara struktural dan visual. Sheet utama adalah `Paper Catalog!A1:R144`.
 - Workbook berisi 143 record: 125 koleksi ML/AI awal + 18 record Data Visualization.
 - Workbook memiliki 23 nilai kategori, tahun 1943–2023, 79 paper Advanced, 61 Intermediate, dan 3 Beginner.
 - Workbook memiliki 69 URL code yang semuanya bertanda `Code Verification = Verified`.
@@ -364,7 +364,7 @@ Status: complete
 
 ### Decisions and non-goals
 
-- `modern_ai_books_validated.xlsx` is an additions workbook. `scripts/build_books_data.py` preserves existing records and appends only source rows explicitly marked for inclusion.
+- `docs/source/book-library/workbooks/modern_ai_books_validated.xlsx` is an additions workbook. `scripts/build_books_data.py` preserves existing records and appends only source rows explicitly marked for inclusion.
 - Book metadata is mapped directly from the workbook; fields not present in the workbook are left empty rather than inferred.
 - No accounts, bookmarks, reading progress, AI summaries, collections, backend/database, or framework migration are included. Detail pages are static generated HTML, not a backend-driven detail system.
 - The pre-existing dirty `chart` worktree remains untouched.

@@ -19,7 +19,9 @@ from urllib.parse import urlparse
 from openpyxl import load_workbook
 
 
-DEFAULT_INPUT = Path("data/bikindashboard_paper_library_master_latest.xlsx")
+DEFAULT_INPUT = Path(
+    "docs/source/papers/workbooks/bikindashboard_paper_library_master_latest.xlsx"
+)
 DEFAULT_OUTPUT = Path("data/papers.json")
 VERIFIED_ACCESS_STATUSES = {
     "arXiv",

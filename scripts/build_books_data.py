@@ -136,7 +136,7 @@ def main() -> None:
     parser.add_argument(
         "--source",
         type=Path,
-        default=Path("data/modern_ai_books_validated.xlsx"),
+        default=Path("docs/source/book-library/workbooks/modern_ai_books_validated.xlsx"),
     )
     parser.add_argument(
         "--output",
