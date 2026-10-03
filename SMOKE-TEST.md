@@ -5,10 +5,22 @@ Tanggal: __________  Tester: __________  Browser: __________
 ## Route dan shell
 
 - [ ] `/` terbuka tanpa error; judul dan kartu tools tampil.
-- [ ] Sidebar mengarah ke Beranda, Color Palette, Chart Guide, Resource Hub, Data Quality Checker, Paper Library, dan Book Library.
+- [ ] Sidebar mengarah ke Beranda, grup TOOLS/LEARN/PRACTICE, dan seluruh route yang tercantum di tiap grup.
 - [ ] Active state sidebar berubah sesuai route.
 - [ ] Pada viewport mobile, tombol menu dapat membuka/menutup sidebar dan tombol Escape menutupnya.
 - [ ] Favicon tampil dan tidak ada request asset 404.
+
+## Data Challenge
+
+- [ ] Beranda menampilkan card Data Challenge, jumlah card sesuai daftar, dan filter Belajar tetap menampilkan card tersebut.
+- [ ] `/challenge/` menampilkan Coffee Shop Performance dengan metadata dan link detail yang benar.
+- [ ] `/challenge/coffee-shop-performance/` memiliki title, description, canonical URL, dan active sidebar state yang sesuai.
+- [ ] Detail menampilkan business context, objective, grain transaksi, metadata dataset, pertanyaan, dan deliverable tanpa jawaban resmi atau pola internal; stretch challenge dan share section tidak ditampilkan untuk Challenge #01.
+- [ ] Dataset dan data dictionary dapat diunduh dengan nama file publik yang ditetapkan.
+- [ ] Tabel data dictionary menampilkan seluruh 18 kolom; pada viewport kecil tabel dapat digulir horizontal tanpa membuat halaman meluber.
+- [ ] Event GA4 `challenge_opened`, `challenge_dataset_downloaded`, `challenge_dictionary_opened`, dan `challenge_dictionary_downloaded` hanya membawa challenge ID/slug serta format file bila relevan.
+- [ ] Tidak ada request halaman publik yang dapat mengambil `docs/source/challenge/` atau materi QA maintainer.
+- [ ] Catalog/detail tetap dapat diakses dari root domain dan subfolder XAMPP; navigasi, focus state, dan layout diperiksa di desktop, tablet, dan mobile.
 
 ## Color Palette
 

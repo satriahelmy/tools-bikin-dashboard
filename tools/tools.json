@@ -58,5 +58,15 @@
     "url": "/book-library/",
     "localUrl": "../book-library/index.html",
     "badges": ["Open Access", "Gratis"]
+  },
+  {
+    "id": "challenge",
+    "name": "Data Challenge",
+    "description": "Analisis kasus bisnis dengan dataset yang disediakan, lalu temukan insight untuk dashboard.",
+    "category": "Belajar",
+    "status": "available",
+    "url": "/challenge/",
+    "localUrl": "../challenge/index.html",
+    "badges": ["Latihan", "CSV", "Gratis"]
   }
 ]

@@ -1,0 +1,19 @@
+column,type,description
+transaction_id,String,Transaction identifier; repeats for multiple product lines in the same transaction.
+transaction_date,Date,Transaction date.
+transaction_time,Time,Transaction time.
+outlet_id,String,Outlet identifier.
+outlet_name,String,Outlet name.
+city,String,Outlet city.
+product_id,String,Product identifier.
+product_name,String,Product name.
+category,String,Product category.
+quantity,Integer,Units sold on the product line.
+unit_price,Integer,Selling price per unit in IDR before discount.
+discount_pct,Integer,Transaction discount percentage.
+gross_sales,Integer,Quantity × unit price.
+net_sales,Integer,Sales after discount.
+unit_cost,Integer,Estimated cost per unit in IDR.
+total_cost,Integer,Quantity × unit cost.
+profit,Integer,Net sales − total cost.
+payment_method,Category,Payment method used.

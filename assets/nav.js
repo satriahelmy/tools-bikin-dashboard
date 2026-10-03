@@ -1,5 +1,5 @@
 (function () {
-  const toolFolders = ['colorpalette', 'chart', 'resourcehub', 'data-quality-checker', 'papers', 'book-library', 'tools'];
+  const toolFolders = ['colorpalette', 'chart', 'resourcehub', 'data-quality-checker', 'papers', 'book-library', 'challenge', 'tools'];
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const toolIndex = pathSegments.findIndex((segment) => toolFolders.includes(segment.toLowerCase()));
   const rootPath = toolIndex === -1
@@ -16,18 +16,34 @@
     const stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
     stylesheet.dataset.bdNavCss = 'true';
-    stylesheet.href = `${new URL('./nav.css', document.currentScript.src).href}?v=1.3`;
+    stylesheet.href = `${new URL('./nav.css', document.currentScript.src).href}?v=1.6`;
     document.head.appendChild(stylesheet);
   }
 
-  const links = [
-    { id: 'home', label: 'Beranda', href: rootPath },
-    { id: 'colorpalette', label: 'Color Palette', href: `${rootPath}colorpalette/` },
-    { id: 'chart', label: 'Chart Guide', href: `${rootPath}chart/` },
-    { id: 'resourcehub', label: 'Resource Hub', href: `${rootPath}resourcehub/` },
-    { id: 'data-quality-checker', label: 'Data Quality', href: `${rootPath}data-quality-checker/` },
-    { id: 'papers', label: 'Paper Library', href: `${rootPath}papers/` },
-    { id: 'book-library', label: 'Book Library', href: `${rootPath}book-library/` }
+  const homeLink = { id: 'home', label: 'Beranda', href: rootPath };
+  const linkGroups = [
+    {
+      label: 'TOOLS',
+      links: [
+        { id: 'colorpalette', label: 'Color Palette', href: `${rootPath}colorpalette/` },
+        { id: 'chart', label: 'Chart Guide', href: `${rootPath}chart/` },
+        { id: 'data-quality-checker', label: 'Data Quality Checker', href: `${rootPath}data-quality-checker/` }
+      ]
+    },
+    {
+      label: 'LEARN',
+      links: [
+        { id: 'resourcehub', label: 'Resource Hub', href: `${rootPath}resourcehub/` },
+        { id: 'papers', label: 'Paper Library', href: `${rootPath}papers/` },
+        { id: 'book-library', label: 'Book Library', href: `${rootPath}book-library/` }
+      ]
+    },
+    {
+      label: 'PRACTICE',
+      links: [
+        { id: 'challenge', label: 'Data Challenge', href: `${rootPath}challenge/` }
+      ]
+    }
   ];
   const current = toolIndex === -1 || pathSegments[toolIndex].toLowerCase() === 'tools'
     ? 'home'
@@ -41,9 +57,15 @@
       resourcehub: '<circle cx="12" cy="12" r="8.5"/><path d="M8 12h8M12 8v8"/>',
       'data-quality-checker': '<path d="M4 5.5h10M4 10h6M4 14.5h5"/><path d="M15 14.5l2 2 3-4"/><circle cx="17" cy="9" r="3.5"/>',
       papers: '<path d="M5 3.5h10l4 4V20.5H5z"/><path d="M15 3.5v4h4M8 11h8M8 14.5h8M8 18h5"/>',
-      'book-library': '<path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v12.5H7.5A2.5 2.5 0 0 0 5 22z"/><path d="M5 4.5v15M8 8h6M8 11h6"/>'
+      'book-library': '<path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v12.5H7.5A2.5 2.5 0 0 0 5 22z"/><path d="M5 4.5v15M8 8h6M8 11h6"/>',
+      challenge: '<path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 13.5l2 2 4-4"/>'
     };
     return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${paths[id] || paths.home}</svg>`;
+  };
+
+  const renderLink = (link) => {
+    const isActive = current === link.id;
+    return `<a class="bd-sidebar-link${isActive ? ' is-active' : ''}" href="${link.href}"${isActive ? ' aria-current="page"' : ''}><span class="bd-sidebar-icon">${iconSvg(link.id)}</span><span>${link.label}</span></a>`;
   };
 
   const aside = document.createElement('aside');
@@ -53,7 +75,8 @@
   aside.innerHTML = `
     <div class="bd-sidebar-brand"><img class="bd-sidebar-brand-logo" src="${rootPath}assets/bikindashboard-logo.svg" alt="bikindashboard" width="164" height="116" loading="lazy" fetchpriority="low" decoding="async"></div>
     <nav class="bd-sidebar-nav">
-      ${links.map((link) => `<a class="bd-sidebar-link${current === link.id ? ' is-active' : ''}" href="${link.href}"><span class="bd-sidebar-icon">${iconSvg(link.id)}</span><span>${link.label}</span></a>`).join('')}
+      ${renderLink(homeLink)}
+      ${linkGroups.map((group) => `<div class="bd-sidebar-group" role="group" aria-label="${group.label}"><span class="bd-sidebar-group-label" aria-hidden="true">${group.label}</span><div class="bd-sidebar-group-links">${group.links.map(renderLink).join('')}</div></div>`).join('')}
     </nav>
     <div class="bd-sidebar-footer">Gratis untuk kerja data</div>`;
 

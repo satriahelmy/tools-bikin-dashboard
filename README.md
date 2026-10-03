@@ -10,6 +10,7 @@ Toolkit statis untuk membantu pekerjaan dashboard dan data visualization. Projec
 - **Data Quality Checker** — memeriksa file CSV/XLSX secara lokal di browser, termasuk missing values, duplicate rows, tipe data, profile kolom, histogram sederhana, preview, dan deteksi issue berdasarkan severity.
 - **Paper Library** — katalog 143 paper terkurasi untuk data, visualization, machine learning, dan AI dengan pencarian, filter, sorting, 138 link paper gratis terverifikasi, dan 69 repository code terverifikasi.
 - **Book Library** — katalog 145 buku data legal dan gratis dari penulis, penerbit, universitas, dan proyek open-access, dengan pencarian judul/author/topik, filter kategori/level/format/tools, halaman detail yang dapat dibagikan per buku, serta CTA ke URL resmi yang sudah diverifikasi.
+- **Data Challenge** — katalog latihan analisis berbasis kasus bisnis dengan dataset dan data dictionary yang dapat diunduh; Challenge #01 adalah Coffee Shop Performance.
 
 Semua halaman memakai navigasi bersama, responsive layout, active route state, empty/error state, dan baseline aksesibilitas.
 
@@ -42,6 +43,8 @@ Kemudian buka [http://127.0.0.1:8765/](http://127.0.0.1:8765/).
 - `/papers/` — katalog Paper Library dengan 143 paper terkurasi dan filter client-side.
 - `/book-library/` — katalog Book Library dengan buku data legal dan gratis, filter client-side, query state, dan link baca eksternal.
 - `/book-library/books/<slug>/` — halaman detail statis per buku untuk canonical URL dan share link; slug dibuat dari judul buku.
+- `/challenge/` — katalog Data Challenge.
+- `/challenge/coffee-shop-performance/` — brief dan dataset Challenge #01 — Coffee Shop Performance.
 
 Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot, dan Heatmap memakai renderer SVG lokal di `chart/native-renderers.js`. Batasan dan perilaku V1 Data Quality Checker dijelaskan di [`data-quality-checker/README.md`](data-quality-checker/README.md).
 
@@ -54,14 +57,17 @@ Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot,
 - `data-quality-checker/` — parser, worker, profiling, model, dan UI pemeriksaan dataset.
 - `papers/` — route, shell, dan page-specific assets Paper Library.
 - `book-library/` — route, shell, page-specific assets, dan halaman detail statis Book Library.
-- `data/` — source dataset Paper Library, hasil transformasi `papers.json`, workbook validasi tambahan buku, dan dataset produksi Book Library `books.json` yang dipakai runtime.
-- `scripts/` — script development-only untuk mengubah workbook Paper Library, menggabungkan tambahan buku tervalidasi ke JSON runtime, dan membuat halaman detail Book Library.
+- `challenge/` — katalog dan halaman detail Data Challenge yang dihasilkan dari data publik, plus stylesheet dan analytics feature.
+- `data/` — source dataset Paper Library, hasil transformasi `papers.json`, metadata challenge `challenges/challenges.json`, workbook validasi tambahan buku, dan dataset produksi Book Library `books.json` yang dipakai runtime.
+- `downloads/challenges/` — dataset dan data dictionary publik yang dapat diunduh.
+- `scripts/` — script development-only untuk mengubah workbook Paper Library, menggabungkan tambahan buku tervalidasi ke JSON runtime, serta menghasilkan halaman detail Book Library dan Data Challenge.
 - `tools/` — data katalog tool dan halaman kompatibilitas/redirect lama.
 - `docs/` dan `design/` — dokumentasi sumber, PRD, desain, dan arsip; bukan route aplikasi utama.
 
 ## Catatan deployment
 
-- Publish isi project dari root repository beserta folder tool, `papers/`, `data/`, dan `assets/`.
+- Publish file runtime aplikasi dari root repository beserta folder tool, `papers/`, `book-library/`, `challenge/`, `downloads/`, `data/`, dan `assets/`; jangan unggah seluruh repository tanpa mengecualikan materi maintainer.
+- Sertakan halaman hasil generasi di `challenge/`, metadata publik di `data/challenges/`, dan CSV publik di `downloads/challenges/`. Jangan publikasikan `docs/`; folder ini memuat materi maintainer. `docs/.htaccess` memblokir akses lewat Apache, tetapi host yang mengabaikan `.htaccess` tetap harus mengecualikan folder ini dari publish artifact.
 - Pastikan `data/books.json` ikut dipublish karena Book Library memuat seluruh katalog buku dari file tersebut di browser.
 - `assets/nav.js`, `assets/nav.css`, favicon, logo, dan share image adalah aset produksi bersama.
 - `assets/tokens.css` adalah sumber tunggal token desain bersama.
@@ -69,6 +75,7 @@ Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot,
 - Setelah workbook berubah, regenerasi katalog dengan `python scripts/build_papers_data.py` dari root repository dan review ringkasan validasinya sebelum publish.
 - Setelah `modern_ai_books_validated.xlsx` berubah, jalankan `python scripts/build_books_data.py` dari root repository; hanya baris yang ditandai `Yes` yang digabungkan ke katalog dan baris paid/preview/course tetap dikecualikan.
 - Setelah `data/books.json` berubah, jalankan `python scripts/build_book_detail_pages.py` dari root repository untuk membuat ulang halaman detail statis dan memperbarui `sitemap.xml`.
+- Setelah metadata challenge atau CSV data dictionary berubah, jalankan `python scripts/build_challenge_pages.py` dari root repository untuk memvalidasi data, membuat katalog/halaman detail statis, dan memperbarui `sitemap.xml`.
 - `data/books.json` adalah dataset runtime hasil katalog lama dan tambahan buku tervalidasi; metadata yang tidak tersedia di workbook dibiarkan kosong, bukan ditebak atau diperkaya otomatis.
 - Book Library hanya menampilkan CTA untuk URL buku yang verified dan membuka sumber resmi di tab baru; BikinDashboard tidak me-host PDF atau isi buku.
 - Data Quality Checker memproses file di browser. Nama file, nama kolom, dan nilai dataset tidak dikirim ke backend aplikasi.

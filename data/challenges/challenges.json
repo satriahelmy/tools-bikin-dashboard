@@ -1,0 +1,55 @@
+{
+  "challenges": [
+    {
+      "id": "01",
+      "slug": "coffee-shop-performance",
+      "title": "Coffee Shop Performance",
+      "catalogDescription": "Analisis dua tahun transaksi sebuah jaringan coffee shop dan temukan insight yang penting untuk management.",
+      "difficulty": "Beginner",
+      "skills": [
+        "Data Analysis",
+        "Data Visualization",
+        "Dashboard Design"
+      ],
+      "tools": "Any tool",
+      "dataset": {
+        "file": "downloads/challenges/coffee-shop-performance/coffee-shop-performance.csv",
+        "rows": 154145,
+        "overview": [
+          { "label": "Rows", "value": 154145, "source": "row_count" },
+          { "label": "Transactions", "value": 103008, "distinctColumn": "transaction_id" },
+          { "label": "Outlets", "value": 10, "distinctColumn": "outlet_id" },
+          { "label": "Products", "value": 16, "distinctColumn": "product_id" }
+        ],
+        "summary": [
+          "3 cities"
+        ],
+        "period": "Jan 2024 — Dec 2025",
+        "format": "CSV",
+        "currency": "IDR"
+      },
+      "dataDictionary": {
+        "file": "downloads/challenges/coffee-shop-performance/coffee-shop-data-dictionary.csv"
+      },
+      "businessContext": [
+        "KopiKita adalah jaringan coffee shop yang memiliki 10 outlet di Bandung, Jakarta, dan Yogyakarta. Management ingin memahami bagaimana bisnis berkembang selama dua tahun terakhir dan menemukan area yang membutuhkan perhatian.",
+        "Kamu berperan sebagai Data Analyst. Explore transaction data dan buat dashboard yang mengkomunikasikan temuan paling penting untuk management.",
+        "Setiap transaksi dapat memiliki lebih dari satu produk. Karena itu, satu transaction_id dapat muncul pada beberapa baris dataset. Nilai penjualan dan biaya menggunakan Rupiah (IDR)."
+      ],
+      "grain": "One row represents one product line within a transaction.",
+      "objective": "Analisis performa bisnis KopiKita selama 2024–2025. Temukan pola, perubahan, atau masalah yang menurutmu penting dan komunikasikan hasil analisismu melalui sebuah dashboard.",
+      "objectiveNote": "Tidak ada satu jawaban atau dashboard yang dianggap paling benar. Fokus pada insight yang dapat didukung oleh data.",
+      "questionsIntro": "Gunakan pertanyaan berikut sebagai panduan. Kamu tidak harus menjawab semuanya dan boleh mengeksplorasi pertanyaan lain.",
+      "questions": [
+        "Bagaimana performa bisnis berubah dari waktu ke waktu?",
+        "Bagaimana performa antar-outlet dan kota?",
+        "Produk dan kategori apa yang paling berkontribusi terhadap bisnis?",
+        "Apakah terdapat pola berdasarkan hari atau waktu transaksi?",
+        "Apakah ada perubahan menarik sepanjang periode data?",
+        "Apa insight yang menurutmu perlu diketahui management?"
+      ],
+      "deliverable": "Buat 1 dashboard yang mengkomunikasikan insight terpenting dari dataset.",
+      "deliverableTools": "Kamu bebas menggunakan Excel, Tableau, Power BI, Looker Studio, Python, atau tools lainnya."
+    }
+  ]
+}

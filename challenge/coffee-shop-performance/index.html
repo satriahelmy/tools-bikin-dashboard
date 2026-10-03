@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Coffee Shop Performance — Data Challenge | BikinDashboard</title>
+  <meta name="description" content="Latihan analisis data dan dashboard menggunakan dataset transaksi coffee shop dua tahun. Download dataset gratis dan temukan insight versimu sendiri.">
+  <link rel="canonical" href="https://bikindashboard.com/challenge/coffee-shop-performance/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Coffee Shop Performance — Data Challenge | BikinDashboard">
+  <meta property="og:description" content="Latihan analisis data dan dashboard menggunakan dataset transaksi coffee shop dua tahun. Download dataset gratis dan temukan insight versimu sendiri.">
+  <meta property="og:url" content="https://bikindashboard.com/challenge/coffee-shop-performance/">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="../../assets/favicon.svg?v=2" type="image/svg+xml">
+  <meta name="theme-color" content="#2f5fb0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/tokens.css">
+  <link rel="stylesheet" href="../../assets/design-system.css?v=1.8" data-bd-design-system>
+  <link rel="stylesheet" href="../../assets/nav.css?v=1.6" data-bd-nav-css>
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../assets/analytics.js?v=1"></script>
+  <script src="../../assets/nav.js?v=1.4" defer></script>
+  <script src="../analytics.js" defer></script>
+</head>
+<body class="bd-with-nav challenge-page" data-challenge-id="01" data-challenge-slug="coffee-shop-performance">
+  <header class="bd-topbar">
+    <div class="bd-topbar-inner">
+      <div class="bd-topbar-left">
+        <a href="../" class="bd-back">← Katalog challenge</a>
+        <span class="bd-topbar-divider"></span>
+        <h1 class="bd-title">Data Challenge</h1>
+      </div>
+    </div>
+  </header>
+  <main class="bd-main">
+    <div class="bd-container">
+      <article class="challenge-brief">
+        <header class="challenge-header bd-tool-intro">
+          <p class="challenge-eyebrow bd-label">CHALLENGE #01</p>
+          <h2>Coffee Shop Performance</h2>
+          <p class="challenge-meta">Beginner · 154,145 rows · 103,008 transactions · Jan 2024 — Dec 2025</p>
+          <p class="challenge-intro bd-body">Analisis dua tahun transaksi sebuah jaringan coffee shop dan temukan insight yang penting untuk management.</p>
+          <div class="challenge-actions">
+            <a class="bd-btn bd-btn-primary" data-challenge-event="challenge_dataset_downloaded" data-file-format="csv" href="../../downloads/challenges/coffee-shop-performance/coffee-shop-performance.csv" download="coffee-shop-performance.csv">Download Dataset</a>
+            <a class="bd-btn bd-btn-secondary" data-challenge-event="challenge_dictionary_opened" href="#data-dictionary">View Data Dictionary</a>
+          </div>
+        </header>
+
+        <section class="challenge-section" aria-labelledby="objective-heading">
+          <h2 id="objective-heading">Your Objective</h2>
+          <p>Analisis performa bisnis KopiKita selama 2024–2025. Temukan pola, perubahan, atau masalah yang menurutmu penting dan komunikasikan hasil analisismu melalui sebuah dashboard.</p>
+          <p>Tidak ada satu jawaban atau dashboard yang dianggap paling benar. Fokus pada insight yang dapat didukung oleh data.</p>
+        </section>
+
+        <section class="challenge-section" aria-labelledby="context-heading">
+          <h2 id="context-heading">Business Context</h2>
+        <p>KopiKita adalah jaringan coffee shop yang memiliki 10 outlet di Bandung, Jakarta, dan Yogyakarta. Management ingin memahami bagaimana bisnis berkembang selama dua tahun terakhir dan menemukan area yang membutuhkan perhatian.</p>
+        <p>Kamu berperan sebagai Data Analyst. Explore transaction data dan buat dashboard yang mengkomunikasikan temuan paling penting untuk management.</p>
+        <p>Setiap transaksi dapat memiliki lebih dari satu produk. Karena itu, satu transaction_id dapat muncul pada beberapa baris dataset. Nilai penjualan dan biaya menggunakan Rupiah (IDR).</p>
+          <p class="challenge-grain"><strong>Dataset grain</strong><br>One row represents one product line within a transaction.</p>
+        </section>
+
+        <section class="challenge-section" aria-labelledby="dataset-heading">
+          <h2 id="dataset-heading">Dataset Overview</h2>
+          <dl class="challenge-stats">
+            <div><dt>Rows</dt><dd>154,145</dd></div>
+            <div><dt>Transactions</dt><dd>103,008</dd></div>
+            <div><dt>Outlets</dt><dd>10</dd></div>
+            <div><dt>Products</dt><dd>16</dd></div>
+          </dl>
+          <p>Jan 2024 — Dec 2025 · CSV · IDR · 3 cities</p>
+        </section>
+
+        <section class="challenge-section" aria-labelledby="questions-heading">
+          <h2 id="questions-heading">Questions to Explore</h2>
+          <p>Gunakan pertanyaan berikut sebagai panduan. Kamu tidak harus menjawab semuanya dan boleh mengeksplorasi pertanyaan lain.</p>
+          <ol class="challenge-questions">
+          <li>Bagaimana performa bisnis berubah dari waktu ke waktu?</li>
+          <li>Bagaimana performa antar-outlet dan kota?</li>
+          <li>Produk dan kategori apa yang paling berkontribusi terhadap bisnis?</li>
+          <li>Apakah terdapat pola berdasarkan hari atau waktu transaksi?</li>
+          <li>Apakah ada perubahan menarik sepanjang periode data?</li>
+          <li>Apa insight yang menurutmu perlu diketahui management?</li>
+          </ol>
+        </section>
+
+      <section class="challenge-section" id="data-dictionary" aria-labelledby="dictionary-heading">
+        <div class="challenge-section-heading">
+          <h2 id="dictionary-heading">Data Dictionary</h2>
+          <a data-challenge-event="challenge_dictionary_downloaded" data-file-format="csv" href="../../downloads/challenges/coffee-shop-performance/coffee-shop-data-dictionary.csv" download="coffee-shop-data-dictionary.csv">Download CSV</a>
+        </div>
+        <div class="challenge-table-wrap" tabindex="0" role="region" aria-label="Data dictionary; scroll horizontally to view all columns">
+          <table>
+            <thead><tr><th scope="col">Column</th><th scope="col">Type</th><th scope="col">Description</th></tr></thead>
+            <tbody>
+          <tr><th scope="row"><code>transaction_id</code></th><td>String</td><td>Transaction identifier; repeats for multiple product lines in the same transaction.</td></tr>
+          <tr><th scope="row"><code>transaction_date</code></th><td>Date</td><td>Transaction date.</td></tr>
+          <tr><th scope="row"><code>transaction_time</code></th><td>Time</td><td>Transaction time.</td></tr>
+          <tr><th scope="row"><code>outlet_id</code></th><td>String</td><td>Outlet identifier.</td></tr>
+          <tr><th scope="row"><code>outlet_name</code></th><td>String</td><td>Outlet name.</td></tr>
+          <tr><th scope="row"><code>city</code></th><td>String</td><td>Outlet city.</td></tr>
+          <tr><th scope="row"><code>product_id</code></th><td>String</td><td>Product identifier.</td></tr>
+          <tr><th scope="row"><code>product_name</code></th><td>String</td><td>Product name.</td></tr>
+          <tr><th scope="row"><code>category</code></th><td>String</td><td>Product category.</td></tr>
+          <tr><th scope="row"><code>quantity</code></th><td>Integer</td><td>Units sold on the product line.</td></tr>
+          <tr><th scope="row"><code>unit_price</code></th><td>Integer</td><td>Selling price per unit in IDR before discount.</td></tr>
+          <tr><th scope="row"><code>discount_pct</code></th><td>Integer</td><td>Transaction discount percentage.</td></tr>
+          <tr><th scope="row"><code>gross_sales</code></th><td>Integer</td><td>Quantity × unit price.</td></tr>
+          <tr><th scope="row"><code>net_sales</code></th><td>Integer</td><td>Sales after discount.</td></tr>
+          <tr><th scope="row"><code>unit_cost</code></th><td>Integer</td><td>Estimated cost per unit in IDR.</td></tr>
+          <tr><th scope="row"><code>total_cost</code></th><td>Integer</td><td>Quantity × unit cost.</td></tr>
+          <tr><th scope="row"><code>profit</code></th><td>Integer</td><td>Net sales − total cost.</td></tr>
+          <tr><th scope="row"><code>payment_method</code></th><td>Category</td><td>Payment method used.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+        <section class="challenge-section" aria-labelledby="deliverable-heading">
+          <h2 id="deliverable-heading">Your Deliverable</h2>
+          <p>Buat 1 dashboard yang mengkomunikasikan insight terpenting dari dataset.</p>
+          <p>Kamu bebas menggunakan Excel, Tableau, Power BI, Looker Studio, Python, atau tools lainnya.</p>
+          <p class="challenge-skills">Skills: Data Analysis · Data Visualization · Dashboard Design</p>
+        </section>
+
+
+
+
+
+        <p class="challenge-back"><a href="../">← Back to Data Challenge</a></p>
+      </article>
+    </div>
+  </main>
+  <footer class="bd-footer">
+    <p class="bd-hint">Gratis untuk kerja data · <a href="https://bikindashboard.com">bikindashboard.com</a> · <a href="../../privacy.html">Kebijakan Privasi</a></p>
+  </footer>
+</body>
+</html>

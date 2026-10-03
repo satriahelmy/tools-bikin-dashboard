@@ -368,3 +368,97 @@ Status: complete
 - Book metadata is mapped directly from the workbook; fields not present in the workbook are left empty rather than inferred.
 - No accounts, bookmarks, reading progress, AI summaries, collections, backend/database, or framework migration are included. Detail pages are static generated HTML, not a backend-driven detail system.
 - The pre-existing dirty `chart` worktree remains untouched.
+
+## Data Challenge — audit and implementation plan
+
+Status: Phases 1–4 implemented; local Phase 5 review is complete except production-host exclusion of maintainer documents and regression checks for unrelated feature workflows.
+
+### Product scope
+
+- Launch `/challenge/` and `/challenge/coffee-shop-performance/` for Challenge #01 — Coffee Shop Performance.
+- Keep the experience static, tool-agnostic, open-ended, and reusable for future challenges.
+- Reuse the shared BikinDashboard shell, navigation, design tokens, typography, and interaction styles.
+- Do not add accounts, submissions, scoring, progress tracking, official solutions, or a new framework/build system.
+
+### Phase 0 — public data and deployment boundary
+
+- [x] Receive `coffee-shop-performance.csv` and `coffee-shop-data-dictionary.csv`; verify their headers, public row counts, and intended filenames against the approved brief.
+- [x] Place public downloads under `downloads/challenges/coffee-shop-performance/`.
+- [ ] Ensure `docs/` and maintainer-only challenge QA information are excluded from the public deployment artifact, or move sensitive source material outside the published root.
+- [x] Keep internal QA notes out of runtime JSON, generated HTML, public metadata, analytics payloads, sitemap, and README copy.
+
+### Phase 1 — content model and static page generation
+
+- [x] Add `data/challenges/challenges.json` containing only approved public challenge metadata and copy.
+- [x] Add `scripts/build_challenge_pages.py`, following the existing static detail-page generator pattern.
+- [x] Generate the catalog at `challenge/index.html` and detail pages at `challenge/<slug>/index.html` from the shared content source.
+- [x] Read the supplied dictionary CSV during generation and render its public fields as an on-page semantic table; avoid maintaining a second copy of the dictionary in JSON.
+- [x] Generate unique page titles, descriptions, canonical URLs, and sitemap entries for the catalog and each challenge.
+- [x] Confirm that adding Challenge #02 requires new public data/assets and regeneration, not a duplicate page implementation.
+
+### Phase 2 — shared navigation integration
+
+- [x] Register `challenge` as a known route in `assets/nav.js` so root/subfolder paths and active state work on catalog and detail pages.
+- [x] Group sidebar links under `TOOLS`, `LEARN`, and `PRACTICE`, with Beranda separate and non-collapsible.
+- [x] Put Data Quality Checker under TOOLS, Resource Hub under LEARN, and Data Challenge under PRACTICE; preserve every existing destination.
+- [x] Add restrained group-label styles in `assets/nav.css` and retain the current compact horizontal scrolling behavior at mobile widths.
+- [x] Use the existing SVG navigation pattern for the Data Challenge icon; do not add an icon library.
+- [x] Bump versioned shared-nav asset URLs across existing pages and page generators so clients receive the grouped navigation assets.
+
+### Phase 3 — page layout and content
+
+- [x] Add scoped `challenge/style.css` and reuse the shared shell, tokens, typography, links, and button conventions.
+- [x] Add a Data Challenge card to the homepage catalog using `tools/tools.json` and the `/challenge/` route.
+- [x] Render a restrained vertical catalog entry with challenge number, title, summary, difficulty, row count, skills, and detail link; do not add filters or fake activity metrics.
+- [x] Render the detail page as a concise analyst brief with business context, objective, explicit data grain, dataset overview, exploration questions, dictionary, and deliverable; optional stretch/share sections render only when configured.
+- [x] Keep one primary CTA (`Download Dataset`) and a secondary dictionary action.
+- [x] Avoid prescribed chart types, a fixed analysis sequence, gamification, decorative cards/gradients, and any solution or hidden-pattern hints.
+- [x] Make the dictionary table horizontally scrollable on small screens; let metadata wrap and dataset statistics reflow to two columns on mobile.
+
+### Phase 4 — analytics and project documentation
+
+- [x] Add `challenge/analytics.js` for `challenge_opened`, dataset download, dictionary open/download, and any implemented share action.
+- [x] Load the existing `assets/analytics.js` GA4 bootstrap; send only challenge identifiers/slugs and relevant file format values.
+- [x] Do not send dataset content, user-entered analysis, or personally identifying information.
+- [x] Update `README.md` with routes, public asset locations, and the page-generation workflow.
+- [x] Update `SMOKE-TEST.md` with challenge route, navigation, download, responsive table, accessibility, and privacy checks.
+
+### Phase 5 — acceptance review
+
+- [x] Confirm the Data Challenge card appears on the homepage and opens `/challenge/` from root and XAMPP subfolder routes.
+- [x] Confirm `/challenge/` and `/challenge/coffee-shop-performance/` load at root and under the XAMPP subfolder route.
+- [x] Confirm the catalog displays Challenge #01 and the detail page shows approved metadata, context, objective, and explicit transaction-line grain.
+- [x] Confirm dataset and dictionary endpoints return CSV and the dictionary CSV matches the rendered table.
+- [x] Confirm guiding questions do not prescribe visualizations and the deliverable remains tool-agnostic.
+- [x] Confirm the stretch challenge and share sections are absent from Challenge #01.
+- [x] Confirm the PRACTICE navigation group and active states work without breaking existing route responses or mobile navigation.
+- [x] Review keyboard access, visible focus, semantic headings/table headers, shared-token contrast, reduced motion, and responsive layouts.
+- [x] Validate GA4 event names and parameters with a mocked `gtag`; no CTA controls were clicked for event testing.
+- [ ] Verify internal challenge documents are excluded from the actual production deployment artifact. Local XAMPP Apache returns 403 for `docs/`; the current public host returns 404 for both internal document paths and `/challenge/`, so the feature is not deployed there and its artifact rules cannot yet be verified.
+- [x] Regression-check representative existing workflows: homepage category filter, Chart Guide category filter, palette generation, Resource Hub category filter, Paper Library search, Book Library search, and the existing Data Quality Checker analytics/profiling tests all pass. Route-response checks also pass; generated book-detail pages only changed shared-nav asset versions.
+
+### Proposed files
+
+Create:
+
+- `data/challenges/challenges.json`
+- `scripts/build_challenge_pages.py`
+- `challenge/index.html` (generated)
+- `challenge/coffee-shop-performance/index.html` (generated)
+- `challenge/style.css`
+- `challenge/analytics.js`
+- `downloads/challenges/coffee-shop-performance/coffee-shop-performance.csv` (when supplied)
+- `downloads/challenges/coffee-shop-performance/coffee-shop-data-dictionary.csv` (when supplied)
+
+Modify:
+
+- `index.html`
+- `tools/tools.json`
+- `assets/nav.js`
+- `assets/nav.css`
+- Shared nav asset references in existing HTML pages; `scripts/build_book_detail_pages.py` keeps generated book pages on the current asset versions.
+- `sitemap.xml`
+- `README.md`
+- `SMOKE-TEST.md`
+
+Leave `assets/tokens.css`, `assets/design-system.css`, `assets/analytics.js`, the homepage, existing tool/library pages, and the source PRD/design content unchanged.

@@ -32,6 +32,25 @@
 
 .bd-sidebar-nav {
   display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.bd-sidebar-group {
+  display: grid;
+  gap: 4px;
+}
+
+.bd-sidebar-group-label {
+  margin: 2px 10px 0;
+  color: var(--bd-text-tertiary);
+  font: 600 10px/1.2 var(--bd-font);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.bd-sidebar-group-links {
+  display: grid;
   gap: 2px;
 }
 
@@ -202,13 +221,32 @@ body.bd-with-nav :where(input, select, textarea):focus-visible {
   .bd-sidebar-nav {
     display: flex;
     flex: 1;
+    align-items: center;
     min-width: 0;
-    gap: 2px;
+    gap: 8px;
     overflow-x: auto;
     scrollbar-width: none;
   }
 
   .bd-sidebar-nav::-webkit-scrollbar { display: none; }
+
+  .bd-sidebar-group {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .bd-sidebar-group-label {
+    margin: 0 3px 0 6px;
+    white-space: nowrap;
+  }
+
+  .bd-sidebar-group-links {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 2px;
+  }
 
   .bd-sidebar-link {
     min-height: 32px;
