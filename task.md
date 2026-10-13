@@ -369,13 +369,13 @@ Status: complete
 - No accounts, bookmarks, reading progress, AI summaries, collections, backend/database, or framework migration are included. Detail pages are static generated HTML, not a backend-driven detail system.
 - The pre-existing dirty `chart` worktree remains untouched.
 
-## Data Challenge — audit and implementation plan
+## Analytical Challenge — audit and implementation plan
 
 Status: Phases 1–4 implemented; local Phase 5 review is complete except production-host exclusion of maintainer documents and regression checks for unrelated feature workflows.
 
 ### Product scope
 
-- Launch `/challenge/` and `/challenge/coffee-shop-performance/` for Challenge #01 — Coffee Shop Performance.
+- Launch `/analytical-challenge/` and `/analytical-challenge/coffee-shop-performance/` for Challenge #01 — Coffee Shop Performance.
 - Keep the experience static, tool-agnostic, open-ended, and reusable for future challenges.
 - Reuse the shared BikinDashboard shell, navigation, design tokens, typography, and interaction styles.
 - Do not add accounts, submissions, scoring, progress tracking, official solutions, or a new framework/build system.
@@ -391,24 +391,24 @@ Status: Phases 1–4 implemented; local Phase 5 review is complete except produc
 
 - [x] Add `data/challenges/challenges.json` containing only approved public challenge metadata and copy.
 - [x] Add `scripts/build_challenge_pages.py`, following the existing static detail-page generator pattern.
-- [x] Generate the catalog at `challenge/index.html` and detail pages at `challenge/<slug>/index.html` from the shared content source.
+- [x] Generate the catalog at `analytical-challenge/index.html` and detail pages at `analytical-challenge/<slug>/index.html` from the shared content source.
 - [x] Read the supplied dictionary CSV during generation and render its public fields as an on-page semantic table; avoid maintaining a second copy of the dictionary in JSON.
 - [x] Generate unique page titles, descriptions, canonical URLs, and sitemap entries for the catalog and each challenge.
 - [x] Confirm that adding Challenge #02 requires new public data/assets and regeneration, not a duplicate page implementation.
 
 ### Phase 2 — shared navigation integration
 
-- [x] Register `challenge` as a known route in `assets/nav.js` so root/subfolder paths and active state work on catalog and detail pages.
+- [x] Register `analytical-challenge` as a known route in `assets/nav.js` so root/subfolder paths and active state work on catalog and detail pages.
 - [x] Group sidebar links under `TOOLS`, `LEARN`, and `PRACTICE`, with Beranda separate and non-collapsible.
-- [x] Put Data Quality Checker under TOOLS, Resource Hub under LEARN, and Data Challenge under PRACTICE; preserve every existing destination.
+- [x] Put Data Quality Checker under TOOLS, Resource Hub under LEARN, and Analytical Challenge under PRACTICE; preserve every existing destination.
 - [x] Add restrained group-label styles in `assets/nav.css` and retain the current compact horizontal scrolling behavior at mobile widths.
-- [x] Use the existing SVG navigation pattern for the Data Challenge icon; do not add an icon library.
+- [x] Use the existing SVG navigation pattern for the Analytical Challenge icon; do not add an icon library.
 - [x] Bump versioned shared-nav asset URLs across existing pages and page generators so clients receive the grouped navigation assets.
 
 ### Phase 3 — page layout and content
 
-- [x] Add scoped `challenge/style.css` and reuse the shared shell, tokens, typography, links, and button conventions.
-- [x] Add a Data Challenge card to the homepage catalog using `tools/tools.json` and the `/challenge/` route.
+- [x] Add scoped `analytical-challenge/style.css` and reuse the shared shell, tokens, typography, links, and button conventions.
+- [x] Add an Analytical Challenge card to the homepage catalog using `tools/tools.json` and the `/analytical-challenge/` route.
 - [x] Render a restrained vertical catalog entry with challenge number, title, summary, difficulty, row count, skills, and detail link; do not add filters or fake activity metrics.
 - [x] Render the detail page as a concise analyst brief with business context, objective, explicit data grain, dataset overview, exploration questions, dictionary, and deliverable; optional stretch/share sections render only when configured.
 - [x] Keep one primary CTA (`Download Dataset`) and a secondary dictionary action.
@@ -417,7 +417,7 @@ Status: Phases 1–4 implemented; local Phase 5 review is complete except produc
 
 ### Phase 4 — analytics and project documentation
 
-- [x] Add `challenge/analytics.js` for `challenge_opened`, dataset download, dictionary open/download, and any implemented share action.
+- [x] Add `analytical-challenge/analytics.js` for `challenge_opened`, dataset download, dictionary open/download, and any implemented share action.
 - [x] Load the existing `assets/analytics.js` GA4 bootstrap; send only challenge identifiers/slugs and relevant file format values.
 - [x] Do not send dataset content, user-entered analysis, or personally identifying information.
 - [x] Update `README.md` with routes, public asset locations, and the page-generation workflow.
@@ -425,8 +425,8 @@ Status: Phases 1–4 implemented; local Phase 5 review is complete except produc
 
 ### Phase 5 — acceptance review
 
-- [x] Confirm the Data Challenge card appears on the homepage and opens `/challenge/` from root and XAMPP subfolder routes.
-- [x] Confirm `/challenge/` and `/challenge/coffee-shop-performance/` load at root and under the XAMPP subfolder route.
+- [ ] Confirm the Analytical Challenge card appears on the homepage and opens `/analytical-challenge/` from root and XAMPP subfolder routes.
+- [ ] Confirm `/analytical-challenge/` and `/analytical-challenge/coffee-shop-performance/` load at root and under the XAMPP subfolder route; legacy `/challenge/` routes redirect to their new URLs.
 - [x] Confirm the catalog displays Challenge #01 and the detail page shows approved metadata, context, objective, and explicit transaction-line grain.
 - [x] Confirm dataset and dictionary endpoints return CSV and the dictionary CSV matches the rendered table.
 - [x] Confirm guiding questions do not prescribe visualizations and the deliverable remains tool-agnostic.
@@ -434,7 +434,7 @@ Status: Phases 1–4 implemented; local Phase 5 review is complete except produc
 - [x] Confirm the PRACTICE navigation group and active states work without breaking existing route responses or mobile navigation.
 - [x] Review keyboard access, visible focus, semantic headings/table headers, shared-token contrast, reduced motion, and responsive layouts.
 - [x] Validate GA4 event names and parameters with a mocked `gtag`; no CTA controls were clicked for event testing.
-- [ ] Verify internal challenge documents are excluded from the actual production deployment artifact. Local XAMPP Apache returns 403 for `docs/`; the current public host returns 404 for both internal document paths and `/challenge/`, so the feature is not deployed there and its artifact rules cannot yet be verified.
+- [ ] Verify internal challenge documents are excluded from the actual production deployment artifact. Local XAMPP Apache returns 403 for `docs/`; production behavior for the new `/analytical-challenge/` route and the legacy redirects has not been checked.
 - [x] Regression-check representative existing workflows: homepage category filter, Chart Guide category filter, palette generation, Resource Hub category filter, Paper Library search, Book Library search, and the existing Data Quality Checker analytics/profiling tests all pass. Route-response checks also pass; generated book-detail pages only changed shared-nav asset versions.
 
 ### Proposed files
@@ -443,10 +443,11 @@ Create:
 
 - `data/challenges/challenges.json`
 - `scripts/build_challenge_pages.py`
-- `challenge/index.html` (generated)
-- `challenge/coffee-shop-performance/index.html` (generated)
-- `challenge/style.css`
-- `challenge/analytics.js`
+- `analytical-challenge/index.html` (generated)
+- `analytical-challenge/coffee-shop-performance/index.html` (generated)
+- `analytical-challenge/style.css`
+- `analytical-challenge/analytics.js`
+- `challenge/index.html` and `challenge/<slug>/index.html` (legacy redirects)
 - `downloads/challenges/coffee-shop-performance/coffee-shop-performance.csv` (when supplied)
 - `downloads/challenges/coffee-shop-performance/coffee-shop-data-dictionary.csv` (when supplied)
 
@@ -461,4 +462,122 @@ Modify:
 - `README.md`
 - `SMOKE-TEST.md`
 
-Leave `assets/tokens.css`, `assets/design-system.css`, `assets/analytics.js`, the homepage, existing tool/library pages, and the source PRD/design content unchanged.
+Keep shared design tokens, the design system, and the analytics bootstrap unchanged; update the source PRD/design labels and route examples to match the Analytical Challenge naming.
+
+## Chart Recommender — audit and phased implementation plan
+
+Status: Phase 0–5 selesai. Smoke test route dan integrasi pada Apache XAMPP sudah lulus; sweep viewport responsif desktop/tablet/mobile masih perlu dijalankan.
+
+### Dokumen sumber yang ditinjau
+
+- [`PRD — BikinDashboard Chart Recommender.md`](docs/source/chart-recommender/PRD%20%E2%80%94%20BikinDashboard%20Chart%20Recommender.md) — tujuan produk, flow, state, analytics, accessibility, dan acceptance criteria.
+- [`DESIGN.md — BikinDashboard Chart Recommender(1).md`](docs/source/chart-recommender/DESIGN.md%20%E2%80%94%20BikinDashboard%20Chart%20Recommender%281%29.md) — UX wizard/result, integrasi shell, Chart Guide, dan QA visual.
+- [`DECISION_TREE.md — BikinDashboard Chart Recommender.md`](docs/source/chart-recommender/DECISION_TREE.md%20%E2%80%94%20BikinDashboard%20Chart%20Recommender.md) — source of truth untuk ID pertanyaan/jawaban, branch, terminal rules, redirect, rekomendasi, dan mapping Guide.
+
+### Temuan audit dan keputusan implementasi
+
+1. Chart Recommender adalah tool ke-8. Saat audit, `tools/tools.json` berisi 7 tool dan `assets/nav.js` menyediakan shell bersama dengan grup TOOLS/LEARN/PRACTICE.
+2. Proyek memakai HTML, CSS, dan JavaScript statis. Implementasi V1 tetap client-side dan deterministic; tidak menambah framework, backend, AI/API, atau dependency visualisasi.
+3. Gunakan route `/chart-recommender/` dengan `chart-recommender/index.html`, mengikuti route pilihan PRD dan pola XAMPP subfolder.
+4. Pisahkan data decision tree, traversal/state logic, dan renderer. Decision tree menjadi sumber tunggal konten/branch; UI tidak menyalin logic ke event handlers.
+5. State wizard hanya hidup selama halaman terbuka. Back mempertahankan jawaban valid; ketika jawaban terdahulu berubah, hapus jawaban downstream yang tak lagi relevan. Restart menghapus seluruh state tanpa konfirmasi. Reload kembali ke initial state; URL state dan persistence bukan kebutuhan V1.
+6. Pertanyaan dan microcopy memakai Bahasa Indonesia; nama chart mengikuti vocabulary Chart Guide berbahasa Inggris. Gunakan CTA lokal seperti `Buka Panduan Bar Chart`.
+7. Result preview tidak diperlukan. Gunakan halaman Chart Guide untuk contoh visual; rekomendasi KPI / Big Number dan Separate Views tidak boleh menampilkan CTA Guide yang rusak.
+8. Chart Guide saat ini mempunyai 16 record di `chart/charts.json`; seluruh 16 ID yang ada pada mapping Guide decision tree sudah tersedia, dan `map` adalah satu-satunya Guide ID yang harus ditambahkan. Taxonomy yang tampil saat ini hanya Perbandingan, Komposisi, Sebaran, dan Hubungan. PRD/design meminta Tren dan Geografis; contoh mapping PRD mencakup Slope Chart = Perbandingan + Tren, Area Chart = Tren + Komposisi, Bar Chart = Perbandingan, Heatmap = Hubungan, dan Map = Geografis.
+9. `chart/chart.html` merender detail dari `charts.json` dan menyediakan fallback saat konfigurasi preview chart tidak tersedia. Entry Map harus melengkapi seluruh field teks yang dibutuhkan template dan memberi panduan Choropleth serta Point/Symbol Map; tidak perlu menambahkan renderer peta.
+10. Analytics memakai `assets/analytics.js`. Kirim hanya event dan properti yang ditentukan PRD—tanpa free-text, dataset, atau informasi pribadi—dan pastikan wizard tetap berfungsi bila analytics tidak tersedia.
+
+### Arsitektur file yang diusulkan
+
+```text
+chart-recommender/
+  index.html       # route /chart-recommender/, shared site shell
+  style.css        # layout/interaction spesifik wizard, memakai shared tokens
+  decision-tree.js # pertanyaan, answer IDs, branching, rules, dan result content
+  engine.js        # traversal, redirect, validasi terminal, dan pengelolaan state
+  script.js        # render, event UI, focus management, dan analytics hooks
+```
+
+Decision tree boleh dimuat sebagai konfigurasi JavaScript biasa. Pertahankan urutan script/defer yang eksplisit dan path asset yang bekerja dari root maupun `/bikindashboard/`; jangan memperkenalkan bundler/build step.
+
+### Phase 0 — audit kontrak dan mapping
+
+- [x] Baca ketiga dokumen sumber dan identifikasi acceptance criteria lintas PRD, design, dan decision tree.
+- [x] Audit `assets/nav.js`, shared CSS/tokens, `index.html`, `tools/tools.json`, Chart Guide list/detail/data, analytics, sitemap, README, dan smoke checklist.
+- [x] Tetapkan route `/chart-recommender/`, arsitektur vanilla JS terpisah, state in-memory, dan tidak ada preview/dependency berat.
+- [x] Verifikasi setiap chart ID pada mapping Recommendation Object terhadap `chart/charts.json`: 16 mapping tersedia, hanya `map` yang perlu dibuat; KPI / Big Number dan Separate Views tidak memerlukan Guide.
+- [x] Catat taxonomy baru dari PRD/design: tambahkan Tren dan Geografis, dukung multi-tag, pertahankan tag existing, dan ikuti contoh Slope, Area, Bar, Heatmap, serta Map sebelum mengubah Chart Guide.
+
+### Phase 1 — route dan integrasi sebagai tool ke-8
+
+- [x] Buat `chart-recommender/index.html` dengan metadata unik, canonical `/chart-recommender/`, shared navigation, design system, footer, dan entry point script.
+- [x] Tambahkan `chart-recommender` ke route resolver `toolFolders`, lalu daftarkan Chart Recommender pada grup TOOLS sesudah Chart Guide dengan active state dan ikon SVG yang mengikuti pola existing.
+- [x] Tambahkan record Chart Recommender sebagai tool ke-8 di `tools/tools.json`; sinkronkan `localPaths`, icon, dan popular links di homepage.
+- [x] Pastikan semua internal links bekerja pada root domain dan instalasi XAMPP subfolder.
+- [x] Tambahkan route ke `sitemap.xml`; dokumentasikan route serta pemeriksaan baru di `README.md` dan `SMOKE-TEST.md`.
+
+### Phase 2 — decision tree dan engine deterministik
+
+- [x] Masukkan lima root intent dan seluruh question ID, answer ID, helper, cabang, terminal `RULE-*`, cross-intent redirect, dan content result yang didefinisikan di `DECISION_TREE.md` tanpa mengganti ID atau menyederhanakan cabang yang mengubah rekomendasi.
+- [x] Implementasikan pure rule traversal yang menerima intent/answers dan menghasilkan salah satu dari: pertanyaan relevan berikutnya, redirect/context baru, recommendation object, atau fallback state.
+- [x] Bentuk recommendation object ternormalisasi: `ruleId`, `intent`, chart family/ID, variant opsional, `why`, 2–4 tips kontekstual, alternative/watch-out opsional, serta `guide` opsional.
+- [x] Terapkan empat redirect yang dispesifikasikan. Pertahankan konteks yang relevan (termasuk numeric + category dan konteks over-time), buang hanya jawaban downstream yang invalid, dan jangan tampilkan notifikasi teknis redirect.
+- [x] Pastikan setiap branch yang dapat dicapai berakhir pada rule atau redirect; tampilkan fallback yang ditentukan dokumen bila tidak ada rule, bukan chart default.
+- [x] Pastikan recommendation non-chart `KPI / Big Number` dan `Separate Views` tidak diberi Guide ID yang tidak tersedia.
+
+### Phase 3 — wizard, hasil, dan interaksi
+
+- [x] Bangun initial state dengan satu pertanyaan root dan lima pilihan intent ber-helper; tampilkan satu pertanyaan dalam satu waktu.
+- [x] Render pilihan sebagai button semantic yang seluruh areanya dapat dipilih dan langsung memajukan wizard; gunakan breadcrumb/context untuk memberi orientasi tanpa menampilkan ID internal atau persentase progress tetap.
+- [x] Sediakan `Kembali`, `Ubah jawaban`, dan `Mulai dari awal`/`Coba lagi`; terapkan invalidasi downstream saat jawaban diubah dan reset tanpa modal konfirmasi.
+- [x] Setelah transisi, pindahkan focus secara logis ke pertanyaan baru; saat result muncul, focus ke heading hasil. Dukung Tab, Enter/Space, focus visible, label deskriptif, kontras, target sentuh memadai, dan `prefers-reduced-motion`.
+- [x] Render satu result surface dengan urutan nama chart, variant, alasan, tips, alternative/watch-out yang tersedia, CTA Guide yang valid, dan aksi ubah jawaban/restart.
+- [x] Render result KPI / Separate Views tanpa CTA Guide. Sembunyikan subsection opsional yang kosong dan jangan menambahkan preview chart dekoratif.
+- [x] Tambahkan loading/error/fallback state secukupnya; kegagalan analytics tidak boleh menghalangi wizard.
+
+### Phase 4 — integrasi Chart Guide dan Map
+
+- [x] Tambahkan entry `map` ke `chart/charts.json` dengan deskripsi, kegunaan, contoh struktur data, dos/don'ts, dan `when_not_to_use` yang dibutuhkan detail template.
+- [x] Jelaskan perbedaan Choropleth untuk administrative regions dan Point/Symbol Map untuk lokasi individual; tegaskan bahwa kolom lokasi saja tidak cukup dan Bar Chart lebih cocok bila tujuan hanya ranking wilayah.
+- [x] Perbarui taxonomy/filter Chart Guide agar mencakup Comparison, Trend, Distribution, Relationship, Composition, dan Geography (label UI: Perbandingan, Tren, Sebaran, Hubungan, Komposisi, Geografis); beri tag multi-intent yang sesuai pada chart terkait tanpa menghapus kegunaan tag lama.
+- [x] Pastikan Map muncul dalam katalog dan detail Guide tetap usable tanpa konfigurasi map renderer; pertahankan fallback preview yang ada.
+- [x] Tambahkan tautan kecil dekat intro/filter Chart Guide: `Tidak yakin chart mana yang cocok? Coba Chart Recommender →`.
+- [x] Pastikan setiap CTA recommendation membuka `chart/chart.html?id=<chartId>` yang valid dan family Guide yang sesuai, termasuk saat recommendation memakai variant.
+
+### Phase 5 — analytics dan privasi
+
+- [x] Muat bootstrap analytics existing dan sediakan hooks untuk `recommender_started` (`entry_source`), `recommender_intent_selected` (`intent`), `recommender_question_answered` (`question_id`, `answer_id`), `recommender_completed` (`intent`, `rule_id`, `recommended_chart`, `question_count`), `recommender_restarted` (`previous_intent`, `previous_rule_id` bila ada), dan `recommender_guide_opened` (`recommended_chart`, `rule_id`).
+- [x] Pastikan event hanya mengirim properti tersebut; jangan kirim jawaban bebas, isi dataset, atau data pribadi. Event error/guide click tidak boleh membuat halaman gagal bila `gtag` belum tersedia.
+
+### Phase 6 — acceptance dan regression review
+
+- [x] Telusuri seluruh node/answer ID dari decision tree: semua root intent dan question reachable, setiap path punya terminal/redirect, tidak ada dead-end, dan kebanyakan path selesai dalam 2–5 pertanyaan.
+- [x] Verifikasi 23 skenario rekomendasi yang mencakup skenario QA #27 di `DECISION_TREE.md`: ranking 5/30 kategori, target vs aktual, Waterfall, Choropleth/Point Map, 2-periode dan tren multi-tahun, Histogram/Box Plot, Scatter/Bubble/Heatmap, komposisi 4 vs 8 bagian, Treemap, KPI, serta Separate Views.
+- [x] Verifikasi Back, edit jawaban upstream, invalidasi downstream, semua redirect dan preservation context, restart, fallback, optional content, dan CTA chart mapping.
+- [x] Tinjau akses keyboard/screen reader, focus management, dan reduced motion. Tab serta Enter/Space diverifikasi di browser.
+- [ ] Selesaikan sweep responsive desktop/tablet/mobile dan pastikan tidak ada horizontal overflow pada viewport kecil.
+- [x] Regression-check integrasi Chart Guide: taxonomy, filter/search, katalog 17 chart, Map detail dan navigasi previous/next diverifikasi; 16 detail chart lama tidak dibuka satu per satu.
+- [x] Verifikasi sidebar active state, homepage card/popular link, root dan subfolder routes, metadata/canonical, sitemap, dan kontrak privasi payload analytics melalui code review.
+- [x] Jalankan smoke test route dan integrasi Chart Recommender pada Apache XAMPP. Beranda, recommender, Chart Guide, dan Map detail mengembalikan HTTP 200; kartu beranda, sidebar, jalur rekomendasi Map, CTA, dan filter Tren diverifikasi.
+
+### File yang dibuat/diubah
+
+Buat:
+
+- `chart-recommender/index.html`
+- `chart-recommender/style.css`
+- `chart-recommender/decision-tree.js`
+- `chart-recommender/engine.js`
+- `chart-recommender/script.js`
+
+Ubah:
+
+- `assets/nav.js` — route resolver, item TOOLS, active state, dan ikon.
+- `index.html` — route lokal, ikon, serta link penemuan tool.
+- `tools/tools.json` — entri tool ke-8.
+- `chart/charts.json` — Map Guide dan taxonomy yang relevan.
+- `chart/index.html` — filter taxonomy dan cross-link ke recommender.
+- `chart/chart.html` — label kategori baru dan detail Map yang kompatibel dengan renderer existing.
+- `sitemap.xml`, `README.md`, dan `SMOKE-TEST.md`.
+
+Jangan ubah shared design tokens atau fungsi Chart Guide yang tidak terkait bila pola yang ada sudah cukup. Jangan menambah framework, backend, akun/persistence, AI, library preview, atau chart di luar vocabulary V1.

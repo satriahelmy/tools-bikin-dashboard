@@ -122,7 +122,7 @@ def render_page(book: dict[str, object], slug: str) -> str:
   <link rel="stylesheet" href="../../style.css?v=1.1">
   <link rel="stylesheet" href="../../../assets/design-system.css?v=1.8" data-bd-design-system>
   <link rel="stylesheet" href="../../../assets/nav.css?v=1.6" data-bd-nav-css>
-  <script src="../../../assets/nav.js?v=1.4" defer></script>
+  <script src="../../../assets/nav.js?v=1.5" defer></script>
 </head>
 <body class="bd-with-nav book-library-page book-detail-page">
   <header class="bd-topbar">

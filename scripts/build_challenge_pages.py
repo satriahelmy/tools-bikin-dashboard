@@ -1,4 +1,4 @@
-"""Generate the static Data Challenge catalog and detail pages from public data."""
+"""Generate the static Analytical Challenge catalog and detail pages from public data."""
 
 from __future__ import annotations
 
@@ -12,7 +12,8 @@ from posixpath import relpath
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CANONICAL_ROOT = "https://bikindashboard.com/challenge/"
+CANONICAL_ROOT = "https://bikindashboard.com/analytical-challenge/"
+LEGACY_ROUTE_ROOT = ROOT / "challenge"
 SLUG_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DICTIONARY_FIELDS = ("column", "type", "description")
 
@@ -57,8 +58,8 @@ def page_shell(
     challenge_slug: str = "",
 ) -> str:
     assets = relpath("assets", base_path or ".")
-    page_style = relpath("challenge/style.css", base_path or ".")
-    page_script = relpath("challenge/analytics.js", base_path or ".")
+    page_style = relpath("analytical-challenge/style.css", base_path or ".")
+    page_script = relpath("analytical-challenge/analytics.js", base_path or ".")
     privacy = relpath("privacy.html", base_path or ".")
     challenge_attributes = (
         f' data-challenge-id="{escaped(challenge_id)}" data-challenge-slug="{escaped(challenge_slug)}"'
@@ -88,7 +89,7 @@ def page_shell(
   <link rel="stylesheet" href="{assets}/nav.css?v=1.6" data-bd-nav-css>
   <link rel="stylesheet" href="{page_style}">
   <script src="{assets}/analytics.js?v=1"></script>
-  <script src="{assets}/nav.js?v=1.4" defer></script>
+  <script src="{assets}/nav.js?v=1.5" defer></script>
   <script src="{page_script}" defer></script>
 </head>
 <body class="bd-with-nav challenge-page"{challenge_attributes}>
@@ -114,6 +115,8 @@ def validate_dataset(challenge: dict[str, object]) -> tuple[Path, Path, list[dic
     slug = text(challenge.get("slug"))
     if not SLUG_PATTERN.fullmatch(slug):
         raise ValueError(f"Invalid challenge slug: {slug!r}")
+
+    challenge_type_label(challenge)
 
     dataset = challenge.get("dataset")
     dictionary = challenge.get("dataDictionary")
@@ -192,17 +195,34 @@ def validate_dataset(challenge: dict[str, object]) -> tuple[Path, Path, list[dic
     return dataset_path, dictionary_path, dictionary_rows
 
 
+def challenge_type_label(challenge: dict[str, object]) -> str:
+    challenge_type = challenge.get("type")
+    if not isinstance(challenge_type, dict):
+        raise ValueError(f"Challenge {text(challenge.get('slug'))} must define a type object")
+
+    type_id = text(challenge_type.get("id"))
+    label = text(challenge_type.get("label"))
+    if not type_id or not label:
+        raise ValueError(
+            f"Challenge {text(challenge.get('slug'))} type must define non-empty id and label"
+        )
+    return label
+
+
 def render_catalog(challenges: list[dict[str, object]]) -> str:
+    type_labels = list(dict.fromkeys(challenge_type_label(challenge) for challenge in challenges))
+    catalog_title = type_labels[0] if len(type_labels) == 1 else "Challenges"
     cards = []
     for challenge in challenges:
         slug = text(challenge.get("slug"))
         dataset = challenge["dataset"]
+        type_label = challenge_type_label(challenge)
         skills = challenge.get("skills") or []
         skill_text = " · ".join(escaped(skill) for skill in skills if text(skill))
         cards.append(f'''      <article class="challenge-catalog-item">
         <p class="challenge-number">#{escaped(challenge.get("id"))}</p>
         <div class="challenge-catalog-copy">
-          <p class="challenge-catalog-meta">{escaped(challenge.get("difficulty"))} · {int(dataset["rows"]):,} rows</p>
+          <p class="challenge-catalog-meta">{escaped(type_label)} · {escaped(challenge.get("difficulty"))} · {int(dataset["rows"]):,} rows</p>
           <h2><a href="{escaped(slug)}/">{escaped(challenge.get("title"))}</a></h2>
           <p>{escaped(challenge.get("catalogDescription"))}</p>
           <p class="challenge-skills">{skill_text}</p>
@@ -213,22 +233,22 @@ def render_catalog(challenges: list[dict[str, object]]) -> str:
     body = f'''  <main class="bd-main">
     <div class="bd-container">
       <header class="challenge-catalog-header bd-tool-intro">
-        <p class="bd-label">PRACTICE · DATA CHALLENGE</p>
+        <p class="bd-label">PRACTICE · {escaped(catalog_title.upper())}</p>
         <h2>Latihan analisis data</h2>
         <p class="bd-body">Gunakan kasus bisnis dan dataset untuk menemukan insight, lalu komunikasikan hasil analisismu melalui dashboard.</p>
       </header>
-      <section class="challenge-catalog-list" aria-label="Daftar Data Challenge">
+      <section class="challenge-catalog-list" aria-label="Daftar {escaped(catalog_title)}">
 {chr(10).join(cards)}
       </section>
     </div>
   </main>'''
     return page_shell(
-        "Data Challenge | BikinDashboard",
+        f"{catalog_title} | BikinDashboard",
         "Latihan analisis data dengan kasus bisnis dan dataset yang realistis. Download dataset gratis dan buat dashboard dengan tools pilihanmu.",
         CANONICAL_ROOT,
-        "challenge",
+        "analytical-challenge",
         body,
-        "Data Challenge",
+        catalog_title,
         "../index.html",
         "Semua tool",
     )
@@ -282,9 +302,10 @@ def display_metric(value: object) -> str:
 
 def render_detail(challenge: dict[str, object], dictionary_rows: list[dict[str, str]]) -> str:
     slug = text(challenge.get("slug"))
+    type_label = challenge_type_label(challenge)
     dataset = challenge["dataset"]
-    dataset_url = relative_asset(f"challenge/{slug}", dataset["file"])
-    dictionary_url = relative_asset(f"challenge/{slug}", challenge["dataDictionary"]["file"])
+    dataset_url = relative_asset(f"analytical-challenge/{slug}", dataset["file"])
+    dictionary_url = relative_asset(f"analytical-challenge/{slug}", challenge["dataDictionary"]["file"])
     dataset_name = PurePosixPath(text(dataset["file"])).name
     dictionary_name = PurePosixPath(text(challenge["dataDictionary"]["file"])).name
     canonical = f"{CANONICAL_ROOT}{slug}/"
@@ -351,7 +372,7 @@ def render_detail(challenge: dict[str, object], dictionary_rows: list[dict[str, 
     <div class="bd-container">
       <article class="challenge-brief">
         <header class="challenge-header bd-tool-intro">
-          <p class="challenge-eyebrow bd-label">CHALLENGE #{escaped(challenge.get("id"))}</p>
+          <p class="challenge-eyebrow bd-label">{escaped(type_label.upper())} #{escaped(challenge.get("id"))}</p>
           <h2>{escaped(challenge.get("title"))}</h2>
           <p class="challenge-meta">{header_metadata_text}</p>
           <p class="challenge-intro bd-body">{escaped(challenge.get("catalogDescription"))}</p>
@@ -396,19 +417,19 @@ def render_detail(challenge: dict[str, object], dictionary_rows: list[dict[str, 
 
 {share_section}
 
-        <p class="challenge-back"><a href="../">← Back to Data Challenge</a></p>
+        <p class="challenge-back"><a href="../">← Kembali ke {escaped(type_label)}</a></p>
       </article>
     </div>
   </main>'''
     return page_shell(
-        f"{text(challenge.get('title'))} — Data Challenge | BikinDashboard",
+        f"{text(challenge.get('title'))} — {type_label} | BikinDashboard",
         "Latihan analisis data dan dashboard menggunakan dataset transaksi coffee shop dua tahun. Download dataset gratis dan temukan insight versimu sendiri.",
         canonical,
-        f"challenge/{slug}",
+        f"analytical-challenge/{slug}",
         body,
-        "Data Challenge",
+        type_label,
         "../",
-        "Katalog challenge",
+        f"Daftar {type_label}",
         text(challenge.get("id")),
         slug,
     )
@@ -416,7 +437,10 @@ def render_detail(challenge: dict[str, object], dictionary_rows: list[dict[str, 
 
 def update_sitemap(sitemap_path: Path, slugs: list[str]) -> None:
     content = sitemap_path.read_text(encoding="utf-8")
-    lines = [line for line in content.splitlines() if "/challenge/" not in line]
+    lines = [
+        line for line in content.splitlines()
+        if "/challenge/" not in line and "/analytical-challenge/" not in line
+    ]
     challenge_urls = [
         f"  <url><loc>{CANONICAL_ROOT}</loc></url>",
         *[f"  <url><loc>{CANONICAL_ROOT}{slug}/</loc></url>" for slug in slugs],
@@ -424,6 +448,44 @@ def update_sitemap(sitemap_path: Path, slugs: list[str]) -> None:
     insert_at = next((index for index, line in enumerate(lines) if "</urlset>" in line), len(lines))
     lines[insert_at:insert_at] = challenge_urls
     sitemap_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def render_legacy_redirect(relative_target: str, canonical: str) -> str:
+    target = escaped(relative_target)
+    canonical_url = escaped(canonical)
+    return f'''<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Halaman dipindahkan — BikinDashboard</title>
+  <link rel="canonical" href="{canonical_url}">
+  <meta http-equiv="refresh" content="0; url={target}">
+</head>
+<body>
+  <p>Halaman ini pindah ke <a href="{target}">Analytical Challenge</a>.</p>
+  <script>window.location.replace("{target}");</script>
+</body>
+</html>
+'''
+
+
+def write_legacy_redirects(slugs: list[str]) -> None:
+    legacy_index = LEGACY_ROUTE_ROOT / "index.html"
+    legacy_index.parent.mkdir(parents=True, exist_ok=True)
+    legacy_index.write_text(
+        render_legacy_redirect("../analytical-challenge/", CANONICAL_ROOT),
+        encoding="utf-8",
+    )
+    for slug in slugs:
+        legacy_detail = LEGACY_ROUTE_ROOT / slug / "index.html"
+        legacy_detail.parent.mkdir(parents=True, exist_ok=True)
+        legacy_detail.write_text(
+            render_legacy_redirect(
+                f"../../analytical-challenge/{slug}/", f"{CANONICAL_ROOT}{slug}/"
+            ),
+            encoding="utf-8",
+        )
 
 
 def build(data_path: Path, output_root: Path, sitemap_path: Path) -> dict[str, int]:
@@ -450,6 +512,7 @@ def build(data_path: Path, output_root: Path, sitemap_path: Path) -> dict[str, i
             render_detail(challenge, dictionary_rows), encoding="utf-8"
         )
 
+    write_legacy_redirects(slugs)
     update_sitemap(sitemap_path, slugs)
     return {"catalogs": 1, "detail_pages": len(challenges), "dictionary_columns": sum(len(item[1][2]) for item in validated)}
 
@@ -457,7 +520,7 @@ def build(data_path: Path, output_root: Path, sitemap_path: Path) -> dict[str, i
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=ROOT / "data/challenges/challenges.json")
-    parser.add_argument("--output", type=Path, default=ROOT / "challenge")
+    parser.add_argument("--output", type=Path, default=ROOT / "analytical-challenge")
     parser.add_argument("--sitemap", type=Path, default=ROOT / "sitemap.xml")
     args = parser.parse_args()
     print(json.dumps(build(args.data, args.output, args.sitemap), ensure_ascii=False))

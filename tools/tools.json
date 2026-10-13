@@ -20,6 +20,16 @@
     "badges": ["Chart.js", "Gratis"]
   },
   {
+    "id": "chart-recommender",
+    "name": "Chart Recommender",
+    "description": "Temukan visualisasi yang sesuai dengan tujuan analisismu lewat beberapa pertanyaan singkat.",
+    "category": "Belajar",
+    "status": "available",
+    "url": "/chart-recommender/",
+    "localUrl": "../chart-recommender/index.html",
+    "badges": ["Gratis"]
+  },
+  {
     "id": "resourcehub",
     "name": "Resource Hub",
     "description": "Kumpulan link tools, dataset, tutorial, dan inspirasi data.",
@@ -61,12 +71,12 @@
   },
   {
     "id": "challenge",
-    "name": "Data Challenge",
-    "description": "Analisis kasus bisnis dengan dataset yang disediakan, lalu temukan insight untuk dashboard.",
+    "name": "Analytical Challenge",
+    "description": "Analisis kasus bisnis menggunakan dataset, lalu temukan insight dan komunikasikan melalui dashboard.",
     "category": "Belajar",
     "status": "available",
-    "url": "/challenge/",
-    "localUrl": "../challenge/index.html",
+    "url": "/analytical-challenge/",
+    "localUrl": "../analytical-challenge/index.html",
     "badges": ["Latihan", "CSV", "Gratis"]
   }
 ]

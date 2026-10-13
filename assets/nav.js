@@ -1,5 +1,5 @@
 (function () {
-  const toolFolders = ['colorpalette', 'chart', 'resourcehub', 'data-quality-checker', 'papers', 'book-library', 'challenge', 'tools'];
+  const toolFolders = ['colorpalette', 'chart', 'chart-recommender', 'resourcehub', 'data-quality-checker', 'papers', 'book-library', 'analytical-challenge', 'challenge', 'tools'];
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const toolIndex = pathSegments.findIndex((segment) => toolFolders.includes(segment.toLowerCase()));
   const rootPath = toolIndex === -1
@@ -27,6 +27,7 @@
       links: [
         { id: 'colorpalette', label: 'Color Palette', href: `${rootPath}colorpalette/` },
         { id: 'chart', label: 'Chart Guide', href: `${rootPath}chart/` },
+        { id: 'chart-recommender', label: 'Chart Recommender', href: `${rootPath}chart-recommender/` },
         { id: 'data-quality-checker', label: 'Data Quality Checker', href: `${rootPath}data-quality-checker/` }
       ]
     },
@@ -41,19 +42,23 @@
     {
       label: 'PRACTICE',
       links: [
-        { id: 'challenge', label: 'Data Challenge', href: `${rootPath}challenge/` }
+        { id: 'challenge', label: 'Analytical Challenge', href: `${rootPath}analytical-challenge/` }
       ]
     }
   ];
-  const current = toolIndex === -1 || pathSegments[toolIndex].toLowerCase() === 'tools'
+  const currentSegment = toolIndex === -1 ? '' : pathSegments[toolIndex].toLowerCase();
+  const current = toolIndex === -1 || currentSegment === 'tools'
     ? 'home'
-    : pathSegments[toolIndex].toLowerCase();
+    : ['analytical-challenge', 'challenge'].includes(currentSegment)
+      ? 'challenge'
+      : currentSegment;
 
   const iconSvg = (id) => {
     const paths = {
       home: '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
       colorpalette: '<circle cx="12" cy="12" r="8.5"/><circle cx="8.5" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="15.5" cy="10" r="1" fill="currentColor" stroke="none"/><path d="M15.5 16.5c0-1.1.9-2 2-2h.5"/>',
       chart: '<path d="M4 19V5M4 19h16"/><rect x="7" y="12" width="2.5" height="4" rx=".5"/><rect x="11" y="9" width="2.5" height="7" rx=".5"/><rect x="15" y="6" width="2.5" height="10" rx=".5"/>',
+      'chart-recommender': '<circle cx="12" cy="12" r="8.5"/><path d="m14.5 9.5-4 1-1 4 4-1z"/>',
       resourcehub: '<circle cx="12" cy="12" r="8.5"/><path d="M8 12h8M12 8v8"/>',
       'data-quality-checker': '<path d="M4 5.5h10M4 10h6M4 14.5h5"/><path d="M15 14.5l2 2 3-4"/><circle cx="17" cy="9" r="3.5"/>',
       papers: '<path d="M5 3.5h10l4 4V20.5H5z"/><path d="M15 3.5v4h4M8 11h8M8 14.5h8M8 18h5"/>',

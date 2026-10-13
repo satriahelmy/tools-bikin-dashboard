@@ -1,6 +1,6 @@
-# design.md — BikinDashboard Data Challenge
+# design.md — BikinDashboard Analytical Challenge
 
-**Feature:** Data Challenge  
+**Feature:** Analytical Challenge
 **Version:** V1  
 **Initial Challenge:** #01 — Coffee Shop Performance  
 **Design direction:** Clean, editorial, practical, information-first
@@ -9,7 +9,7 @@
 
 ## 1. Design Intent
 
-Data Challenge should feel like receiving a concise **Data Analyst project brief**, not entering an online course, game, or marketing landing page.
+Analytical Challenge should feel like receiving a concise **Data Analyst project brief**, not entering an online course, game, or marketing landing page.
 
 The interface should make the user think:
 
@@ -168,7 +168,7 @@ Paper Library
 Book Library
 
 PRACTICE
-Data Challenge
+Analytical Challenge
 ```
 
 Section labels:
@@ -180,7 +180,7 @@ Section labels:
 
 Do not make groups collapsible in V1.
 
-`Data Challenge` should use the same active-state treatment as other current navigation items.
+`Analytical Challenge` should use the same active-state treatment as other current navigation items.
 
 ---
 
@@ -232,7 +232,7 @@ A subtle divider may be used between major groups when useful.
 
 Reuse the existing BikinDashboard typography.
 
-If the site currently uses Poppins, continue using it rather than introducing another font solely for Data Challenge.
+If the site currently uses Poppins, continue using it rather than introducing another font solely for Analytical Challenge.
 
 Hierarchy should come primarily from:
 
@@ -277,14 +277,14 @@ If a label is used for `Beginner`, a neutral treatment is sufficient.
 
 ---
 
-# 8. Challenge Catalog — `/challenge/`
+# 8. Analytical Challenge Catalog — `/analytical-challenge/`
 
 ## 8.1 Header
 
 Left-aligned.
 
 ```text
-Data Challenge
+Analytical Challenge
 
 Latihan analisis data dengan kasus bisnis dan dataset yang realistis.
 Explore datanya, temukan insight, dan buat dashboard dengan tools pilihanmu.
@@ -332,7 +332,7 @@ It is an index, not a gamification level.
 
 The first viewport should immediately establish:
 
-1. this is a Data Challenge,
+1. this is an Analytical Challenge,
 2. the challenge title,
 3. difficulty/scope,
 4. business premise,
@@ -341,7 +341,7 @@ The first viewport should immediately establish:
 Preferred hierarchy:
 
 ```text
-Data Challenge / Challenge #01
+Analytical Challenge / Challenge #01
 
 Coffee Shop Performance
 
@@ -631,7 +631,7 @@ Do not use a generic giant CTA banner.
 A simple return/navigation treatment is enough:
 
 ```text
-← Back to Data Challenge
+← Back to Analytical Challenge
 ```
 
 Future versions may show another challenge only when another real challenge exists.
@@ -665,7 +665,7 @@ Do not show a fake “Next Challenge — Coming Soon” solely to fill space.
 - body copy stays comfortably readable,
 - no important information hidden.
 
-Do not create Data Challenge-specific mobile navigation if the site already has one.
+Do not create Analytical Challenge-specific mobile navigation if the site already has one.
 
 ---
 
@@ -767,9 +767,9 @@ Preserve existing:
 
 Before adding new CSS, inspect whether an existing token/component can be reused.
 
-Feature-specific CSS should be scoped to Data Challenge and should not unintentionally alter existing pages.
+Feature-specific CSS should be scoped to Analytical Challenge and should not unintentionally alter existing pages.
 
-Do not rewrite shared navigation solely for this feature except for the necessary category grouping and Data Challenge entry.
+Do not rewrite shared navigation solely for this feature except for the necessary category grouping and Analytical Challenge entry.
 
 ---
 
@@ -843,7 +843,7 @@ Before considering the implementation complete, verify:
 
 ```text
 ┌──────────────────────────────────────────────────────────────┐
-│ Data Challenge                                               │
+│ Analytical Challenge                                               │
 │ Latihan analisis data dengan kasus bisnis dan dataset...    │
 │                                                              │
 │ ──────────────────────────────────────────────────────────── │
@@ -862,7 +862,7 @@ Before considering the implementation complete, verify:
 # 30. Reference Wireframe — Detail
 
 ```text
-Data Challenge / Challenge #01
+Analytical Challenge / Challenge #01
 
 Coffee Shop Performance
 Beginner · 154,145 rows · 103,008 transactions · 2024–2025
@@ -931,7 +931,7 @@ Share Your Work
 
 #BikinDashboardChallenge · @satriahelmy
 
-← Back to Data Challenge
+← Back to Analytical Challenge
 ```
 
 ---
@@ -944,4 +944,4 @@ When deciding whether to add another visual component, use this test:
 
 If the answer is no, do not add it.
 
-The strongest Data Challenge page should feel almost obvious: a clear brief, understandable data, one strong download action, and enough guidance to begin without prescribing the answer.
+The strongest Analytical Challenge page should feel almost obvious: a clear brief, understandable data, one strong download action, and enough guidance to begin without prescribing the answer.

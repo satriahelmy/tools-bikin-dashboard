@@ -1,14 +1,14 @@
-# PRD — BikinDashboard Data Challenge
+# PRD — BikinDashboard Analytical Challenge
 
 **Product:** BikinDashboard  
-**Feature:** Data Challenge  
+**Feature:** Analytical Challenge
 **Version:** V1  
 **Status:** Ready for implementation  
 **Initial Challenge:** #01 — Coffee Shop Performance
 
 ## 1. Overview
 
-Data Challenge is the **Practice** area of BikinDashboard. It provides realistic, open-ended data analysis cases where users receive a business context, objective, dataset, data dictionary, optional guiding questions, and suggested deliverable.
+Analytical Challenge is the **Practice** area of BikinDashboard. It provides realistic, open-ended data analysis cases where users receive a business context, objective, dataset, data dictionary, optional guiding questions, and suggested deliverable.
 
 Users may analyze the data using any tool they prefer. There is no official dashboard, fixed visualization requirement, scoring system, or single correct answer.
 
@@ -32,7 +32,7 @@ Paper Library
 Book Library
 
 PRACTICE
-Data Challenge
+Analytical Challenge
 ```
 
 Use small muted uppercase section labels. No accordion/collapsible navigation in V1.
@@ -41,7 +41,7 @@ Use small muted uppercase section labels. No accordion/collapsible navigation in
 
 BikinDashboard already provides practical tools and curated resources, but does not yet provide a place to practice end-to-end analytical thinking.
 
-Many exercises over-specify the solution: calculate exact KPIs, use exact charts, or reproduce an example dashboard. Data Challenge should instead simulate a lightweight Data Analyst assignment:
+Many exercises over-specify the solution: calculate exact KPIs, use exact charts, or reproduce an example dashboard. Analytical Challenge should instead simulate a lightweight Data Analyst assignment:
 
 > Here is the business context and the data. Explore it, decide what matters, and communicate what you find.
 
@@ -111,27 +111,27 @@ Avoid excessive cards, gradients, decorative widgets, gamification, and generic 
 Routes:
 
 ```text
-/challenge/
-/challenge/coffee-shop-performance/
+/analytical-challenge/
+/analytical-challenge/coffee-shop-performance/
 ```
 
 Future examples:
 
 ```text
-/challenge/ecommerce-performance/
-/challenge/marketing-campaign/
-/challenge/delivery-performance/
+/analytical-challenge/ecommerce-performance/
+/analytical-challenge/marketing-campaign/
+/analytical-challenge/delivery-performance/
 ```
 
 Do not tie the route architecture to Challenge #01.
 
 ## 9. Challenge Catalog
 
-`/challenge/` is the entry point for all challenges.
+`/analytical-challenge/` is the entry point for the current analytical challenges.
 
 Suggested header:
 
-> **Data Challenge**
+> **Analytical Challenge**
 >
 > Latihan analisis data dengan kasus bisnis dan dataset yang realistis. Explore datanya, temukan insight, dan buat dashboard dengan tools pilihanmu.
 
@@ -205,7 +205,7 @@ The exact schema may change, but adding Challenge #02 must not require duplicati
 Recommended hierarchy:
 
 ```text
-Data Challenge / Breadcrumb
+Analytical Challenge / Breadcrumb
 
 Challenge #01
 Coffee Shop Performance
@@ -507,7 +507,7 @@ Each challenge should have its own indexable URL.
 Recommended title:
 
 ```text
-Coffee Shop Performance — Data Challenge | BikinDashboard
+Coffee Shop Performance — Analytical Challenge | BikinDashboard
 ```
 
 Recommended description:
@@ -541,10 +541,10 @@ Do **not** publish the internal QA document.
 Adapt this to the existing repository rather than forcing a framework:
 
 ```text
-/challenge/
+/analytical-challenge/
     index.html
 
-/challenge/coffee-shop-performance/
+/analytical-challenge/coffee-shop-performance/
     index.html
 
 /data/challenges/
@@ -561,8 +561,8 @@ Reuse existing shared navigation, tokens, and styles. Do not duplicate the share
 
 V1 is complete when:
 
-- [ ] `Data Challenge` appears under a `PRACTICE` sidebar group.
-- [ ] `/challenge/` displays the challenge catalog.
+- [ ] `Analytical Challenge` appears under a `PRACTICE` sidebar group.
+- [ ] `/analytical-challenge/` displays the challenge catalog.
 - [ ] Challenge #01 appears in the catalog.
 - [ ] Challenge #01 has a stable detail URL.
 - [ ] Business context and objective are displayed.

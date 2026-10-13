@@ -11,7 +11,7 @@ Folder ini menampung dokumen perencanaan, desain, QA, dan arsip ZIP yang menjadi
 - `source/papers/` — PRD dan design spec Paper Library.
 - `source/papers/workbooks/` — workbook editorial sumber Paper Library yang dipakai untuk membuat JSON runtime.
 - `source/resourcehub/` — PRD, design spec, dan tasks Resource Hub.
-- `source/challenge/` — PRD dan design spec Data Challenge.
+- `source/challenge/` — PRD dan design spec Analytical Challenge.
 - `archive/` — snapshot ZIP dari tool awal.
 
 Dokumen Color Palette memakai nama standar `prd.md` dan `design.md`; file unduhan dengan suffix `(1)`/`(2)` tidak dipertahankan.

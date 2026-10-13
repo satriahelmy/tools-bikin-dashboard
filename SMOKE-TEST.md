@@ -10,11 +10,12 @@ Tanggal: __________  Tester: __________  Browser: __________
 - [ ] Pada viewport mobile, tombol menu dapat membuka/menutup sidebar dan tombol Escape menutupnya.
 - [ ] Favicon tampil dan tidak ada request asset 404.
 
-## Data Challenge
+## Analytical Challenge
 
-- [ ] Beranda menampilkan card Data Challenge, jumlah card sesuai daftar, dan filter Belajar tetap menampilkan card tersebut.
-- [ ] `/challenge/` menampilkan Coffee Shop Performance dengan metadata dan link detail yang benar.
-- [ ] `/challenge/coffee-shop-performance/` memiliki title, description, canonical URL, dan active sidebar state yang sesuai.
+- [ ] Beranda menampilkan card Analytical Challenge, jumlah card sesuai daftar, dan filter Belajar tetap menampilkan card tersebut.
+- [ ] `/analytical-challenge/` menampilkan Coffee Shop Performance dengan metadata dan link detail yang benar.
+- [ ] `/analytical-challenge/coffee-shop-performance/` memiliki title, description, canonical URL, dan active sidebar state yang sesuai.
+- [ ] Rute lama `/challenge/` dan `/challenge/coffee-shop-performance/` mengarahkan pengunjung ke rute Analytical Challenge yang baru.
 - [ ] Detail menampilkan business context, objective, grain transaksi, metadata dataset, pertanyaan, dan deliverable tanpa jawaban resmi atau pola internal; stretch challenge dan share section tidak ditampilkan untuk Challenge #01.
 - [ ] Dataset dan data dictionary dapat diunduh dengan nama file publik yang ditetapkan.
 - [ ] Tabel data dictionary menampilkan seluruh 18 kolom; pada viewport kecil tabel dapat digulir horizontal tanpa membuat halaman meluber.
@@ -37,6 +38,18 @@ Tanggal: __________  Tester: __________  Browser: __________
 - [ ] Detail memiliki link kembali ke overview Chart Guide dan navigasi chart sebelumnya/berikutnya.
 - [ ] Chart interaktif tampil; fallback muncul bila bundle gagal dimuat.
 - [ ] Judul, deskripsi, dan canonical detail berubah sesuai `?id=`.
+
+## Chart Recommender
+
+- [x] `/chart-recommender/` terbuka dari Beranda dan sidebar; active state benar di root domain dan subfolder XAMPP.
+- [x] Lima intent tampil dan setiap pilihan memajukan satu pertanyaan yang sesuai.
+- [x] Back, ubah jawaban upstream, invalidasi jawaban downstream, redirect lintas intent, dan Mulai dari awal bekerja.
+- [x] Recommendation menampilkan alasan, tips, alternative/watch-out bila tersedia, variant bila ada, dan CTA Guide yang valid.
+- [x] KPI / Big Number dan Separate Views tidak menampilkan CTA Guide; fallback menyediakan aksi mulai ulang.
+- [x] Link dari Chart Guide ke Recommender terlihat dekat intro/filter.
+- [x] Analytics event hanya mengirim intent/ID/rule/chart/count atau entry source yang ditetapkan; tidak mengirim jawaban bebas atau data pribadi.
+- [x] Wizard dapat digunakan dengan keyboard/screen reader; Tab, Enter, dan Space serta focus heading diverifikasi.
+- [ ] Layout wizard tidak meluber horizontal pada desktop, tablet, dan mobile; sweep viewport masih perlu dilakukan.
 
 ## Resource Hub
 

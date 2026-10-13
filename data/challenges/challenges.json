@@ -2,6 +2,10 @@
   "challenges": [
     {
       "id": "01",
+      "type": {
+        "id": "analytical",
+        "label": "Analytical Challenge"
+      },
       "slug": "coffee-shop-performance",
       "title": "Coffee Shop Performance",
       "catalogDescription": "Analisis dua tahun transaksi sebuah jaringan coffee shop dan temukan insight yang penting untuk management.",
