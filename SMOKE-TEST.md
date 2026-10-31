@@ -23,6 +23,20 @@ Tanggal: __________  Tester: __________  Browser: __________
 - [ ] Tidak ada request halaman publik yang dapat mengambil `docs/source/challenge/` atau materi QA maintainer.
 - [ ] Catalog/detail tetap dapat diakses dari root domain dan subfolder XAMPP; navigasi, focus state, dan layout diperiksa di desktop, tablet, dan mobile.
 
+## SQL Challenge
+
+- [ ] `/sql-challenge/` menampilkan 100 soal dalam urutan Easy (35), Medium (45), dan Hard (20) dari delapan dataset, serta sidebar menandai SQL Challenge aktif.
+- [ ] Grup level dapat dibuka/tutup dan grup soal aktif terbuka saat link soal dibagikan.
+- [ ] Status Belum dicoba/Sudah dicoba/Selesai dan progres total berubah sesuai hasil query serta bertahan setelah halaman dimuat ulang.
+- [ ] Memilih soal memperbarui prompt, tingkat kesulitan, dataset/schema, editor kosong, dan parameter `q` di URL.
+- [ ] Tombol Back/Forward browser mengubah soal sesuai URL.
+- [ ] Query jawaban untuk seluruh 100 soal berjalan dan ditandai benar saat QA.
+- [ ] Menjalankan editor kosong meminta pengguna menulis query tanpa memuat mesin SQL.
+- [ ] Query valid dengan hasil berbeda menampilkan tabel dan status belum cocok.
+- [ ] Query sintaksis salah dan statement non-SELECT menampilkan pesan yang terbaca tanpa merusak halaman.
+- [ ] Mesin SQL gagal dimuat dengan pesan yang bisa dipulihkan saat offline; query dan dataset tidak dikirim ke analytics.
+- [ ] Editor, soal, schema, dan tabel hasil dapat dipakai dengan keyboard serta tidak meluber di viewport mobile.
+
 ## Color Palette
 
 - [ ] Generator membuat palet baru, mode harmoni dapat dipilih, dan tombol Space bekerja.

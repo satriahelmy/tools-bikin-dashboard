@@ -1,5 +1,5 @@
 (function () {
-  const toolFolders = ['colorpalette', 'chart', 'chart-recommender', 'resourcehub', 'data-quality-checker', 'papers', 'book-library', 'analytical-challenge', 'challenge', 'tools'];
+  const toolFolders = ['colorpalette', 'chart', 'chart-recommender', 'resourcehub', 'data-quality-checker', 'papers', 'book-library', 'analytical-challenge', 'sql-challenge', 'challenge', 'tools'];
   const pathSegments = window.location.pathname.split('/').filter(Boolean);
   const toolIndex = pathSegments.findIndex((segment) => toolFolders.includes(segment.toLowerCase()));
   const rootPath = toolIndex === -1
@@ -42,7 +42,8 @@
     {
       label: 'PRACTICE',
       links: [
-        { id: 'challenge', label: 'Analytical Challenge', href: `${rootPath}analytical-challenge/` }
+        { id: 'challenge', label: 'Analytical Challenge', href: `${rootPath}analytical-challenge/` },
+        { id: 'sql-challenge', label: 'SQL Challenge', href: `${rootPath}sql-challenge/` }
       ]
     }
   ];
@@ -63,7 +64,8 @@
       'data-quality-checker': '<path d="M4 5.5h10M4 10h6M4 14.5h5"/><path d="M15 14.5l2 2 3-4"/><circle cx="17" cy="9" r="3.5"/>',
       papers: '<path d="M5 3.5h10l4 4V20.5H5z"/><path d="M15 3.5v4h4M8 11h8M8 14.5h8M8 18h5"/>',
       'book-library': '<path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v12.5H7.5A2.5 2.5 0 0 0 5 22z"/><path d="M5 4.5v15M8 8h6M8 11h6"/>',
-      challenge: '<path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 13.5l2 2 4-4"/>'
+      challenge: '<path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 13.5l2 2 4-4"/>',
+      'sql-challenge': '<ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v13c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-13M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/>'
     };
     return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${paths[id] || paths.home}</svg>`;
   };

@@ -78,5 +78,15 @@
     "url": "/analytical-challenge/",
     "localUrl": "../analytical-challenge/index.html",
     "badges": ["Latihan", "CSV", "Gratis"]
+  },
+  {
+    "id": "sql-challenge",
+    "name": "SQL Challenge",
+    "description": "Latihan SQL lewat soal mandiri, jalankan query, dan bandingkan hasilnya langsung di browser.",
+    "category": "Belajar",
+    "status": "available",
+    "url": "/sql-challenge/",
+    "localUrl": "../sql-challenge/index.html",
+    "badges": ["SQL", "Latihan", "Gratis"]
   }
 ]

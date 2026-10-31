@@ -115,7 +115,7 @@ def render_page(book: dict[str, object], slug: str) -> str:
   <link rel="icon" href="../../../assets/favicon.svg?v=2" type="image/svg+xml">
   <meta name="theme-color" content="#2f5fb0">
   <script type="application/ld+json">{structured_data}</script>
-  <script src="../../../assets/analytics.js?v=1"></script>
+  <script src="../../../assets/analytics.js?v=2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">

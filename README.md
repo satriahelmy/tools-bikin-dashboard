@@ -12,6 +12,7 @@ Toolkit statis untuk membantu pekerjaan dashboard dan data visualization. Projec
 - **Paper Library** — katalog 143 paper terkurasi untuk data, visualization, machine learning, dan AI dengan pencarian, filter, sorting, 138 link paper gratis terverifikasi, dan 69 repository code terverifikasi.
 - **Book Library** — katalog 145 buku data legal dan gratis dari penulis, penerbit, universitas, dan proyek open-access, dengan pencarian judul/author/topik, filter kategori/level/format/tools, halaman detail yang dapat dibagikan per buku, serta CTA ke URL resmi yang sudah diverifikasi.
 - **Analytical Challenge** — latihan analisis berbasis kasus bisnis dengan dataset dan data dictionary yang dapat diunduh; Challenge #01 adalah Coffee Shop Performance. Metadata menyimpan tipe challenge agar kategori SQL dan Python dapat ditambahkan kemudian.
+- **SQL Challenge** — latihan SQL bertahap dengan 100 soal (35 Easy, 45 Medium, 20 Hard) dari delapan dataset: kedai kopi, toko online, HR, perpustakaan, customer support, kampus, langganan, dan web analytics. Query dijalankan serta dinilai di browser menggunakan DuckDB-Wasm; pencarian dan progres soal tersimpan lokal di browser.
 
 Semua halaman memakai navigasi bersama, responsive layout, active route state, empty/error state, dan baseline aksesibilitas.
 
@@ -47,6 +48,7 @@ Kemudian buka [http://127.0.0.1:8765/](http://127.0.0.1:8765/).
 - `/book-library/books/<slug>/` — halaman detail statis per buku untuk canonical URL dan share link; slug dibuat dari judul buku.
 - `/analytical-challenge/` — katalog Analytical Challenge.
 - `/analytical-challenge/coffee-shop-performance/` — brief dan dataset Challenge #01 — Coffee Shop Performance.
+- `/sql-challenge/` — katalog dan workspace soal SQL interaktif.
 
 Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot, dan Heatmap memakai renderer SVG lokal di `chart/native-renderers.js`. Batasan dan perilaku V1 Data Quality Checker dijelaskan di [`data-quality-checker/README.md`](data-quality-checker/README.md).
 
@@ -61,6 +63,7 @@ Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot,
 - `papers/` — route, shell, dan page-specific assets Paper Library.
 - `book-library/` — route, shell, page-specific assets, dan halaman detail statis Book Library.
 - `analytical-challenge/` — katalog dan halaman detail Analytical Challenge yang dihasilkan dari data publik, plus stylesheet dan analytics feature.
+- `sql-challenge/` — katalog soal SQL, dataset latihan sintetis, editor, dan engine DuckDB-Wasm 1.32.0 yang dimuat saat query pertama dijalankan.
 - `data/` — JSON runtime publik: `papers.json`, `books.json`, dan metadata challenge `challenges/challenges.json`.
 - `downloads/challenges/` — dataset dan data dictionary publik yang dapat diunduh.
 - `scripts/` — script development-only untuk mengubah workbook Paper Library, menggabungkan tambahan buku tervalidasi ke JSON runtime, serta menghasilkan halaman detail Book Library dan Analytical Challenge.
@@ -80,6 +83,7 @@ Chart.js tersedia dari bundle lokal `chart/chart.umd.min.js`. Treemap, Box Plot,
 - Workbook tambahan buku ada di `docs/source/book-library/workbooks/modern_ai_books_validated.xlsx`. Setelah workbook berubah, jalankan `python scripts/build_books_data.py` dari root repository; hanya baris yang ditandai `Yes` yang digabungkan ke katalog dan baris paid/preview/course tetap dikecualikan.
 - Setelah `data/books.json` berubah, jalankan `python scripts/build_book_detail_pages.py` dari root repository untuk membuat ulang halaman detail statis dan memperbarui `sitemap.xml`.
 - Setelah metadata challenge atau CSV data dictionary berubah, jalankan `python scripts/build_challenge_pages.py` dari root repository untuk memvalidasi data, membuat katalog/halaman detail statis, dan memperbarui `sitemap.xml`.
+- SQL Challenge memerlukan koneksi internet saat pertama kali menjalankan query untuk memuat DuckDB-Wasm dari jsDelivr; dataset dan query dijalankan di browser, tanpa backend aplikasi.
 - `data/books.json` adalah dataset runtime hasil katalog lama dan tambahan buku tervalidasi; metadata yang tidak tersedia di workbook dibiarkan kosong, bukan ditebak atau diperkaya otomatis. Workbook sumber tetap di bawah `docs/source/`.
 - Book Library hanya menampilkan CTA untuk URL buku yang verified dan membuka sumber resmi di tab baru; BikinDashboard tidak me-host PDF atau isi buku.
 - Data Quality Checker memproses file di browser. Nama file, nama kolom, dan nilai dataset tidak dikirim ke backend aplikasi.

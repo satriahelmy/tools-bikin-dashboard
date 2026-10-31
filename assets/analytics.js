@@ -1,6 +1,8 @@
 (function (window, document) {
   'use strict';
 
+  if (window.location.hostname !== 'tools.bikindashboard.com') return;
+
   var measurementId = 'G-XEBWBZB42D';
 
   window.dataLayer = window.dataLayer || [];

@@ -1,0 +1,5222 @@
+{
+  "datasets": {
+    "coffee-shop": {
+      "name": "Kedai kopi",
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            [
+              "order_id",
+              "INTEGER"
+            ],
+            [
+              "outlet",
+              "VARCHAR"
+            ],
+            [
+              "order_date",
+              "DATE"
+            ]
+          ],
+          "preview": [
+            [
+              101,
+              "Jakarta",
+              "2026-01-01"
+            ],
+            [
+              102,
+              "Bandung",
+              "2026-01-01"
+            ],
+            [
+              103,
+              "Jakarta",
+              "2026-01-01"
+            ]
+          ]
+        },
+        {
+          "name": "order_items",
+          "columns": [
+            [
+              "order_id",
+              "INTEGER"
+            ],
+            [
+              "product_id",
+              "INTEGER"
+            ],
+            [
+              "quantity",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              101,
+              1,
+              2
+            ],
+            [
+              101,
+              2,
+              1
+            ],
+            [
+              102,
+              3,
+              2
+            ]
+          ]
+        },
+        {
+          "name": "products",
+          "columns": [
+            [
+              "product_id",
+              "INTEGER"
+            ],
+            [
+              "product_name",
+              "VARCHAR"
+            ],
+            [
+              "category",
+              "VARCHAR"
+            ],
+            [
+              "unit_price",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              1,
+              "Espresso",
+              "Coffee",
+              22000
+            ],
+            [
+              2,
+              "Latte",
+              "Coffee",
+              28000
+            ],
+            [
+              3,
+              "Matcha",
+              "Tea",
+              32000
+            ]
+          ]
+        }
+      ],
+      "setupSql": [
+        "DROP TABLE IF EXISTS order_items",
+        "DROP TABLE IF EXISTS orders",
+        "DROP TABLE IF EXISTS products",
+        "CREATE TABLE orders (order_id INTEGER, outlet VARCHAR, order_date DATE)",
+        "INSERT INTO orders VALUES (101, 'Jakarta', '2026-01-01'), (102, 'Bandung', '2026-01-01'), (103, 'Jakarta', '2026-01-01'), (104, 'Bandung', '2026-01-02'), (105, 'Jakarta', '2026-01-02'), (106, 'Surabaya', '2026-01-02'), (107, 'Jakarta', '2026-01-03'), (108, 'Bandung', '2026-01-03'), (109, 'Surabaya', '2026-01-03'), (110, 'Surabaya', '2026-01-03')",
+        "CREATE TABLE order_items (order_id INTEGER, product_id INTEGER, quantity INTEGER)",
+        "INSERT INTO order_items VALUES (101, 1, 2), (101, 2, 1), (102, 3, 2), (102, 4, 1), (103, 5, 3), (104, 6, 4), (105, 1, 1), (106, 2, 2), (107, 3, 1), (108, 5, 2), (109, 4, 2), (110, 6, 1)",
+        "CREATE TABLE products (product_id INTEGER, product_name VARCHAR, category VARCHAR, unit_price INTEGER)",
+        "INSERT INTO products VALUES (1, 'Espresso', 'Coffee', 22000), (2, 'Latte', 'Coffee', 28000), (3, 'Matcha', 'Tea', 32000), (4, 'Green Tea', 'Tea', 25000), (5, 'Croissant', 'Food', 18000), (6, 'Cookie', 'Food', 12000)"
+      ]
+    },
+    "online-store": {
+      "name": "Toko online",
+      "tables": [
+        {
+          "name": "customers",
+          "columns": [
+            [
+              "customer_id",
+              "INTEGER"
+            ],
+            [
+              "customer_name",
+              "VARCHAR"
+            ],
+            [
+              "city",
+              "VARCHAR"
+            ],
+            [
+              "signup_date",
+              "DATE"
+            ]
+          ],
+          "preview": [
+            [
+              101,
+              "Alya",
+              "Jakarta",
+              "2025-12-01"
+            ],
+            [
+              102,
+              "Bima",
+              "Bandung",
+              "2025-12-02"
+            ],
+            [
+              103,
+              "Citra",
+              "Surabaya",
+              "2025-12-03"
+            ]
+          ]
+        },
+        {
+          "name": "store_orders",
+          "columns": [
+            [
+              "order_id",
+              "INTEGER"
+            ],
+            [
+              "customer_id",
+              "INTEGER"
+            ],
+            [
+              "order_date",
+              "DATE"
+            ],
+            [
+              "status",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              201,
+              101,
+              "2026-02-01",
+              "completed"
+            ],
+            [
+              202,
+              102,
+              "2026-02-01",
+              "completed"
+            ],
+            [
+              203,
+              101,
+              "2026-02-02",
+              "cancelled"
+            ]
+          ]
+        },
+        {
+          "name": "store_order_items",
+          "columns": [
+            [
+              "order_id",
+              "INTEGER"
+            ],
+            [
+              "product_id",
+              "INTEGER"
+            ],
+            [
+              "quantity",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              201,
+              11,
+              1
+            ],
+            [
+              201,
+              12,
+              2
+            ],
+            [
+              202,
+              12,
+              1
+            ]
+          ]
+        },
+        {
+          "name": "store_products",
+          "columns": [
+            [
+              "product_id",
+              "INTEGER"
+            ],
+            [
+              "product_name",
+              "VARCHAR"
+            ],
+            [
+              "category",
+              "VARCHAR"
+            ],
+            [
+              "unit_price",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              11,
+              "Notebook",
+              "Stationery",
+              20000
+            ],
+            [
+              12,
+              "Pen Set",
+              "Stationery",
+              15000
+            ],
+            [
+              13,
+              "Water Bottle",
+              "Lifestyle",
+              40000
+            ]
+          ]
+        }
+      ],
+      "setupSql": [
+        "DROP TABLE IF EXISTS store_order_items",
+        "DROP TABLE IF EXISTS store_orders",
+        "DROP TABLE IF EXISTS store_products",
+        "DROP TABLE IF EXISTS customers",
+        "CREATE TABLE customers (customer_id INTEGER, customer_name VARCHAR, city VARCHAR, signup_date DATE)",
+        "INSERT INTO customers VALUES (101, 'Alya', 'Jakarta', '2025-12-01'), (102, 'Bima', 'Bandung', '2025-12-02'), (103, 'Citra', 'Surabaya', '2025-12-03'), (104, 'Dimas', 'Jakarta', '2025-12-04'), (105, 'Eka', 'Bandung', '2025-12-05'), (106, 'Fajar', 'Medan', '2025-12-06')",
+        "CREATE TABLE store_products (product_id INTEGER, product_name VARCHAR, category VARCHAR, unit_price INTEGER)",
+        "INSERT INTO store_products VALUES (11, 'Notebook', 'Stationery', 20000), (12, 'Pen Set', 'Stationery', 15000), (13, 'Water Bottle', 'Lifestyle', 40000), (14, 'Tote Bag', 'Lifestyle', 35000)",
+        "CREATE TABLE store_orders (order_id INTEGER, customer_id INTEGER, order_date DATE, status VARCHAR)",
+        "INSERT INTO store_orders VALUES (201, 101, '2026-02-01', 'completed'), (202, 102, '2026-02-01', 'completed'), (203, 101, '2026-02-02', 'cancelled'), (204, 103, '2026-02-02', 'completed'), (205, 104, '2026-02-03', 'completed'), (206, 102, '2026-02-03', 'completed'), (207, 105, '2026-02-03', 'pending'), (208, 101, '2026-02-04', 'completed')",
+        "CREATE TABLE store_order_items (order_id INTEGER, product_id INTEGER, quantity INTEGER)",
+        "INSERT INTO store_order_items VALUES (201, 11, 1), (201, 12, 2), (202, 12, 1), (202, 13, 1), (203, 11, 3), (204, 14, 2), (205, 13, 2), (206, 11, 1), (206, 14, 1), (207, 12, 2), (208, 13, 1), (208, 14, 1)"
+      ]
+    },
+    "hr-analytics": {
+      "name": "HR perusahaan",
+      "tables": [
+        {
+          "name": "departments",
+          "columns": [
+            [
+              "department_id",
+              "INTEGER"
+            ],
+            [
+              "department_name",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              1,
+              "Sales"
+            ],
+            [
+              2,
+              "Operations"
+            ],
+            [
+              3,
+              "Marketing"
+            ]
+          ]
+        },
+        {
+          "name": "employees",
+          "columns": [
+            [
+              "employee_id",
+              "INTEGER"
+            ],
+            [
+              "employee_name",
+              "VARCHAR"
+            ],
+            [
+              "department_id",
+              "INTEGER"
+            ],
+            [
+              "hire_date",
+              "DATE"
+            ],
+            [
+              "salary",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              101,
+              "Anisa",
+              1,
+              "2022-01-10",
+              9000000
+            ],
+            [
+              102,
+              "Bagas",
+              1,
+              "2023-03-15",
+              7500000
+            ],
+            [
+              103,
+              "Citra",
+              1,
+              "2024-06-02",
+              6500000
+            ]
+          ]
+        }
+      ],
+      "setupSql": [
+        "DROP TABLE IF EXISTS employees",
+        "DROP TABLE IF EXISTS departments",
+        "CREATE TABLE departments (department_id INTEGER, department_name VARCHAR)",
+        "INSERT INTO departments VALUES (1, 'Sales'), (2, 'Operations'), (3, 'Marketing')",
+        "CREATE TABLE employees (employee_id INTEGER, employee_name VARCHAR, department_id INTEGER, hire_date DATE, salary INTEGER)",
+        "INSERT INTO employees VALUES (101, 'Anisa', 1, '2022-01-10', 9000000), (102, 'Bagas', 1, '2023-03-15', 7500000), (103, 'Citra', 1, '2024-06-02', 6500000), (201, 'Deni', 2, '2021-09-05', 10000000), (202, 'Eka', 2, '2023-11-21', 8000000), (203, 'Farid', 2, '2024-02-17', 7000000), (301, 'Gina', 3, '2022-12-01', 8500000), (302, 'Hadi', 3, '2025-01-08', 6000000), (303, 'Intan', 3, '2025-05-10', 6500000)"
+      ]
+    },
+    "library": {
+      "name": "Perpustakaan",
+      "tables": [
+        {
+          "name": "library_authors",
+          "columns": [
+            [
+              "author_id",
+              "INTEGER"
+            ],
+            [
+              "author_name",
+              "VARCHAR"
+            ],
+            [
+              "country",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              1,
+              "Ada Rahman",
+              "Indonesia"
+            ],
+            [
+              2,
+              "Budi Santoso",
+              "Indonesia"
+            ],
+            [
+              3,
+              "Clara Lim",
+              "Singapore"
+            ]
+          ]
+        },
+        {
+          "name": "library_books",
+          "columns": [
+            [
+              "book_id",
+              "INTEGER"
+            ],
+            [
+              "title",
+              "VARCHAR"
+            ],
+            [
+              "author_id",
+              "INTEGER"
+            ],
+            [
+              "category",
+              "VARCHAR"
+            ],
+            [
+              "published_year",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              11,
+              "SQL Fundamentals",
+              1,
+              "Technology",
+              2020
+            ],
+            [
+              12,
+              "Data Stories",
+              1,
+              "Data",
+              2022
+            ],
+            [
+              13,
+              "Query Design",
+              2,
+              "Technology",
+              2018
+            ]
+          ]
+        },
+        {
+          "name": "library_members",
+          "columns": [
+            [
+              "member_id",
+              "INTEGER"
+            ],
+            [
+              "member_name",
+              "VARCHAR"
+            ],
+            [
+              "city",
+              "VARCHAR"
+            ],
+            [
+              "joined_on",
+              "DATE"
+            ]
+          ],
+          "preview": [
+            [
+              201,
+              "Rani",
+              "Jakarta",
+              "2024-01-10"
+            ],
+            [
+              202,
+              "Seno",
+              "Bandung",
+              "2023-05-20"
+            ],
+            [
+              203,
+              "Tika",
+              "Jakarta",
+              "2025-02-02"
+            ]
+          ]
+        },
+        {
+          "name": "library_loans",
+          "columns": [
+            [
+              "loan_id",
+              "INTEGER"
+            ],
+            [
+              "book_id",
+              "INTEGER"
+            ],
+            [
+              "member_id",
+              "INTEGER"
+            ],
+            [
+              "loan_date",
+              "DATE"
+            ],
+            [
+              "return_date",
+              "DATE"
+            ],
+            [
+              "days_late",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              301,
+              11,
+              201,
+              "2026-01-05",
+              "2026-01-12",
+              0
+            ],
+            [
+              302,
+              13,
+              202,
+              "2026-01-06",
+              "2026-01-17",
+              3
+            ],
+            [
+              303,
+              15,
+              201,
+              "2026-01-08",
+              "2026-01-18",
+              1
+            ]
+          ]
+        }
+      ],
+      "setupSql": [
+        "DROP TABLE IF EXISTS library_loans",
+        "DROP TABLE IF EXISTS library_members",
+        "DROP TABLE IF EXISTS library_books",
+        "DROP TABLE IF EXISTS library_authors",
+        "CREATE TABLE library_authors (author_id INTEGER,author_name VARCHAR,country VARCHAR)",
+        "INSERT INTO library_authors VALUES (1,'Ada Rahman','Indonesia'),(2,'Budi Santoso','Indonesia'),(3,'Clara Lim','Singapore'),(4,'Daniel Green','United Kingdom'),(5,'Elena Rossi','Italy')",
+        "CREATE TABLE library_books (book_id INTEGER,title VARCHAR,author_id INTEGER,category VARCHAR,published_year INTEGER)",
+        "INSERT INTO library_books VALUES (11,'SQL Fundamentals',1,'Technology',2020),(12,'Data Stories',1,'Data',2022),(13,'Query Design',2,'Technology',2018),(14,'City Numbers',2,'Data',2021),(15,'Modern Analytics',3,'Data',2024),(16,'The Quiet Library',4,'Fiction',2019),(17,'Small Algorithms',5,'Technology',2023),(18,'Island Letters',5,'Fiction',2020),(19,'Network Notes',3,'Technology',2021),(20,'Data Ethics',2,'Data',2023),(21,'SQL Patterns',1,'Technology',2025)",
+        "CREATE TABLE library_members (member_id INTEGER,member_name VARCHAR,city VARCHAR,joined_on DATE)",
+        "INSERT INTO library_members VALUES (201,'Rani','Jakarta','2024-01-10'),(202,'Seno','Bandung','2023-05-20'),(203,'Tika','Jakarta','2025-02-02'),(204,'Umar','Surabaya','2022-08-08'),(205,'Vina','Medan','2024-09-15'),(206,'Wawan','Bandung','2025-03-21'),(207,'Xena','Yogyakarta','2025-08-30')",
+        "CREATE TABLE library_loans (loan_id INTEGER,book_id INTEGER,member_id INTEGER,loan_date DATE,return_date DATE,days_late INTEGER)",
+        "INSERT INTO library_loans VALUES (301,11,201,'2026-01-05','2026-01-12',0),(302,13,202,'2026-01-06','2026-01-17',3),(303,15,201,'2026-01-08','2026-01-18',1),(304,12,203,'2026-01-09','2026-01-23',5),(305,17,204,'2026-01-10','2026-01-20',0),(306,16,202,'2026-01-12','2026-01-26',2),(307,15,205,'2026-01-13','2026-01-19',0),(308,11,201,'2026-01-15','2026-01-25',3),(309,14,206,'2026-01-20','2026-01-27',0),(310,18,203,'2026-01-22','2026-01-29',1),(311,17,204,'2026-01-23','2026-02-03',4),(312,13,206,'2026-01-25','2026-02-04',2),(313,20,205,'2026-01-27','2026-02-02',0),(314,19,201,'2026-01-29','2026-02-06',2)"
+      ]
+    },
+    "support": {
+      "name": "Customer support",
+      "tables": [
+        {
+          "name": "support_agents",
+          "columns": [
+            [
+              "agent_id",
+              "INTEGER"
+            ],
+            [
+              "agent_name",
+              "VARCHAR"
+            ],
+            [
+              "team_name",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              1,
+              "Arman",
+              "Team Alpha"
+            ],
+            [
+              2,
+              "Bunga",
+              "Team Beta"
+            ],
+            [
+              3,
+              "Candra",
+              "Team Gamma"
+            ]
+          ]
+        },
+        {
+          "name": "support_tickets",
+          "columns": [
+            [
+              "ticket_id",
+              "INTEGER"
+            ],
+            [
+              "customer_name",
+              "VARCHAR"
+            ],
+            [
+              "customer_city",
+              "VARCHAR"
+            ],
+            [
+              "agent_id",
+              "INTEGER"
+            ],
+            [
+              "priority",
+              "VARCHAR"
+            ],
+            [
+              "status",
+              "VARCHAR"
+            ],
+            [
+              "opened_date",
+              "DATE"
+            ],
+            [
+              "resolved_hours",
+              "INTEGER"
+            ],
+            [
+              "channel",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              501,
+              "Hana",
+              "Jakarta",
+              1,
+              "High",
+              "resolved",
+              "2026-02-01",
+              6,
+              "phone"
+            ],
+            [
+              502,
+              "Iwan",
+              "Bandung",
+              2,
+              "Medium",
+              "resolved",
+              "2026-02-01",
+              22,
+              "chat"
+            ],
+            [
+              503,
+              "Joko",
+              "Jakarta",
+              1,
+              "Low",
+              "resolved",
+              "2026-02-02",
+              48,
+              "email"
+            ]
+          ]
+        }
+      ],
+      "setupSql": [
+        "DROP TABLE IF EXISTS support_tickets",
+        "DROP TABLE IF EXISTS support_agents",
+        "CREATE TABLE support_agents (agent_id INTEGER,agent_name VARCHAR,team_name VARCHAR)",
+        "INSERT INTO support_agents VALUES (1,'Arman','Team Alpha'),(2,'Bunga','Team Beta'),(3,'Candra','Team Gamma'),(4,'Diah','Team Alpha')",
+        "CREATE TABLE support_tickets (ticket_id INTEGER,customer_name VARCHAR,customer_city VARCHAR,agent_id INTEGER,priority VARCHAR,status VARCHAR,opened_date DATE,resolved_hours INTEGER,channel VARCHAR)",
+        "INSERT INTO support_tickets VALUES (501,'Hana','Jakarta',1,'High','resolved','2026-02-01',6,'phone'),(502,'Iwan','Bandung',2,'Medium','resolved','2026-02-01',22,'chat'),(503,'Joko','Jakarta',1,'Low','resolved','2026-02-02',48,'email'),(504,'Kiki','Surabaya',3,'High','open','2026-02-02',NULL,'phone'),(505,'Lala','Bandung',2,'High','resolved','2026-02-03',10,'email'),(506,'Miko','Medan',3,'Medium','resolved','2026-02-03',30,'chat'),(507,'Nia','Jakarta',1,'Medium','open','2026-02-04',NULL,'chat'),(508,'Oki','Yogyakarta',2,'Low','resolved','2026-02-04',14,'phone'),(509,'Putri','Surabaya',3,'High','resolved','2026-02-05',8,'email'),(510,'Raka','Medan',3,'Low','resolved','2026-02-05',55,'email'),(511,'Sari','Jakarta',1,'High','resolved','2026-02-06',4,'phone'),(512,'Tono','Bandung',2,'Medium','open','2026-02-06',NULL,'chat'),(513,'Uli','Surabaya',4,'Medium','resolved','2026-02-07',18,'phone'),(514,'Vero','Jakarta',4,'Low','resolved','2026-02-08',36,'chat'),(515,'Wira','Medan',4,'High','resolved','2026-02-08',12,'email'),(516,'Yani','Bandung',4,'Medium','resolved','2026-02-09',26,'phone')"
+      ]
+    },
+    "education": {
+      "name": "Kampus",
+      "tables": [
+        {
+          "name": "students",
+          "columns": [
+            [
+              "student_id",
+              "INTEGER"
+            ],
+            [
+              "student_name",
+              "VARCHAR"
+            ],
+            [
+              "city",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              1,
+              "Ana",
+              "Jakarta"
+            ],
+            [
+              2,
+              "Beni",
+              "Bandung"
+            ],
+            [
+              3,
+              "Citra",
+              "Surabaya"
+            ]
+          ]
+        },
+        {
+          "name": "courses",
+          "columns": [
+            [
+              "course_id",
+              "INTEGER"
+            ],
+            [
+              "course_name",
+              "VARCHAR"
+            ],
+            [
+              "department",
+              "VARCHAR"
+            ],
+            [
+              "credits",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              11,
+              "SQL Basic",
+              "Data",
+              2
+            ],
+            [
+              12,
+              "Stats Intro",
+              "Data",
+              3
+            ],
+            [
+              13,
+              "Visual Analytics",
+              "Design",
+              3
+            ]
+          ]
+        },
+        {
+          "name": "enrollments",
+          "columns": [
+            [
+              "enrollment_id",
+              "INTEGER"
+            ],
+            [
+              "student_id",
+              "INTEGER"
+            ],
+            [
+              "course_id",
+              "INTEGER"
+            ],
+            [
+              "term",
+              "VARCHAR"
+            ],
+            [
+              "score",
+              "INTEGER"
+            ],
+            [
+              "status",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              1001,
+              1,
+              11,
+              "2026-T1",
+              92,
+              "completed"
+            ],
+            [
+              1002,
+              1,
+              12,
+              "2026-T1",
+              81,
+              "completed"
+            ],
+            [
+              1003,
+              2,
+              11,
+              "2026-T1",
+              76,
+              "completed"
+            ]
+          ]
+        }
+      ],
+      "setupSql": [
+        "DROP TABLE IF EXISTS enrollments",
+        "DROP TABLE IF EXISTS courses",
+        "DROP TABLE IF EXISTS students",
+        "CREATE TABLE students (student_id INTEGER,student_name VARCHAR,city VARCHAR)",
+        "INSERT INTO students VALUES (1,'Ana','Jakarta'),(2,'Beni','Bandung'),(3,'Citra','Surabaya'),(4,'Dewa','Jakarta'),(5,'Eka','Medan'),(6,'Fajar','Bandung'),(7,'Gita','Surabaya'),(8,'Hadi','Jakarta')",
+        "CREATE TABLE courses (course_id INTEGER,course_name VARCHAR,department VARCHAR,credits INTEGER)",
+        "INSERT INTO courses VALUES (11,'SQL Basic','Data',2),(12,'Stats Intro','Data',3),(13,'Visual Analytics','Design',3),(14,'Product Metrics','Business',2),(15,'Python for Data','Data',4)",
+        "CREATE TABLE enrollments (enrollment_id INTEGER,student_id INTEGER,course_id INTEGER,term VARCHAR,score INTEGER,status VARCHAR)",
+        "INSERT INTO enrollments VALUES (1001,1,11,'2026-T1',92,'completed'),(1002,1,12,'2026-T1',81,'completed'),(1003,2,11,'2026-T1',76,'completed'),(1004,2,13,'2026-T1',NULL,'current'),(1005,3,12,'2026-T1',95,'completed'),(1006,3,14,'2026-T1',84,'completed'),(1007,4,15,'2026-T1',78,'completed'),(1008,4,11,'2026-T1',66,'completed'),(1009,5,13,'2026-T1',90,'completed'),(1010,5,15,'2026-T1',88,'completed'),(1011,6,14,'2026-T1',58,'dropped'),(1012,6,11,'2026-T1',87,'completed'),(1013,7,12,'2026-T1',NULL,'current'),(1014,7,13,'2026-T1',83,'completed'),(1015,8,14,'2026-T1',91,'completed'),(1016,8,15,'2026-T1',70,'dropped'),(1017,1,11,'2026-T2',96,'completed'),(1018,2,12,'2026-T2',89,'completed'),(1019,3,15,'2026-T2',93,'completed'),(1020,4,14,'2026-T2',88,'completed'),(1021,5,11,'2026-T2',86,'completed'),(1022,2,11,'2026-T2',84,'completed'),(1023,3,12,'2026-T2',90,'completed'),(1024,4,15,'2026-T2',86,'completed'),(1025,7,12,'2026-T2',85,'completed')"
+      ]
+    },
+    "subscriptions": {
+      "name": "Layanan berlangganan",
+      "tables": [
+        {
+          "name": "subscription_plans",
+          "columns": [
+            [
+              "plan_id",
+              "INTEGER"
+            ],
+            [
+              "plan_name",
+              "VARCHAR"
+            ],
+            [
+              "price_amount",
+              "INTEGER"
+            ],
+            [
+              "billing_cycle",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              1,
+              "Basic",
+              49000,
+              "monthly"
+            ],
+            [
+              2,
+              "Plus",
+              99000,
+              "monthly"
+            ],
+            [
+              3,
+              "Annual",
+              990000,
+              "annual"
+            ]
+          ]
+        },
+        {
+          "name": "subscribers",
+          "columns": [
+            [
+              "subscriber_id",
+              "INTEGER"
+            ],
+            [
+              "subscriber_name",
+              "VARCHAR"
+            ],
+            [
+              "city",
+              "VARCHAR"
+            ],
+            [
+              "plan_id",
+              "INTEGER"
+            ],
+            [
+              "start_date",
+              "DATE"
+            ],
+            [
+              "status",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              101,
+              "Alya",
+              "Jakarta",
+              1,
+              "2026-01-01",
+              "active"
+            ],
+            [
+              102,
+              "Bima",
+              "Bandung",
+              2,
+              "2026-01-01",
+              "active"
+            ],
+            [
+              103,
+              "Citra",
+              "Surabaya",
+              1,
+              "2026-01-02",
+              "cancelled"
+            ]
+          ]
+        },
+        {
+          "name": "subscription_payments",
+          "columns": [
+            [
+              "payment_id",
+              "INTEGER"
+            ],
+            [
+              "subscriber_id",
+              "INTEGER"
+            ],
+            [
+              "paid_date",
+              "DATE"
+            ],
+            [
+              "amount",
+              "INTEGER"
+            ],
+            [
+              "status",
+              "VARCHAR"
+            ]
+          ],
+          "preview": [
+            [
+              201,
+              101,
+              "2026-01-01",
+              49000,
+              "paid"
+            ],
+            [
+              202,
+              102,
+              "2026-01-01",
+              99000,
+              "paid"
+            ],
+            [
+              203,
+              103,
+              "2026-01-02",
+              49000,
+              "paid"
+            ]
+          ]
+        }
+      ],
+      "setupSql": [
+        "DROP TABLE IF EXISTS subscription_payments",
+        "DROP TABLE IF EXISTS subscribers",
+        "DROP TABLE IF EXISTS subscription_plans",
+        "CREATE TABLE subscription_plans (plan_id INTEGER,plan_name VARCHAR,price_amount INTEGER,billing_cycle VARCHAR)",
+        "INSERT INTO subscription_plans VALUES (1,'Basic',49000,'monthly'),(2,'Plus',99000,'monthly'),(3,'Annual',990000,'annual')",
+        "CREATE TABLE subscribers (subscriber_id INTEGER,subscriber_name VARCHAR,city VARCHAR,plan_id INTEGER,start_date DATE,status VARCHAR)",
+        "INSERT INTO subscribers VALUES (101,'Alya','Jakarta',1,'2026-01-01','active'),(102,'Bima','Bandung',2,'2026-01-01','active'),(103,'Citra','Surabaya',1,'2026-01-02','cancelled'),(104,'Dimas','Jakarta',3,'2026-01-03','active'),(105,'Eka','Bandung',2,'2026-01-04','active'),(106,'Fajar','Medan',1,'2026-01-05','active'),(107,'Gita','Jakarta',2,'2026-01-06','cancelled'),(108,'Hadi','Surabaya',3,'2026-01-07','active'),(109,'Intan','Yogyakarta',1,'2026-01-08','active'),(110,'Joko','Bandung',2,'2026-01-09','active')",
+        "CREATE TABLE subscription_payments (payment_id INTEGER,subscriber_id INTEGER,paid_date DATE,amount INTEGER,status VARCHAR)",
+        "INSERT INTO subscription_payments VALUES (201,101,'2026-01-01',49000,'paid'),(202,102,'2026-01-01',99000,'paid'),(203,103,'2026-01-02',49000,'paid'),(204,104,'2026-01-03',990000,'paid'),(205,105,'2026-01-04',99000,'failed'),(206,105,'2026-02-04',99000,'paid'),(207,106,'2026-01-05',49000,'paid'),(208,107,'2026-01-06',99000,'paid'),(209,108,'2026-01-07',990000,'paid'),(210,101,'2026-02-01',49000,'paid'),(211,102,'2026-02-01',99000,'paid'),(212,103,'2026-02-02',49000,'failed'),(213,104,'2026-02-03',990000,'paid'),(214,106,'2026-02-05',49000,'paid'),(215,108,'2026-02-07',990000,'paid'),(216,109,'2026-02-08',49000,'paid'),(217,110,'2026-02-09',99000,'paid')"
+      ]
+    },
+    "web-analytics": {
+      "name": "Web analytics",
+      "tables": [
+        {
+          "name": "web_campaigns",
+          "columns": [
+            [
+              "campaign_id",
+              "INTEGER"
+            ],
+            [
+              "campaign_name",
+              "VARCHAR"
+            ],
+            [
+              "channel",
+              "VARCHAR"
+            ],
+            [
+              "budget",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              1,
+              "Back to School",
+              "Email",
+              2000000
+            ],
+            [
+              2,
+              "Summer Sale",
+              "Social",
+              4000000
+            ],
+            [
+              3,
+              "Organic Search",
+              "Organic",
+              0
+            ]
+          ]
+        },
+        {
+          "name": "web_visits",
+          "columns": [
+            [
+              "visit_id",
+              "INTEGER"
+            ],
+            [
+              "visitor_id",
+              "INTEGER"
+            ],
+            [
+              "campaign_id",
+              "INTEGER"
+            ],
+            [
+              "visit_date",
+              "DATE"
+            ],
+            [
+              "device",
+              "VARCHAR"
+            ],
+            [
+              "landing_page",
+              "VARCHAR"
+            ],
+            [
+              "converted",
+              "INTEGER"
+            ],
+            [
+              "session_seconds",
+              "INTEGER"
+            ]
+          ],
+          "preview": [
+            [
+              301,
+              1,
+              1,
+              "2026-01-01",
+              "mobile",
+              "/sale",
+              1,
+              180
+            ],
+            [
+              302,
+              2,
+              1,
+              "2026-01-01",
+              "desktop",
+              "/sale",
+              0,
+              60
+            ],
+            [
+              303,
+              1,
+              2,
+              "2026-01-02",
+              "mobile",
+              "/new",
+              1,
+              240
+            ]
+          ]
+        }
+      ],
+      "setupSql": [
+        "DROP TABLE IF EXISTS web_visits",
+        "DROP TABLE IF EXISTS web_campaigns",
+        "CREATE TABLE web_campaigns (campaign_id INTEGER,campaign_name VARCHAR,channel VARCHAR,budget INTEGER)",
+        "INSERT INTO web_campaigns VALUES (1,'Back to School','Email',2000000),(2,'Summer Sale','Social',4000000),(3,'Organic Search','Organic',0),(4,'Monthly Newsletter','Email',1000000),(5,'Friend Referral','Referral',500000)",
+        "CREATE TABLE web_visits (visit_id INTEGER,visitor_id INTEGER,campaign_id INTEGER,visit_date DATE,device VARCHAR,landing_page VARCHAR,converted INTEGER,session_seconds INTEGER)",
+        "INSERT INTO web_visits VALUES (301,1,1,'2026-01-01','mobile','/sale',1,180),(302,2,1,'2026-01-01','desktop','/sale',0,60),(303,1,2,'2026-01-02','mobile','/new',1,240),(304,3,2,'2026-01-02','mobile','/new',0,90),(305,4,2,'2026-01-02','desktop','/new',1,300),(306,5,3,'2026-01-03','desktop','/home',0,45),(307,2,3,'2026-01-03','mobile','/home',0,80),(308,6,3,'2026-01-03','mobile','/guide',0,120),(309,7,4,'2026-01-04','desktop','/newsletter',1,200),(310,8,4,'2026-01-04','mobile','/newsletter',0,70),(311,3,5,'2026-01-05','tablet','/refer',1,220),(312,9,5,'2026-01-05','mobile','/refer',0,55),(313,10,1,'2026-01-06','desktop','/sale',1,240),(314,4,4,'2026-01-06','desktop','/newsletter',0,90),(315,6,2,'2026-01-07','mobile','/new',1,320),(316,10,3,'2026-01-07','tablet','/home',0,65)"
+      ]
+    }
+  },
+  "problems": [
+    {
+      "id": "products-alphabetically",
+      "datasetId": "coffee-shop",
+      "title": "Daftar produk A–Z",
+      "difficulty": "Easy",
+      "topic": "SELECT + ORDER BY",
+      "prompt": "Tampilkan nama produk, kategori, dan harga satuan. Urutkan berdasarkan nama produk dari A ke Z.",
+      "expectedColumns": [
+        "product_name",
+        "category",
+        "unit_price"
+      ],
+      "expectedRows": [
+        [
+          "Cookie",
+          "Food",
+          12000
+        ],
+        [
+          "Croissant",
+          "Food",
+          18000
+        ],
+        [
+          "Espresso",
+          "Coffee",
+          22000
+        ],
+        [
+          "Green Tea",
+          "Tea",
+          25000
+        ],
+        [
+          "Latte",
+          "Coffee",
+          28000
+        ],
+        [
+          "Matcha",
+          "Tea",
+          32000
+        ]
+      ]
+    },
+    {
+      "id": "products-by-price",
+      "datasetId": "coffee-shop",
+      "title": "Produk dengan harga minimal 22.000",
+      "difficulty": "Easy",
+      "topic": "WHERE + ORDER BY",
+      "prompt": "Tampilkan nama produk dan unit_price untuk produk dengan harga minimal 22.000. Urutkan dari harga terendah, lalu nama produk A–Z.",
+      "expectedColumns": [
+        "product_name",
+        "unit_price"
+      ],
+      "expectedRows": [
+        [
+          "Espresso",
+          22000
+        ],
+        [
+          "Green Tea",
+          25000
+        ],
+        [
+          "Latte",
+          28000
+        ],
+        [
+          "Matcha",
+          32000
+        ]
+      ]
+    },
+    {
+      "id": "customers-alphabetically",
+      "datasetId": "online-store",
+      "title": "Daftar pelanggan A–Z",
+      "difficulty": "Easy",
+      "topic": "SELECT + ORDER BY",
+      "prompt": "Tampilkan customer_name dan city dari seluruh pelanggan. Urutkan berdasarkan nama pelanggan A–Z.",
+      "expectedColumns": [
+        "customer_name",
+        "city"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          "Jakarta"
+        ],
+        [
+          "Bima",
+          "Bandung"
+        ],
+        [
+          "Citra",
+          "Surabaya"
+        ],
+        [
+          "Dimas",
+          "Jakarta"
+        ],
+        [
+          "Eka",
+          "Bandung"
+        ],
+        [
+          "Fajar",
+          "Medan"
+        ]
+      ]
+    },
+    {
+      "id": "unique-outlets",
+      "datasetId": "coffee-shop",
+      "title": "Daftar outlet unik",
+      "difficulty": "Easy",
+      "topic": "DISTINCT",
+      "prompt": "Tampilkan setiap nama outlet satu kali saja. Urutkan nama outlet dari A ke Z.",
+      "expectedColumns": [
+        "outlet"
+      ],
+      "expectedRows": [
+        [
+          "Bandung"
+        ],
+        [
+          "Jakarta"
+        ],
+        [
+          "Surabaya"
+        ]
+      ]
+    },
+    {
+      "id": "count-all-orders",
+      "datasetId": "coffee-shop",
+      "title": "Hitung seluruh order",
+      "difficulty": "Easy",
+      "topic": "COUNT",
+      "prompt": "Hitung seluruh baris pada tabel orders. Tampilkan satu kolom bernama total_orders.",
+      "expectedColumns": [
+        "total_orders"
+      ],
+      "expectedRows": [
+        [
+          10
+        ]
+      ]
+    },
+    {
+      "id": "orders-by-outlet",
+      "datasetId": "coffee-shop",
+      "title": "Jumlah order per outlet",
+      "difficulty": "Easy",
+      "topic": "GROUP BY",
+      "prompt": "Hitung jumlah order untuk setiap outlet. Tampilkan outlet dan total_orders. Urutkan dari jumlah terbesar; jika sama, urutkan nama outlet A–Z.",
+      "expectedColumns": [
+        "outlet",
+        "total_orders"
+      ],
+      "expectedRows": [
+        [
+          "Jakarta",
+          4
+        ],
+        [
+          "Bandung",
+          3
+        ],
+        [
+          "Surabaya",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "employees-over-salary-threshold",
+      "datasetId": "hr-analytics",
+      "title": "Karyawan dengan gaji minimal 7 juta",
+      "difficulty": "Easy",
+      "topic": "WHERE + ORDER BY",
+      "prompt": "Tampilkan employee_name dan salary untuk karyawan dengan gaji minimal 7.000.000. Urutkan dari gaji tertinggi.",
+      "expectedColumns": [
+        "employee_name",
+        "salary"
+      ],
+      "expectedRows": [
+        [
+          "Deni",
+          10000000
+        ],
+        [
+          "Anisa",
+          9000000
+        ],
+        [
+          "Gina",
+          8500000
+        ],
+        [
+          "Eka",
+          8000000
+        ],
+        [
+          "Bagas",
+          7500000
+        ],
+        [
+          "Farid",
+          7000000
+        ]
+      ]
+    },
+    {
+      "id": "customer-order-count",
+      "datasetId": "online-store",
+      "title": "Jumlah order tiap pelanggan",
+      "difficulty": "Medium",
+      "topic": "LEFT JOIN + COUNT",
+      "prompt": "Tampilkan seluruh pelanggan beserta jumlah order yang tercatat (semua status), termasuk pelanggan yang belum pernah order. Tampilkan customer_name dan order_count, urutkan jumlah terbesar lalu nama A–Z.",
+      "expectedColumns": [
+        "customer_name",
+        "order_count"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          3
+        ],
+        [
+          "Bima",
+          2
+        ],
+        [
+          "Citra",
+          1
+        ],
+        [
+          "Dimas",
+          1
+        ],
+        [
+          "Eka",
+          1
+        ],
+        [
+          "Fajar",
+          0
+        ]
+      ]
+    },
+    {
+      "id": "units-sold-by-product",
+      "datasetId": "online-store",
+      "title": "Jumlah unit terjual per produk",
+      "difficulty": "Medium",
+      "topic": "JOIN + SUM",
+      "prompt": "Hitung total quantity setiap produk dari order berstatus completed saja. Tampilkan product_name dan total_units, urutkan total unit terbesar lebih dahulu lalu nama produk A–Z.",
+      "expectedColumns": [
+        "product_name",
+        "total_units"
+      ],
+      "expectedRows": [
+        [
+          "Tote Bag",
+          4
+        ],
+        [
+          "Water Bottle",
+          4
+        ],
+        [
+          "Pen Set",
+          3
+        ],
+        [
+          "Notebook",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "revenue-by-order",
+      "datasetId": "online-store",
+      "title": "Nilai penjualan tiap order",
+      "difficulty": "Medium",
+      "topic": "JOIN + agregasi",
+      "prompt": "Hitung nilai item yang tercatat pada setiap order dari quantity × unit_price, termasuk status cancelled dan pending. Tampilkan order_id, customer_name, dan revenue, urutkan berdasarkan order_id.",
+      "expectedColumns": [
+        "order_id",
+        "customer_name",
+        "revenue"
+      ],
+      "expectedRows": [
+        [
+          201,
+          "Alya",
+          50000
+        ],
+        [
+          202,
+          "Bima",
+          55000
+        ],
+        [
+          203,
+          "Alya",
+          60000
+        ],
+        [
+          204,
+          "Citra",
+          70000
+        ],
+        [
+          205,
+          "Dimas",
+          80000
+        ],
+        [
+          206,
+          "Bima",
+          55000
+        ],
+        [
+          207,
+          "Eka",
+          30000
+        ],
+        [
+          208,
+          "Alya",
+          75000
+        ]
+      ]
+    },
+    {
+      "id": "revenue-by-category",
+      "datasetId": "online-store",
+      "title": "Omzet per kategori toko",
+      "difficulty": "Medium",
+      "topic": "JOIN + agregasi",
+      "prompt": "Hitung omzet produk dari order berstatus completed saja, lalu jumlahkan per kategori. Tampilkan category dan revenue, urutkan revenue terbesar lebih dahulu.",
+      "expectedColumns": [
+        "category",
+        "revenue"
+      ],
+      "expectedRows": [
+        [
+          "Lifestyle",
+          300000
+        ],
+        [
+          "Stationery",
+          85000
+        ]
+      ]
+    },
+    {
+      "id": "repeat-customers",
+      "datasetId": "online-store",
+      "title": "Pelanggan dengan order berulang",
+      "difficulty": "Medium",
+      "topic": "GROUP BY + HAVING",
+      "prompt": "Tampilkan pelanggan yang memiliki minimal dua order tercatat (semua status). Tampilkan customer_name dan total_orders, urutkan jumlah order terbesar lebih dahulu.",
+      "expectedColumns": [
+        "customer_name",
+        "total_orders"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          3
+        ],
+        [
+          "Bima",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "revenue-by-day",
+      "datasetId": "coffee-shop",
+      "title": "Omzet kedai per tanggal",
+      "difficulty": "Medium",
+      "topic": "JOIN + GROUP BY tanggal",
+      "prompt": "Hitung omzet kedai pada setiap tanggal dari quantity × unit_price. Tampilkan order_date dan revenue, urutkan dari tanggal paling awal.",
+      "expectedColumns": [
+        "order_date",
+        "revenue"
+      ],
+      "expectedRows": [
+        [
+          "2026-01-01",
+          215000
+        ],
+        [
+          "2026-01-02",
+          126000
+        ],
+        [
+          "2026-01-03",
+          130000
+        ]
+      ]
+    },
+    {
+      "id": "busy-outlets",
+      "datasetId": "coffee-shop",
+      "title": "Outlet dengan minimal 3 order",
+      "difficulty": "Medium",
+      "topic": "GROUP BY + HAVING",
+      "prompt": "Tampilkan outlet yang menerima setidaknya tiga order. Hasil memiliki outlet dan total_orders, urutkan jumlah terbesar lalu nama outlet A–Z.",
+      "expectedColumns": [
+        "outlet",
+        "total_orders"
+      ],
+      "expectedRows": [
+        [
+          "Jakarta",
+          4
+        ],
+        [
+          "Bandung",
+          3
+        ],
+        [
+          "Surabaya",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "average-salary-by-department",
+      "datasetId": "hr-analytics",
+      "title": "Rata-rata gaji per departemen",
+      "difficulty": "Medium",
+      "topic": "JOIN + AVG",
+      "prompt": "Hitung rata-rata gaji setiap departemen. Tampilkan department_name dan average_salary dalam bilangan bulat (pembulatan terdekat), urutkan rata-rata tertinggi lebih dahulu.",
+      "expectedColumns": [
+        "department_name",
+        "average_salary"
+      ],
+      "expectedRows": [
+        [
+          "Operations",
+          8333333
+        ],
+        [
+          "Sales",
+          7666667
+        ],
+        [
+          "Marketing",
+          7000000
+        ]
+      ]
+    },
+    {
+      "id": "product-rank-by-category",
+      "datasetId": "online-store",
+      "title": "Peringkat produk per kategori",
+      "difficulty": "Hard",
+      "topic": "ROW_NUMBER + PARTITION",
+      "prompt": "Hitung omzet setiap produk dari order berstatus completed saja, lalu beri peringkat di dalam kategori. Tampilkan category, product_name, revenue, dan rank_in_category. Urutkan category A–Z lalu peringkat terkecil.",
+      "expectedColumns": [
+        "category",
+        "product_name",
+        "revenue",
+        "rank_in_category"
+      ],
+      "expectedRows": [
+        [
+          "Lifestyle",
+          "Water Bottle",
+          160000,
+          1
+        ],
+        [
+          "Lifestyle",
+          "Tote Bag",
+          140000,
+          2
+        ],
+        [
+          "Stationery",
+          "Pen Set",
+          45000,
+          1
+        ],
+        [
+          "Stationery",
+          "Notebook",
+          40000,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "running-revenue-by-outlet",
+      "datasetId": "coffee-shop",
+      "title": "Omzet berjalan per outlet",
+      "difficulty": "Hard",
+      "topic": "CTE + window SUM",
+      "prompt": "Hitung omzet tiap order, lalu omzet berjalan di dalam outlet berdasarkan tanggal dan order_id. Tampilkan outlet, order_id, revenue, dan running_revenue; urutkan outlet A–Z lalu tanggal dan order_id.",
+      "expectedColumns": [
+        "outlet",
+        "order_id",
+        "revenue",
+        "running_revenue"
+      ],
+      "expectedRows": [
+        [
+          "Bandung",
+          102,
+          89000,
+          89000
+        ],
+        [
+          "Bandung",
+          104,
+          48000,
+          137000
+        ],
+        [
+          "Bandung",
+          108,
+          36000,
+          173000
+        ],
+        [
+          "Jakarta",
+          101,
+          72000,
+          72000
+        ],
+        [
+          "Jakarta",
+          103,
+          54000,
+          126000
+        ],
+        [
+          "Jakarta",
+          105,
+          22000,
+          148000
+        ],
+        [
+          "Jakarta",
+          107,
+          32000,
+          180000
+        ],
+        [
+          "Surabaya",
+          106,
+          56000,
+          56000
+        ],
+        [
+          "Surabaya",
+          109,
+          50000,
+          106000
+        ],
+        [
+          "Surabaya",
+          110,
+          12000,
+          118000
+        ]
+      ]
+    },
+    {
+      "id": "salary-rank-by-department",
+      "datasetId": "hr-analytics",
+      "title": "Peringkat gaji per departemen",
+      "difficulty": "Hard",
+      "topic": "RANK + PARTITION",
+      "prompt": "Urutkan karyawan berdasarkan gaji di setiap departemen. Tampilkan department_name, employee_name, salary, dan salary_rank. Gunakan RANK dan urutkan departemen A–Z lalu peringkat terkecil.",
+      "expectedColumns": [
+        "department_name",
+        "employee_name",
+        "salary",
+        "salary_rank"
+      ],
+      "expectedRows": [
+        [
+          "Marketing",
+          "Gina",
+          8500000,
+          1
+        ],
+        [
+          "Marketing",
+          "Intan",
+          6500000,
+          2
+        ],
+        [
+          "Marketing",
+          "Hadi",
+          6000000,
+          3
+        ],
+        [
+          "Operations",
+          "Deni",
+          10000000,
+          1
+        ],
+        [
+          "Operations",
+          "Eka",
+          8000000,
+          2
+        ],
+        [
+          "Operations",
+          "Farid",
+          7000000,
+          3
+        ],
+        [
+          "Sales",
+          "Anisa",
+          9000000,
+          1
+        ],
+        [
+          "Sales",
+          "Bagas",
+          7500000,
+          2
+        ],
+        [
+          "Sales",
+          "Citra",
+          6500000,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "coffee-first-day",
+      "datasetId": "coffee-shop",
+      "title": "Order pada hari pertama",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan order_id dan outlet tanggal 1 Januari 2026, urutkan ID.",
+      "expectedColumns": [
+        "order_id",
+        "outlet"
+      ],
+      "expectedRows": [
+        [
+          101,
+          "Jakarta"
+        ],
+        [
+          102,
+          "Bandung"
+        ],
+        [
+          103,
+          "Jakarta"
+        ]
+      ]
+    },
+    {
+      "id": "coffee-surabaya",
+      "datasetId": "coffee-shop",
+      "title": "Order outlet Surabaya",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan order_id dan order_date untuk outlet Surabaya.",
+      "expectedColumns": [
+        "order_id",
+        "order_date"
+      ],
+      "expectedRows": [
+        [
+          106,
+          "2026-01-02"
+        ],
+        [
+          109,
+          "2026-01-03"
+        ],
+        [
+          110,
+          "2026-01-03"
+        ]
+      ]
+    },
+    {
+      "id": "coffee-cheap",
+      "datasetId": "coffee-shop",
+      "title": "Produk di bawah 20.000",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan nama dan harga produk di bawah 20.000, dari termurah.",
+      "expectedColumns": [
+        "product_name",
+        "unit_price"
+      ],
+      "expectedRows": [
+        [
+          "Cookie",
+          12000
+        ],
+        [
+          "Croissant",
+          18000
+        ]
+      ]
+    },
+    {
+      "id": "store-jakarta",
+      "datasetId": "online-store",
+      "title": "Pelanggan dari Jakarta",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan nama pelanggan dari Jakarta, urutkan A-Z.",
+      "expectedColumns": [
+        "customer_name",
+        "city"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          "Jakarta"
+        ],
+        [
+          "Dimas",
+          "Jakarta"
+        ]
+      ]
+    },
+    {
+      "id": "store-cancelled",
+      "datasetId": "online-store",
+      "title": "Order dibatalkan",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan ID pelanggan dan tanggal order berstatus cancelled.",
+      "expectedColumns": [
+        "order_id",
+        "customer_id",
+        "order_date"
+      ],
+      "expectedRows": [
+        [
+          203,
+          101,
+          "2026-02-02"
+        ]
+      ]
+    },
+    {
+      "id": "store-stationery",
+      "datasetId": "online-store",
+      "title": "Produk kategori Stationery",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan nama dan harga produk Stationery, harga tertinggi dulu.",
+      "expectedColumns": [
+        "product_name",
+        "unit_price"
+      ],
+      "expectedRows": [
+        [
+          "Notebook",
+          20000
+        ],
+        [
+          "Pen Set",
+          15000
+        ]
+      ]
+    },
+    {
+      "id": "store-unfinished",
+      "datasetId": "online-store",
+      "title": "Order belum selesai",
+      "difficulty": "Easy",
+      "topic": "IN",
+      "prompt": "Tampilkan ID dan status order cancelled atau pending.",
+      "expectedColumns": [
+        "order_id",
+        "status"
+      ],
+      "expectedRows": [
+        [
+          203,
+          "cancelled"
+        ],
+        [
+          207,
+          "pending"
+        ]
+      ]
+    },
+    {
+      "id": "hr-sales",
+      "datasetId": "hr-analytics",
+      "title": "Karyawan departemen Sales",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan nama dan gaji karyawan department_id 1.",
+      "expectedColumns": [
+        "employee_name",
+        "salary"
+      ],
+      "expectedRows": [
+        [
+          "Anisa",
+          9000000
+        ],
+        [
+          "Bagas",
+          7500000
+        ],
+        [
+          "Citra",
+          6500000
+        ]
+      ]
+    },
+    {
+      "id": "hr-high-salary",
+      "datasetId": "hr-analytics",
+      "title": "Gaji minimal 8 juta",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan karyawan bergaji minimal 8 juta dari gaji tertinggi.",
+      "expectedColumns": [
+        "employee_name",
+        "salary"
+      ],
+      "expectedRows": [
+        [
+          "Deni",
+          10000000
+        ],
+        [
+          "Anisa",
+          9000000
+        ],
+        [
+          "Gina",
+          8500000
+        ],
+        [
+          "Eka",
+          8000000
+        ]
+      ]
+    },
+    {
+      "id": "hr-early-hires",
+      "datasetId": "hr-analytics",
+      "title": "Karyawan masuk sebelum 2024",
+      "difficulty": "Easy",
+      "topic": "WHERE tanggal",
+      "prompt": "Tampilkan nama dan hire_date sebelum 1 Januari 2024.",
+      "expectedColumns": [
+        "employee_name",
+        "hire_date"
+      ],
+      "expectedRows": [
+        [
+          "Deni",
+          "2021-09-05"
+        ],
+        [
+          "Anisa",
+          "2022-01-10"
+        ],
+        [
+          "Gina",
+          "2022-12-01"
+        ],
+        [
+          "Bagas",
+          "2023-03-15"
+        ],
+        [
+          "Eka",
+          "2023-11-21"
+        ]
+      ]
+    },
+    {
+      "id": "lib-recent",
+      "datasetId": "library",
+      "title": "Buku terbit sejak 2022",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan judul dan tahun terbit sejak 2022, terbaru dulu.",
+      "expectedColumns": [
+        "title",
+        "published_year"
+      ],
+      "expectedRows": [
+        [
+          "SQL Patterns",
+          2025
+        ],
+        [
+          "Modern Analytics",
+          2024
+        ],
+        [
+          "Data Ethics",
+          2023
+        ],
+        [
+          "Small Algorithms",
+          2023
+        ],
+        [
+          "Data Stories",
+          2022
+        ]
+      ]
+    },
+    {
+      "id": "lib-fiction",
+      "datasetId": "library",
+      "title": "Buku kategori Fiction",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan judul dan tahun terbit buku Fiction dari yang terlama.",
+      "expectedColumns": [
+        "title",
+        "published_year"
+      ],
+      "expectedRows": [
+        [
+          "The Quiet Library",
+          2019
+        ],
+        [
+          "Island Letters",
+          2020
+        ]
+      ]
+    },
+    {
+      "id": "lib-tech",
+      "datasetId": "library",
+      "title": "Buku kategori Technology",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan judul dan tahun terbit buku Technology urut judul.",
+      "expectedColumns": [
+        "title",
+        "published_year"
+      ],
+      "expectedRows": [
+        [
+          "Network Notes",
+          2021
+        ],
+        [
+          "Query Design",
+          2018
+        ],
+        [
+          "SQL Fundamentals",
+          2020
+        ],
+        [
+          "SQL Patterns",
+          2025
+        ],
+        [
+          "Small Algorithms",
+          2023
+        ]
+      ]
+    },
+    {
+      "id": "lib-countries",
+      "datasetId": "library",
+      "title": "Negara asal penulis",
+      "difficulty": "Easy",
+      "topic": "DISTINCT",
+      "prompt": "Tampilkan setiap negara penulis satu kali urut A-Z.",
+      "expectedColumns": [
+        "country"
+      ],
+      "expectedRows": [
+        [
+          "Indonesia"
+        ],
+        [
+          "Italy"
+        ],
+        [
+          "Singapore"
+        ],
+        [
+          "United Kingdom"
+        ]
+      ]
+    },
+    {
+      "id": "lib-bandung",
+      "datasetId": "library",
+      "title": "Anggota dari Bandung",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan nama anggota dan tanggal gabung dari Bandung.",
+      "expectedColumns": [
+        "member_name",
+        "joined_on"
+      ],
+      "expectedRows": [
+        [
+          "Seno",
+          "2023-05-20"
+        ],
+        [
+          "Wawan",
+          "2025-03-21"
+        ]
+      ]
+    },
+    {
+      "id": "sup-open",
+      "datasetId": "support",
+      "title": "Tiket masih terbuka",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan ID, prioritas, tanggal buka tiket berstatus open.",
+      "expectedColumns": [
+        "ticket_id",
+        "priority",
+        "opened_date"
+      ],
+      "expectedRows": [
+        [
+          504,
+          "High",
+          "2026-02-02"
+        ],
+        [
+          507,
+          "Medium",
+          "2026-02-04"
+        ],
+        [
+          512,
+          "Medium",
+          "2026-02-06"
+        ]
+      ]
+    },
+    {
+      "id": "sup-high",
+      "datasetId": "support",
+      "title": "Tiket prioritas tinggi",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan ID dan kota untuk tiket High.",
+      "expectedColumns": [
+        "ticket_id",
+        "customer_city"
+      ],
+      "expectedRows": [
+        [
+          501,
+          "Jakarta"
+        ],
+        [
+          504,
+          "Surabaya"
+        ],
+        [
+          505,
+          "Bandung"
+        ],
+        [
+          509,
+          "Surabaya"
+        ],
+        [
+          511,
+          "Jakarta"
+        ],
+        [
+          515,
+          "Medan"
+        ]
+      ]
+    },
+    {
+      "id": "sup-email",
+      "datasetId": "support",
+      "title": "Tiket melalui email",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan ID, kota, prioritas untuk channel email.",
+      "expectedColumns": [
+        "ticket_id",
+        "customer_city",
+        "priority"
+      ],
+      "expectedRows": [
+        [
+          503,
+          "Jakarta",
+          "Low"
+        ],
+        [
+          505,
+          "Bandung",
+          "High"
+        ],
+        [
+          509,
+          "Surabaya",
+          "High"
+        ],
+        [
+          510,
+          "Medan",
+          "Low"
+        ],
+        [
+          515,
+          "Medan",
+          "High"
+        ]
+      ]
+    },
+    {
+      "id": "sup-teams",
+      "datasetId": "support",
+      "title": "Daftar tim support",
+      "difficulty": "Easy",
+      "topic": "DISTINCT",
+      "prompt": "Tampilkan setiap team_name satu kali.",
+      "expectedColumns": [
+        "team_name"
+      ],
+      "expectedRows": [
+        [
+          "Team Alpha"
+        ],
+        [
+          "Team Beta"
+        ],
+        [
+          "Team Gamma"
+        ]
+      ]
+    },
+    {
+      "id": "edu-credits",
+      "datasetId": "education",
+      "title": "Mata kuliah minimal 3 kredit",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan nama mata kuliah dengan minimal 3 kredit.",
+      "expectedColumns": [
+        "course_name",
+        "credits"
+      ],
+      "expectedRows": [
+        [
+          "Python for Data",
+          4
+        ],
+        [
+          "Stats Intro",
+          3
+        ],
+        [
+          "Visual Analytics",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "edu-high-scores",
+      "datasetId": "education",
+      "title": "Nilai completed minimal 85",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan enrollment_id dan score completed >=85, nilai tertinggi dulu.",
+      "expectedColumns": [
+        "enrollment_id",
+        "score"
+      ],
+      "expectedRows": [
+        [
+          1017,
+          96
+        ],
+        [
+          1005,
+          95
+        ],
+        [
+          1019,
+          93
+        ],
+        [
+          1001,
+          92
+        ],
+        [
+          1015,
+          91
+        ],
+        [
+          1009,
+          90
+        ],
+        [
+          1023,
+          90
+        ],
+        [
+          1018,
+          89
+        ],
+        [
+          1010,
+          88
+        ],
+        [
+          1020,
+          88
+        ],
+        [
+          1012,
+          87
+        ],
+        [
+          1021,
+          86
+        ],
+        [
+          1024,
+          86
+        ],
+        [
+          1025,
+          85
+        ]
+      ]
+    },
+    {
+      "id": "edu-jakarta",
+      "datasetId": "education",
+      "title": "Mahasiswa dari Jakarta",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan nama mahasiswa dari Jakarta.",
+      "expectedColumns": [
+        "student_name"
+      ],
+      "expectedRows": [
+        [
+          "Ana"
+        ],
+        [
+          "Dewa"
+        ],
+        [
+          "Hadi"
+        ]
+      ]
+    },
+    {
+      "id": "edu-dropped",
+      "datasetId": "education",
+      "title": "Enrollment dropped",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan ID enrollment, mahasiswa, dan course yang dropped.",
+      "expectedColumns": [
+        "enrollment_id",
+        "student_id",
+        "course_id"
+      ],
+      "expectedRows": [
+        [
+          1011,
+          6,
+          14
+        ],
+        [
+          1016,
+          8,
+          15
+        ]
+      ]
+    },
+    {
+      "id": "sub-active",
+      "datasetId": "subscriptions",
+      "title": "Pelanggan aktif",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan nama dan plan_id pelanggan berstatus active.",
+      "expectedColumns": [
+        "subscriber_name",
+        "plan_id"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          1
+        ],
+        [
+          "Bima",
+          2
+        ],
+        [
+          "Dimas",
+          3
+        ],
+        [
+          "Eka",
+          2
+        ],
+        [
+          "Fajar",
+          1
+        ],
+        [
+          "Hadi",
+          3
+        ],
+        [
+          "Intan",
+          1
+        ],
+        [
+          "Joko",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "sub-plans",
+      "datasetId": "subscriptions",
+      "title": "Harga paket langganan",
+      "difficulty": "Easy",
+      "topic": "ORDER BY",
+      "prompt": "Tampilkan nama paket, harga, siklus tagihan dari termahal.",
+      "expectedColumns": [
+        "plan_name",
+        "price_amount",
+        "billing_cycle"
+      ],
+      "expectedRows": [
+        [
+          "Annual",
+          990000,
+          "annual"
+        ],
+        [
+          "Plus",
+          99000,
+          "monthly"
+        ],
+        [
+          "Basic",
+          49000,
+          "monthly"
+        ]
+      ]
+    },
+    {
+      "id": "sub-failed",
+      "datasetId": "subscriptions",
+      "title": "Pembayaran gagal",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan ID pembayaran, pelanggan, dan jumlah untuk status failed.",
+      "expectedColumns": [
+        "payment_id",
+        "subscriber_id",
+        "amount"
+      ],
+      "expectedRows": [
+        [
+          205,
+          105,
+          99000
+        ],
+        [
+          212,
+          103,
+          49000
+        ]
+      ]
+    },
+    {
+      "id": "web-mobile",
+      "datasetId": "web-analytics",
+      "title": "Kunjungan perangkat mobile",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan ID kunjungan, halaman, konversi dari perangkat mobile.",
+      "expectedColumns": [
+        "visit_id",
+        "landing_page",
+        "converted"
+      ],
+      "expectedRows": [
+        [
+          301,
+          "/sale",
+          1
+        ],
+        [
+          303,
+          "/new",
+          1
+        ],
+        [
+          304,
+          "/new",
+          0
+        ],
+        [
+          307,
+          "/home",
+          0
+        ],
+        [
+          308,
+          "/guide",
+          0
+        ],
+        [
+          310,
+          "/newsletter",
+          0
+        ],
+        [
+          312,
+          "/refer",
+          0
+        ],
+        [
+          315,
+          "/new",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "web-converted",
+      "datasetId": "web-analytics",
+      "title": "Kunjungan yang konversi",
+      "difficulty": "Easy",
+      "topic": "WHERE",
+      "prompt": "Tampilkan ID, kampanye, tanggal untuk converted = 1.",
+      "expectedColumns": [
+        "visit_id",
+        "campaign_id",
+        "visit_date"
+      ],
+      "expectedRows": [
+        [
+          301,
+          1,
+          "2026-01-01"
+        ],
+        [
+          303,
+          2,
+          "2026-01-02"
+        ],
+        [
+          305,
+          2,
+          "2026-01-02"
+        ],
+        [
+          309,
+          4,
+          "2026-01-04"
+        ],
+        [
+          311,
+          5,
+          "2026-01-05"
+        ],
+        [
+          313,
+          1,
+          "2026-01-06"
+        ],
+        [
+          315,
+          2,
+          "2026-01-07"
+        ]
+      ]
+    },
+    {
+      "id": "coffee-outlet-revenue",
+      "datasetId": "coffee-shop",
+      "title": "Omzet per outlet",
+      "difficulty": "Medium",
+      "topic": "JOIN + SUM",
+      "prompt": "Hitung omzet outlet dari quantity kali harga.",
+      "expectedColumns": [
+        "outlet",
+        "revenue"
+      ],
+      "expectedRows": [
+        [
+          "Jakarta",
+          180000
+        ],
+        [
+          "Bandung",
+          173000
+        ],
+        [
+          "Surabaya",
+          118000
+        ]
+      ]
+    },
+    {
+      "id": "coffee-units-category",
+      "datasetId": "coffee-shop",
+      "title": "Unit terjual per kategori",
+      "difficulty": "Medium",
+      "topic": "JOIN + SUM",
+      "prompt": "Jumlahkan quantity per kategori produk.",
+      "expectedColumns": [
+        "category",
+        "total_units"
+      ],
+      "expectedRows": [
+        [
+          "Food",
+          10
+        ],
+        [
+          "Coffee",
+          6
+        ],
+        [
+          "Tea",
+          6
+        ]
+      ]
+    },
+    {
+      "id": "coffee-outlet-day",
+      "datasetId": "coffee-shop",
+      "title": "Order per outlet per tanggal",
+      "difficulty": "Medium",
+      "topic": "GROUP BY",
+      "prompt": "Hitung order per tanggal dan outlet.",
+      "expectedColumns": [
+        "order_date",
+        "outlet",
+        "total_orders"
+      ],
+      "expectedRows": [
+        [
+          "2026-01-01",
+          "Bandung",
+          1
+        ],
+        [
+          "2026-01-01",
+          "Jakarta",
+          2
+        ],
+        [
+          "2026-01-02",
+          "Bandung",
+          1
+        ],
+        [
+          "2026-01-02",
+          "Jakarta",
+          1
+        ],
+        [
+          "2026-01-02",
+          "Surabaya",
+          1
+        ],
+        [
+          "2026-01-03",
+          "Bandung",
+          1
+        ],
+        [
+          "2026-01-03",
+          "Jakarta",
+          1
+        ],
+        [
+          "2026-01-03",
+          "Surabaya",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "coffee-high-orders",
+      "datasetId": "coffee-shop",
+      "title": "Order bernilai di atas 50.000",
+      "difficulty": "Medium",
+      "topic": "CTE",
+      "prompt": "Tampilkan order dengan omzet >50.000.",
+      "expectedColumns": [
+        "order_id",
+        "outlet",
+        "revenue"
+      ],
+      "expectedRows": [
+        [
+          102,
+          "Bandung",
+          89000
+        ],
+        [
+          101,
+          "Jakarta",
+          72000
+        ],
+        [
+          106,
+          "Surabaya",
+          56000
+        ],
+        [
+          103,
+          "Jakarta",
+          54000
+        ]
+      ]
+    },
+    {
+      "id": "coffee-avg-price",
+      "datasetId": "coffee-shop",
+      "title": "Rata-rata harga per kategori",
+      "difficulty": "Medium",
+      "topic": "AVG",
+      "prompt": "Rata-rata unit_price kategori dibulatkan rupiah penuh.",
+      "expectedColumns": [
+        "category",
+        "average_price"
+      ],
+      "expectedRows": [
+        [
+          "Tea",
+          28500.0
+        ],
+        [
+          "Coffee",
+          25000.0
+        ],
+        [
+          "Food",
+          15000.0
+        ]
+      ]
+    },
+    {
+      "id": "store-revenue-category",
+      "datasetId": "online-store",
+      "title": "Omzet completed per kategori",
+      "difficulty": "Medium",
+      "topic": "JOIN + GROUP BY",
+      "prompt": "Jumlahkan omzet produk dari order completed per kategori.",
+      "expectedColumns": [
+        "category",
+        "revenue"
+      ],
+      "expectedRows": [
+        [
+          "Lifestyle",
+          300000
+        ],
+        [
+          "Stationery",
+          85000
+        ]
+      ]
+    },
+    {
+      "id": "store-spend-customer",
+      "datasetId": "online-store",
+      "title": "Nilai order per pelanggan",
+      "difficulty": "Medium",
+      "topic": "JOIN + GROUP BY",
+      "prompt": "Hitung nilai seluruh item order per pelanggan.",
+      "expectedColumns": [
+        "customer_name",
+        "total_value"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          185000
+        ],
+        [
+          "Bima",
+          110000
+        ],
+        [
+          "Dimas",
+          80000
+        ],
+        [
+          "Citra",
+          70000
+        ],
+        [
+          "Eka",
+          30000
+        ]
+      ]
+    },
+    {
+      "id": "store-status-count",
+      "datasetId": "online-store",
+      "title": "Jumlah order per status",
+      "difficulty": "Medium",
+      "topic": "GROUP BY",
+      "prompt": "Hitung jumlah order untuk setiap status.",
+      "expectedColumns": [
+        "status",
+        "total_orders"
+      ],
+      "expectedRows": [
+        [
+          "cancelled",
+          1
+        ],
+        [
+          "completed",
+          6
+        ],
+        [
+          "pending",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "store-units-category",
+      "datasetId": "online-store",
+      "title": "Unit completed per kategori",
+      "difficulty": "Medium",
+      "topic": "JOIN + SUM",
+      "prompt": "Jumlahkan unit produk dari order completed per kategori.",
+      "expectedColumns": [
+        "category",
+        "total_units"
+      ],
+      "expectedRows": [
+        [
+          "Lifestyle",
+          8
+        ],
+        [
+          "Stationery",
+          5
+        ]
+      ]
+    },
+    {
+      "id": "store-large-orders",
+      "datasetId": "online-store",
+      "title": "Order bernilai di atas 55.000",
+      "difficulty": "Medium",
+      "topic": "CTE",
+      "prompt": "Tampilkan order dengan nilai item >55.000 semua status.",
+      "expectedColumns": [
+        "order_id",
+        "revenue"
+      ],
+      "expectedRows": [
+        [
+          205,
+          80000
+        ],
+        [
+          208,
+          75000
+        ],
+        [
+          204,
+          70000
+        ],
+        [
+          203,
+          60000
+        ]
+      ]
+    },
+    {
+      "id": "store-revenue-city",
+      "datasetId": "online-store",
+      "title": "Omzet completed per kota",
+      "difficulty": "Medium",
+      "topic": "JOIN + GROUP BY",
+      "prompt": "Jumlahkan omzet order completed per kota pelanggan.",
+      "expectedColumns": [
+        "city",
+        "revenue"
+      ],
+      "expectedRows": [
+        [
+          "Jakarta",
+          205000
+        ],
+        [
+          "Bandung",
+          110000
+        ],
+        [
+          "Surabaya",
+          70000
+        ]
+      ]
+    },
+    {
+      "id": "hr-headcount",
+      "datasetId": "hr-analytics",
+      "title": "Jumlah karyawan per departemen",
+      "difficulty": "Medium",
+      "topic": "JOIN + COUNT",
+      "prompt": "Hitung jumlah karyawan setiap departemen.",
+      "expectedColumns": [
+        "department_name",
+        "headcount"
+      ],
+      "expectedRows": [
+        [
+          "Marketing",
+          3
+        ],
+        [
+          "Operations",
+          3
+        ],
+        [
+          "Sales",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "hr-payroll",
+      "datasetId": "hr-analytics",
+      "title": "Total gaji per departemen",
+      "difficulty": "Medium",
+      "topic": "JOIN + SUM",
+      "prompt": "Jumlahkan salary untuk tiap departemen.",
+      "expectedColumns": [
+        "department_name",
+        "payroll"
+      ],
+      "expectedRows": [
+        [
+          "Operations",
+          25000000
+        ],
+        [
+          "Sales",
+          23000000
+        ],
+        [
+          "Marketing",
+          21000000
+        ]
+      ]
+    },
+    {
+      "id": "hr-above-average",
+      "datasetId": "hr-analytics",
+      "title": "Karyawan di atas rata-rata departemen",
+      "difficulty": "Medium",
+      "topic": "Subquery",
+      "prompt": "Tampilkan karyawan dengan gaji di atas rata-rata departemennya.",
+      "expectedColumns": [
+        "department_name",
+        "employee_name",
+        "salary"
+      ],
+      "expectedRows": [
+        [
+          "Marketing",
+          "Gina",
+          8500000
+        ],
+        [
+          "Operations",
+          "Deni",
+          10000000
+        ],
+        [
+          "Sales",
+          "Anisa",
+          9000000
+        ]
+      ]
+    },
+    {
+      "id": "hr-salary-band",
+      "datasetId": "hr-analytics",
+      "title": "Jumlah karyawan per kelompok gaji",
+      "difficulty": "Medium",
+      "topic": "CASE + GROUP BY",
+      "prompt": "Kelompokkan gaji High >=8 juta, Mid >=7 juta, Entry di bawahnya.",
+      "expectedColumns": [
+        "salary_band",
+        "employee_count"
+      ],
+      "expectedRows": [
+        [
+          "High",
+          4
+        ],
+        [
+          "Mid",
+          2
+        ],
+        [
+          "Entry",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "lib-loans-member",
+      "datasetId": "library",
+      "title": "Pinjaman per anggota",
+      "difficulty": "Medium",
+      "topic": "LEFT JOIN + COUNT",
+      "prompt": "Hitung pinjaman setiap anggota termasuk yang belum pernah meminjam.",
+      "expectedColumns": [
+        "member_name",
+        "loan_count"
+      ],
+      "expectedRows": [
+        [
+          "Rani",
+          4
+        ],
+        [
+          "Seno",
+          2
+        ],
+        [
+          "Tika",
+          2
+        ],
+        [
+          "Umar",
+          2
+        ],
+        [
+          "Vina",
+          2
+        ],
+        [
+          "Wawan",
+          2
+        ],
+        [
+          "Xena",
+          0
+        ]
+      ]
+    },
+    {
+      "id": "lib-loans-category",
+      "datasetId": "library",
+      "title": "Pinjaman per kategori",
+      "difficulty": "Medium",
+      "topic": "JOIN + COUNT",
+      "prompt": "Hitung jumlah pinjaman untuk tiap kategori buku.",
+      "expectedColumns": [
+        "category",
+        "loan_count"
+      ],
+      "expectedRows": [
+        [
+          "Technology",
+          7
+        ],
+        [
+          "Data",
+          5
+        ],
+        [
+          "Fiction",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "lib-popular-authors",
+      "datasetId": "library",
+      "title": "Penulis dengan minimal 3 pinjaman",
+      "difficulty": "Medium",
+      "topic": "HAVING",
+      "prompt": "Tampilkan penulis dengan setidaknya tiga pinjaman untuk buku-bukunya.",
+      "expectedColumns": [
+        "author_name",
+        "loan_count"
+      ],
+      "expectedRows": [
+        [
+          "Budi Santoso",
+          4
+        ],
+        [
+          "Ada Rahman",
+          3
+        ],
+        [
+          "Clara Lim",
+          3
+        ],
+        [
+          "Elena Rossi",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "lib-average-late",
+      "datasetId": "library",
+      "title": "Rata-rata keterlambatan anggota",
+      "difficulty": "Medium",
+      "topic": "AVG",
+      "prompt": "Hitung rata-rata days_late per anggota dan bulatkan satu desimal.",
+      "expectedColumns": [
+        "member_name",
+        "average_days_late"
+      ],
+      "expectedRows": [
+        [
+          "Tika",
+          3.0
+        ],
+        [
+          "Seno",
+          2.5
+        ],
+        [
+          "Umar",
+          2.0
+        ],
+        [
+          "Rani",
+          1.5
+        ],
+        [
+          "Wawan",
+          1.0
+        ],
+        [
+          "Vina",
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "lib-never-loaned",
+      "datasetId": "library",
+      "title": "Buku belum dipinjam",
+      "difficulty": "Medium",
+      "topic": "LEFT JOIN + NULL",
+      "prompt": "Cari buku yang tidak punya catatan pinjaman.",
+      "expectedColumns": [
+        "book_id",
+        "title"
+      ],
+      "expectedRows": [
+        [
+          21,
+          "SQL Patterns"
+        ]
+      ]
+    },
+    {
+      "id": "sup-count-agent",
+      "datasetId": "support",
+      "title": "Jumlah tiket per agen",
+      "difficulty": "Medium",
+      "topic": "JOIN + COUNT",
+      "prompt": "Hitung tiket yang ditangani tiap agen.",
+      "expectedColumns": [
+        "agent_name",
+        "ticket_count"
+      ],
+      "expectedRows": [
+        [
+          "Arman",
+          4
+        ],
+        [
+          "Bunga",
+          4
+        ],
+        [
+          "Candra",
+          4
+        ],
+        [
+          "Diah",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "sup-average-priority",
+      "datasetId": "support",
+      "title": "Rata-rata waktu per prioritas",
+      "difficulty": "Medium",
+      "topic": "AVG",
+      "prompt": "Rata-rata resolved_hours per prioritas tiket resolved.",
+      "expectedColumns": [
+        "priority",
+        "average_hours"
+      ],
+      "expectedRows": [
+        [
+          "High",
+          8.0
+        ],
+        [
+          "Medium",
+          24.0
+        ],
+        [
+          "Low",
+          38.3
+        ]
+      ]
+    },
+    {
+      "id": "sup-busy-agents",
+      "datasetId": "support",
+      "title": "Agen dengan minimal 4 tiket",
+      "difficulty": "Medium",
+      "topic": "HAVING",
+      "prompt": "Tampilkan agen yang menangani minimal empat tiket.",
+      "expectedColumns": [
+        "agent_name",
+        "ticket_count"
+      ],
+      "expectedRows": [
+        [
+          "Arman",
+          4
+        ],
+        [
+          "Bunga",
+          4
+        ],
+        [
+          "Candra",
+          4
+        ],
+        [
+          "Diah",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "sup-status-team",
+      "datasetId": "support",
+      "title": "Tiket open dan resolved per tim",
+      "difficulty": "Medium",
+      "topic": "CASE + GROUP BY",
+      "prompt": "Hitung tiket open dan resolved untuk tiap tim.",
+      "expectedColumns": [
+        "team_name",
+        "open_tickets",
+        "resolved_tickets"
+      ],
+      "expectedRows": [
+        [
+          "Team Alpha",
+          1,
+          7
+        ],
+        [
+          "Team Beta",
+          1,
+          3
+        ],
+        [
+          "Team Gamma",
+          1,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "sup-resolution-city",
+      "datasetId": "support",
+      "title": "Waktu penyelesaian per kota",
+      "difficulty": "Medium",
+      "topic": "AVG + GROUP BY",
+      "prompt": "Rata-rata resolved_hours per kota tiket yang selesai.",
+      "expectedColumns": [
+        "customer_city",
+        "average_hours"
+      ],
+      "expectedRows": [
+        [
+          "Medan",
+          32.3
+        ],
+        [
+          "Jakarta",
+          23.5
+        ],
+        [
+          "Bandung",
+          19.3
+        ],
+        [
+          "Yogyakarta",
+          14.0
+        ],
+        [
+          "Surabaya",
+          13.0
+        ]
+      ]
+    },
+    {
+      "id": "edu-average-course",
+      "datasetId": "education",
+      "title": "Rata-rata nilai per mata kuliah",
+      "difficulty": "Medium",
+      "topic": "JOIN + AVG",
+      "prompt": "Hitung rata-rata score completed tiap course, satu desimal.",
+      "expectedColumns": [
+        "course_name",
+        "average_score"
+      ],
+      "expectedRows": [
+        [
+          "Stats Intro",
+          88.0
+        ],
+        [
+          "Product Metrics",
+          87.7
+        ],
+        [
+          "Visual Analytics",
+          86.5
+        ],
+        [
+          "Python for Data",
+          86.3
+        ],
+        [
+          "SQL Basic",
+          83.9
+        ]
+      ]
+    },
+    {
+      "id": "edu-completed-student",
+      "datasetId": "education",
+      "title": "Course selesai per mahasiswa",
+      "difficulty": "Medium",
+      "topic": "JOIN + COUNT",
+      "prompt": "Hitung jumlah course completed tiap mahasiswa.",
+      "expectedColumns": [
+        "student_name",
+        "completed_courses"
+      ],
+      "expectedRows": [
+        [
+          "Citra",
+          4
+        ],
+        [
+          "Dewa",
+          4
+        ],
+        [
+          "Ana",
+          3
+        ],
+        [
+          "Beni",
+          3
+        ],
+        [
+          "Eka",
+          3
+        ],
+        [
+          "Gita",
+          2
+        ],
+        [
+          "Fajar",
+          1
+        ],
+        [
+          "Hadi",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "edu-pass-rate",
+      "datasetId": "education",
+      "title": "Persentase lulus per mata kuliah",
+      "difficulty": "Medium",
+      "topic": "CASE + GROUP BY",
+      "prompt": "Nilai >=75 dinyatakan lulus; hitung lulus, total, dan persentase per course.",
+      "expectedColumns": [
+        "course_name",
+        "passed",
+        "completed",
+        "pass_rate"
+      ],
+      "expectedRows": [
+        [
+          "Product Metrics",
+          3,
+          3,
+          100.0
+        ],
+        [
+          "Python for Data",
+          4,
+          4,
+          100.0
+        ],
+        [
+          "Stats Intro",
+          5,
+          5,
+          100.0
+        ],
+        [
+          "Visual Analytics",
+          2,
+          2,
+          100.0
+        ],
+        [
+          "SQL Basic",
+          6,
+          7,
+          85.7
+        ]
+      ]
+    },
+    {
+      "id": "edu-status-course",
+      "datasetId": "education",
+      "title": "Status enrollment per course",
+      "difficulty": "Medium",
+      "topic": "GROUP BY",
+      "prompt": "Hitung enrollment per course dan status.",
+      "expectedColumns": [
+        "course_name",
+        "status",
+        "total"
+      ],
+      "expectedRows": [
+        [
+          "Product Metrics",
+          "completed",
+          3
+        ],
+        [
+          "Product Metrics",
+          "dropped",
+          1
+        ],
+        [
+          "Python for Data",
+          "completed",
+          4
+        ],
+        [
+          "Python for Data",
+          "dropped",
+          1
+        ],
+        [
+          "SQL Basic",
+          "completed",
+          7
+        ],
+        [
+          "Stats Intro",
+          "completed",
+          5
+        ],
+        [
+          "Stats Intro",
+          "current",
+          1
+        ],
+        [
+          "Visual Analytics",
+          "completed",
+          2
+        ],
+        [
+          "Visual Analytics",
+          "current",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "edu-high-average",
+      "datasetId": "education",
+      "title": "Course dengan rata-rata minimal 85",
+      "difficulty": "Medium",
+      "topic": "HAVING",
+      "prompt": "Tampilkan course dengan rata-rata nilai completed >=85.",
+      "expectedColumns": [
+        "course_name",
+        "average_score"
+      ],
+      "expectedRows": [
+        [
+          "Stats Intro",
+          88.0
+        ],
+        [
+          "Product Metrics",
+          87.7
+        ],
+        [
+          "Visual Analytics",
+          86.5
+        ],
+        [
+          "Python for Data",
+          86.3
+        ]
+      ]
+    },
+    {
+      "id": "sub-revenue-plan",
+      "datasetId": "subscriptions",
+      "title": "Pendapatan per paket",
+      "difficulty": "Medium",
+      "topic": "JOIN + SUM",
+      "prompt": "Jumlahkan pembayaran paid per plan.",
+      "expectedColumns": [
+        "plan_name",
+        "paid_revenue"
+      ],
+      "expectedRows": [
+        [
+          "Annual",
+          3960000
+        ],
+        [
+          "Plus",
+          495000
+        ],
+        [
+          "Basic",
+          294000
+        ]
+      ]
+    },
+    {
+      "id": "sub-repeat-payers",
+      "datasetId": "subscriptions",
+      "title": "Pelanggan dengan dua pembayaran sukses",
+      "difficulty": "Medium",
+      "topic": "HAVING",
+      "prompt": "Tampilkan pelanggan dengan minimal dua pembayaran paid.",
+      "expectedColumns": [
+        "subscriber_name",
+        "paid_count"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          2
+        ],
+        [
+          "Bima",
+          2
+        ],
+        [
+          "Dimas",
+          2
+        ],
+        [
+          "Fajar",
+          2
+        ],
+        [
+          "Hadi",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "sub-success-rate",
+      "datasetId": "subscriptions",
+      "title": "Tingkat sukses per paket",
+      "difficulty": "Medium",
+      "topic": "CASE + GROUP BY",
+      "prompt": "Hitung pembayaran sukses dan success_rate setiap plan.",
+      "expectedColumns": [
+        "plan_name",
+        "paid_count",
+        "success_rate"
+      ],
+      "expectedRows": [
+        [
+          "Annual",
+          4,
+          100.0
+        ],
+        [
+          "Basic",
+          6,
+          85.7
+        ],
+        [
+          "Plus",
+          5,
+          83.3
+        ]
+      ]
+    },
+    {
+      "id": "sub-active-city",
+      "datasetId": "subscriptions",
+      "title": "Pelanggan aktif per kota",
+      "difficulty": "Medium",
+      "topic": "GROUP BY",
+      "prompt": "Hitung subscriber active per kota.",
+      "expectedColumns": [
+        "city",
+        "active_count"
+      ],
+      "expectedRows": [
+        [
+          "Bandung",
+          3
+        ],
+        [
+          "Jakarta",
+          2
+        ],
+        [
+          "Medan",
+          1
+        ],
+        [
+          "Surabaya",
+          1
+        ],
+        [
+          "Yogyakarta",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "web-campaign-performance",
+      "datasetId": "web-analytics",
+      "title": "Kunjungan dan konversi kampanye",
+      "difficulty": "Medium",
+      "topic": "JOIN + GROUP BY",
+      "prompt": "Hitung visits dan conversions setiap campaign.",
+      "expectedColumns": [
+        "campaign_name",
+        "visits",
+        "conversions"
+      ],
+      "expectedRows": [
+        [
+          "Organic Search",
+          4,
+          0
+        ],
+        [
+          "Summer Sale",
+          4,
+          3
+        ],
+        [
+          "Back to School",
+          3,
+          2
+        ],
+        [
+          "Monthly Newsletter",
+          3,
+          1
+        ],
+        [
+          "Friend Referral",
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "web-channel-rate",
+      "datasetId": "web-analytics",
+      "title": "Conversion rate per channel",
+      "difficulty": "Medium",
+      "topic": "JOIN + GROUP BY",
+      "prompt": "Hitung visits dan conversion_rate per channel, satu desimal.",
+      "expectedColumns": [
+        "channel",
+        "visits",
+        "conversion_rate"
+      ],
+      "expectedRows": [
+        [
+          "Social",
+          4,
+          75.0
+        ],
+        [
+          "Email",
+          6,
+          50.0
+        ],
+        [
+          "Referral",
+          2,
+          50.0
+        ],
+        [
+          "Organic",
+          4,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "web-device-session",
+      "datasetId": "web-analytics",
+      "title": "Durasi sesi per perangkat",
+      "difficulty": "Medium",
+      "topic": "AVG + GROUP BY",
+      "prompt": "Rata-rata session_seconds per device dibulatkan satu desimal.",
+      "expectedColumns": [
+        "device",
+        "average_seconds"
+      ],
+      "expectedRows": [
+        [
+          "desktop",
+          155.8
+        ],
+        [
+          "mobile",
+          144.4
+        ],
+        [
+          "tablet",
+          142.5
+        ]
+      ]
+    },
+    {
+      "id": "coffee-rank-orders",
+      "datasetId": "coffee-shop",
+      "title": "Peringkat nilai order per outlet",
+      "difficulty": "Hard",
+      "topic": "RANK",
+      "prompt": "Rank revenue order tertinggi di tiap outlet.",
+      "expectedColumns": [
+        "outlet",
+        "order_id",
+        "revenue",
+        "revenue_rank"
+      ],
+      "expectedRows": [
+        [
+          "Bandung",
+          102,
+          89000,
+          1
+        ],
+        [
+          "Bandung",
+          104,
+          48000,
+          2
+        ],
+        [
+          "Bandung",
+          108,
+          36000,
+          3
+        ],
+        [
+          "Jakarta",
+          101,
+          72000,
+          1
+        ],
+        [
+          "Jakarta",
+          103,
+          54000,
+          2
+        ],
+        [
+          "Jakarta",
+          107,
+          32000,
+          3
+        ],
+        [
+          "Jakarta",
+          105,
+          22000,
+          4
+        ],
+        [
+          "Surabaya",
+          106,
+          56000,
+          1
+        ],
+        [
+          "Surabaya",
+          109,
+          50000,
+          2
+        ],
+        [
+          "Surabaya",
+          110,
+          12000,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "coffee-running-daily",
+      "datasetId": "coffee-shop",
+      "title": "Omzet kumulatif harian outlet",
+      "difficulty": "Hard",
+      "topic": "Window SUM",
+      "prompt": "Hitung omzet harian lalu running_revenue tiap outlet.",
+      "expectedColumns": [
+        "outlet",
+        "order_date",
+        "daily_revenue",
+        "running_revenue"
+      ],
+      "expectedRows": [
+        [
+          "Bandung",
+          "2026-01-01",
+          89000,
+          89000
+        ],
+        [
+          "Bandung",
+          "2026-01-02",
+          48000,
+          137000
+        ],
+        [
+          "Bandung",
+          "2026-01-03",
+          36000,
+          173000
+        ],
+        [
+          "Jakarta",
+          "2026-01-01",
+          126000,
+          126000
+        ],
+        [
+          "Jakarta",
+          "2026-01-02",
+          22000,
+          148000
+        ],
+        [
+          "Jakarta",
+          "2026-01-03",
+          32000,
+          180000
+        ],
+        [
+          "Surabaya",
+          "2026-01-02",
+          56000,
+          56000
+        ],
+        [
+          "Surabaya",
+          "2026-01-03",
+          62000,
+          118000
+        ]
+      ]
+    },
+    {
+      "id": "store-rank-spend",
+      "datasetId": "online-store",
+      "title": "Peringkat belanja pelanggan per kota",
+      "difficulty": "Hard",
+      "topic": "RANK",
+      "prompt": "Rank belanja completed tiap pelanggan di dalam kotanya.",
+      "expectedColumns": [
+        "city",
+        "customer_name",
+        "spend",
+        "spend_rank"
+      ],
+      "expectedRows": [
+        [
+          "Bandung",
+          "Bima",
+          110000,
+          1
+        ],
+        [
+          "Jakarta",
+          "Alya",
+          125000,
+          1
+        ],
+        [
+          "Jakarta",
+          "Dimas",
+          80000,
+          2
+        ],
+        [
+          "Surabaya",
+          "Citra",
+          70000,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "store-date-lag",
+      "datasetId": "online-store",
+      "title": "Tanggal order sebelumnya pelanggan",
+      "difficulty": "Hard",
+      "topic": "LAG",
+      "prompt": "Tampilkan tanggal order sebelumnya tiap pelanggan menggunakan LAG.",
+      "expectedColumns": [
+        "customer_name",
+        "order_id",
+        "order_date",
+        "previous_order_date"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          201,
+          "2026-02-01",
+          null
+        ],
+        [
+          "Alya",
+          203,
+          "2026-02-02",
+          "2026-02-01"
+        ],
+        [
+          "Alya",
+          208,
+          "2026-02-04",
+          "2026-02-02"
+        ],
+        [
+          "Bima",
+          202,
+          "2026-02-01",
+          null
+        ],
+        [
+          "Bima",
+          206,
+          "2026-02-03",
+          "2026-02-01"
+        ],
+        [
+          "Citra",
+          204,
+          "2026-02-02",
+          null
+        ],
+        [
+          "Dimas",
+          205,
+          "2026-02-03",
+          null
+        ],
+        [
+          "Eka",
+          207,
+          "2026-02-03",
+          null
+        ]
+      ]
+    },
+    {
+      "id": "store-running-spend",
+      "datasetId": "online-store",
+      "title": "Belanja kumulatif pelanggan",
+      "difficulty": "Hard",
+      "topic": "Window SUM",
+      "prompt": "Hitung nilai per order lalu running_spend tiap pelanggan.",
+      "expectedColumns": [
+        "customer_name",
+        "order_id",
+        "revenue",
+        "running_spend"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          201,
+          50000,
+          50000
+        ],
+        [
+          "Alya",
+          203,
+          60000,
+          110000
+        ],
+        [
+          "Alya",
+          208,
+          75000,
+          185000
+        ],
+        [
+          "Bima",
+          202,
+          55000,
+          55000
+        ],
+        [
+          "Bima",
+          206,
+          55000,
+          110000
+        ],
+        [
+          "Citra",
+          204,
+          70000,
+          70000
+        ],
+        [
+          "Dimas",
+          205,
+          80000,
+          80000
+        ],
+        [
+          "Eka",
+          207,
+          30000,
+          30000
+        ]
+      ]
+    },
+    {
+      "id": "hr-salary-gap",
+      "datasetId": "hr-analytics",
+      "title": "Selisih gaji dari rata-rata departemen",
+      "difficulty": "Hard",
+      "topic": "AVG window",
+      "prompt": "Tampilkan gaji dan selisih dari rata-rata departemen tiap karyawan.",
+      "expectedColumns": [
+        "department_name",
+        "employee_name",
+        "salary",
+        "average_salary",
+        "salary_gap"
+      ],
+      "expectedRows": [
+        [
+          "Marketing",
+          "Gina",
+          8500000,
+          7000000.0,
+          1500000.0
+        ],
+        [
+          "Marketing",
+          "Intan",
+          6500000,
+          7000000.0,
+          -500000.0
+        ],
+        [
+          "Marketing",
+          "Hadi",
+          6000000,
+          7000000.0,
+          -1000000.0
+        ],
+        [
+          "Operations",
+          "Deni",
+          10000000,
+          8333333.0,
+          1666667.0
+        ],
+        [
+          "Operations",
+          "Eka",
+          8000000,
+          8333333.0,
+          -333333.0
+        ],
+        [
+          "Operations",
+          "Farid",
+          7000000,
+          8333333.0,
+          -1333333.0
+        ],
+        [
+          "Sales",
+          "Anisa",
+          9000000,
+          7666667.0,
+          1333333.0
+        ],
+        [
+          "Sales",
+          "Bagas",
+          7500000,
+          7666667.0,
+          -166667.0
+        ],
+        [
+          "Sales",
+          "Citra",
+          6500000,
+          7666667.0,
+          -1166667.0
+        ]
+      ]
+    },
+    {
+      "id": "hr-running-payroll",
+      "datasetId": "hr-analytics",
+      "title": "Payroll kumulatif departemen",
+      "difficulty": "Hard",
+      "topic": "Window SUM",
+      "prompt": "Hitung payroll berjalan dari gaji tertinggi di setiap departemen.",
+      "expectedColumns": [
+        "department_name",
+        "employee_name",
+        "salary",
+        "running_payroll"
+      ],
+      "expectedRows": [
+        [
+          "Marketing",
+          "Gina",
+          8500000,
+          8500000
+        ],
+        [
+          "Marketing",
+          "Intan",
+          6500000,
+          15000000
+        ],
+        [
+          "Marketing",
+          "Hadi",
+          6000000,
+          21000000
+        ],
+        [
+          "Operations",
+          "Deni",
+          10000000,
+          10000000
+        ],
+        [
+          "Operations",
+          "Eka",
+          8000000,
+          18000000
+        ],
+        [
+          "Operations",
+          "Farid",
+          7000000,
+          25000000
+        ],
+        [
+          "Sales",
+          "Anisa",
+          9000000,
+          9000000
+        ],
+        [
+          "Sales",
+          "Bagas",
+          7500000,
+          16500000
+        ],
+        [
+          "Sales",
+          "Citra",
+          6500000,
+          23000000
+        ]
+      ]
+    },
+    {
+      "id": "lib-rank-books",
+      "datasetId": "library",
+      "title": "Peringkat popularitas buku per kategori",
+      "difficulty": "Hard",
+      "topic": "RANK + LEFT JOIN",
+      "prompt": "Hitung pinjaman tiap buku lalu ranking dalam kategorinya, termasuk buku nol pinjaman.",
+      "expectedColumns": [
+        "category",
+        "title",
+        "loan_count",
+        "popularity_rank"
+      ],
+      "expectedRows": [
+        [
+          "Data",
+          "Modern Analytics",
+          2,
+          1
+        ],
+        [
+          "Data",
+          "City Numbers",
+          1,
+          2
+        ],
+        [
+          "Data",
+          "Data Ethics",
+          1,
+          2
+        ],
+        [
+          "Data",
+          "Data Stories",
+          1,
+          2
+        ],
+        [
+          "Fiction",
+          "Island Letters",
+          1,
+          1
+        ],
+        [
+          "Fiction",
+          "The Quiet Library",
+          1,
+          1
+        ],
+        [
+          "Technology",
+          "Query Design",
+          2,
+          1
+        ],
+        [
+          "Technology",
+          "SQL Fundamentals",
+          2,
+          1
+        ],
+        [
+          "Technology",
+          "Small Algorithms",
+          2,
+          1
+        ],
+        [
+          "Technology",
+          "Network Notes",
+          1,
+          4
+        ],
+        [
+          "Technology",
+          "SQL Patterns",
+          0,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "lib-running-member",
+      "datasetId": "library",
+      "title": "Pinjaman berjalan tiap anggota",
+      "difficulty": "Hard",
+      "topic": "Window COUNT",
+      "prompt": "Hitung running_loans tiap anggota berdasarkan loan_date.",
+      "expectedColumns": [
+        "member_name",
+        "loan_date",
+        "title",
+        "running_loans"
+      ],
+      "expectedRows": [
+        [
+          "Rani",
+          "2026-01-05",
+          "SQL Fundamentals",
+          1
+        ],
+        [
+          "Rani",
+          "2026-01-08",
+          "Modern Analytics",
+          2
+        ],
+        [
+          "Rani",
+          "2026-01-15",
+          "SQL Fundamentals",
+          3
+        ],
+        [
+          "Rani",
+          "2026-01-29",
+          "Network Notes",
+          4
+        ],
+        [
+          "Seno",
+          "2026-01-06",
+          "Query Design",
+          1
+        ],
+        [
+          "Seno",
+          "2026-01-12",
+          "The Quiet Library",
+          2
+        ],
+        [
+          "Tika",
+          "2026-01-09",
+          "Data Stories",
+          1
+        ],
+        [
+          "Tika",
+          "2026-01-22",
+          "Island Letters",
+          2
+        ],
+        [
+          "Umar",
+          "2026-01-10",
+          "Small Algorithms",
+          1
+        ],
+        [
+          "Umar",
+          "2026-01-23",
+          "Small Algorithms",
+          2
+        ],
+        [
+          "Vina",
+          "2026-01-13",
+          "Modern Analytics",
+          1
+        ],
+        [
+          "Vina",
+          "2026-01-27",
+          "Data Ethics",
+          2
+        ],
+        [
+          "Wawan",
+          "2026-01-20",
+          "City Numbers",
+          1
+        ],
+        [
+          "Wawan",
+          "2026-01-25",
+          "Query Design",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "sup-agent-rank",
+      "datasetId": "support",
+      "title": "Peringkat kecepatan agen per tim",
+      "difficulty": "Hard",
+      "topic": "RANK + CTE",
+      "prompt": "Rank rata-rata waktu resolved tercepat di tiap tim.",
+      "expectedColumns": [
+        "team_name",
+        "agent_name",
+        "average_hours",
+        "speed_rank"
+      ],
+      "expectedRows": [
+        [
+          "Team Alpha",
+          "Arman",
+          19.3,
+          1
+        ],
+        [
+          "Team Alpha",
+          "Diah",
+          23.0,
+          2
+        ],
+        [
+          "Team Beta",
+          "Bunga",
+          15.3,
+          1
+        ],
+        [
+          "Team Gamma",
+          "Candra",
+          31.0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "sup-date-lag",
+      "datasetId": "support",
+      "title": "Tanggal tiket sebelumnya agen",
+      "difficulty": "Hard",
+      "topic": "LAG",
+      "prompt": "Tampilkan tanggal tiket sebelumnya untuk setiap agen.",
+      "expectedColumns": [
+        "ticket_id",
+        "agent_name",
+        "opened_date",
+        "previous_ticket_date"
+      ],
+      "expectedRows": [
+        [
+          501,
+          "Arman",
+          "2026-02-01",
+          null
+        ],
+        [
+          503,
+          "Arman",
+          "2026-02-02",
+          "2026-02-01"
+        ],
+        [
+          507,
+          "Arman",
+          "2026-02-04",
+          "2026-02-02"
+        ],
+        [
+          511,
+          "Arman",
+          "2026-02-06",
+          "2026-02-04"
+        ],
+        [
+          502,
+          "Bunga",
+          "2026-02-01",
+          null
+        ],
+        [
+          505,
+          "Bunga",
+          "2026-02-03",
+          "2026-02-01"
+        ],
+        [
+          508,
+          "Bunga",
+          "2026-02-04",
+          "2026-02-03"
+        ],
+        [
+          512,
+          "Bunga",
+          "2026-02-06",
+          "2026-02-04"
+        ],
+        [
+          504,
+          "Candra",
+          "2026-02-02",
+          null
+        ],
+        [
+          506,
+          "Candra",
+          "2026-02-03",
+          "2026-02-02"
+        ],
+        [
+          509,
+          "Candra",
+          "2026-02-05",
+          "2026-02-03"
+        ],
+        [
+          510,
+          "Candra",
+          "2026-02-05",
+          "2026-02-05"
+        ],
+        [
+          513,
+          "Diah",
+          "2026-02-07",
+          null
+        ],
+        [
+          514,
+          "Diah",
+          "2026-02-08",
+          "2026-02-07"
+        ],
+        [
+          515,
+          "Diah",
+          "2026-02-08",
+          "2026-02-08"
+        ],
+        [
+          516,
+          "Diah",
+          "2026-02-09",
+          "2026-02-08"
+        ]
+      ]
+    },
+    {
+      "id": "edu-rank-score",
+      "datasetId": "education",
+      "title": "Peringkat nilai per mata kuliah",
+      "difficulty": "Hard",
+      "topic": "RANK",
+      "prompt": "Rank nilai enrollment completed di setiap course.",
+      "expectedColumns": [
+        "course_name",
+        "student_name",
+        "score",
+        "score_rank"
+      ],
+      "expectedRows": [
+        [
+          "Product Metrics",
+          "Hadi",
+          91,
+          1
+        ],
+        [
+          "Product Metrics",
+          "Dewa",
+          88,
+          2
+        ],
+        [
+          "Product Metrics",
+          "Citra",
+          84,
+          3
+        ],
+        [
+          "Python for Data",
+          "Citra",
+          93,
+          1
+        ],
+        [
+          "Python for Data",
+          "Eka",
+          88,
+          2
+        ],
+        [
+          "Python for Data",
+          "Dewa",
+          86,
+          3
+        ],
+        [
+          "Python for Data",
+          "Dewa",
+          78,
+          4
+        ],
+        [
+          "SQL Basic",
+          "Ana",
+          96,
+          1
+        ],
+        [
+          "SQL Basic",
+          "Ana",
+          92,
+          2
+        ],
+        [
+          "SQL Basic",
+          "Fajar",
+          87,
+          3
+        ],
+        [
+          "SQL Basic",
+          "Eka",
+          86,
+          4
+        ],
+        [
+          "SQL Basic",
+          "Beni",
+          84,
+          5
+        ],
+        [
+          "SQL Basic",
+          "Beni",
+          76,
+          6
+        ],
+        [
+          "SQL Basic",
+          "Dewa",
+          66,
+          7
+        ],
+        [
+          "Stats Intro",
+          "Citra",
+          95,
+          1
+        ],
+        [
+          "Stats Intro",
+          "Citra",
+          90,
+          2
+        ],
+        [
+          "Stats Intro",
+          "Beni",
+          89,
+          3
+        ],
+        [
+          "Stats Intro",
+          "Gita",
+          85,
+          4
+        ],
+        [
+          "Stats Intro",
+          "Ana",
+          81,
+          5
+        ],
+        [
+          "Visual Analytics",
+          "Eka",
+          90,
+          1
+        ],
+        [
+          "Visual Analytics",
+          "Gita",
+          83,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "edu-score-lag",
+      "datasetId": "education",
+      "title": "Perubahan nilai antar term",
+      "difficulty": "Hard",
+      "topic": "LAG",
+      "prompt": "Bandingkan score completed tiap mahasiswa dan course dari term sebelumnya.",
+      "expectedColumns": [
+        "student_name",
+        "course_name",
+        "term",
+        "score",
+        "previous_score"
+      ],
+      "expectedRows": [
+        [
+          "Ana",
+          "SQL Basic",
+          "2026-T1",
+          92,
+          null
+        ],
+        [
+          "Ana",
+          "SQL Basic",
+          "2026-T2",
+          96,
+          92
+        ],
+        [
+          "Ana",
+          "Stats Intro",
+          "2026-T1",
+          81,
+          null
+        ],
+        [
+          "Beni",
+          "SQL Basic",
+          "2026-T1",
+          76,
+          null
+        ],
+        [
+          "Beni",
+          "SQL Basic",
+          "2026-T2",
+          84,
+          76
+        ],
+        [
+          "Beni",
+          "Stats Intro",
+          "2026-T2",
+          89,
+          null
+        ],
+        [
+          "Citra",
+          "Product Metrics",
+          "2026-T1",
+          84,
+          null
+        ],
+        [
+          "Citra",
+          "Python for Data",
+          "2026-T2",
+          93,
+          null
+        ],
+        [
+          "Citra",
+          "Stats Intro",
+          "2026-T1",
+          95,
+          null
+        ],
+        [
+          "Citra",
+          "Stats Intro",
+          "2026-T2",
+          90,
+          95
+        ],
+        [
+          "Dewa",
+          "Product Metrics",
+          "2026-T2",
+          88,
+          null
+        ],
+        [
+          "Dewa",
+          "Python for Data",
+          "2026-T1",
+          78,
+          null
+        ],
+        [
+          "Dewa",
+          "Python for Data",
+          "2026-T2",
+          86,
+          78
+        ],
+        [
+          "Dewa",
+          "SQL Basic",
+          "2026-T1",
+          66,
+          null
+        ],
+        [
+          "Eka",
+          "Python for Data",
+          "2026-T1",
+          88,
+          null
+        ],
+        [
+          "Eka",
+          "SQL Basic",
+          "2026-T2",
+          86,
+          null
+        ],
+        [
+          "Eka",
+          "Visual Analytics",
+          "2026-T1",
+          90,
+          null
+        ],
+        [
+          "Fajar",
+          "SQL Basic",
+          "2026-T1",
+          87,
+          null
+        ],
+        [
+          "Gita",
+          "Stats Intro",
+          "2026-T2",
+          85,
+          null
+        ],
+        [
+          "Gita",
+          "Visual Analytics",
+          "2026-T1",
+          83,
+          null
+        ],
+        [
+          "Hadi",
+          "Product Metrics",
+          "2026-T1",
+          91,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "sub-revenue-lag",
+      "datasetId": "subscriptions",
+      "title": "Perubahan pendapatan bulanan per paket",
+      "difficulty": "Hard",
+      "topic": "LAG + GROUP BY",
+      "prompt": "Jumlahkan pembayaran paid per bulan lalu bandingkan dengan bulan sebelumnya.",
+      "expectedColumns": [
+        "plan_name",
+        "paid_month",
+        "revenue",
+        "previous_revenue",
+        "revenue_change"
+      ],
+      "expectedRows": [
+        [
+          "Annual",
+          "2026-01",
+          1980000,
+          null,
+          null
+        ],
+        [
+          "Annual",
+          "2026-02",
+          1980000,
+          1980000,
+          0
+        ],
+        [
+          "Basic",
+          "2026-01",
+          147000,
+          null,
+          null
+        ],
+        [
+          "Basic",
+          "2026-02",
+          147000,
+          147000,
+          0
+        ],
+        [
+          "Plus",
+          "2026-01",
+          198000,
+          null,
+          null
+        ],
+        [
+          "Plus",
+          "2026-02",
+          297000,
+          198000,
+          99000
+        ]
+      ]
+    },
+    {
+      "id": "sub-running-user",
+      "datasetId": "subscriptions",
+      "title": "Pembayaran kumulatif pelanggan",
+      "difficulty": "Hard",
+      "topic": "Window SUM",
+      "prompt": "Hitung running_paid tiap pelanggan berdasarkan tanggal pembayaran sukses.",
+      "expectedColumns": [
+        "subscriber_name",
+        "paid_date",
+        "amount",
+        "running_paid"
+      ],
+      "expectedRows": [
+        [
+          "Alya",
+          "2026-01-01",
+          49000,
+          49000
+        ],
+        [
+          "Alya",
+          "2026-02-01",
+          49000,
+          98000
+        ],
+        [
+          "Bima",
+          "2026-01-01",
+          99000,
+          99000
+        ],
+        [
+          "Bima",
+          "2026-02-01",
+          99000,
+          198000
+        ],
+        [
+          "Citra",
+          "2026-01-02",
+          49000,
+          49000
+        ],
+        [
+          "Dimas",
+          "2026-01-03",
+          990000,
+          990000
+        ],
+        [
+          "Dimas",
+          "2026-02-03",
+          990000,
+          1980000
+        ],
+        [
+          "Eka",
+          "2026-02-04",
+          99000,
+          99000
+        ],
+        [
+          "Fajar",
+          "2026-01-05",
+          49000,
+          49000
+        ],
+        [
+          "Fajar",
+          "2026-02-05",
+          49000,
+          98000
+        ],
+        [
+          "Gita",
+          "2026-01-06",
+          99000,
+          99000
+        ],
+        [
+          "Hadi",
+          "2026-01-07",
+          990000,
+          990000
+        ],
+        [
+          "Hadi",
+          "2026-02-07",
+          990000,
+          1980000
+        ],
+        [
+          "Intan",
+          "2026-02-08",
+          49000,
+          49000
+        ],
+        [
+          "Joko",
+          "2026-02-09",
+          99000,
+          99000
+        ]
+      ]
+    },
+    {
+      "id": "web-rank-landing",
+      "datasetId": "web-analytics",
+      "title": "Peringkat landing page per channel",
+      "difficulty": "Hard",
+      "topic": "RANK + CTE",
+      "prompt": "Rank landing page berdasarkan jumlah konversi per channel.",
+      "expectedColumns": [
+        "channel",
+        "landing_page",
+        "conversions",
+        "page_rank"
+      ],
+      "expectedRows": [
+        [
+          "Email",
+          "/sale",
+          2,
+          1
+        ],
+        [
+          "Email",
+          "/newsletter",
+          1,
+          2
+        ],
+        [
+          "Organic",
+          "/guide",
+          0,
+          1
+        ],
+        [
+          "Organic",
+          "/home",
+          0,
+          1
+        ],
+        [
+          "Referral",
+          "/refer",
+          1,
+          1
+        ],
+        [
+          "Social",
+          "/new",
+          3,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "web-running-conversion",
+      "datasetId": "web-analytics",
+      "title": "Konversi kumulatif kampanye",
+      "difficulty": "Hard",
+      "topic": "Window SUM",
+      "prompt": "Hitung konversi harian dan running_conversions tiap campaign.",
+      "expectedColumns": [
+        "campaign_name",
+        "visit_date",
+        "daily_conversions",
+        "running_conversions"
+      ],
+      "expectedRows": [
+        [
+          "Back to School",
+          "2026-01-01",
+          1,
+          1
+        ],
+        [
+          "Back to School",
+          "2026-01-06",
+          1,
+          2
+        ],
+        [
+          "Friend Referral",
+          "2026-01-05",
+          1,
+          1
+        ],
+        [
+          "Monthly Newsletter",
+          "2026-01-04",
+          1,
+          1
+        ],
+        [
+          "Monthly Newsletter",
+          "2026-01-06",
+          0,
+          1
+        ],
+        [
+          "Organic Search",
+          "2026-01-03",
+          0,
+          0
+        ],
+        [
+          "Organic Search",
+          "2026-01-07",
+          0,
+          0
+        ],
+        [
+          "Summer Sale",
+          "2026-01-02",
+          2,
+          2
+        ],
+        [
+          "Summer Sale",
+          "2026-01-07",
+          1,
+          3
+        ]
+      ]
+    }
+  ]
+}

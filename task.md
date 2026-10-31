@@ -159,6 +159,7 @@ Pekerjaan dianggap siap untuk deployment apabila:
 9. Layout dapat digunakan pada desktop, tablet, dan mobile.
 10. UI utama memakai Bahasa Indonesia yang konsisten.
 11. Data Quality Checker tersedia di `/data-quality-checker/` dan active state sidebar sesuai.
+12. SQL Challenge tersedia di `/sql-challenge/`, menampilkan soal SQL, menjalankan query di browser, dan memeriksa hasilnya.
 
 ## Cara menjalankan lokal
 
@@ -581,3 +582,20 @@ Ubah:
 - `sitemap.xml`, `README.md`, dan `SMOKE-TEST.md`.
 
 Jangan ubah shared design tokens atau fungsi Chart Guide yang tidak terkait bila pola yang ada sudah cukup. Jangan menambah framework, backend, akun/persistence, AI, library preview, atau chart di luar vocabulary V1.
+
+## SQL Challenge
+
+Status: route berisi 100 soal bertahap (35 Easy, 45 Medium, 20 Hard) dari delapan dataset: kedai kopi, toko online, HR, perpustakaan, customer support, kampus, layanan langganan, dan web analytics. Pencarian, status/progres lokal, schema dinamis, editor kosong, runner DuckDB-Wasm, grading hasil, dan integrasi beranda/navigasi tersedia. QA interaktif di XAMPP masih perlu dilakukan.
+
+- [x] Susun 100 soal bertahap dari SELECT/ORDER BY dan filter menuju JOIN, agregasi, subquery, CTE, dan window function.
+- [x] Sediakan delapan konteks dataset dengan schema yang berubah sesuai soal: kedai kopi, toko online, HR, perpustakaan, customer support, kampus, layanan langganan, dan web analytics.
+- [x] Tambahkan pencarian soal berdasarkan judul, topik, prompt, dataset, dan tingkat kesulitan.
+- [x] Kelompokkan soal pada navigasi berdasarkan Easy, Medium, dan Hard; buka grup sesuai soal aktif.
+- [x] Tampilkan status per soal dan progres level/total; simpan status secara lokal di browser.
+- [x] Tampilkan schema dataset aktif pada soal yang sedang dikerjakan.
+- [x] Mulai tiap soal dengan editor kosong; jangan tampilkan query jawaban sebagai starter.
+- [x] Jalankan query `SELECT`/`WITH` di DuckDB-Wasm lokal browser dan tampilkan hasil tabel serta status kecocokan.
+- [x] Tambahkan route, active state sidebar, kartu beranda, katalog tools, sitemap, dan dokumentasi.
+- [x] Pin DuckDB-Wasm ke versi CDN yang tersedia; tampilkan pesan yang bisa dipulihkan ketika engine gagal dimuat.
+- [x] Pastikan setiap soal membuka editor kosong dan parameter `q` berubah saat soal dipilih.
+- [ ] Verifikasi seluruh 100 query jawaban, query salah, statement non-SELECT, navigasi Back/Forward, dan layout responsive melalui XAMPP.

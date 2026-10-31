@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SQL Challenge — Latihan Query Data | BikinDashboard</title>
+  <meta name="description" content="Latihan SQL dengan soal mandiri. Tulis query, jalankan di browser, dan periksa hasilnya langsung.">
+  <link rel="canonical" href="https://bikindashboard.com/sql-challenge/">
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <meta name="theme-color" content="#2f5fb0">
+  <script src="../assets/analytics.js?v=2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/design-system.css?v=1.8" data-bd-design-system>
+  <link rel="stylesheet" href="../assets/nav.css?v=1.6" data-bd-nav-css>
+  <link rel="stylesheet" href="style.css?v=1.1">
+  <script src="../assets/nav.js?v=1.5" defer></script>
+  <script src="app.js?v=1.7" type="module"></script>
+</head>
+<body class="bd-with-nav bd-sql-challenge-page">
+  <header class="bd-topbar">
+    <div class="bd-topbar-inner">
+      <div class="bd-topbar-left">
+        <a href="../index.html" class="bd-back">← Semua tool</a>
+        <span class="bd-topbar-divider"></span>
+        <h1 class="bd-title">SQL Challenge</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="bd-main">
+    <div class="bd-container">
+      <header class="bd-tool-intro sql-intro">
+        <p class="bd-label">PRACTICE · SQL</p>
+        <h2 class="bd-hero-title">Latihan SQL, satu soal setiap kali</h2>
+        <p class="bd-hero-subtitle">Kerjakan 100 soal bertahap, dari SELECT dan filter dasar hingga JOIN, agregasi, dan window function di delapan dataset.</p>
+      </header>
+
+      <div class="sql-workspace">
+        <aside class="sql-problem-panel" aria-label="Daftar soal SQL">
+          <div class="sql-panel-heading">
+            <h2>Soal</h2>
+            <span id="sql-question-count" class="sql-question-count">Memuat…</span>
+          </div>
+          <div class="sql-progress-summary">
+            <div class="sql-progress-label-row">
+              <span>Progres</span>
+              <span id="sql-progress-count" aria-live="polite">0/100 selesai</span>
+            </div>
+            <div id="sql-progress-bar" class="sql-progress-bar" role="progressbar" aria-label="Progres SQL Challenge" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span id="sql-progress-fill" class="sql-progress-fill"></span>
+            </div>
+            <p>Disimpan di browser ini.</p>
+          </div>
+          <div class="sql-question-search-wrap">
+            <label class="sql-sr-only" for="sql-question-search">Cari soal berdasarkan judul, dataset, atau topik</label>
+            <input id="sql-question-search" class="sql-question-search" type="search" placeholder="Cari soal atau topik…" autocomplete="off">
+          </div>
+          <nav id="sql-question-list" class="sql-question-list" aria-label="Pilih soal"></nav>
+        </aside>
+
+        <section class="sql-problem-content" aria-labelledby="sql-problem-title">
+          <div id="sql-load-state" class="sql-load-state" role="status">Memuat soal…</div>
+          <div id="sql-problem-view" hidden>
+            <header class="sql-problem-header">
+              <div class="sql-problem-meta">
+                <span id="sql-difficulty" class="sql-difficulty"></span>
+                <span id="sql-topic" class="sql-topic"></span>
+                <span id="sql-dataset-name" class="sql-topic"></span>
+              </div>
+              <h2 id="sql-problem-title"></h2>
+              <p id="sql-prompt" class="sql-prompt"></p>
+            </header>
+
+            <details class="sql-schema-panel" open>
+              <summary>Struktur dataset</summary>
+              <div id="sql-schema" class="sql-schema-grid"></div>
+              <p class="sql-data-note">Dataset latihan dibuat untuk soal ini. Engine diambil dari jsDelivr saat pertama dipakai; query dan data diproses di browser.</p>
+            </details>
+
+            <section class="sql-editor-panel" aria-labelledby="sql-editor-heading">
+              <div class="sql-editor-heading">
+                <h3 id="sql-editor-heading">Query kamu</h3>
+                <button type="button" id="sql-clear-button" class="sql-text-button">Kosongkan editor</button>
+              </div>
+              <label class="sql-sr-only" for="sql-editor">Tulis query SQL</label>
+              <textarea id="sql-editor" class="sql-editor" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Tulis query SQL untuk menyelesaikan soal ini…" aria-describedby="sql-editor-help"></textarea>
+              <p id="sql-editor-help" class="sql-editor-help">Buat satu query <code>SELECT</code> atau <code>WITH</code>. Urutan hasil mengikuti instruksi soal.</p>
+              <div class="sql-run-row">
+                <button type="button" id="sql-run-button" class="bd-btn bd-btn-primary">Jalankan SQL</button>
+              <span id="sql-engine-note" class="sql-engine-note">Mesin SQL dimuat saat query pertama dijalankan (perlu internet).</span>
+              </div>
+            </section>
+
+            <section id="sql-result" class="sql-result" aria-live="polite" aria-atomic="true">
+              <div class="sql-result-heading">
+                <h3>Hasil query</h3>
+                <span id="sql-result-status" class="sql-result-status">Belum dijalankan</span>
+              </div>
+              <div id="sql-result-content" class="sql-result-content">
+                <p class="sql-result-empty">Hasil query akan tampil di sini.</p>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bd-footer">
+    <p class="bd-hint">Gratis untuk kamu yang kerja dengan data · <a href="https://bikindashboard.com" class="bd-link">bikindashboard.com</a> · <a href="../privacy.html" class="bd-link">Kebijakan Privasi</a></p>
+  </footer>
+</body>
+</html>
