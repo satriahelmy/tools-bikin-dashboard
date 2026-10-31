@@ -30,6 +30,7 @@ Tanggal: __________  Tester: __________  Browser: __________
 - [ ] Status Belum dicoba/Sudah dicoba/Selesai dan progres total berubah sesuai hasil query serta bertahan setelah halaman dimuat ulang.
 - [ ] Memilih soal memperbarui prompt, tingkat kesulitan, dataset/schema, editor kosong, dan parameter `q` di URL.
 - [ ] Tombol Back/Forward browser mengubah soal sesuai URL.
+- [ ] Pada viewport mobile, daftar 100 soal diganti pemilih ringkas yang tetap bisa dicari dan menampilkan status pengerjaan.
 - [ ] Query jawaban untuk seluruh 100 soal berjalan dan ditandai benar saat QA.
 - [ ] Menjalankan editor kosong meminta pengguna menulis query tanpa memuat mesin SQL.
 - [ ] Query valid dengan hasil berbeda menampilkan tabel dan status belum cocok.

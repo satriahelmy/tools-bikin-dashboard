@@ -4,6 +4,7 @@ const progressCount = document.getElementById("sql-progress-count");
 const progressBar = document.getElementById("sql-progress-bar");
 const progressFill = document.getElementById("sql-progress-fill");
 const questionSearch = document.getElementById("sql-question-search");
+const questionSelect = document.getElementById("sql-question-select");
 const loadState = document.getElementById("sql-load-state");
 const problemView = document.getElementById("sql-problem-view");
 const title = document.getElementById("sql-problem-title");
@@ -76,8 +77,14 @@ function getDataset(problem) {
 
 function renderQuestionList() {
   questionList.replaceChildren();
+  questionSelect.replaceChildren();
   const searchTerm = questionSearch.value.trim().toLocaleLowerCase("id-ID");
+  const placeholder = makeElement("option", "", searchTerm ? "Pilih soal dari hasil pencarian" : "Pilih soal");
+  placeholder.value = "";
+  placeholder.disabled = true;
+  questionSelect.append(placeholder);
   let visibleCount = 0;
+  let activeProblemIsVisible = false;
   for (const level of ["Easy", "Medium", "Hard"]) {
     const allLevelProblems = challengeData.problems.filter((problem) => problem.difficulty === level);
     const levelProblems = allLevelProblems.filter((problem) => {
@@ -99,6 +106,8 @@ function renderQuestionList() {
       makeElement("span", "sql-question-group-count", `${completedInLevel}/${allLevelProblems.length} selesai`)
     );
     const cards = makeElement("div", "sql-question-group-cards");
+    const options = document.createElement("optgroup");
+    options.label = `${level} · ${levelProblems.length} soal`;
 
     for (const problem of levelProblems) {
       const button = makeElement("button", "sql-question-card");
@@ -116,12 +125,20 @@ function renderQuestionList() {
       );
       button.addEventListener("click", () => selectProblem(problem.id));
       cards.append(button);
+
+      const option = makeElement("option", "", `${problem.title} — ${progressLabel}`);
+      option.value = problem.id;
+      options.append(option);
+      if (problem.id === activeProblem.id) activeProblemIsVisible = true;
     }
 
     group.append(heading, cards);
     questionList.append(group);
+    questionSelect.append(options);
   }
   if (!visibleCount) questionList.append(makeElement("p", "sql-question-empty", "Tidak ada soal yang cocok. Coba kata kunci lain."));
+  questionSelect.value = activeProblemIsVisible ? activeProblem.id : "";
+  questionSelect.disabled = !visibleCount;
   questionCount.textContent = searchTerm ? `${visibleCount} hasil` : `${challengeData.problems.length} soal`;
   updateProgressSummary();
 }
@@ -292,6 +309,9 @@ async function loadChallenge() {
 
 runButton.addEventListener("click", runActiveQuery);
 questionSearch.addEventListener("input", renderQuestionList);
+questionSelect.addEventListener("change", () => {
+  if (questionSelect.value) selectProblem(questionSelect.value);
+});
 clearButton.addEventListener("click", () => {
   if (!activeProblem) return;
   editor.value = "";

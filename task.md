@@ -590,6 +590,7 @@ Status: route berisi 100 soal bertahap (35 Easy, 45 Medium, 20 Hard) dari delapa
 - [x] Susun 100 soal bertahap dari SELECT/ORDER BY dan filter menuju JOIN, agregasi, subquery, CTE, dan window function.
 - [x] Sediakan delapan konteks dataset dengan schema yang berubah sesuai soal: kedai kopi, toko online, HR, perpustakaan, customer support, kampus, layanan langganan, dan web analytics.
 - [x] Tambahkan pencarian soal berdasarkan judul, topik, prompt, dataset, dan tingkat kesulitan.
+- [x] Gunakan pemilih soal ringkas di viewport mobile agar daftar 100 soal tidak mendorong latihan terlalu jauh ke bawah.
 - [x] Kelompokkan soal pada navigasi berdasarkan Easy, Medium, dan Hard; buka grup sesuai soal aktif.
 - [x] Tampilkan status per soal dan progres level/total; simpan status secara lokal di browser.
 - [x] Tampilkan schema dataset aktif pada soal yang sedang dikerjakan.
